@@ -1,0 +1,25 @@
+@import "partials/_setup.scss";
+@import "partials/_utils.scss";
+@import "partials/_typography.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+/* =========================
+
+
+
+
+INSERT STYLING HERE ABOVE PARTIALS
+
+
+
+========================== */
+
+@import "partials/_media-queries.scss";
