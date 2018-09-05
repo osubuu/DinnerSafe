@@ -1,6 +1,6 @@
-@import "partials/_setup.scss";
-@import "partials/_utils.scss";
-@import "partials/_typography.scss";
+@import "./partials/_setup.scss";
+@import "./partials/_utils.scss";
+@import "./partials/_typography.scss";
 
 * {
   margin: 0;
@@ -22,4 +22,4 @@ INSERT STYLING HERE ABOVE PARTIALS
 
 ========================== */
 
-@import "partials/_media-queries.scss";
+@import "./partials/_media-queries.scss";
