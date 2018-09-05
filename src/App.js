@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import firebase from "./firebase";
+//COMPONENTS//
+import apiCall from "./components/apiCall";
 
 const dbRef = firebase.database().ref();
 
@@ -32,17 +34,19 @@ let parties = [
   }
 ];
 
+// let key = dbRef.push(user).key;
+// dbRef.child(key).set({ user, friends, parties });
+
 /* ===================
 TEST STUFF ABOVE THAT CAN BE DELETED WHEN DONE
 ==================== */
-
-// let key = dbRef.push(user).key;
-// dbRef.child(key).set({ user, friends, parties });
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      allowedAllergies: [],
+      allowedDiet: [],
       userProfile: {}
     };
   }
