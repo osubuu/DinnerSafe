@@ -4,15 +4,18 @@ const apiUrl = 'http://api.yummly.com/v1/api/recipes';
 const apiKey = 'db330b81d710c9b574e3c76551fbcdb5';
 const apiId = 'a61c2317';
 
-const allergies = ["394^Peanut-Free", "396^Dairy-Free"];
-const diets = ["390^Pescetarian"]
-const excludeIngredients = [];
+// const allergies = ["394^Peanut-Free", "396^Dairy-Free"];
+// const diets = ["390^Pescetarian"]
+// const excludeIngredients = [];
 const courses = ["course^course-Main Dishes", "course^course-Side Dishes"];
 const searchTerms = 'french onion soup';
 const resultsPerPage = 10;
 const page = 2;
 
-const apiCall = () => {
+const matchingRecipes = object => {
+
+  // const recipes = []
+
   return axios.get(apiUrl, {
     params: {
       _app_key: apiKey,
@@ -20,21 +23,19 @@ const apiCall = () => {
       requirePictures: true,
       maxResult: resultsPerPage,
       start: resultsPerPage * (page - 1),
-      allowedAllergy: allergies,
-      allowedDiet: diets,
+
+      allowedAllergy: object.allowedAllergy,
+      allowedDiet: object.allowedDiet,
+      excludedIngredient: object.excludedIngredient,
+      
       allowedCourse: courses,
-      excludedIngredient: excludeIngredients,
       q: searchTerms
     }
   })
-  .then(res => {
-    console.log('res: ', res);
-    
-  });
+
 };
 
-export default apiCall;
-
+export default matchingRecipes;
 
 const diet =
 [

@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
 import firebase from "./firebase";
-//COMPONENTS//
-import apiCall from "./components/apiCall";
+
+// FUNCTIONS
+import matchingRecipes from "./components/matchingRecipes";
+
+//COMPONENTS
+import DisplayMatchingRecipes from './components/DisplayMatchingRecipes/DisplayMatchingRecipes'
 
 const dbRef = firebase.database().ref();
 
@@ -45,14 +49,37 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      allowedAllergies: [],
-      allowedDiet: [],
+      restrictions: {
+        allowedAllergy: ["400^Soy-Free"],
+        allowedDiet: ["387^Lacto-ovo vegetarian"],
+        excludedIngredient: ['salt', 'butter', 'beef']
+      },
       userProfile: {},
       user: "",
       currentTextValue: "",
       loginPurpose: ""
     };
   }
+
+  // // this.state.dietaryRestrictions object format
+  // {
+  //   allergies: [],
+  //   diets: [],
+  //   excludeIngredients: []
+  // }
+  // // Examples
+  // // Example 1
+  // {
+  //   allergies: ["394^Peanut-Free", "396^Dairy-Free"],
+  //   diets: ["390^Pescetarian"],
+  //   excludeIngredients: ["tomato", "arugala", "peach"]
+  // }
+  // // Example 2 - all arrays are optional
+  // {
+  //   allergies: [],
+  //   diets: ["390^Pescetarian"],
+  //   excludeIngredients: []
+  // }
 
   /* FUNCTION TO GET EVENTS FROM FIREBASE */
   retrieveEventsFromFirebase = snapshot => {
@@ -179,12 +206,15 @@ class App extends Component {
             );
           }
         })}
+
+        {/* Display List of Recipes */}
+        <DisplayMatchingRecipes restrictions={this.state.restrictions}/>
       </div>
     );
   }
 
   componentDidMount() {
-    apiCall();
+    // matchingRecipes();
     
 
     dbRef.on("value", snapshot => {
