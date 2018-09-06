@@ -11,6 +11,12 @@ import {
 import apiCall from "./components/apiCall";
 import OverviewPage from "./components/OverviewPage";
 
+// FUNCTIONS
+import matchingRecipes from "./components/matchingRecipes";
+
+//COMPONENTS
+import DisplayMatchingRecipes from "./components/DisplayMatchingRecipes/DisplayMatchingRecipes";
+
 const dbRef = firebase.database().ref();
 
 /* ===================
@@ -52,14 +58,50 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      allowedAllergies: [],
-      allowedDiet: [],
+      restrictions: {
+        allowedAllergy: ["400^Soy-Free"],
+        allowedDiet: ["387^Lacto-ovo vegetarian"],
+        excludedIngredient: ["salt", "butter", "beef"]
+      },
       userProfile: null,
       user: "",
       currentTextValue: "",
       loginPurpose: ""
     };
   }
+
+  // // this.state.dietaryRestrictions object format
+  // {
+  //   allergies: [],
+  //   diets: [],
+  //   excludeIngredients: []
+  // }
+  // // Examples
+  // // Example 1
+  // {
+  //   allergies: ["394^Peanut-Free", "396^Dairy-Free"],
+  //   diets: ["390^Pescetarian"],
+  //   excludeIngredients: ["tomato", "arugala", "peach"]
+  // }
+  // // Example 2 - all arrays are optional
+  // {
+  //   allergies: [],
+  //   diets: ["390^Pescetarian"],
+  //   excludeIngredients: []
+  // }
+
+  /* FUNCTION TO GET EVENTS FROM FIREBASE */
+  retrieveEventsFromFirebase = snapshot => {
+    let newResults = Object.values(snapshot);
+
+    newResults.forEach(person => {
+      if (user === person.user) {
+        this.setState({
+          userProfile: newResults
+        });
+      }
+    });
+  };
 
   // Function for create button
   checkIfUserExists = snapshot => {
@@ -179,6 +221,9 @@ class App extends Component {
               </button>
             </form>
           </section>
+
+          {/* Display List of Recipes */}
+          <DisplayMatchingRecipes restrictions={this.state.restrictions} />
 
           <Route
             exact
