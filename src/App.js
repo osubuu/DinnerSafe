@@ -1,25 +1,32 @@
 import React, { Component } from "react";
 import "./App.css";
 import firebase from "./firebase";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 //COMPONENTS//
 import apiCall from "./components/apiCall";
+import OverviewPage from "./components/OverviewPage";
 
 const dbRef = firebase.database().ref();
 
 /* ===================
 TEST STUFF BELOW THAT CAN BE DELETED WHEN DONE
 ==================== */
-let user = "Bill";
+let user = "Nicole";
 let friends = [
   {
-    name: "Rosie",
+    name: "Pratik",
     allergies: ["Apple", "Bananas"],
-    parties: ["sept3", "oct5"]
+    parties: ["sept3"]
   },
   {
-    name: "Moin",
+    name: "Junior",
     allergies: ["Grapes", "Cookies"],
-    parties: ["sept3", "oct5"]
+    parties: ["sept3", "nov1"]
   }
 ];
 
@@ -29,8 +36,8 @@ let parties = [
     recipes: ["Pie", "McDonald's"]
   },
   {
-    title: "oct5",
-    recipes: ["Peanut", "Pizza"]
+    title: "nov1",
+    recipes: ["Candy", "Dog Food"]
   }
 ];
 
@@ -47,87 +54,98 @@ class App extends Component {
     this.state = {
       allowedAllergies: [],
       allowedDiet: [],
-      userProfile: {},
+      userProfile: null,
       user: "",
       currentTextValue: "",
       loginPurpose: ""
     };
   }
 
-  /* FUNCTION TO GET EVENTS FROM FIREBASE */
-  retrieveEventsFromFirebase = snapshot => {
-    let newResults = Object.values(snapshot);
-
-    newResults.forEach(person => {
-      if (user === person.user) {
-        this.setState({
-          userProfile: newResults
-        });
-      }
-    });
-  };
-
   // Function for create button
-  checkIfUserExists = userInput => {
+  checkIfUserExists = snapshot => {
     // if userInput is blank, leave the function
-    if (userInput.length === 0) {
+    if (this.state.user.length === 0) {
       return;
     }
 
     let counter = 0;
-    let currentInfoFromFirebase = Object.values(this.state.userProfile);
+    let currentInfoFromFirebase = Object.values(snapshot);
+    console.log(currentInfoFromFirebase);
 
     currentInfoFromFirebase.map(userObject => {
       // If the user input is found within the current firebase and the user clicked "CREATE", reset user state to "" so nothing displays
       if (
         this.state.loginPurpose === "create" &&
-        userObject.user === userInput
+        userObject.user === this.state.user
       ) {
         this.setState({
-          user: ""
+          user: "",
+          userProfile: null
         });
         alert(
           "Name already exists. Please create an account with another name."
         );
+        return;
+      }
+
+      console.log(userObject);
+      if (
+        this.state.loginPurpose === "sign-in" &&
+        userObject.user === this.state.user
+      ) {
+        this.setState({ userProfile: userObject });
+        return;
       }
 
       // If the user input is not found within the current firebase object, increment the counter by 1
-      if (userObject.user !== userInput) {
+      if (userObject.user !== this.state.user) {
         counter++;
       }
 
       // If this conditional is true, then the userInput does not exist yet and will be added to firebase
       if (counter === currentInfoFromFirebase.length) {
-        let user = userInput;
+        let user = this.state.user;
         let friends = [];
         let parties = [];
 
         // if user clicked create button, create new user on firebase
         if (this.state.loginPurpose === "create") {
-          let newKey = dbRef.push(userInput).key;
+          let newKey = dbRef.push(this.state.user).key;
           dbRef.child(newKey).set({ user, friends, parties });
+
+          this.setState({
+            userProfile: { user: this.state.user }
+          });
         } else {
           alert("You should create an account!");
+          this.setState({ user: "", userProfile: [] });
         }
       }
     });
   };
 
   // Handling for form submit
-  handleSubmit = e => {
+  handleSubmitLogin = e => {
     e.preventDefault();
-    e.target.reset();
+    // e.target.reset();
 
     //create user on firebase
-    this.setState({
-      user: this.state.currentTextValue
-    });
-
-    this.checkIfUserExists(this.state.currentTextValue);
+    this.setState(
+      {
+        user: this.state.currentTextValue.trim().toLowerCase()
+      },
+      () => {
+        // dbRef.remove();
+        dbRef.once("value", snapshot => {
+          console.log(snapshot.val());
+          this.checkIfUserExists(snapshot.val());
+        });
+      }
+    );
   };
 
   // Handling for text input
-  handleChange = e => {
+  handleChangeLogin = e => {
     this.setState({
       currentTextValue: e.target.value
     });
@@ -142,55 +160,50 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>JDK PROJECT!!!</h1>
+      <Router>
+        <div className="App">
+          <section className="logInPage">
+            {/* FIRST PAGE: USER LOGIN */}
+            <form action="" onSubmit={this.handleSubmitLogin}>
+              <label htmlFor="create-user">USERNAME</label>
+              <input
+                onChange={this.handleChangeLogin}
+                id="create-user"
+                type="text"
+              />
+              <button value="sign-in" onClick={this.handleClickLogin}>
+                SIGN IN
+              </button>
+              <button value="create" onClick={this.handleClickLogin}>
+                CREATE
+              </button>
+            </form>
+          </section>
 
-        {/* FIRST PAGE: USER LOGIN */}
-        <form action="" onSubmit={this.handleSubmit}>
-          <label htmlFor="create-user">USERNAME</label>
-          <input onChange={this.handleChange} id="create-user" type="text" />
-          <button value="sign-in" onClick={this.handleClickLogin}>
-            SIGN IN
-          </button>
-          <button value="create" onClick={this.handleClickLogin}>
-            CREATE
-          </button>
-        </form>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return this.state.userProfile !== null ? (
+                <Redirect to="/overview" />
+              ) : null;
+            }}
+          />
 
-        {/* MAP THROUGH EVERY USER OBJECT RECEIVED FROM FIREBASE */}
-        {Object.values(this.state.userProfile).map(property => {
-          // if the user name is equal to the user we want
-          if (property.user === this.state.user) {
-            // display's user name
-            return (
-              <div>
-                <h1>{property.user}</h1>
-                {/* Go through parties object and list all the parties and their recipes */}
-                {property.parties === undefined
-                  ? null
-                  : property.parties.map(party => {
-                      return (
-                        <div>
-                          <h2>{party.title}</h2>
-                        </div>
-                      );
-                    })}
-              </div>
-            );
-          }
-        })}
-      </div>
+          {/* OVERVIEW PAGE */}
+          <Route
+            exact
+            path="/overview"
+            render={props => (
+              <OverviewPage {...props} userProfile={this.state.userProfile} />
+            )}
+          />
+        </div>
+      </Router>
     );
   }
 
-  componentDidMount() {
-    apiCall();
-    
-
-    dbRef.on("value", snapshot => {
-      this.retrieveEventsFromFirebase(snapshot.val());
-    });
-  }
+  componentDidMount() {}
 }
 
 export default App;
