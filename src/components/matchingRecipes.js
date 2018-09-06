@@ -32,18 +32,7 @@ const matchingRecipes = object => {
       q: searchTerms
     }
   })
-  // .then(res => {
-  //   // console.log('res: ', res);
 
-  //   const newArray = res.data.matches;
-    
-  //   recipes.push(...newArray);
-
-  //   // console.log('recipes in then', recipes);
-    
-  // });
-
-  // return recipes;
 };
 
 export default matchingRecipes;

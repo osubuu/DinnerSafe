@@ -11,6 +11,7 @@ const DisplaySingleRecipe = (props) => {
                 <div className="img">
                     <img src={props.recipe.imageUrlsBySize['90']} alt=""/>
                 </div>
+                
             </a>
         </li>
     )
