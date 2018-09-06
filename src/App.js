@@ -92,6 +92,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    apiCall();
+    
+
     dbRef.on("value", snapshot => {
       this.retrieveEventsFromFirebase(snapshot.val());
     });
