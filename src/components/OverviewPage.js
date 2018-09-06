@@ -24,9 +24,6 @@ const OverviewPage = props => {
 
       <Link to="/manage-friends">Manage Friends</Link>
       <Link to="/manage-events">Manage Events</Link>
-
-      <Route exact path="/manage-friends" component={ManageFriends} />
-      <Route exact path="/manage-events" component={ManageEvents} />
     </main>
   ) : null;
 };
