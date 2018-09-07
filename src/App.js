@@ -8,7 +8,7 @@ import {
   Redirect
 } from "react-router-dom";
 //COMPONENTS//
-import apiCall from "./components/apiCall";
+
 import OverviewPage from "./components/OverviewPage";
 
 // FUNCTIONS
@@ -58,12 +58,34 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      restrictions: {
-        allowedAllergy: ["400^Soy-Free"],
-        allowedDiet: ["387^Lacto-ovo vegetarian"],
-        excludedIngredient: ["salt", "butter", "beef"]
-      },
+      // restrictions: {
+      //   allowedAllergy: ["400^Soy-Free"],
+      //   allowedDiet: ["387^Lacto-ovo vegetarian"],
+      //   excludedIngredient: ["salt", "butter", "beef"]
+      // },
       userProfile: null,
+      
+      // // Test user profile so that there is already a userprofile when DisplayMatchingRecipes mounts
+      // userProfile: {
+      //   parties: [
+      //     {title: "sept3"},
+      //     {title: "nov1"}
+      //   ],
+      //   friends: [
+      //     {
+      //       allowedAllergy: ["393^Gluten-Free", "394^Peanut-Free"],
+      //       allowedDiet: ["388^Lacto vegetarian", "389^Ovo vegetarian"],
+      //       excludedIngredient: ["Peanut", "Banana"],
+      //       parties: ["sept3"]
+      //     },
+      //     {
+      //       allowedAllergy: ["400^Soy-Free", "395^Tree Nut-Free"],
+      //       allowedDiet: ["387^Lacto-ovo vegetarian", "403^Paleo"],
+      //       excludedIngredient: ["Arugala", "Bread"],
+      //       parties: ["sept3", "nov1"]
+      //     }
+      //   ]
+      // },
       user: "",
       currentTextValue: "",
       loginPurpose: ""
@@ -112,7 +134,7 @@ class App extends Component {
 
     let counter = 0;
     let currentInfoFromFirebase = Object.values(snapshot);
-    console.log(currentInfoFromFirebase);
+    // console.log(currentInfoFromFirebase);
 
     currentInfoFromFirebase.map(userObject => {
       // If the user input is found within the current firebase and the user clicked "CREATE", reset user state to "" so nothing displays
@@ -130,7 +152,7 @@ class App extends Component {
         return;
       }
 
-      console.log(userObject);
+      // console.log(userObject);
       if (
         this.state.loginPurpose === "sign-in" &&
         userObject.user === this.state.user
@@ -179,7 +201,7 @@ class App extends Component {
       () => {
         // dbRef.remove();
         dbRef.once("value", snapshot => {
-          console.log(snapshot.val());
+          // console.log(snapshot.val());
           this.checkIfUserExists(snapshot.val());
         });
       }
@@ -199,6 +221,16 @@ class App extends Component {
       loginPurpose: e.target.value
     });
   };
+
+  // Add props to DisplayMatchingRecipes
+  displayRecipes = () => {
+    return(
+      <DisplayMatchingRecipes
+        restrictions={this.state.restrictions}
+        userProfile={this.state.userProfile}
+      />
+    )
+  }
 
   render() {
     return (
@@ -223,7 +255,17 @@ class App extends Component {
           </section>
 
           {/* Display List of Recipes */}
-          <DisplayMatchingRecipes restrictions={this.state.restrictions} />
+          {/* <DisplayMatchingRecipes 
+            restrictions={this.state.restrictions} 
+            userProfile={this.state.userProfile} 
+          /> */}
+
+          <Link to="/display-recipes">Display Recipes</Link>
+
+          <Route 
+            exact path="/display-recipes" 
+            render={this.displayRecipes} 
+          />
 
           <Route
             exact

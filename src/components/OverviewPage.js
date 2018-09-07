@@ -7,7 +7,7 @@ import { Route, Link } from "react-router-dom";
 // handleClickAddEvent = () => {};
 
 const OverviewPage = props => {
-  console.log(props);
+  // console.log(props);
   return props.userProfile !== null && props.userProfile !== undefined ? (
     <main className="overview-page">
       <h1>{_.capitalize(props.userProfile.user)}</h1>
