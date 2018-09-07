@@ -18,6 +18,7 @@ const OverviewPage = props => {
             return (
               <div>
                 <h2>{party.title}</h2>
+                <Link to="/event">{party.title}</Link>
               </div>
             );
           })}

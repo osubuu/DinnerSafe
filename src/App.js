@@ -223,7 +223,7 @@ class App extends Component {
     return(
       <EventPage 
         userProfile={this.state.userProfile}
-        eventName={this.state.userProfile.parties ? this.state.userProfile.parties[0].title : null}
+        eventName={this.state.userProfile.parties[0].title}
       />
     )
   }
@@ -249,8 +249,6 @@ class App extends Component {
               </button>
             </form>
           </section>
-
-          <Link to="/event">Event</Link>
 
           <Route 
             exact path="/event"
