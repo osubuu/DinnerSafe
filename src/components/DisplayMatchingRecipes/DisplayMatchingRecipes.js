@@ -44,7 +44,6 @@ class DisplayMatchingRecipes extends Component {
 
         })
 
-
         this.setState({
             restrictions: {
                 allowedAllergy: allergies,
