@@ -10,6 +10,7 @@ import {
 //COMPONENTS//
 
 import OverviewPage from "./components/OverviewPage";
+import EventPage from "./components/EventPage/EventPage"
 
 // FUNCTIONS
 import matchingRecipes from "./components/matchingRecipes";
@@ -58,11 +59,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      // restrictions: {
-      //   allowedAllergy: ["400^Soy-Free"],
-      //   allowedDiet: ["387^Lacto-ovo vegetarian"],
-      //   excludedIngredient: ["salt", "butter", "beef"]
-      // },
       userProfile: null,
       
       // // Test user profile so that there is already a userprofile when DisplayMatchingRecipes mounts
@@ -222,12 +218,12 @@ class App extends Component {
     });
   };
 
-  // Add props to DisplayMatchingRecipes
-  displayRecipes = () => {
+  // Add props to singleEvent
+  singleEvent = () => {
     return(
-      <DisplayMatchingRecipes
-        restrictions={this.state.restrictions}
+      <EventPage 
         userProfile={this.state.userProfile}
+        eventName={this.state.userProfile.parties ? this.state.userProfile.parties[0].title : null}
       />
     )
   }
@@ -254,18 +250,13 @@ class App extends Component {
             </form>
           </section>
 
-          {/* Display List of Recipes */}
-          {/* <DisplayMatchingRecipes 
-            restrictions={this.state.restrictions} 
-            userProfile={this.state.userProfile} 
-          /> */}
-
-          <Link to="/display-recipes">Display Recipes</Link>
+          <Link to="/event">Event</Link>
 
           <Route 
-            exact path="/display-recipes" 
-            render={this.displayRecipes} 
+            exact path="/event"
+            render={this.singleEvent}
           />
+
 
           <Route
             exact

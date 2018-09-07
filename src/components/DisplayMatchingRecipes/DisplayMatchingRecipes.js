@@ -61,7 +61,7 @@ class DisplayMatchingRecipes extends Component {
 
         if(this.props.userProfile){
             
-            this.setRestrictions(this.props.userProfile, this.props.userProfile.parties[0].title,() => {
+            this.setRestrictions(this.props.userProfile, this.props.eventName,() => {
 
                 console.log('restrictions', this.state.restrictions);
                 console.log('party: ', this.props.userProfile.parties[0].title);
