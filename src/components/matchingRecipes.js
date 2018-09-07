@@ -8,7 +8,7 @@ const apiId = "a61c2317";
 // const diets = ["390^Pescetarian"]
 // const excludeIngredients = [];
 const courses = ["course^course-Main Dishes", "course^course-Side Dishes"];
-const searchTerms = "french onion soup";
+const searchTerms = "";
 const resultsPerPage = 10;
 const page = 2;
 
