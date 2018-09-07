@@ -1,35 +1,46 @@
-import React from "react";
+import React, { Component } from "react";
 import _ from "lodash";
-import ManageEvents from "./ManageEvents";
-import ManageFriends from "./ManageFriends";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import firebase from "firebase";
 
-// handleClickAddEvent = () => {};
+class OverviewPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userProfile: props.userProfile
+    };
+  }
 
-const OverviewPage = props => {
-  // console.log(props);
-  return props.userProfile !== null && props.userProfile !== undefined ? (
-    <main className="overview-page">
-      <h1>{_.capitalize(props.userProfile.user)}</h1>
-      {/* Go through parties object and list all the parties and their recipes */}
-      {props.userProfile.parties === undefined
-        ? null
-        : props.userProfile.parties.map(party => {
-            return (
-              <div>
-                <h2>{party.title}</h2>
-                <Link to="/event">{party.title}</Link>
-              </div>
-            );
-          })}
+  render() {
+    return this.state.userProfile !== null &&
+      this.state.userProfile !== undefined ? (
+      <main className="overview-page">
+        <h1>{_.capitalize(this.state.userProfile.user)}</h1>
+        {/* Go through parties object and list all the parties and their recipes */}
+        {this.state.userProfile.parties === undefined
+          ? null
+          : this.state.userProfile.parties.map(party => {
+              return (
+                <div>
+                  <h2>{party.title}</h2>
+                </div>
+              );
+            })}
 
-      <Link to="/manage-friends">Manage Friends</Link>
-      <Link to="/manage-events">Manage Events</Link>
+        <Link to="/manage-friends">Manage Friends</Link>
+        <Link to="/manage-events">Manage Events</Link>
+      </main>
+    ) : null;
+  }
 
-      <Route exact path="/manage-friends" component={ManageFriends} />
-      <Route exact path="/manage-events" component={ManageEvents} />
-    </main>
-  ) : null;
-};
+  componentDidMount() {
+    if (this.state.userProfile !== null) {
+      let dbRef = firebase.database().ref(`${this.state.userProfile.id}`);
+      dbRef.on("value", snapshot => {
+        this.setState({ userProfile: snapshot.val() });
+      });
+    }
+  }
+}
 
 export default OverviewPage;
