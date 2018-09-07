@@ -4,7 +4,6 @@ import { Route, Link } from "react-router-dom";
 import firebase from "firebase";
 import ManageEvents from "./ManageEvents";
 import ExistingFriendList from "./ExistingFriendList";
-import Simple from "./Simple";
 
 class OverviewPage extends Component {
   constructor(props) {
@@ -29,6 +28,7 @@ class OverviewPage extends Component {
               return (
                 <div>
                   <h2>{party.title}</h2>
+                  <Link to="/event">{party.title}</Link>
                 </div>
               );
             })}
