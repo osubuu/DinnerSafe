@@ -103,6 +103,7 @@ class ManageEvents extends Component {
       let dbRef = firebase
         .database()
         .ref(`${this.props.userProfile.id}/parties`);
+
       dbRef.on("value", snapshot => {
         this.setState({
           userProfileParties: snapshot.val()

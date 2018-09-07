@@ -12,13 +12,14 @@ import {
 import EventPage from "./components/EventPage/EventPage"
 import OverviewPage from "./components/OverviewPage";
 import ManageEvents from "./components/ManageEvents";
-import ManageFriends from "./components/ManageFriends";
+import EditFriend from "./components/EditFriend";
 
 // FUNCTIONS
 import matchingRecipes from "./components/matchingRecipes";
 
 //COMPONENTS
 import DisplayMatchingRecipes from "./components/DisplayMatchingRecipes/DisplayMatchingRecipes";
+import ExistingFriendList from "./components/ExistingFriendList";
 
 const dbRef = firebase.database().ref();
 
@@ -262,26 +263,41 @@ class App extends Component {
 
           {/* OVERVIEW PAGE */}
           <Route
-            exact
             path="/overview"
             render={props => (
               <OverviewPage {...props} userProfile={this.state.userProfile} />
             )}
           />
+
           <Route
-            exact
-            path="/manage-friends"
+            path="/existing-friend-list"
             render={props => (
-              <ManageFriends {...props} userProfile={this.state.userProfile} />
+              <ExistingFriendList
+                {...props}
+                userProfile={this.state.userProfile}
+              />
             )}
           />
+
           <Route
-            exact
             path="/manage-events"
             render={props => (
               <ManageEvents {...props} userProfile={this.state.userProfile} />
             )}
           />
+
+          {/* <Route
+            exact
+            path="/edit-friend"
+            render={props => (
+              <EditFriend
+                {...props}
+                friendProfile={this.state.userProfileFriends[this.state.key]}
+                friendKey={this.state.key}
+                userID={this.props.userProfile.id}
+              />
+            )}
+          /> */}
         </div>
       </Router>
     );

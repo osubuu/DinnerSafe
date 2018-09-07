@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import firebase from "firebase";
+import ManageEvents from "./ManageEvents";
+import ExistingFriendList from "./ExistingFriendList";
 
 class OverviewPage extends Component {
   constructor(props) {
@@ -12,10 +14,13 @@ class OverviewPage extends Component {
   }
 
   render() {
-    return this.state.userProfile !== null &&
-      this.state.userProfile !== undefined ? (
+    // return this.state.userProfile !== null &&
+    //   this.state.userProfile !== undefined ? (
+
+    return (
       <main className="overview-page">
         <h1>{_.capitalize(this.state.userProfile.user)}</h1>
+
         {/* Go through parties object and list all the parties and their recipes */}
         {this.state.userProfile.parties === undefined
           ? null
@@ -23,14 +28,15 @@ class OverviewPage extends Component {
               return (
                 <div>
                   <h2>{party.title}</h2>
+                  <Link to="/event">{party.title}</Link>
                 </div>
               );
             })}
 
-        <Link to="/manage-friends">Manage Friends</Link>
+        <Link to="/existing-friend-list">Existing Friend List</Link>
         <Link to="/manage-events">Manage Events</Link>
       </main>
-    ) : null;
+    );
   }
 
   componentDidMount() {
