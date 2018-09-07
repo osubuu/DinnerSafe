@@ -237,7 +237,13 @@ class App extends Component {
               <OverviewPage {...props} userProfile={this.state.userProfile} />
             )}
           />
-          <Route exact path="/manage-friends" component={ManageFriends} />
+          <Route
+            exact
+            path="/manage-friends"
+            render={props => (
+              <ManageFriends {...props} userProfile={this.state.userProfile} />
+            )}
+          />
           <Route
             exact
             path="/manage-events"

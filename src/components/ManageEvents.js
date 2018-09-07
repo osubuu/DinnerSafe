@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import firebase from "firebase";
+import { Link } from "react-router-dom";
 
 class ManageEvents extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       inputValue: "",
       confirmedEventName: "",
-      userProfileParties: null
+      userProfileParties: props.userProfile.parties
     };
   }
 
@@ -35,7 +36,7 @@ class ManageEvents extends Component {
     };
 
     // create temp array (clone of current firebase parties array) and add new object to it
-    let tempArr = this.props.userProfile.parties;
+    let tempArr = this.state.userProfileParties;
     tempArr.push(newEventObj);
 
     // replace the firebase array with the newly updated array
@@ -63,24 +64,26 @@ class ManageEvents extends Component {
 
   render() {
     return (
-      <div className="manage-events">
+      <section className="manage-events">
         <h1>MANAGE EVENTS</h1>
-        <h2>Add Event</h2>
 
         {/* DISPLAY LIST OF PARTIES */}
         {this.state.userProfileParties !== null &&
         this.state.userProfileParties !== undefined
           ? this.state.userProfileParties.map((party, i) => {
               return (
-                <h2 key={i} onClick={() => this.deleteEvent(i)}>
-                  {party.title}
-                </h2>
+                <div key={i}>
+                  <h2>{party.title}</h2>
+                  <button onClick={() => this.deleteEvent(i)}>
+                    DELETE EVENT
+                  </button>
+                </div>
               );
             })
           : null}
 
         <form onSubmit={this.handleSubmitManageEvents} action="">
-          <label htmlFor="new-event" />
+          <label htmlFor="new-event">Add New Event</label>
           <input
             onChange={this.handleChangeManageEvents}
             id="new-event"
@@ -88,17 +91,14 @@ class ManageEvents extends Component {
           />
           <button onClick={this.handleClickManageEvents}>SUBMIT</button>
         </form>
-      </div>
+
+        <Link to="/Overview">Back to Overview</Link>
+      </section>
     );
   }
 
   componentDidMount() {
-    // assign to the userProfileParties state the original party from the App.js parent
-    if (this.props.userProfile !== null) {
-      this.setState({
-        userProfileParties: this.props.userProfile.parties
-      });
-
+    if (this.state.userProfileParties !== null) {
       // if there are any changes in the firebase array of parties for the user, update the userProfileParties state
       let dbRef = firebase
         .database()
