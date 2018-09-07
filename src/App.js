@@ -8,8 +8,9 @@ import {
   Redirect
 } from "react-router-dom";
 //COMPONENTS//
-import apiCall from "./components/apiCall";
 import OverviewPage from "./components/OverviewPage";
+import ManageEvents from "./components/ManageEvents";
+import ManageFriends from "./components/ManageFriends";
 
 // FUNCTIONS
 import matchingRecipes from "./components/matchingRecipes";
@@ -22,16 +23,20 @@ const dbRef = firebase.database().ref();
 /* ===================
 TEST STUFF BELOW THAT CAN BE DELETED WHEN DONE
 ==================== */
-let user = "Nicole";
+let user = "Christine";
 let friends = [
   {
-    name: "Pratik",
-    allergies: ["Apple", "Bananas"],
+    name: "Stefan",
+    allowedAllergy: ["393^Gluten-Free", "394^Peanut-Free"],
+    allowedDiet: ["388^Lacto vegetarian", "389^Ovo vegetarian"],
+    excludedIngredient: ["Peanut", "Banana"],
     parties: ["sept3"]
   },
   {
-    name: "Junior",
-    allergies: ["Grapes", "Cookies"],
+    name: "Ben",
+    allowedAllergy: ["400^Soy-Free", "395^Tree Nut-Free"],
+    allowedDiet: ["387^Lacto-ovo vegetarian", "403^Paleo"],
+    excludedIngredient: ["Arugula", "Bread"],
     parties: ["sept3", "nov1"]
   }
 ];
@@ -39,11 +44,11 @@ let friends = [
 let parties = [
   {
     title: "sept3",
-    recipes: ["Pie", "McDonald's"]
+    recipes: []
   },
   {
     title: "nov1",
-    recipes: ["Candy", "Dog Food"]
+    recipes: []
   }
 ];
 
@@ -66,7 +71,8 @@ class App extends Component {
       userProfile: null,
       user: "",
       currentTextValue: "",
-      loginPurpose: ""
+      loginPurpose: "",
+      key: ""
     };
   }
 
@@ -90,19 +96,6 @@ class App extends Component {
   //   excludeIngredients: []
   // }
 
-  /* FUNCTION TO GET EVENTS FROM FIREBASE */
-  retrieveEventsFromFirebase = snapshot => {
-    let newResults = Object.values(snapshot);
-
-    newResults.forEach(person => {
-      if (user === person.user) {
-        this.setState({
-          userProfile: newResults
-        });
-      }
-    });
-  };
-
   // Function for create button
   checkIfUserExists = snapshot => {
     // if userInput is blank, leave the function
@@ -115,6 +108,7 @@ class App extends Component {
     console.log(currentInfoFromFirebase);
 
     currentInfoFromFirebase.map(userObject => {
+      console.log(userObject);
       // If the user input is found within the current firebase and the user clicked "CREATE", reset user state to "" so nothing displays
       if (
         this.state.loginPurpose === "create" &&
@@ -130,7 +124,7 @@ class App extends Component {
         return;
       }
 
-      console.log(userObject);
+      // when person is found
       if (
         this.state.loginPurpose === "sign-in" &&
         userObject.user === this.state.user
@@ -152,8 +146,8 @@ class App extends Component {
 
         // if user clicked create button, create new user on firebase
         if (this.state.loginPurpose === "create") {
-          let newKey = dbRef.push(this.state.user).key;
-          dbRef.child(newKey).set({ user, friends, parties });
+          let id = dbRef.push(this.state.user).key;
+          dbRef.child(id).set({ user, friends, parties, id });
 
           this.setState({
             userProfile: { user: this.state.user }
@@ -223,7 +217,7 @@ class App extends Component {
           </section>
 
           {/* Display List of Recipes */}
-          <DisplayMatchingRecipes restrictions={this.state.restrictions} />
+          {/* <DisplayMatchingRecipes restrictions={this.state.restrictions} /> */}
 
           <Route
             exact
@@ -241,6 +235,20 @@ class App extends Component {
             path="/overview"
             render={props => (
               <OverviewPage {...props} userProfile={this.state.userProfile} />
+            )}
+          />
+          <Route
+            exact
+            path="/manage-friends"
+            render={props => (
+              <ManageFriends {...props} userProfile={this.state.userProfile} />
+            )}
+          />
+          <Route
+            exact
+            path="/manage-events"
+            render={props => (
+              <ManageEvents {...props} userProfile={this.state.userProfile} />
             )}
           />
         </div>
