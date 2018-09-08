@@ -7,19 +7,20 @@
   padding: 0;
 }
 
-.App {
-  text-align: center;
+img {
+  max-width: 100%;
 }
 
-/* =========================
+.wrapper {
+  max-width: 1440px;
+  width: 90%;
+  margin: 0 auto;
+}
 
+ul {
+  list-style: none;
+}
 
-
-
-INSERT STYLING HERE ABOVE PARTIALS
-
-
-
-========================== */
+// 
 
 @import "./partials/_media-queries.scss";
