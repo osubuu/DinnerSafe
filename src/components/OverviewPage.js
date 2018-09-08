@@ -34,7 +34,6 @@ class OverviewPage extends Component {
   };
 
   singleEvent = () => {
-    console.log("got into this function");
     return (
       <EventPage
         userProfile={this.state.userProfile}
@@ -62,7 +61,6 @@ class OverviewPage extends Component {
             : this.state.userProfile.parties.map((party, i) => {
                 return (
                   <div key={i}>
-                    {/* <Link onClick={this.toggleOverviewList} to="/overview/event"> */}
                     <h2
                       onClick={this.toggleOverviewList}
                       id={i}
@@ -70,24 +68,21 @@ class OverviewPage extends Component {
                     >
                       {party.title}
                     </h2>
-                    {/* </Link> */}
                   </div>
                 );
               })}
 
           <Route
-            exact
             path="/overview"
             render={() => {
-              return this.state.selectedEventIndex !== -1 ? (
+              return this.state.selectedEventIndex !== -1 &&
+                this.state.useProfile !== null ? (
                 <Redirect to="/overview/event" />
               ) : null;
             }}
           />
 
-          {/* <Link to="/existing-friend-list">Existing Friend List</Link> */}
-          {/* <Link to="/manage-events">Manage Events</Link> */}
-          <Route exact path="/overview/event" render={this.singleEvent} />
+          <Route path="/overview/event" render={this.singleEvent} />
         </div>
       </main>
     );

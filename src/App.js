@@ -11,7 +11,6 @@ import {
 
 import EventPage from "./components/EventPage/EventPage";
 import OverviewPage from "./components/OverviewPage";
-import ManageEvents from "./components/ManageEvents";
 import EditFriend from "./components/EditFriend";
 
 // FUNCTIONS
@@ -228,14 +227,13 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          
           {/* Current router setup is possibly just a placeholder.
           /// Making sure it's not visible when hitting other pages of the site.
           /// decide if we should make the login page into a component?   */}
-          <Route 
-            path="/login"
+          <Route
+            path="/"
             render={() => {
-              return(
+              return (
                 <section className="logInPage">
                   {/* FIRST PAGE: USER LOGIN */}
                   <form action="" onSubmit={this.handleSubmitLogin}>
@@ -253,9 +251,8 @@ class App extends Component {
                     </button>
                   </form>
                 </section>
-              )
-            }
-            }
+              );
+            }}
           />
 
           {/* <Route exact path="/event" render={this.singleEvent} /> */}
@@ -277,7 +274,7 @@ class App extends Component {
             )}
           />
 
-          <Route
+          {/* <Route
             path="/existing-friend-list"
             render={props => (
               <ExistingFriendList
@@ -285,14 +282,14 @@ class App extends Component {
                 userProfile={this.state.userProfile}
               />
             )}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path="/manage-events"
             render={props => (
               <ManageEvents {...props} userProfile={this.state.userProfile} />
             )}
-          />
+          /> */}
 
           {/* <Route
             exact
