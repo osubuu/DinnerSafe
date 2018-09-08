@@ -49,41 +49,46 @@ class OverviewPage extends Component {
   render() {
     return (
       <main className="overview-page">
-        <h1>{_.capitalize(this.state.userProfile.user)}</h1>
+        <div className="wrapper">
+          <div className="current-user">
+            <h1>{_.capitalize(this.state.userProfile.user)}</h1>
+            <Link to="/login">Log Out</Link>
+          </div>
 
-        {/* Go through parties object and list all the parties and their recipes */}
-        {this.state.userProfile.parties === undefined ||
-        this.state.hideOverviewList === true
-          ? null
-          : this.state.userProfile.parties.map((party, i) => {
-              return (
-                <div key={i}>
-                  {/* <Link onClick={this.toggleOverviewList} to="/overview/event"> */}
-                  <h2
-                    onClick={this.toggleOverviewList}
-                    id={i}
-                    className="go-to-event"
-                  >
-                    {party.title}
-                  </h2>
-                  {/* </Link> */}
-                </div>
-              );
-            })}
+          {/* Go through parties object and list all the parties and their recipes */}
+          {this.state.userProfile.parties === undefined ||
+          this.state.hideOverviewList === true
+            ? null
+            : this.state.userProfile.parties.map((party, i) => {
+                return (
+                  <div key={i}>
+                    {/* <Link onClick={this.toggleOverviewList} to="/overview/event"> */}
+                    <h2
+                      onClick={this.toggleOverviewList}
+                      id={i}
+                      className="go-to-event"
+                    >
+                      {party.title}
+                    </h2>
+                    {/* </Link> */}
+                  </div>
+                );
+              })}
 
-        <Route
-          exact
-          path="/overview"
-          render={() => {
-            return this.state.selectedEventIndex !== -1 ? (
-              <Redirect to="/overview/event" />
-            ) : null;
-          }}
-        />
+          <Route
+            exact
+            path="/overview"
+            render={() => {
+              return this.state.selectedEventIndex !== -1 ? (
+                <Redirect to="/overview/event" />
+              ) : null;
+            }}
+          />
 
-        {/* <Link to="/existing-friend-list">Existing Friend List</Link> */}
-        {/* <Link to="/manage-events">Manage Events</Link> */}
-        <Route exact path="/overview/event" render={this.singleEvent} />
+          {/* <Link to="/existing-friend-list">Existing Friend List</Link> */}
+          {/* <Link to="/manage-events">Manage Events</Link> */}
+          <Route exact path="/overview/event" render={this.singleEvent} />
+        </div>
       </main>
     );
   }

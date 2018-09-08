@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 class EventPage extends Component {
   render() {
     return (
-      <div>
+      <div className="event-page">
         <Link
           onClick={this.props.toggleOverviewList}
           className="go-to-overview"
@@ -51,7 +51,7 @@ class EventPage extends Component {
 
         <DisplayMatchingRecipes
           userProfile={this.props.userProfile}
-          eventName={this.props.eventName}
+          eventName={this.props.selectedEvent.title}
         />
       </div>
     );
