@@ -8,7 +8,7 @@ class ExistingFriendList extends Component {
     super(props);
     this.state = {
       inputValue: "",
-      confirmedEventName: "",
+      selectedEventIndex: props.selectedEventIndex,
       userProfileFriends: props.userProfile.friends,
       key: null
     };
@@ -31,11 +31,47 @@ class ExistingFriendList extends Component {
         <h1>FRIENDS</h1>
         <form action="" onSubmit={this.handleSubmit}>
           {this.state.userProfileFriends.map((friend, i) => {
-            return (
-              <div key={i} className="single-friend">
-                <input id={i} type="checkbox" />
-                <label htmlFor={i}>{friend.name}</label>
-                {/* <ul className="friend-allergies">
+            if (
+              friend ===
+              this.props.userProfile.parties[this.selectedEventIndex].name
+            ) {
+              return (
+                <div key={i} className="single-friend">
+                  <input id={i} type="checkbox" checked />
+                  <label htmlFor={i}>{friend.name}</label>
+                </div>
+              );
+            } else {
+              return (
+                <div key={i} className="single-friend">
+                  <input id={i} type="checkbox" />
+                  <label htmlFor={i}>{friend.name}</label>
+                </div>
+              );
+            }
+          })}
+        </form>
+
+        <Link to="/event">Back to Event</Link>
+      </section>
+    );
+  }
+
+  componentDidMount() {
+    if (this.state.userProfileFriends !== null) {
+      // if there are any changes in the firebase array of parties for the user, update the userProfileParties state
+      let dbRef = firebase
+        .database()
+        .ref(`${this.props.userProfile.id}/friends`);
+      dbRef.on("value", snapshot => {
+        this.setState({ userProfileFriends: snapshot.val() });
+      });
+    }
+  }
+}
+
+{
+  /* <ul className="friend-allergies">
                   <h3>Allergies</h3>
                   {friend.allowedAllergy.map(allergy => {
                     return <li>{allergy}</li>;
@@ -54,56 +90,13 @@ class ExistingFriendList extends Component {
                   {friend.excludedIngredient.map(ingredient => {
                     return <li>{ingredient}</li>;
                   })}
-                </ul>*/}
+                </ul>*/
+}
 
-                <button id={i} onClick={this.saveCurrentFriendIndex}>
+{
+  /* <button id={i} onClick={this.saveCurrentFriendIndex}>
                   EDIT FRIEND
-                </button>
-              </div>
-            );
-          })}
-          <button>SUBMIT</button>
-        </form>
-
-        <Link to="/overview">Back to Overview</Link>
-
-        {/* Redirect to edit-friend when edit-friend button is clicked, wait for state to change */}
-        <Route
-          path="/existing-friend-list"
-          render={() => {
-            return this.state.key !== null ? (
-              <Redirect to="/existing-friend-list/edit-friend" />
-            ) : null;
-          }}
-        />
-
-        {/* Route to edit friend page */}
-        <Route
-          path="/existing-friend-list/edit-friend"
-          render={props => (
-            <EditFriend
-              {...props}
-              friendProfile={this.state.userProfileFriends[this.state.key]}
-              friendKey={this.state.key}
-              userID={this.props.userProfile.id}
-            />
-          )}
-        />
-      </section>
-    );
-  }
-
-  componentDidMount() {
-    if (this.state.userProfileFriends !== null) {
-      // if there are any changes in the firebase array of parties for the user, update the userProfileParties state
-      let dbRef = firebase
-        .database()
-        .ref(`${this.props.userProfile.id}/friends`);
-      dbRef.on("value", snapshot => {
-        this.setState({ userProfileFriends: snapshot.val() });
-      });
-    }
-  }
+                </button> */
 }
 
 export default ExistingFriendList;

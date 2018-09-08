@@ -10,40 +10,9 @@ class OverviewPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: props.userProfile,
-      hideOverviewList: false,
-      selectedEventIndex: -1
+      userProfile: props.userProfile
     };
   }
-
-  toggleOverviewList = e => {
-    console.log(e.target.className);
-    console.log(this.state.selectedEventIndex);
-    console.log(Number(e.target.id));
-    if (e.target.className === "go-to-event") {
-      this.setState({
-        hideOverviewList: true,
-        selectedEventIndex: Number(e.target.id)
-      });
-    } else {
-      this.setState({
-        hideOverviewList: false,
-        selectedEventIndex: -1
-      });
-    }
-  };
-
-  singleEvent = () => {
-    return (
-      <EventPage
-        userProfile={this.state.userProfile}
-        selectedEvent={
-          this.state.userProfile.parties[this.state.selectedEventIndex]
-        }
-        toggleOverviewList={this.toggleOverviewList}
-      />
-    );
-  };
 
   render() {
     return (
@@ -51,38 +20,26 @@ class OverviewPage extends Component {
         <div className="wrapper">
           <div className="current-user">
             <h1>{_.capitalize(this.state.userProfile.user)}</h1>
-            <Link to="/login">Log Out</Link>
+            <Link onClick={this.props.handleLogout} to="/">
+              Log Out
+            </Link>
           </div>
 
           {/* Go through parties object and list all the parties and their recipes */}
-          {this.state.userProfile.parties === undefined ||
-          this.state.hideOverviewList === true
+          {this.state.userProfile.parties === undefined
             ? null
             : this.state.userProfile.parties.map((party, i) => {
                 return (
-                  <div key={i}>
-                    <h2
-                      onClick={this.toggleOverviewList}
-                      id={i}
-                      className="go-to-event"
-                    >
-                      {party.title}
-                    </h2>
-                  </div>
+                  <h2
+                    onClick={this.props.selectEvent}
+                    id={i}
+                    className="go-to-event"
+                    to="/event"
+                  >
+                    {party.title}
+                  </h2>
                 );
               })}
-
-          <Route
-            path="/overview"
-            render={() => {
-              return this.state.selectedEventIndex !== -1 &&
-                this.state.useProfile !== null ? (
-                <Redirect to="/overview/event" />
-              ) : null;
-            }}
-          />
-
-          <Route path="/overview/event" render={this.singleEvent} />
         </div>
       </main>
     );

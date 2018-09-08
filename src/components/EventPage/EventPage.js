@@ -40,14 +40,14 @@ class EventPage extends Component {
     });
   };
 
+  addNewFriendToEvent = e => {};
+
+  addExistingGuestToEvent = e => {};
+
   render() {
     return (
       <div className="event-page">
-        <Link
-          onClick={this.props.toggleOverviewList}
-          className="go-to-overview"
-          to="/Overview"
-        >
+        <Link onClick={this.props.handleBackToOverview} to="/Overview">
           Back to Overview
         </Link>
 
@@ -67,7 +67,9 @@ class EventPage extends Component {
 
                     {/* Fake button to make it clear you can click on the guest to edit them */}
                     <div className="fakeButton">
-                      <Link to="/overview/event/edit-friend">EDIT FRIEND</Link>
+                      <h2 id={friend.name} onClick={this.props.selectFriend}>
+                        EDIT FRIEND
+                      </h2>
                     </div>
                     {/* </a> */}
 
@@ -83,26 +85,13 @@ class EventPage extends Component {
               }
             })}
           </ul>
-          <a href="#AddExistingGuest">Add Existing Guest</a>
-          <a href="#AddNewGuest">Add New Guest</a>
+          <Link to="existing-friend-list">Add Existing Guest</Link>
+          <a href="#AddExistingGuest">Add New Guest</a>
         </div>
 
         <DisplayMatchingRecipes
           userProfile={this.props.userProfile}
           eventName={this.props.selectedEvent.title}
-        />
-
-        <Route
-          exact
-          path="/overview/event/edit-friend"
-          render={props => (
-            <EditFriend
-              {...props}
-              friendProfile={this.state.userProfileFriends[this.state.key]}
-              friendKey={this.state.key}
-              userID={this.props.userProfile.id}
-            />
-          )}
         />
       </div>
     );
