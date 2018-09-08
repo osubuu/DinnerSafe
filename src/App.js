@@ -11,7 +11,6 @@ import {
 
 import EventPage from "./components/EventPage/EventPage";
 import OverviewPage from "./components/OverviewPage";
-import ManageEvents from "./components/ManageEvents";
 import EditFriend from "./components/EditFriend";
 
 // FUNCTIONS
@@ -265,7 +264,7 @@ class App extends Component {
             )}
           />
 
-          <Route
+          {/* <Route
             path="/existing-friend-list"
             render={props => (
               <ExistingFriendList
@@ -273,14 +272,14 @@ class App extends Component {
                 userProfile={this.state.userProfile}
               />
             )}
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path="/manage-events"
             render={props => (
               <ManageEvents {...props} userProfile={this.state.userProfile} />
             )}
-          />
+          /> */}
 
           {/* <Route
             exact
