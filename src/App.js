@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 //COMPONENTS//
 
-import EventPage from "./components/EventPage/EventPage"
+import EventPage from "./components/EventPage/EventPage";
 import OverviewPage from "./components/OverviewPage";
 import ManageEvents from "./components/ManageEvents";
 import EditFriend from "./components/EditFriend";
@@ -67,7 +67,7 @@ class App extends Component {
     super();
     this.state = {
       userProfile: null,
-      
+
       // // Test user profile so that there is already a userprofile when DisplayMatchingRecipes mounts
       // userProfile: {
       //   parties: [
@@ -174,7 +174,7 @@ class App extends Component {
           });
         } else {
           alert("You should create an account!");
-          this.setState({ user: "", userProfile: [] });
+          this.setState({ user: "", userProfile: null });
         }
       }
     });
@@ -215,14 +215,14 @@ class App extends Component {
   };
 
   // Add props to singleEvent
-  singleEvent = () => {
-    return(
-      <EventPage 
-        userProfile={this.state.userProfile}
-        eventName={this.state.userProfile.parties[0].title}
-      />
-    )
-  }
+  // singleEvent = () => {
+  //   return (
+  //     <EventPage
+  //       userProfile={this.state.userProfile}
+  //       eventName={this.state.userProfile.parties[0].title}
+  //     />
+  //   );
+  // };
 
   render() {
     return (
@@ -246,13 +246,9 @@ class App extends Component {
             </form>
           </section>
 
-          <Route 
-            exact path="/event"
-            render={this.singleEvent}
-          />
+          {/* <Route exact path="/event" render={this.singleEvent} /> */}
 
           <Route
-            exact
             path="/"
             render={() => {
               return this.state.userProfile !== null ? (
