@@ -100,7 +100,7 @@ class EditFriend extends Component {
         <form action="">
           <h3>Allergies</h3>
           {Allergy.map(allergy => {
-            // if the current allergy is already in the friend's allergy array, checke the input on display
+            // if the current allergy is already in the friend's allergy array, check the input on display
             if (
               this.state.friendProfile.allowedAllergy.indexOf(
                 allergy.searchValue
@@ -208,7 +208,9 @@ class EditFriend extends Component {
           </form>
         </section>
 
-        <Link to="/existing-friend-list">Back to Existing Friend List</Link>
+        <Link onClick={this.props.handleBackToEvent} to="/event">
+          Back to Event Page
+        </Link>
       </div>
     );
   }

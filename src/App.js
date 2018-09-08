@@ -7,6 +7,8 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
+import _ from "lodash";
+
 //COMPONENTS//
 
 import EventPage from "./components/EventPage/EventPage";
@@ -19,6 +21,7 @@ import matchingRecipes from "./components/matchingRecipes";
 //COMPONENTS
 import DisplayMatchingRecipes from "./components/DisplayMatchingRecipes/DisplayMatchingRecipes";
 import ExistingFriendList from "./components/ExistingFriendList";
+import { timingSafeEqual } from "crypto";
 
 const dbRef = firebase.database().ref();
 
@@ -66,7 +69,9 @@ class App extends Component {
     super();
     this.state = {
       userProfile: null,
-
+      selectedEventIndex: null,
+      selectedFriend: null,
+      loggedIn: false,
       // // Test user profile so that there is already a userprofile when DisplayMatchingRecipes mounts
       // userProfile: {
       //   parties: [
@@ -148,7 +153,7 @@ class App extends Component {
         this.state.loginPurpose === "sign-in" &&
         userObject.user === this.state.user
       ) {
-        this.setState({ userProfile: userObject });
+        this.setState({ userProfile: userObject, loggedIn: true });
         return;
       }
 
@@ -213,15 +218,67 @@ class App extends Component {
     });
   };
 
-  // Add props to singleEvent
-  // singleEvent = () => {
-  //   return (
-  //     <EventPage
-  //       userProfile={this.state.userProfile}
-  //       eventName={this.state.userProfile.parties[0].title}
-  //     />
-  //   );
-  // };
+  handleLogout = e => {
+    this.setState({
+      userProfile: null,
+      selectedEventIndex: null,
+      selectedFriend: null,
+      loggedIn: false,
+      user: "",
+      currentTextValue: "",
+      loginPurpose: "",
+      key: ""
+    });
+  };
+
+  selectEvent = e => {
+    console.log(e.target.id);
+    this.setState({
+      selectedEventIndex: Number(e.target.id)
+    });
+  };
+
+  singleEvent = () => {
+    return (
+      <EventPage
+        userProfile={this.state.userProfile}
+        selectedEvent={
+          this.state.userProfile.parties[this.state.selectedEventIndex]
+        }
+        handleBackToOverview={this.handleBackToOverview}
+        selectFriend={this.selectFriend}
+      />
+    );
+  };
+
+  handleBackToOverview = e => {
+    this.setState({
+      selectedEventIndex: null
+    });
+  };
+
+  handleBackToEvent = e => {
+    this.setState({
+      selectedFriend: null
+    });
+  };
+
+  selectFriend = e => {
+    this.setState(
+      {
+        selectedFriend: e.target.id
+      },
+      () => {
+        let friendProfile = this.state.userProfile.friends[
+          _.findIndex(this.state.userProfile.friends, [
+            "name",
+            this.state.selectedFriend
+          ])
+        ];
+        console.log(friendProfile);
+      }
+    );
+  };
 
   render() {
     return (
@@ -231,33 +288,46 @@ class App extends Component {
           /// Making sure it's not visible when hitting other pages of the site.
           /// decide if we should make the login page into a component?   */}
           <Route
-            exact path="/"
+            exact
+            path="/"
             render={() => {
               return (
                 <section className="log-in-page">
                   <div className="wrapper">
                     {/* FIRST PAGE: USER LOGIN */}
                     <h1 className="app-name">Friendly Food</h1>
-                    <form className="log-in-form clearfix" action="" onSubmit={this.handleSubmitLogin}>
-                      
-                      <label className="username" htmlFor="create-user">Username</label>
-                      
+                    <form
+                      className="log-in-form clearfix"
+                      action=""
+                      onSubmit={this.handleSubmitLogin}
+                    >
+                      <label className="username" htmlFor="create-user">
+                        Username
+                      </label>
+
                       <input
                         className="log-in-text-input"
                         onChange={this.handleChangeLogin}
                         id="create-user"
                         type="text"
                       />
-                      
+
                       <div className="buttons clearfix">
-                        <button className="left" value="sign-in" onClick={this.handleClickLogin}>
+                        <button
+                          className="left"
+                          value="sign-in"
+                          onClick={this.handleClickLogin}
+                        >
                           SIGN IN
                         </button>
-                        <button className="right" value="create" onClick={this.handleClickLogin}>
+                        <button
+                          className="right"
+                          value="create"
+                          onClick={this.handleClickLogin}
+                        >
                           CREATE
                         </button>
                       </div>
-                      
                     </form>
                   </div>
                 </section>
@@ -280,37 +350,76 @@ class App extends Component {
           <Route
             path="/overview"
             render={props => (
-              <OverviewPage {...props} userProfile={this.state.userProfile} />
+              <OverviewPage
+                {...props}
+                userProfile={this.state.userProfile}
+                handleLogout={this.handleLogout}
+                selectEvent={this.selectEvent}
+              />
             )}
           />
 
-          {/* <Route
+          <Route
+            path="/"
+            render={() => {
+              return this.state.selectedEventIndex !== null ? (
+                <Redirect to="/event" />
+              ) : null;
+            }}
+          />
+
+          {/* SINGLE EVENT PAGE */}
+          <Route path="/event" render={this.singleEvent} />
+
+          <Route
+            path="/event"
+            render={() => {
+              return this.state.selectedFriend !== null ? (
+                <Redirect to="/edit-friend" />
+              ) : null;
+            }}
+          />
+
+          {/* EDIT FRIEND PAGE */}
+          <Route
+            path="/edit-friend"
+            render={props => (
+              <EditFriend
+                {...props}
+                friendProfile={
+                  this.state.userProfile.friends[
+                    _.findIndex(this.state.userProfile.friends, [
+                      "name",
+                      this.state.selectedFriend
+                    ])
+                  ]
+                }
+                friendKey={_.findIndex(this.state.userProfile.friends, [
+                  "name",
+                  this.state.selectedFriend
+                ])}
+                userID={this.state.userProfile.id}
+                handleBackToEvent={this.handleBackToEvent}
+              />
+            )}
+          />
+
+          {/* ADD EXISTING FRIEND */}
+          <Route
             path="/existing-friend-list"
             render={props => (
               <ExistingFriendList
                 {...props}
                 userProfile={this.state.userProfile}
+                selectedEventIndex={this.state.selectedEventIndex}
               />
             )}
-          /> */}
+          />
 
           {/* <Route
             path="/manage-events"
             render={props => (
               <ManageEvents {...props} userProfile={this.state.userProfile} />
-            )}
-          /> */}
-
-          {/* <Route
-            exact
-            path="/edit-friend"
-            render={props => (
-              <EditFriend
-                {...props}
-                friendProfile={this.state.userProfileFriends[this.state.key]}
-                friendKey={this.state.key}
-                userID={this.props.userProfile.id}
-              />
             )}
           /> */}
         </div>
