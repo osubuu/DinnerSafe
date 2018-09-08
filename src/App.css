@@ -228,6 +228,65 @@ img {
 ul {
   list-style: none; }
 
+.log-in-page {
+  background: #3e3e3e;
+  height: 100vh;
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./assets/heroBGweb.jpg) 50% 50%;
+  background-size: cover; }
+
+.log-in-form {
+  width: 80%;
+  background: #ffe4c9;
+  max-width: 500px;
+  left: 50%;
+  top: 55%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  border-radius: 10px; }
+  .log-in-form .username {
+    text-align: center;
+    float: left;
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #141414;
+    padding-bottom: 20px; }
+  .log-in-form .log-in-text-input {
+    width: 50%;
+    min-width: 125px;
+    font-size: 2.5rem;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #141414; }
+  .log-in-form button {
+    width: 40%;
+    padding: 10px 0;
+    background: #f34843;
+    color: #f2f2f2;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 5px; }
+  .log-in-form .buttons {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 23px; }
+    .log-in-form .buttons .left {
+      float: left; }
+    .log-in-form .buttons .right {
+      float: right; }
+
+.app-name {
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 13rem;
+  font-weight: normal;
+  color: #ffcb00;
+  text-align: center;
+  padding-top: 9vh; }
+
 @media all and (max-width: 500px) {
   h1 {
     color: blue; } }

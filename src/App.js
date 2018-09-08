@@ -288,24 +288,48 @@ class App extends Component {
           /// Making sure it's not visible when hitting other pages of the site.
           /// decide if we should make the login page into a component?   */}
           <Route
+            exact
             path="/"
             render={() => {
               return (
-                <section className="logInPage">
-                  <form action="" onSubmit={this.handleSubmitLogin}>
-                    <label htmlFor="create-user">USERNAME</label>
-                    <input
-                      onChange={this.handleChangeLogin}
-                      id="create-user"
-                      type="text"
-                    />
-                    <button value="sign-in" onClick={this.handleClickLogin}>
-                      SIGN IN
-                    </button>
-                    <button value="create" onClick={this.handleClickLogin}>
-                      CREATE
-                    </button>
-                  </form>
+                <section className="log-in-page">
+                  <div className="wrapper">
+                    {/* FIRST PAGE: USER LOGIN */}
+                    <h1 className="app-name">Friendly Food</h1>
+                    <form
+                      className="log-in-form clearfix"
+                      action=""
+                      onSubmit={this.handleSubmitLogin}
+                    >
+                      <label className="username" htmlFor="create-user">
+                        Username
+                      </label>
+
+                      <input
+                        className="log-in-text-input"
+                        onChange={this.handleChangeLogin}
+                        id="create-user"
+                        type="text"
+                      />
+
+                      <div className="buttons clearfix">
+                        <button
+                          className="left"
+                          value="sign-in"
+                          onClick={this.handleClickLogin}
+                        >
+                          SIGN IN
+                        </button>
+                        <button
+                          className="right"
+                          value="create"
+                          onClick={this.handleClickLogin}
+                        >
+                          CREATE
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </section>
               );
             }}
