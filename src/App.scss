@@ -20,6 +20,10 @@ img {
 ul {
   list-style: none;
 }
+
+body {
+  background: $color-2;
+}
 // Log In Page
 
 .log-in-page {
@@ -95,9 +99,66 @@ ul {
   font-weight: normal;
   color: $yellow;
   text-align: center;
-  padding-top: 9vh;
+  padding-top: 5vh;
+  padding-bottom: 20px;
 }
-// Event Page
+
+.app-name-sub-header {
+  color: $yellow;
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+// Header
+
+header {
+  background: rgb(80, 80, 80);
+
+  & .app-name {
+    font-size: 3rem;
+    padding: 15px 0;
+    text-align: left;
+    width: auto;
+    float: left;
+  }
+}
+
+.user {
+  color: $yellow;
+  float: right;
+  padding: 15px 0;
+  position: relative;
+  display: block;
+
+  & h2 {
+    float: left;
+    padding-right: 70px;
+  }
+
+  & a {
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 60px;
+  }
+}
+
+.log-out {
+  background: $red;
+  color: $color-2;
+}
+
+// Overview Page
+
+.overview-page {
+  background: $color-2;
+}
 
 
 

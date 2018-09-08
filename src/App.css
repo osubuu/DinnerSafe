@@ -228,6 +228,9 @@ img {
 ul {
   list-style: none; }
 
+body {
+  background: #f2f2f2; }
+
 .log-in-page {
   background: #3e3e3e;
   height: 100vh;
@@ -285,7 +288,50 @@ ul {
   font-weight: normal;
   color: #ffcb00;
   text-align: center;
-  padding-top: 9vh; }
+  padding-top: 5vh;
+  padding-bottom: 20px; }
+
+.app-name-sub-header {
+  color: #ffcb00;
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-align: center; }
+
+header {
+  background: #505050; }
+  header .app-name {
+    font-size: 3rem;
+    padding: 15px 0;
+    text-align: left;
+    width: auto;
+    float: left; }
+
+.user {
+  color: #ffcb00;
+  float: right;
+  padding: 15px 0;
+  position: relative;
+  display: block; }
+  .user h2 {
+    float: left;
+    padding-right: 70px; }
+  .user a {
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 60px; }
+
+.log-out {
+  background: #f34843;
+  color: #f2f2f2; }
+
+.overview-page {
+  background: #f2f2f2; }
 
 @media all and (max-width: 500px) {
   h1 {
