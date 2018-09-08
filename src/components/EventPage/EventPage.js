@@ -42,7 +42,7 @@ class EventPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="event-page">
         <Link
           onClick={this.props.toggleOverviewList}
           className="go-to-overview"

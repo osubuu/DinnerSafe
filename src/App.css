@@ -217,19 +217,17 @@ p {
   margin: 0;
   padding: 0; }
 
-.App {
-  text-align: center; }
+img {
+  max-width: 100%; }
 
-/* =========================
+.wrapper {
+  max-width: 1440px;
+  width: 90%;
+  margin: 0 auto; }
 
+ul {
+  list-style: none; }
 
-
-
-INSERT STYLING HERE ABOVE PARTIALS
-
-
-
-========================== */
 @media all and (max-width: 500px) {
   h1 {
     color: blue; } }

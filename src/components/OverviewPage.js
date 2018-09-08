@@ -48,37 +48,42 @@ class OverviewPage extends Component {
   render() {
     return (
       <main className="overview-page">
-        <h1>{_.capitalize(this.state.userProfile.user)}</h1>
+        <div className="wrapper">
+          <div className="current-user">
+            <h1>{_.capitalize(this.state.userProfile.user)}</h1>
+            <Link to="/login">Log Out</Link>
+          </div>
 
-        {/* Go through parties object and list all the parties and their recipes */}
-        {this.state.userProfile.parties === undefined ||
-        this.state.hideOverviewList === true
-          ? null
-          : this.state.userProfile.parties.map((party, i) => {
-              return (
-                <div key={i}>
-                  <h2
-                    onClick={this.toggleOverviewList}
-                    id={i}
-                    className="go-to-event"
-                  >
-                    {party.title}
-                  </h2>
-                </div>
-              );
-            })}
+          {/* Go through parties object and list all the parties and their recipes */}
+          {this.state.userProfile.parties === undefined ||
+          this.state.hideOverviewList === true
+            ? null
+            : this.state.userProfile.parties.map((party, i) => {
+                return (
+                  <div key={i}>
+                    <h2
+                      onClick={this.toggleOverviewList}
+                      id={i}
+                      className="go-to-event"
+                    >
+                      {party.title}
+                    </h2>
+                  </div>
+                );
+              })}
 
-        <Route
-          path="/overview"
-          render={() => {
-            return this.state.selectedEventIndex !== -1 &&
-              this.state.useProfile !== null ? (
-              <Redirect to="/overview/event" />
-            ) : null;
-          }}
-        />
+          <Route
+            path="/overview"
+            render={() => {
+              return this.state.selectedEventIndex !== -1 &&
+                this.state.useProfile !== null ? (
+                <Redirect to="/overview/event" />
+              ) : null;
+            }}
+          />
 
-        <Route path="/overview/event" render={this.singleEvent} />
+          <Route path="/overview/event" render={this.singleEvent} />
+        </div>
       </main>
     );
   }

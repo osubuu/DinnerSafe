@@ -227,23 +227,35 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <section className="logInPage">
-            {/* FIRST PAGE: USER LOGIN */}
-            <form action="" onSubmit={this.handleSubmitLogin}>
-              <label htmlFor="create-user">USERNAME</label>
-              <input
-                onChange={this.handleChangeLogin}
-                id="create-user"
-                type="text"
-              />
-              <button value="sign-in" onClick={this.handleClickLogin}>
-                SIGN IN
-              </button>
-              <button value="create" onClick={this.handleClickLogin}>
-                CREATE
-              </button>
-            </form>
-          </section>
+          
+          {/* Current router setup is possibly just a placeholder.
+          /// Making sure it's not visible when hitting other pages of the site.
+          /// decide if we should make the login page into a component?   */}
+          <Route 
+            path="/login"
+            render={() => {
+              return(
+                <section className="logInPage">
+                  {/* FIRST PAGE: USER LOGIN */}
+                  <form action="" onSubmit={this.handleSubmitLogin}>
+                    <label htmlFor="create-user">USERNAME</label>
+                    <input
+                      onChange={this.handleChangeLogin}
+                      id="create-user"
+                      type="text"
+                    />
+                    <button value="sign-in" onClick={this.handleClickLogin}>
+                      SIGN IN
+                    </button>
+                    <button value="create" onClick={this.handleClickLogin}>
+                      CREATE
+                    </button>
+                  </form>
+                </section>
+              )
+            }
+            }
+          />
 
           {/* <Route exact path="/event" render={this.singleEvent} /> */}
 
