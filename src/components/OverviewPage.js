@@ -25,25 +25,28 @@ class OverviewPage extends Component {
           
           <div className="events">
             
-            <h2>Events</h2>
+            <h2 className="page-title">Events</h2>
             
+            <Link className="create-new-event" to="/PLACEHOLDER">Create New Event</Link>
+
             <ul>
               {/* Go through parties object and list all the parties and their recipes */} 
               {this.state.userProfile.parties === undefined
                 ? null
                 : this.state.userProfile.parties.map((party, i) => {
                     return (
-                      <li
-                        onClick={this.props.selectEvent}
-                        id={i}
-                        className="go-to-event"
-                        to="/event"
-                      >
-                        {party.title}
+                      <li key={i}>
+                        <Link 
+                          id={i}
+                          className="go-to-event event"
+                          to="/event"onClick={this.props.selectEvent} href="#">{party.title}
+                          </Link>
                       </li>
                     );
                   })}
             </ul>
+
+            
 
           </div>
           {/* End of Events Div */}

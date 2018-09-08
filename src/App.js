@@ -297,7 +297,7 @@ class App extends Component {
                     {/* FIRST PAGE: USER LOGIN */}
                     <h1 className="app-name">Friendly Food</h1>
                     <h2 className="app-name-sub-header">Party guests with allergies and diet restictions?</h2>
-                    <h2 className="app-name-sub-header">Get recipies that everyone can eat!</h2>
+                    <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
                     <form
                       className="log-in-form clearfix"
                       action=""
