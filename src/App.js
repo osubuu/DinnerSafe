@@ -68,7 +68,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      userProfile: null,
+      userProfile: {
+        user: "default",
+        id: -1
+      },
       selectedEventIndex: null,
       selectedFriend: null,
       loggedIn: false,
@@ -356,7 +359,7 @@ class App extends Component {
           <Route
             path="/"
             render={() => {
-              return this.state.userProfile !== null ? (
+              return this.state.userProfile && this.state.loggedIn === true ? (
                 <Redirect to="/overview" />
               ) : null;
             }}
@@ -380,7 +383,7 @@ class App extends Component {
           <Route
             path="/"
             render={() => {
-              return this.state.selectedEventIndex !== null ? (
+              return this.state.selectedEventIndex ? (
                 <Redirect to="/event" />
               ) : null;
             }}
@@ -393,7 +396,7 @@ class App extends Component {
           <Route
             path="/event"
             render={() => {
-              return this.state.selectedFriend !== null ? (
+              return this.state.selectedFriend ? (
                 <Redirect to="/edit-friend" />
               ) : null;
             }}
@@ -434,19 +437,22 @@ class App extends Component {
               />
             )}
           />
-
-          {/* <Route
-            path="/manage-events"
-            render={props => (
-              <ManageEvents {...props} userProfile={this.state.userProfile} />
-            )}
-          /> */}
         </div>
       </Router>
     );
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log("outside");
+
+    console.log("inside");
+
+    let dbRef = firebase.database().ref(`${this.state.userProfile.id}`);
+
+    dbRef.on("value", snapshot => {
+      this.setState({ userProfile: snapshot.val() });
+    });
+  }
 }
 
 export default App;

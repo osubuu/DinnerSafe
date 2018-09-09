@@ -103,27 +103,6 @@ class OverviewPage extends Component {
           </div>
           {/* End of Events Div */}
 
-          {/* Go through parties object and list all the parties and their recipes */}
-          {/* {this.state.userProfile.parties
-            ? this.state.userProfile.parties.map((party, i) => {
-                return (
-                  <div key={i}>
-                    <h2
-                      onClick={this.props.selectEvent}
-                      id={i}
-                      className="go-to-event"
-                      to="/event"
-                    >
-                      {party.title}
-                    </h2>
-                    <button onClick={() => this.deleteEvent(i)}>
-                      DELETE EVENT
-                    </button>
-                  </div>
-                );
-              })
-            : null} */}
-
           <form onSubmit={this.handleSubmitAddEvent} action="">
             <label htmlFor="new-event">Add New Event</label>
             <input

@@ -8,7 +8,7 @@ class ManageEvents extends Component {
     this.state = {
       inputValue: "",
       confirmedEventName: "",
-      userProfileParties: props.userProfile.parties
+      userProfile: props.userProfile
     };
   }
 
@@ -36,7 +36,7 @@ class ManageEvents extends Component {
     };
 
     // create temp array (clone of current firebase parties array) and add new object to it
-    let tempArr = this.state.userProfileParties;
+    let tempArr = this.state.userProfile.parties;
     tempArr.push(newEventObj);
 
     // replace the firebase array with the newly updated array
@@ -52,7 +52,7 @@ class ManageEvents extends Component {
   deleteEvent = key => {
     console.log(key);
 
-    let tempArr = this.state.userProfileParties;
+    let tempArr = this.state.userProfile.parties;
     tempArr.splice(key, 1);
 
     const dbRef = firebase
@@ -68,9 +68,8 @@ class ManageEvents extends Component {
         <h1>MANAGE EVENTS</h1>
 
         {/* DISPLAY LIST OF PARTIES */}
-        {this.state.userProfileParties !== null &&
-        this.state.userProfileParties !== undefined
-          ? this.state.userProfileParties.map((party, i) => {
+        {this.state.userProfile.parties
+          ? this.state.userProfile.parties.map((party, i) => {
               return (
                 <div key={i}>
                   <h2>{party.title}</h2>
@@ -98,15 +97,16 @@ class ManageEvents extends Component {
   }
 
   componentDidMount() {
-    if (this.state.userProfileParties !== null) {
-      // if there are any changes in the firebase array of parties for the user, update the userProfileParties state
+    if (this.state.userProfile.parties) {
+      // if there are any changes in the firebase array of parties for the user, update the userProfile state
       let dbRef = firebase
         .database()
-        .ref(`${this.props.userProfile.id}/parties`);
+        // .ref(`${this.props.userProfile.id}/parties`);
+        .ref(`${this.props.userProfile.id}`);
 
       dbRef.on("value", snapshot => {
         this.setState({
-          userProfileParties: snapshot.val()
+          userProfile: snapshot.val()
         });
       });
     }

@@ -42,15 +42,6 @@ class EventPage extends Component {
     });
   };
 
-  addNewFriendToEvent = () => {
-    let tempArr = this.state.userProfile.friends;
-    console.log("creating and adding new friend");
-
-    // let x =
-
-    // tempArr.push({name: })
-  };
-
   addExistingFriendToEvent = () => {
     this.props.updateAppUserProfile(this.state.userProfile);
   };
@@ -106,7 +97,7 @@ class EventPage extends Component {
 
           <div className="guestList">
             <ul className="guests">
-              {this.props.userProfile.friends.map((friend, i) => {
+              {this.state.userProfile.friends.map((friend, i) => {
                 if (
                   friend.parties.indexOf(this.props.selectedEvent.title) !== -1
                 ) {
