@@ -7,7 +7,7 @@ const Header = (props) => {
         <header>
             <div className="wrapper">
                 <div className="inner-header clearfix">
-                    <h1 className="app-name">Friendly Food</h1>
+                    <h1 className="app-name">DinnerSafe</h1>
                     <div className="user clearfix">
                         <h2>{props.user}</h2>
                         {/* <div className="log-out-div clearfix"> */}
