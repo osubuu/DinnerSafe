@@ -153,7 +153,11 @@ class App extends Component {
         this.state.loginPurpose === "sign-in" &&
         userObject.user === this.state.user
       ) {
-        this.setState({ userProfile: userObject, loggedIn: true });
+        this.setState({
+          userProfile: userObject,
+          loggedIn: true,
+          key: userObject.id
+        });
         return;
       }
 
@@ -232,7 +236,6 @@ class App extends Component {
   };
 
   selectEvent = e => {
-    console.log(e.target.id);
     this.setState({
       selectedEventIndex: Number(e.target.id)
     });
@@ -247,6 +250,7 @@ class App extends Component {
         }
         handleBackToOverview={this.handleBackToOverview}
         selectFriend={this.selectFriend}
+        updateAppUserProfile={this.updateAppUserProfile}
       />
     );
   };
@@ -279,6 +283,12 @@ class App extends Component {
       }
     );
   };
+
+  // updateAppUserProfile = updatedProfile => {
+  //   this.setState({
+  //     userProfile: updatedProfile
+  //   });
+  // };
 
   render() {
     return (
@@ -335,8 +345,7 @@ class App extends Component {
             }}
           />
 
-          {/* <Route exact path="/event" render={this.singleEvent} /> */}
-
+          {/* Wait for userProfile to be ready, then redirect to overview */}
           <Route
             path="/"
             render={() => {
@@ -355,10 +364,12 @@ class App extends Component {
                 userProfile={this.state.userProfile}
                 handleLogout={this.handleLogout}
                 selectEvent={this.selectEvent}
+                updateAppUserProfile={this.updateAppUserProfile}
               />
             )}
           />
 
+          {/* Wait for selected event index to be ready, then redirect to event page */}
           <Route
             path="/"
             render={() => {
@@ -371,6 +382,7 @@ class App extends Component {
           {/* SINGLE EVENT PAGE */}
           <Route path="/event" render={this.singleEvent} />
 
+          {/* Wait for selected friend to be ready, then redirect to edit friend page */}
           <Route
             path="/event"
             render={() => {

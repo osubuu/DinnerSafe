@@ -3,7 +3,6 @@
 import React, { Component } from "react";
 import DisplayMatchingRecipes from "../DisplayMatchingRecipes/DisplayMatchingRecipes";
 import { Route, Link } from "react-router-dom";
-import EditFriend from "../EditFriend";
 import firebase from "../../firebase";
 import _ from "lodash";
 
@@ -11,7 +10,9 @@ class EventPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: props.userProfile
+      userProfile: props.userProfile,
+      inputValue: "",
+      confirmedNewName: ""
     };
     this.dbRef = firebase.database().ref(`${props.userProfile.id}`);
   }
@@ -40,9 +41,52 @@ class EventPage extends Component {
     });
   };
 
-  addNewFriendToEvent = e => {};
+  addNewFriendToEvent = () => {
+    let tempArr = this.state.userProfile.friends;
+    console.log("creating and adding new friend");
 
-  addExistingGuestToEvent = e => {};
+    // let x =
+
+    // tempArr.push({name: })
+  };
+
+  addExistingFriendToEvent = () => {
+    this.props.updateAppUserProfile(this.state.userProfile);
+  };
+
+  handleChangeAddFriend = e => {
+    this.setState({
+      inputValue: e.target.value
+    });
+  };
+
+  handleSubmitAddFriend = e => {
+    e.preventDefault();
+
+    let newFriendObj = {
+      name: this.state.confirmedNewName,
+      allowedAllergy: [],
+      allowedDiet: [],
+      excludedIngredient: [],
+      parties: [this.props.selectedEvent.title]
+    };
+
+    // create temp array (clone of current firebase friend array) and add new object to it
+    let tempArr = this.state.userProfile.friends;
+    tempArr.push(newFriendObj);
+    console.log(tempArr);
+
+    // replace the firebase array with the newly updated array
+    this.dbRef.child("/friends").set(tempArr);
+
+    console.log(tempArr);
+  };
+
+  handleClickAddFriend = e => {
+    this.setState({
+      confirmedNewName: this.state.inputValue
+    });
+  };
 
   render() {
     return (
@@ -55,14 +99,14 @@ class EventPage extends Component {
 
         <div className="guestList">
           <ul className="guests">
-            {this.props.userProfile.friends.map((friend, i) => {
+            {this.state.userProfile.friends.map((friend, i) => {
               if (
+                friend.parties &&
                 friend.parties.indexOf(this.props.selectedEvent.title) !== -1
               ) {
                 return (
                   <li className="guest">
                     {/* Edit the guests restrictions */}
-                    {/* <a href="#placeholderToEditGuestRestrictions"> */}
                     <p>{friend.name}</p>
 
                     {/* Fake button to make it clear you can click on the guest to edit them */}
@@ -85,8 +129,22 @@ class EventPage extends Component {
               }
             })}
           </ul>
-          <Link to="existing-friend-list">Add Existing Guest</Link>
-          <a href="#AddExistingGuest">Add New Guest</a>
+          <Link
+            onClick={this.addExistingFriendToEvent}
+            to="/existing-friend-list"
+          >
+            Add Existing Guest
+          </Link>
+
+          <form onSubmit={this.handleSubmitAddFriend} action="">
+            <label htmlFor="add-new-friend">Add New Guest</label>
+            <input
+              id={"add-new-friend"}
+              onChange={this.handleChangeAddFriend}
+              type="text"
+            />
+            <button onClick={this.handleClickAddFriend}>ADD</button>
+          </form>
         </div>
 
         <DisplayMatchingRecipes
@@ -95,6 +153,12 @@ class EventPage extends Component {
         />
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.dbRef.on("value", snapshot => {
+      this.setState({ userProfile: snapshot.val() });
+    });
   }
 }
 
