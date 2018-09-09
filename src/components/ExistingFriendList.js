@@ -74,13 +74,13 @@ class ExistingFriendList extends Component {
     );
   }
 
-  componentDidMount() {
-    if (this.state.userProfileFriends) {
-      this.dbRef.on("value", snapshot => {
-        this.setState({ userProfileFriends: snapshot.val() });
-      });
-    }
-  }
+  // componentDidMount() {
+  //   if (this.state.userProfileFriends) {
+  //     this.dbRef.on("value", snapshot => {
+  //       this.setState({ userProfileFriends: snapshot.val() });
+  //     });
+  //   }
+  // }
 }
 
 export default ExistingFriendList;

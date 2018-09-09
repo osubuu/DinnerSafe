@@ -96,14 +96,14 @@ class EditFriend extends Component {
         <h2>{this.state.friendProfile.name}</h2>
         <form action="">
           <h3>Allergies</h3>
-          {Allergy.map(allergy => {
+          {Allergy.map((allergy, i) => {
             // if the current allergy is already in the friend's allergy array, check the input on display
             if (
               this.state.friendProfile.allowedAllergy &&
               this.state.friendProfile.allowedAllergy.indexOf(allergy.searchValue) !== -1
             ) {
               return (
-                <div>
+                <div key={i}>
                   <label htmlFor={allergy.searchValue}>{allergy.shortDescription}</label>
                   <input
                     className="allergy"
@@ -119,7 +119,7 @@ class EditFriend extends Component {
             // else, do not check it
             else {
               return (
-                <div>
+                <div key={i}>
                   <label htmlFor={allergy.searchValue}>{allergy.shortDescription}</label>
                   <input
                     className="allergy"
@@ -135,14 +135,14 @@ class EditFriend extends Component {
         </form>
         <form action="">
           <h3>Diet</h3>
-          {Diet.map(diet => {
+          {Diet.map((diet, i) => {
             // if the current diet is already in the friend's diet array, check the input on display
             if (
               this.state.friendProfile.allowedDiet &&
               this.state.friendProfile.allowedDiet.indexOf(diet.searchValue) !== -1
             ) {
               return (
-                <div>
+                <div key={i}>
                   <label htmlFor={diet.searchValue}>{diet.shortDescription}</label>
                   <input
                     className="diet"
@@ -158,7 +158,7 @@ class EditFriend extends Component {
             // else, do not check it
             else {
               return (
-                <div>
+                <div key={i}>
                   <label htmlFor={diet.searchValue}>{diet.shortDescription}</label>
                   <input
                     className="diet"
@@ -199,13 +199,13 @@ class EditFriend extends Component {
     );
   }
 
-  componentDidMount() {
-    this.dbRef.on("value", snapshot => {
-      this.setState({
-        friendProfile: snapshot.val()
-      });
-    });
-  }
+  // componentDidMount() {
+  //   this.dbRef.on("value", snapshot => {
+  //     this.setState({
+  //       friendProfile: snapshot.val()
+  //     });
+  //   });
+  // }
 }
 
 export default EditFriend;

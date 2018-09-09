@@ -11,7 +11,7 @@ class OverviewPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: props.userProfile,
+      // userProfile: props.userProfile,
       inputValue: "",
       confirmedEventName: "",
       userID: props.userID
@@ -43,7 +43,7 @@ class OverviewPage extends Component {
     };
 
     // create temp array (clone of current firebase parties array) and add new object to it
-    let tempArr = this.state.userProfile.parties;
+    let tempArr = this.props.userProfile.parties;
     tempArr.push(newEventObj);
 
     // replace the firebase array with the newly updated array
@@ -60,7 +60,7 @@ class OverviewPage extends Component {
   deleteEvent = key => {
     console.log(key);
 
-    let tempArr = this.state.userProfile.parties;
+    let tempArr = this.props.userProfile.parties;
     tempArr.splice(key, 1);
 
     this.dbRef.child("/parties").set(tempArr);
@@ -69,7 +69,7 @@ class OverviewPage extends Component {
   render() {
     return (
       <main className="overview-page">
-        <Header user={_.capitalize(this.state.userProfile.user)} handleLogout={this.props.handleLogout} />
+        <Header user={_.capitalize(this.props.userProfile.user)} handleLogout={this.props.handleLogout} />
 
         <div className="wrapper">
           <div className="events">
@@ -81,8 +81,8 @@ class OverviewPage extends Component {
 
             <ul>
               {/* Go through parties object and list all the parties and their recipes */}
-              {this.state.userProfile.parties
-                ? this.state.userProfile.parties.map((party, i) => {
+              {this.props.userProfile.parties
+                ? this.props.userProfile.parties.map((party, i) => {
                     return (
                       <li key={i}>
                         <Link
@@ -119,20 +119,20 @@ class OverviewPage extends Component {
     );
   }
 
-  componentDidMount() {
-    console.log("Inside ComponentDidMount of Overview");
-    console.log("UserProfile state:");
-    console.log(this.state.userProfile);
-    console.log("UserID");
-    console.log(this.state.userID);
+  // componentDidMount() {
+  //   console.log("Inside ComponentDidMount of Overview");
+  //   console.log("UserProfile state:");
+  //   console.log(this.state.userProfile);
+  //   console.log("UserID");
+  //   console.log(this.state.userID);
 
-    this.dbRef.on("value", snapshot => {
-      console.log(snapshot.val());
-      this.setState({ userProfile: snapshot.val() }, () => {
-        console.log(this.state.userProfile);
-      });
-    });
-  }
+  //   this.dbRef.on("value", snapshot => {
+  //     console.log(snapshot.val());
+  //     this.setState({ userProfile: snapshot.val() }, () => {
+  //       console.log(this.state.userProfile);
+  //     });
+  //   });
+  // }
 }
 
 export default OverviewPage;

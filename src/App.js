@@ -241,7 +241,6 @@ class App extends Component {
         selectedEvent={this.state.userProfile.parties[this.state.selectedEventIndex]}
         handleBackToOverview={this.handleBackToOverview}
         selectFriend={this.selectFriend}
-        updateAppUserProfile={this.updateAppUserProfile}
         handleLogout={this.handleLogout}
       />
     );
@@ -326,6 +325,7 @@ class App extends Component {
 
           {/* Wait for userProfile to be ready, then redirect to overview */}
           <Route
+            exact
             path="/"
             render={() => {
               return this.state.userProfile.id !== "default" && this.state.loggedIn === true && this.state.key ? (
@@ -343,7 +343,6 @@ class App extends Component {
                 userProfile={this.state.userProfile}
                 handleLogout={this.handleLogout}
                 selectEvent={this.selectEvent}
-                updateAppUserProfile={this.updateAppUserProfile}
                 userID={this.state.key}
               />
             )}
@@ -351,6 +350,7 @@ class App extends Component {
 
           {/* Wait for selected event index to be ready, then redirect to event page */}
           <Route
+            exact
             path="/"
             render={() => {
               return this.state.selectedEventIndex ? <Redirect to="/event" /> : null;

@@ -11,7 +11,7 @@ class EventPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: props.userProfile,
+      // userProfile: props.userProfile,
       inputValue: "",
       confirmedNewName: ""
     };
@@ -20,13 +20,14 @@ class EventPage extends Component {
 
   removeFriendFromEvent = e => {
     console.log(e.target.id);
+    let friendName = e.target.id;
 
     this.dbRef.child("friends").once("value", snapshot => {
       // find index of current friend on firebase
-      let tempFriendIndex = _.findIndex(snapshot.val(), ["name", e.target.id]);
+      let tempFriendIndex = _.findIndex(snapshot.val(), ["name", friendName]);
 
       // make temporary array of the parties array of the current friend
-      let tempFriendParties = _.find(snapshot.val(), ["name", e.target.id]).parties;
+      let tempFriendParties = _.find(snapshot.val(), ["name", friendName]).parties;
 
       // remove current party from current friend
       tempFriendParties.splice(tempFriendParties.indexOf(this.props.selectedEvent.title), 1);
@@ -34,10 +35,6 @@ class EventPage extends Component {
       // set new party array to firebase
       this.dbRef.child(`/friends/${tempFriendIndex}/parties`).set(tempFriendParties);
     });
-  };
-
-  addExistingFriendToEvent = () => {
-    this.props.updateAppUserProfile(this.state.userProfile);
   };
 
   handleChangeAddFriend = e => {
@@ -58,7 +55,7 @@ class EventPage extends Component {
     };
 
     // create temp array (clone of current firebase friend array) and add new object to it
-    let tempArr = this.state.userProfile.friends;
+    let tempArr = this.props.userProfile.friends;
     tempArr.push(newFriendObj);
     console.log(tempArr);
 
@@ -77,7 +74,7 @@ class EventPage extends Component {
   render() {
     return (
       <div className="event-page">
-        <Header user={_.capitalize(this.state.userProfile.user)} handleLogout={this.props.handleLogout} />
+        <Header user={_.capitalize(this.props.userProfile.user)} handleLogout={this.props.handleLogout} />
 
         <div className="wrapper">
           <Link onClick={this.props.handleBackToOverview} to="/Overview">
@@ -88,10 +85,10 @@ class EventPage extends Component {
 
           <div className="guestList">
             <ul className="guests">
-              {this.state.userProfile.friends.map((friend, i) => {
+              {this.props.userProfile.friends.map((friend, i) => {
                 if (friend.parties.indexOf(this.props.selectedEvent.title) !== -1) {
                   return (
-                    <li className="guest">
+                    <li key={i} className="guest">
                       {/* Edit the guests restrictions */}
                       {/* <a href="#placeholderToEditGuestRestrictions"> */}
                       <p>{friend.name}</p>
@@ -129,14 +126,14 @@ class EventPage extends Component {
     );
   }
 
-  componentDidMount() {
-    console.log("Inside ComponentDidMount of EventPage.js");
+  // componentDidMount() {
+  //   console.log("Inside ComponentDidMount of EventPage.js");
 
-    this.dbRef.on("value", snapshot => {
-      console.log(snapshot.val());
-      this.setState({ userProfile: snapshot.val() });
-    });
-  }
+  //   this.dbRef.on("value", snapshot => {
+  //     console.log(snapshot.val());
+  //     this.setState({ userProfile: snapshot.val() });
+  //   });
+  // }
 }
 
 export default EventPage;
