@@ -340,23 +340,83 @@ header {
   text-align: center;
   margin: 50px 0 25px 0; }
 
+.create-new-event {
+  background: #ffcb00;
+  padding: 10px;
+  border-radius: 5px;
+  color: #141414; }
+
+.new-event-label {
+  width: 100%;
+  float: left;
+  font-size: 1.5rem;
+  text-align: left;
+  padding-bottom: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold; }
+
+.new-event-name-input,
+.new-event-button {
+  border: none;
+  float: left; }
+
+.new-event-name-input {
+  padding: 10px;
+  width: calc(100% - 114px); }
+
+.new-event-button {
+  float: left;
+  margin-left: 10px;
+  border-radius: 5px;
+  background: #117842;
+  color: #f2f2f2;
+  padding: 10px 20px; }
+
+.go-to-event,
+.create-new-event {
+  padding: 10px;
+  border-radius: 5px; }
+
+.go-to-event {
+  width: calc(100% - 55px);
+  float: left;
+  background: #505050;
+  color: white;
+  font-family: "Muli", sans-serif; }
+
 .create-new-event,
 .event {
-  width: 90%;
   max-width: 500px;
+  width: 80%;
   display: block;
   text-align: center;
-  color: white;
-  border-radius: 5px;
   font-size: 2rem;
-  padding: 10px;
-  margin: 0 auto 10px auto; }
+  margin: 0 auto 15px auto;
+  position: relative; }
 
-.create-new-event {
-  background: #f34843; }
+.delete-button {
+  background: #f34843;
+  height: 45px;
+  width: 45px;
+  float: left;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-weight: bold;
+  position: absolute;
+  margin-left: 10px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%); }
 
-.event {
-  background: #505050; }
+.fa-times {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  margin: 0;
+  font-size: 2.5rem; }
 
 @media all and (max-width: 500px) {
   h1 {
