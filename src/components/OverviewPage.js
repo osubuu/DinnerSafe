@@ -93,6 +93,9 @@ class OverviewPage extends Component {
                         >
                           {party.title}
                         </Link>
+                        <button onClick={() => this.deleteEvent(i)}>
+                          DELETE EVENT
+                        </button>
                       </li>
                     );
                   })}
@@ -101,7 +104,7 @@ class OverviewPage extends Component {
           {/* End of Events Div */}
 
           {/* Go through parties object and list all the parties and their recipes */}
-          {this.state.userProfile.parties
+          {/* {this.state.userProfile.parties
             ? this.state.userProfile.parties.map((party, i) => {
                 return (
                   <div key={i}>
@@ -119,7 +122,7 @@ class OverviewPage extends Component {
                   </div>
                 );
               })
-            : null}
+            : null} */}
 
           <form onSubmit={this.handleSubmitAddEvent} action="">
             <label htmlFor="new-event">Add New Event</label>

@@ -137,6 +137,7 @@ class EventPage extends Component {
               })}
             </ul>
             <Link to="existing-friend-list">Add Existing Guest</Link>
+
             <form onSubmit={this.handleSubmitAddFriend} action="">
               <label htmlFor="add-new-friend">Add New Guest</label>
               <input
