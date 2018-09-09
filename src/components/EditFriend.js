@@ -17,75 +17,91 @@ class EditFriend extends Component {
     this.dbRef = firebase.database().ref(`${this.state.userID}/friends/${this.state.friendKey}`);
   }
 
+  // Handle input value for new restriction
   handleChangeEditFriend = e => {
     this.setState({
       inputValue: e.target.value
     });
   };
 
-  // Handling for click of either sign in or create buttons
+  // Handling for click for new restriction
   handleClickEditFriend = e => {
     this.setState({
       confirmedIngredient: this.state.inputValue
     });
   };
 
-  // Handling for form submit
+  // Handling for form submit of new restriction
   handleSubmitEditFriend = e => {
     e.preventDefault();
 
-    // make copy of current excluded ingredient array and then push new ingredient to it
-    let newIngredientList = this.state.friendProfile.excludedIngredient;
-    newIngredientList.push(this.state.confirmedIngredient);
+    // make copy of current friend profile
+    let tempObj = this.state.friendProfile;
+
+    // initialize an empty array of excluded ingredient, if it doesn't exist yet
+    if (!this.state.friendProfile.excludedIngredient) {
+      tempObj.excludedIngredient = [];
+    }
+
+    // push new ingredient into array
+    tempObj.excludedIngredient.push(this.state.confirmedIngredient);
 
     // set new ingredient list to friend
-    this.dbRef.child("/excludedIngredient").set(newIngredientList);
+    this.dbRef.set(tempObj);
 
     this.setState({
-      confirmedIngredient: ""
+      confirmedIngredient: "",
+      inputValue: ""
     });
   };
 
+  // Delete current ingredient
   deleteIngredient = key => {
-    console.log(key);
     let newIngredientList = this.state.friendProfile.excludedIngredient;
-    console.log(newIngredientList);
     newIngredientList.splice(newIngredientList.indexOf(key), 1);
-    console.log(newIngredientList);
 
     this.dbRef.child("/excludedIngredient").set(newIngredientList);
   };
 
+  // Function to toggle allergies/diets directly on page and into firebase
   toggleAllergies = e => {
-    if (e.target.className === "allergy") {
-      let tempArr = this.state.friendProfile.allowedAllergy;
-      // the item should be added to the list of allergies
-      if (e.target.checked === true) {
-        tempArr.push(e.target.id);
+    // make copy of current friend profile
+    let tempObj = this.state.friendProfile;
 
-        this.dbRef.child("/allowedAllergy").set(tempArr);
+    // if friend has no allergy array yet, initialize one
+    if (!this.state.friendProfile.allowedAllergy) {
+      tempObj.allowedAllergy = [];
+    }
+
+    // if friend has no diet array yet, initialize one
+    if (!this.state.friendProfile.allowedDiet) {
+      tempObj.allowedDiet = [];
+    }
+
+    // if the checkbox was an allergy box
+    if (e.target.className === "allergy") {
+      // the item should be added to the arrayof allergies
+      if (e.target.checked === true) {
+        tempObj.allowedAllergy.push(e.target.id);
+        this.dbRef.set(tempObj);
       }
       // the item should be removed from the list of allergies
       else {
-        tempArr.splice(tempArr.indexOf(e.target.id), 1);
-
-        this.dbRef.child("/allowedAllergy").set(tempArr);
+        tempObj.allowedAllergy.splice(tempObj.allowedAllergy.indexOf(e.target.id), 1);
+        this.dbRef.set(tempObj);
       }
     }
     // if not allergy, it has to be diet
-    else {
-      let tempArr = this.state.friendProfile.allowedDiet;
+    else if (e.target.className === "diet") {
       // the item should be added to the list of diet
       if (e.target.checked === true) {
-        tempArr.push(e.target.id);
-
-        this.dbRef.child("/allowedDiet").set(tempArr);
+        tempObj.allowedDiet.push(e.target.id);
+        this.dbRef.set(tempObj);
       }
       // the item should be removed from the list of diet
       else {
-        tempArr.splice(tempArr.indexOf(e.target.id), 1);
-
-        this.dbRef.child("/allowedDiet").set(tempArr);
+        tempObj.allowedDiet.splice(tempObj.allowedDiet.indexOf(e.target.id), 1);
+        this.dbRef.set(tempObj);
       }
     }
   };
@@ -96,14 +112,14 @@ class EditFriend extends Component {
         <h2>{this.state.friendProfile.name}</h2>
         <form action="">
           <h3>Allergies</h3>
-          {Allergy.map(allergy => {
+          {Allergy.map((allergy, i) => {
             // if the current allergy is already in the friend's allergy array, check the input on display
             if (
               this.state.friendProfile.allowedAllergy &&
               this.state.friendProfile.allowedAllergy.indexOf(allergy.searchValue) !== -1
             ) {
               return (
-                <div>
+                <div key={i}>
                   <label htmlFor={allergy.searchValue}>{allergy.shortDescription}</label>
                   <input
                     className="allergy"
@@ -119,7 +135,7 @@ class EditFriend extends Component {
             // else, do not check it
             else {
               return (
-                <div>
+                <div key={i}>
                   <label htmlFor={allergy.searchValue}>{allergy.shortDescription}</label>
                   <input
                     className="allergy"
@@ -135,14 +151,14 @@ class EditFriend extends Component {
         </form>
         <form action="">
           <h3>Diet</h3>
-          {Diet.map(diet => {
+          {Diet.map((diet, i) => {
             // if the current diet is already in the friend's diet array, check the input on display
             if (
               this.state.friendProfile.allowedDiet &&
               this.state.friendProfile.allowedDiet.indexOf(diet.searchValue) !== -1
             ) {
               return (
-                <div>
+                <div key={i}>
                   <label htmlFor={diet.searchValue}>{diet.shortDescription}</label>
                   <input
                     className="diet"
@@ -158,7 +174,7 @@ class EditFriend extends Component {
             // else, do not check it
             else {
               return (
-                <div>
+                <div key={i}>
                   <label htmlFor={diet.searchValue}>{diet.shortDescription}</label>
                   <input
                     className="diet"
@@ -187,7 +203,7 @@ class EditFriend extends Component {
               : null}
           </ul>
           <form onSubmit={this.handleSubmitEditFriend} action="">
-            <input onChange={this.handleChangeEditFriend} type="text" />
+            <input value={this.state.inputValue} onChange={this.handleChangeEditFriend} type="text" />
             <button onClick={this.handleClickEditFriend}>ADD</button>
           </form>
         </section>

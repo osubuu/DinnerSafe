@@ -24,9 +24,7 @@ class DisplayMatchingRecipes extends Component {
 
   setRestrictions = (userProfile, event, callback) => {
     // filters userProfile.friends array for friends with the event and pushes them to the friends array
-    const friends = userProfile.friends.filter(friend =>
-      friend.parties.includes(event)
-    );
+    const friends = userProfile.friends.filter(friend => friend.parties && friend.parties.includes(event));
 
     console.log("friends filtered: ", friends);
 
@@ -42,9 +40,7 @@ class DisplayMatchingRecipes extends Component {
         friend.allowedDiet.forEach(diet => diets.push(diet));
       }
       if (friend.excludedIngredient) {
-        friend.excludedIngredient.forEach(ingredient =>
-          ingredients.push(ingredient)
-        );
+        friend.excludedIngredient.forEach(ingredient => ingredients.push(ingredient));
       }
     });
 
