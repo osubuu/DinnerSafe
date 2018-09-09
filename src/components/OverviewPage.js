@@ -83,26 +83,35 @@ class OverviewPage extends Component {
           <div className="events">
             <h2 className="page-title">Events</h2>
 
-            <Link className="create-new-event" to="/PLACEHOLDER">
-              Create New Event
-            </Link>
+            <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
+              <label className="new-event-label" htmlFor="new-event">
+                Add New Event
+              </label>
+              <input
+                className="new-event-name-input"
+                onChange={this.handleChangeAddEvent}
+                id="new-event"
+                type="text"
+                placeholder="New Event Name"
+                value={this.state.inputValue}
+              />
+              <button className="new-event-button" onClick={this.handleClickAddEvent}>
+                Submit
+              </button>
+            </form>
 
             <ul>
               {/* Go through parties object and list all the parties and their recipes */}
               {this.props.userProfile.parties
                 ? this.props.userProfile.parties.map((party, i) => {
                     return (
-                      <li key={i}>
-                        <Link
-                          id={i}
-                          className="go-to-event event"
-                          to="/event"
-                          onClick={this.props.selectEvent}
-                          href="#"
-                        >
+                      <li className="clearfix event" key={i}>
+                        <Link id={i} className="go-to-event" to="/event" onClick={this.props.selectEvent} href="#">
                           {party.title}
                         </Link>
-                        <button onClick={() => this.deleteEvent(i, party.title)}>DELETE EVENT</button>
+                        <button className="delete-button" onClick={() => this.deleteEvent(i, party.title)}>
+                          <i class="fas fa-times" />
+                        </button>
                       </li>
                     );
                   })
@@ -110,18 +119,6 @@ class OverviewPage extends Component {
             </ul>
           </div>
           {/* End of Events Div */}
-
-          <form onSubmit={this.handleSubmitAddEvent} action="">
-            <label htmlFor="new-event">Add New Event</label>
-            <input
-              onChange={this.handleChangeAddEvent}
-              id="new-event"
-              type="text"
-              placeholder="New Event Name"
-              value={this.state.inputValue}
-            />
-            <button onClick={this.handleClickAddEvent}>SUBMIT</button>
-          </form>
         </div>
       </main>
     );
