@@ -189,9 +189,7 @@ class App extends Component {
         user: this.state.currentTextValue.trim().toLowerCase()
       },
       () => {
-        // dbRef.remove();
-        dbRef.once("value", snapshot => {
-          // console.log(snapshot.val());
+        dbRef.on("value", snapshot => {
           this.checkIfUserExists(snapshot.val());
         });
       }

@@ -30,18 +30,23 @@ class ExistingFriendList extends Component {
     let tempArr = this.state.userProfileFriends;
     let friendIndex = _.findIndex(this.state.userProfileFriends, ["name", e.target.value]);
 
-    tempArr = tempArr[friendIndex].parties;
+    // create copy of current friend profile
+    let friendProfile = tempArr[friendIndex];
+
+    if (!friendProfile.parties) {
+      friendProfile.parties = [];
+    }
 
     // the friend should be added to the party if newly checked
     if (e.target.checked === true) {
-      tempArr.push(this.state.selectedEvent);
+      friendProfile.parties.push(this.state.selectedEvent);
 
-      this.dbRef.child(`/${friendIndex}/parties`).set(tempArr);
+      this.dbRef.child(`/${friendIndex}`).set(friendProfile);
     }
     // else, remove party from parties array of friend
     else {
-      tempArr.splice(tempArr.indexOf(e.target.value), 1);
-      this.dbRef.child(`/${friendIndex}/parties`).set(tempArr);
+      friendProfile.parties.splice(friendProfile.parties.indexOf(e.target.value), 1);
+      this.dbRef.child(`/${friendIndex}`).set(friendProfile);
     }
   };
 
@@ -51,7 +56,7 @@ class ExistingFriendList extends Component {
         <h1>FRIENDS</h1>
         <form action="" onSubmit={this.handleSubmit}>
           {this.state.userProfileFriends.map((friend, i) => {
-            if (friend.parties.indexOf(this.state.selectedEvent) !== -1 && friend.parties !== undefined) {
+            if (friend.parties && friend.parties.indexOf(this.state.selectedEvent) !== -1) {
               return (
                 <div key={i} className="single-friend">
                   <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" defaultChecked />
@@ -74,13 +79,13 @@ class ExistingFriendList extends Component {
     );
   }
 
-  // componentDidMount() {
-  //   if (this.state.userProfileFriends) {
-  //     this.dbRef.on("value", snapshot => {
-  //       this.setState({ userProfileFriends: snapshot.val() });
-  //     });
-  //   }
-  // }
+  componentDidMount() {
+    if (this.state.userProfileFriends) {
+      this.dbRef.on("value", snapshot => {
+        this.setState({ userProfileFriends: snapshot.val() });
+      });
+    }
+  }
 }
 
 export default ExistingFriendList;

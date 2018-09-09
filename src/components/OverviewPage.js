@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Route, Link, Redirect } from "react-router-dom";
 import firebase from "firebase";
-import ManageEvents from "./ManageEvents";
 import ExistingFriendList from "./ExistingFriendList";
 import EventPage from "./EventPage/EventPage";
 import Header from "./Header";
@@ -11,7 +10,7 @@ class OverviewPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // userProfile: props.userProfile,
+      userProfile: props.userProfile,
       inputValue: "",
       confirmedEventName: "",
       userID: props.userID
@@ -57,13 +56,22 @@ class OverviewPage extends Component {
   };
 
   // delete parties
-  deleteEvent = key => {
+  deleteEvent = (key, eventName) => {
     console.log(key);
 
-    let tempArr = this.props.userProfile.parties;
-    tempArr.splice(key, 1);
+    // remove event from parties array
+    let tempPartiesArr = this.props.userProfile.parties;
+    tempPartiesArr.splice(key, 1);
+    this.dbRef.child("/parties").set(tempPartiesArr);
 
-    this.dbRef.child("/parties").set(tempArr);
+    // remove event from friends
+    let tempFriendsArr = this.props.userProfile.friends;
+
+    tempFriendsArr.forEach(friend => {
+      if (friend.parties && friend.parties.indexOf(eventName) !== -1) {
+        console.log(`${friend.name} is part of ${eventName}`);
+      }
+    });
   };
 
   render() {
@@ -94,7 +102,7 @@ class OverviewPage extends Component {
                         >
                           {party.title}
                         </Link>
-                        <button onClick={() => this.deleteEvent(i)}>DELETE EVENT</button>
+                        <button onClick={() => this.deleteEvent(i, party.title)}>DELETE EVENT</button>
                       </li>
                     );
                   })
@@ -119,20 +127,13 @@ class OverviewPage extends Component {
     );
   }
 
-  // componentDidMount() {
-  //   console.log("Inside ComponentDidMount of Overview");
-  //   console.log("UserProfile state:");
-  //   console.log(this.state.userProfile);
-  //   console.log("UserID");
-  //   console.log(this.state.userID);
-
-  //   this.dbRef.on("value", snapshot => {
-  //     console.log(snapshot.val());
-  //     this.setState({ userProfile: snapshot.val() }, () => {
-  //       console.log(this.state.userProfile);
-  //     });
-  //   });
-  // }
+  componentDidMount() {
+    this.dbRef.on("value", snapshot => {
+      this.setState({ userProfile: snapshot.val() }, () => {
+        console.log(this.state.userProfile);
+      });
+    });
+  }
 }
 
 export default OverviewPage;

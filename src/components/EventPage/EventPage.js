@@ -11,7 +11,7 @@ class EventPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // userProfile: props.userProfile,
+      userProfile: props.userProfile,
       inputValue: "",
       confirmedNewName: ""
     };
@@ -26,14 +26,16 @@ class EventPage extends Component {
       // find index of current friend on firebase
       let tempFriendIndex = _.findIndex(snapshot.val(), ["name", friendName]);
 
-      // make temporary array of the parties array of the current friend
-      let tempFriendParties = _.find(snapshot.val(), ["name", friendName]).parties;
+      if (_.find(snapshot.val(), ["name", friendName]).parties) {
+        // make temporary array of the parties array of the current friend
+        let tempFriendParties = _.find(snapshot.val(), ["name", friendName]).parties;
 
-      // remove current party from current friend
-      tempFriendParties.splice(tempFriendParties.indexOf(this.props.selectedEvent.title), 1);
+        // remove current party from current friend
+        tempFriendParties.splice(tempFriendParties.indexOf(this.props.selectedEvent.title), 1);
 
-      // set new party array to firebase
-      this.dbRef.child(`/friends/${tempFriendIndex}/parties`).set(tempFriendParties);
+        // set new party array to firebase
+        this.dbRef.child(`/friends/${tempFriendIndex}/parties`).set(tempFriendParties);
+      }
     });
   };
 
@@ -86,7 +88,7 @@ class EventPage extends Component {
           <div className="guestList">
             <ul className="guests">
               {this.props.userProfile.friends.map((friend, i) => {
-                if (friend.parties.indexOf(this.props.selectedEvent.title) !== -1) {
+                if (friend.parties && friend.parties.indexOf(this.props.selectedEvent.title) !== -1) {
                   return (
                     <li key={i} className="guest">
                       {/* Edit the guests restrictions */}
@@ -126,14 +128,14 @@ class EventPage extends Component {
     );
   }
 
-  // componentDidMount() {
-  //   console.log("Inside ComponentDidMount of EventPage.js");
+  componentDidMount() {
+    console.log("Inside ComponentDidMount of EventPage.js");
 
-  //   this.dbRef.on("value", snapshot => {
-  //     console.log(snapshot.val());
-  //     this.setState({ userProfile: snapshot.val() });
-  //   });
-  // }
+    this.dbRef.on("value", snapshot => {
+      console.log(snapshot.val());
+      this.setState({ userProfile: snapshot.val() });
+    });
+  }
 }
 
 export default EventPage;
