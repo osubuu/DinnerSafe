@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { Route, Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import firebase from "firebase";
-import ExistingFriendList from "./ExistingFriendList";
-import EventPage from "./EventPage/EventPage";
 import Header from "./Header";
 
 class OverviewPage extends Component {
@@ -18,20 +16,21 @@ class OverviewPage extends Component {
     this.dbRef = firebase.database().ref(`${this.state.userID}`);
   }
 
+  // Handle input for new event name
   handleChangeAddEvent = e => {
     this.setState({
       inputValue: e.target.value
     });
   };
 
-  // Handling for click create buttons
+  // Handling for when new event is submitted
   handleClickAddEvent = e => {
     this.setState({
       confirmedEventName: this.state.inputValue
     });
   };
 
-  // Handling for form submit
+  // Handling for form submit of new event creations
   handleSubmitAddEvent = e => {
     e.preventDefault();
 
@@ -48,17 +47,13 @@ class OverviewPage extends Component {
     // replace the firebase array with the newly updated array
     this.dbRef.child("/parties").set(tempArr);
 
-    console.log(tempArr);
-
     this.setState({
       inputValue: ""
     });
   };
 
-  // delete parties
+  // Function to delete a party from parties list AND individual friends' parties array
   deleteEvent = (key, eventName) => {
-    console.log(key);
-
     // remove event from parties array
     let tempPartiesArr = this.props.userProfile.parties;
     tempPartiesArr.splice(key, 1);
@@ -67,11 +62,14 @@ class OverviewPage extends Component {
     // remove event from friends
     let tempFriendsArr = this.props.userProfile.friends;
 
+    // go through all the friends and check if party is in their parties array
     tempFriendsArr.forEach(friend => {
       if (friend.parties && friend.parties.indexOf(eventName) !== -1) {
-        console.log(`${friend.name} is part of ${eventName}`);
+        friend.parties.splice(friend.parties.indexOf(eventName), 1);
       }
     });
+
+    this.dbRef.child("/friends").set(tempFriendsArr);
   };
 
   render() {
@@ -110,7 +108,7 @@ class OverviewPage extends Component {
                           {party.title}
                         </Link>
                         <button className="delete-button" onClick={() => this.deleteEvent(i, party.title)}>
-                          <i class="fas fa-times" />
+                          <i className="fas fa-times" />
                         </button>
                       </li>
                     );
@@ -126,9 +124,7 @@ class OverviewPage extends Component {
 
   componentDidMount() {
     this.dbRef.on("value", snapshot => {
-      this.setState({ userProfile: snapshot.val() }, () => {
-        console.log(this.state.userProfile);
-      });
+      this.setState({ userProfile: snapshot.val() });
     });
   }
 }

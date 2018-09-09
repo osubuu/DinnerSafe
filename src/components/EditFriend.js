@@ -17,20 +17,21 @@ class EditFriend extends Component {
     this.dbRef = firebase.database().ref(`${this.state.userID}/friends/${this.state.friendKey}`);
   }
 
+  // Handle input value for new restriction
   handleChangeEditFriend = e => {
     this.setState({
       inputValue: e.target.value
     });
   };
 
-  // Handling for click of either sign in or create buttons
+  // Handling for click for new restriction
   handleClickEditFriend = e => {
     this.setState({
       confirmedIngredient: this.state.inputValue
     });
   };
 
-  // Handling for form submit
+  // Handling for form submit of new restriction
   handleSubmitEditFriend = e => {
     e.preventDefault();
 
@@ -54,16 +55,15 @@ class EditFriend extends Component {
     });
   };
 
+  // Delete current ingredient
   deleteIngredient = key => {
-    console.log(key);
     let newIngredientList = this.state.friendProfile.excludedIngredient;
-    console.log(newIngredientList);
     newIngredientList.splice(newIngredientList.indexOf(key), 1);
-    console.log(newIngredientList);
 
     this.dbRef.child("/excludedIngredient").set(newIngredientList);
   };
 
+  // Function to toggle allergies/diets directly on page and into firebase
   toggleAllergies = e => {
     // make copy of current friend profile
     let tempObj = this.state.friendProfile;

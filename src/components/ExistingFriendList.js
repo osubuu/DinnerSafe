@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Route, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import firebase from "firebase";
 import _ from "lodash";
 
@@ -15,17 +15,19 @@ class ExistingFriendList extends Component {
     this.dbRef = firebase.database().ref(`${this.props.userProfile.id}/friends`);
   }
 
+  // Handle Submit of toggling friends from event
   handleSubmit = e => {
     e.preventDefault();
   };
 
+  // Save current friend index
   saveCurrentFriendIndex = e => {
-    console.log(e.target);
     this.setState({
       key: e.target.id
     });
   };
 
+  // Function for toggling friend directly into firebase
   toggleFriend = e => {
     let tempArr = this.state.userProfileFriends;
     let friendIndex = _.findIndex(this.state.userProfileFriends, ["name", e.target.value]);

@@ -1,8 +1,7 @@
 // Event page for a single event
-
 import React, { Component } from "react";
 import DisplayMatchingRecipes from "../DisplayMatchingRecipes/DisplayMatchingRecipes";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import firebase from "../../firebase";
 import _ from "lodash";
 import Header from "../Header";
@@ -18,8 +17,8 @@ class EventPage extends Component {
     this.dbRef = firebase.database().ref(`${props.userProfile.id}`);
   }
 
+  // Function to remove specific friend from the current event
   removeFriendFromEvent = e => {
-    console.log(e.target.id);
     let friendName = e.target.id;
 
     this.dbRef.child("friends").once("value", snapshot => {
@@ -39,12 +38,14 @@ class EventPage extends Component {
     });
   };
 
+  // Handle input value for new friend to add
   handleChangeAddFriend = e => {
     this.setState({
       inputValue: e.target.value
     });
   };
 
+  // Handle form submit of new friend
   handleSubmitAddFriend = e => {
     e.preventDefault();
 
@@ -59,14 +60,12 @@ class EventPage extends Component {
     // create temp array (clone of current firebase friend array) and add new object to it
     let tempArr = this.props.userProfile.friends;
     tempArr.push(newFriendObj);
-    console.log(tempArr);
 
     // replace the firebase array with the newly updated array
     this.dbRef.child("/friends").set(tempArr);
-
-    console.log(tempArr);
   };
 
+  // Handle click of new friend
   handleClickAddFriend = e => {
     this.setState({
       confirmedNewName: this.state.inputValue
@@ -92,7 +91,6 @@ class EventPage extends Component {
                   return (
                     <li key={i} className="guest">
                       {/* Edit the guests restrictions */}
-                      {/* <a href="#placeholderToEditGuestRestrictions"> */}
                       <p>{friend.name}</p>
 
                       {/* Fake button to make it clear you can click on the guest to edit them */}
@@ -101,7 +99,6 @@ class EventPage extends Component {
                           EDIT FRIEND
                         </h2>
                       </div>
-                      {/* </a> */}
 
                       {/* Removes guest from the event */}
                       <button id={friend.name} onClick={this.removeFriendFromEvent}>
@@ -129,10 +126,7 @@ class EventPage extends Component {
   }
 
   componentDidMount() {
-    console.log("Inside ComponentDidMount of EventPage.js");
-
     this.dbRef.on("value", snapshot => {
-      console.log(snapshot.val());
       this.setState({ userProfile: snapshot.val() });
     });
   }

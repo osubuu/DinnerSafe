@@ -10,54 +10,10 @@ import EventPage from "./components/EventPage/EventPage";
 import OverviewPage from "./components/OverviewPage";
 import EditFriend from "./components/EditFriend";
 
-// FUNCTIONS
-import matchingRecipes from "./components/matchingRecipes";
-
 //COMPONENTS
-import DisplayMatchingRecipes from "./components/DisplayMatchingRecipes/DisplayMatchingRecipes";
 import ExistingFriendList from "./components/ExistingFriendList";
-import { timingSafeEqual } from "crypto";
 
 const dbRef = firebase.database().ref();
-
-/* ===================
-TEST STUFF BELOW THAT CAN BE DELETED WHEN DONE
-==================== */
-let user = "Christine";
-let friends = [
-  {
-    name: "Stefan",
-    allowedAllergy: ["393^Gluten-Free", "394^Peanut-Free"],
-    allowedDiet: ["388^Lacto vegetarian", "389^Ovo vegetarian"],
-    excludedIngredient: ["Peanut", "Banana"],
-    parties: ["sept3"]
-  },
-  {
-    name: "Ben",
-    allowedAllergy: ["400^Soy-Free", "395^Tree Nut-Free"],
-    allowedDiet: ["387^Lacto-ovo vegetarian", "403^Paleo"],
-    excludedIngredient: ["Arugula", "Bread"],
-    parties: ["sept3", "nov1"]
-  }
-];
-
-let parties = [
-  {
-    title: "sept3",
-    recipes: []
-  },
-  {
-    title: "nov1",
-    recipes: []
-  }
-];
-
-// let newkey = dbRef.push(user).key;
-// dbRef.child(newkey).set({ user, friends, parties });
-
-/* ===================
-TEST STUFF ABOVE THAT CAN BE DELETED WHEN DONE
-==================== */
 
 class App extends Component {
   constructor() {
@@ -67,57 +23,15 @@ class App extends Component {
         user: "loggedOut",
         id: "default"
       },
-      // userProfile: null,
       selectedEventIndex: null,
       selectedFriend: null,
       loggedIn: false,
-      // // Test user profile so that there is already a userprofile when DisplayMatchingRecipes mounts
-      // userProfile: {
-      //   parties: [
-      //     {title: "sept3"},
-      //     {title: "nov1"}
-      //   ],
-      //   friends: [
-      //     {
-      //       allowedAllergy: ["393^Gluten-Free", "394^Peanut-Free"],
-      //       allowedDiet: ["388^Lacto vegetarian", "389^Ovo vegetarian"],
-      //       excludedIngredient: ["Peanut", "Banana"],
-      //       parties: ["sept3"]
-      //     },
-      //     {
-      //       allowedAllergy: ["400^Soy-Free", "395^Tree Nut-Free"],
-      //       allowedDiet: ["387^Lacto-ovo vegetarian", "403^Paleo"],
-      //       excludedIngredient: ["Arugala", "Bread"],
-      //       parties: ["sept3", "nov1"]
-      //     }
-      //   ]
-      // },
       user: "",
       currentTextValue: "",
       loginPurpose: "",
       key: ""
     };
   }
-
-  // // this.state.dietaryRestrictions object format
-  // {
-  //   allergies: [],
-  //   diets: [],
-  //   excludeIngredients: []
-  // }
-  // // Examples
-  // // Example 1
-  // {
-  //   allergies: ["394^Peanut-Free", "396^Dairy-Free"],
-  //   diets: ["390^Pescetarian"],
-  //   excludeIngredients: ["tomato", "arugala", "peach"]
-  // }
-  // // Example 2 - all arrays are optional
-  // {
-  //   allergies: [],
-  //   diets: ["390^Pescetarian"],
-  //   excludeIngredients: []
-  // }
 
   // Function for create button
   checkIfUserExists = snapshot => {
@@ -128,7 +42,6 @@ class App extends Component {
 
     let counter = 0;
     let currentInfoFromFirebase = Object.values(snapshot);
-    // console.log(currentInfoFromFirebase);
 
     currentInfoFromFirebase.map(userObject => {
       // If the user input is found within the current firebase and the user clicked "CREATE", reset user state to "" so nothing displays
@@ -181,7 +94,6 @@ class App extends Component {
   // Handling for form submit
   handleSubmitLogin = e => {
     e.preventDefault();
-    // e.target.reset();
 
     //create user on firebase
     this.setState(
@@ -196,7 +108,7 @@ class App extends Component {
     );
   };
 
-  // Handling for text input
+  // Handling for text input of login
   handleChangeLogin = e => {
     this.setState({
       currentTextValue: e.target.value
@@ -210,6 +122,7 @@ class App extends Component {
     });
   };
 
+  // Reset stats back to default when logged out
   handleLogout = e => {
     this.setState({
       userProfile: {
@@ -226,12 +139,14 @@ class App extends Component {
     });
   };
 
+  // Set state for selecting an event (used in overview page)
   selectEvent = e => {
     this.setState({
       selectedEventIndex: Number(e.target.id)
     });
   };
 
+  // Function with props for the single event page
   singleEvent = () => {
     return (
       <EventPage
@@ -244,37 +159,26 @@ class App extends Component {
     );
   };
 
+  // Handler for going back to the overview page from the single event page
   handleBackToOverview = e => {
     this.setState({
       selectedEventIndex: null
     });
   };
 
+  // Handler for going back to event page from editing a friend (used in edit friend)
   handleBackToEvent = e => {
     this.setState({
       selectedFriend: null
     });
   };
 
+  // Set state for selecting a friend (used in Event Page)
   selectFriend = e => {
-    this.setState(
-      {
-        selectedFriend: e.target.id
-      },
-      () => {
-        let friendProfile = this.state.userProfile.friends[
-          _.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])
-        ];
-        console.log(friendProfile);
-      }
-    );
+    this.setState({
+      selectedFriend: e.target.id
+    });
   };
-
-  // updateAppUserProfile = updatedProfile => {
-  //   this.setState({
-  //     userProfile: updatedProfile
-  //   });
-  // };
 
   render() {
     return (
@@ -290,7 +194,6 @@ class App extends Component {
               return (
                 <section className="log-in-page">
                   <div className="wrapper">
-                    {/* FIRST PAGE: USER LOGIN */}
                     <h1 className="app-name">DinnerSafe</h1>
                     <h2 className="app-name-sub-header">Party guests with allergies and diet restictions?</h2>
                     <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
@@ -321,7 +224,7 @@ class App extends Component {
             }}
           />
 
-          {/* Wait for userProfile to be ready, then redirect to overview */}
+          {/* REDIRECT FOR OVERVIEW PAGE: wait for userProfile to be ready */}
           <Route
             exact
             path="/"
@@ -346,7 +249,7 @@ class App extends Component {
             )}
           />
 
-          {/* Wait for selected event index to be ready, then redirect to event page */}
+          {/* REDIRECT FOR SINGLE EVENT PAGE ROUTE: wait for selected event index to be ready */}
           <Route
             exact
             path="/"
@@ -355,10 +258,10 @@ class App extends Component {
             }}
           />
 
-          {/* SINGLE EVENT PAGE */}
+          {/* SINGLE EVENT PAGE ROUTE */}
           <Route path="/event" render={this.singleEvent} />
 
-          {/* Wait for selected friend to be ready, then redirect to edit friend page */}
+          {/* REDIRECT FOR EDIT FRIEND ROUTE: wait for selected friend state to be ready*/}
           <Route
             path="/event"
             render={() => {
@@ -366,7 +269,7 @@ class App extends Component {
             }}
           />
 
-          {/* EDIT FRIEND PAGE */}
+          {/* EDIT FRIEND PAGE ROUTE */}
           <Route
             path="/edit-friend"
             render={props => (
@@ -384,7 +287,7 @@ class App extends Component {
             )}
           />
 
-          {/* ADD EXISTING FRIEND */}
+          {/* ADD EXISTING FRIEND ROUTE */}
           <Route
             path="/existing-friend-list"
             render={props => (
@@ -401,13 +304,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("Inside ComponentDidMount of App.js");
-
-    console.log(this.state.userProfile);
     let dbRef = firebase.database().ref(`${this.state.userProfile.id}`);
-
     dbRef.on("value", snapshot => {
-      console.log(snapshot.val());
       this.setState({ userProfile: snapshot.val() });
     });
   }
