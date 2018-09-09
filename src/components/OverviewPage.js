@@ -24,7 +24,7 @@ class OverviewPage extends Component {
     });
   };
 
-  // Handling for click of either sign in or create buttons
+  // Handling for click create buttons
   handleClickAddEvent = e => {
     this.setState({
       confirmedEventName: this.state.inputValue
@@ -49,6 +49,10 @@ class OverviewPage extends Component {
     this.dbRef.child("/parties").set(tempArr);
 
     console.log(tempArr);
+
+    this.setState({
+      inputValue: ""
+    })
   };
 
   // delete parties
@@ -108,7 +112,9 @@ class OverviewPage extends Component {
             <input
               onChange={this.handleChangeAddEvent}
               id="new-event"
-              type="text"
+              type="text" 
+              placeholder="New Event Name" 
+              value={this.state.inputValue}
             />
             <button onClick={this.handleClickAddEvent}>SUBMIT</button>
           </form>
