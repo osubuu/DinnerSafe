@@ -1,8 +1,7 @@
 // Event page for a single event
-
 import React, { Component } from "react";
 import DisplayMatchingRecipes from "../DisplayMatchingRecipes/DisplayMatchingRecipes";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import firebase from "../../firebase";
 import _ from "lodash";
 import Header from "../Header";
@@ -18,34 +17,35 @@ class EventPage extends Component {
     this.dbRef = firebase.database().ref(`${props.userProfile.id}`);
   }
 
+  // Function to remove specific friend from the current event
   removeFriendFromEvent = e => {
-    console.log(e.target.id);
+    let friendName = e.target.id;
 
     this.dbRef.child("friends").once("value", snapshot => {
       // find index of current friend on firebase
-      let tempFriendIndex = _.findIndex(snapshot.val(), ["name", e.target.id]);
+      let tempFriendIndex = _.findIndex(snapshot.val(), ["name", friendName]);
 
-      // make temporary array of the parties array of the current friend
-      let tempFriendParties = _.find(snapshot.val(), ["name", e.target.id]).parties;
+      if (_.find(snapshot.val(), ["name", friendName]).parties) {
+        // make temporary array of the parties array of the current friend
+        let tempFriendParties = _.find(snapshot.val(), ["name", friendName]).parties;
 
-      // remove current party from current friend
-      tempFriendParties.splice(tempFriendParties.indexOf(this.props.selectedEvent.title), 1);
+        // remove current party from current friend
+        tempFriendParties.splice(tempFriendParties.indexOf(this.props.selectedEvent.title), 1);
 
-      // set new party array to firebase
-      this.dbRef.child(`/friends/${tempFriendIndex}/parties`).set(tempFriendParties);
+        // set new party array to firebase
+        this.dbRef.child(`/friends/${tempFriendIndex}/parties`).set(tempFriendParties);
+      }
     });
   };
 
-  addExistingFriendToEvent = () => {
-    this.props.updateAppUserProfile(this.state.userProfile);
-  };
-
+  // Handle input value for new friend to add
   handleChangeAddFriend = e => {
     this.setState({
       inputValue: e.target.value
     });
   };
 
+  // Handle form submit of new friend
   handleSubmitAddFriend = e => {
     e.preventDefault();
 
@@ -58,16 +58,14 @@ class EventPage extends Component {
     };
 
     // create temp array (clone of current firebase friend array) and add new object to it
-    let tempArr = this.state.userProfile.friends;
+    let tempArr = this.props.userProfile.friends;
     tempArr.push(newFriendObj);
-    console.log(tempArr);
 
     // replace the firebase array with the newly updated array
     this.dbRef.child("/friends").set(tempArr);
-
-    console.log(tempArr);
   };
 
+  // Handle click of new friend
   handleClickAddFriend = e => {
     this.setState({
       confirmedNewName: this.state.inputValue
@@ -77,7 +75,7 @@ class EventPage extends Component {
   render() {
     return (
       <div className="event-page">
-        <Header user={_.capitalize(this.state.userProfile.user)} handleLogout={this.props.handleLogout} />
+        <Header user={_.capitalize(this.props.userProfile.user)} handleLogout={this.props.handleLogout} />
 
         <div className="wrapper">
           <Link onClick={this.props.handleBackToOverview} to="/Overview">
@@ -88,12 +86,11 @@ class EventPage extends Component {
 
           <div className="guestList">
             <ul className="guests">
-              {this.state.userProfile.friends.map((friend, i) => {
-                if (friend.parties.indexOf(this.props.selectedEvent.title) !== -1) {
+              {this.props.userProfile.friends.map((friend, i) => {
+                if (friend.parties && friend.parties.indexOf(this.props.selectedEvent.title) !== -1) {
                   return (
-                    <li className="guest">
+                    <li key={i} className="guest">
                       {/* Edit the guests restrictions */}
-                      {/* <a href="#placeholderToEditGuestRestrictions"> */}
                       <p>{friend.name}</p>
 
                       {/* Fake button to make it clear you can click on the guest to edit them */}
@@ -102,7 +99,6 @@ class EventPage extends Component {
                           EDIT FRIEND
                         </h2>
                       </div>
-                      {/* </a> */}
 
                       {/* Removes guest from the event */}
                       <button id={friend.name} onClick={this.removeFriendFromEvent}>
@@ -130,10 +126,7 @@ class EventPage extends Component {
   }
 
   componentDidMount() {
-    console.log("Inside ComponentDidMount of EventPage.js");
-
     this.dbRef.on("value", snapshot => {
-      console.log(snapshot.val());
       this.setState({ userProfile: snapshot.val() });
     });
   }
