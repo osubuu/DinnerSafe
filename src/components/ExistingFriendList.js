@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import { Link, Route, Redirect } from "react-router-dom";
 import firebase from "firebase";
-import EditFriend from "./EditFriend";
+import _ from "lodash";
 
 class ExistingFriendList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inputValue: "",
-      selectedEventIndex: props.selectedEventIndex,
+      selectedEvent: props.userProfile.parties[props.selectedEventIndex].title,
       userProfileFriends: props.userProfile.friends,
       key: null
     };
+    this.dbRef = firebase
+      .database()
+      .ref(`${this.props.userProfile.id}/friends`);
   }
 
   handleSubmit = e => {
@@ -25,6 +28,28 @@ class ExistingFriendList extends Component {
     });
   };
 
+  toggleFriend = e => {
+    let tempArr = this.state.userProfileFriends;
+    let friendIndex = _.findIndex(this.state.userProfileFriends, [
+      "name",
+      e.target.value
+    ]);
+
+    tempArr = tempArr[friendIndex].parties;
+
+    // the friend should be added to the party if newly checked
+    if (e.target.checked === true) {
+      tempArr.push(this.state.selectedEvent);
+
+      this.dbRef.child(`/${friendIndex}/parties`).set(tempArr);
+    }
+    // else, remove party from parties array of friend
+    else {
+      tempArr.splice(tempArr.indexOf(e.target.value), 1);
+      this.dbRef.child(`/${friendIndex}/parties`).set(tempArr);
+    }
+  };
+
   render() {
     return (
       <section className="manage-friends">
@@ -32,19 +57,30 @@ class ExistingFriendList extends Component {
         <form action="" onSubmit={this.handleSubmit}>
           {this.state.userProfileFriends.map((friend, i) => {
             if (
-              friend ===
-              this.props.userProfile.parties[this.selectedEventIndex].name
+              friend.parties.indexOf(this.state.selectedEvent) !== -1 &&
+              friend.parties !== undefined
             ) {
               return (
                 <div key={i} className="single-friend">
-                  <input id={i} type="checkbox" checked />
+                  <input
+                    onClick={this.toggleFriend}
+                    id={i}
+                    value={friend.name}
+                    type="checkbox"
+                    defaultChecked
+                  />
                   <label htmlFor={i}>{friend.name}</label>
                 </div>
               );
             } else {
               return (
                 <div key={i} className="single-friend">
-                  <input id={i} type="checkbox" />
+                  <input
+                    onClick={this.toggleFriend}
+                    id={i}
+                    value={friend.name}
+                    type="checkbox"
+                  />
                   <label htmlFor={i}>{friend.name}</label>
                 </div>
               );
@@ -58,45 +94,12 @@ class ExistingFriendList extends Component {
   }
 
   componentDidMount() {
-    if (this.state.userProfileFriends !== null) {
-      // if there are any changes in the firebase array of parties for the user, update the userProfileParties state
-      let dbRef = firebase
-        .database()
-        .ref(`${this.props.userProfile.id}/friends`);
-      dbRef.on("value", snapshot => {
+    if (this.state.userProfileFriends) {
+      this.dbRef.on("value", snapshot => {
         this.setState({ userProfileFriends: snapshot.val() });
       });
     }
   }
-}
-
-{
-  /* <ul className="friend-allergies">
-                  <h3>Allergies</h3>
-                  {friend.allowedAllergy.map(allergy => {
-                    return <li>{allergy}</li>;
-                  })}
-                </ul>
-
-                <ul className="friend-diets">
-                  <h3>Diets</h3>
-                  {friend.allowedDiet.map(diet => {
-                    return <li>{diet}</li>;
-                  })}
-                </ul>
-
-                <ul className="friend-restricted-ingredients">
-                  <h3>Restricted Ingredients</h3>
-                  {friend.excludedIngredient.map(ingredient => {
-                    return <li>{ingredient}</li>;
-                  })}
-                </ul>*/
-}
-
-{
-  /* <button id={i} onClick={this.saveCurrentFriendIndex}>
-                  EDIT FRIEND
-                </button> */
 }
 
 export default ExistingFriendList;

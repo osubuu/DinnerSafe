@@ -68,7 +68,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      userProfile: null,
+      userProfile: {
+        user: "default",
+        id: -1
+      },
       selectedEventIndex: null,
       selectedFriend: null,
       loggedIn: false,
@@ -153,7 +156,11 @@ class App extends Component {
         this.state.loginPurpose === "sign-in" &&
         userObject.user === this.state.user
       ) {
-        this.setState({ userProfile: userObject, loggedIn: true });
+        this.setState({
+          userProfile: userObject,
+          loggedIn: true,
+          key: userObject.id
+        });
         return;
       }
 
@@ -232,7 +239,6 @@ class App extends Component {
   };
 
   selectEvent = e => {
-    console.log(e.target.id);
     this.setState({
       selectedEventIndex: Number(e.target.id)
     });
@@ -247,6 +253,7 @@ class App extends Component {
         }
         handleBackToOverview={this.handleBackToOverview}
         selectFriend={this.selectFriend}
+        updateAppUserProfile={this.updateAppUserProfile}
         handleLogout={this.handleLogout}
       />
     );
@@ -281,6 +288,12 @@ class App extends Component {
     );
   };
 
+  // updateAppUserProfile = updatedProfile => {
+  //   this.setState({
+  //     userProfile: updatedProfile
+  //   });
+  // };
+
   render() {
     return (
       <Router>
@@ -297,8 +310,12 @@ class App extends Component {
                   <div className="wrapper">
                     {/* FIRST PAGE: USER LOGIN */}
                     <h1 className="app-name">DinnerSafe</h1>
-                    <h2 className="app-name-sub-header">Party guests with allergies and diet restictions?</h2>
-                    <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
+                    <h2 className="app-name-sub-header">
+                      Party guests with allergies and diet restictions?
+                    </h2>
+                    <h2 className="app-name-sub-header">
+                      Find recipes that everyone can eat!
+                    </h2>
                     <form
                       className="log-in-form clearfix"
                       action=""
@@ -338,12 +355,11 @@ class App extends Component {
             }}
           />
 
-          {/* <Route exact path="/event" render={this.singleEvent} /> */}
-
+          {/* Wait for userProfile to be ready, then redirect to overview */}
           <Route
             path="/"
             render={() => {
-              return this.state.userProfile !== null ? (
+              return this.state.userProfile && this.state.loggedIn === true ? (
                 <Redirect to="/overview" />
               ) : null;
             }}
@@ -358,14 +374,16 @@ class App extends Component {
                 userProfile={this.state.userProfile}
                 handleLogout={this.handleLogout}
                 selectEvent={this.selectEvent}
+                updateAppUserProfile={this.updateAppUserProfile}
               />
             )}
           />
 
+          {/* Wait for selected event index to be ready, then redirect to event page */}
           <Route
             path="/"
             render={() => {
-              return this.state.selectedEventIndex !== null ? (
+              return this.state.selectedEventIndex ? (
                 <Redirect to="/event" />
               ) : null;
             }}
@@ -374,10 +392,11 @@ class App extends Component {
           {/* SINGLE EVENT PAGE */}
           <Route path="/event" render={this.singleEvent} />
 
+          {/* Wait for selected friend to be ready, then redirect to edit friend page */}
           <Route
             path="/event"
             render={() => {
-              return this.state.selectedFriend !== null ? (
+              return this.state.selectedFriend ? (
                 <Redirect to="/edit-friend" />
               ) : null;
             }}
@@ -418,19 +437,22 @@ class App extends Component {
               />
             )}
           />
-
-          {/* <Route
-            path="/manage-events"
-            render={props => (
-              <ManageEvents {...props} userProfile={this.state.userProfile} />
-            )}
-          /> */}
         </div>
       </Router>
     );
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log("outside");
+
+    console.log("inside");
+
+    let dbRef = firebase.database().ref(`${this.state.userProfile.id}`);
+
+    dbRef.on("value", snapshot => {
+      this.setState({ userProfile: snapshot.val() });
+    });
+  }
 }
 
 export default App;

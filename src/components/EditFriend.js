@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { format } from "path";
 import { allergy as Allergy, diet as Diet } from "./matchingRecipes";
 import { Link } from "react-router-dom";
 import firebase from "../firebase";
@@ -102,6 +101,7 @@ class EditFriend extends Component {
           {Allergy.map(allergy => {
             // if the current allergy is already in the friend's allergy array, check the input on display
             if (
+              this.state.friendProfile.allowedAllergy &&
               this.state.friendProfile.allowedAllergy.indexOf(
                 allergy.searchValue
               ) !== -1
@@ -146,8 +146,9 @@ class EditFriend extends Component {
           {Diet.map(diet => {
             // if the current diet is already in the friend's diet array, check the input on display
             if (
+              this.state.friendProfile.allowedDiet &&
               this.state.friendProfile.allowedDiet.indexOf(diet.searchValue) !==
-              -1
+                -1
             ) {
               return (
                 <div>
@@ -187,20 +188,22 @@ class EditFriend extends Component {
         <section>
           <ul className="friend-restricted-ingredients">
             <h3>Restricted Ingredients</h3>
-            {this.state.friendProfile.excludedIngredient.map(
-              (ingredient, i) => {
-                return (
-                  <div key={i}>
-                    <li>{ingredient}</li>
-                    <button
-                      onClick={() => this.deleteIngredient(`${ingredient}`)}
-                    >
-                      REMOVE INGREDIENT
-                    </button>
-                  </div>
-                );
-              }
-            )}
+            {this.state.friendProfile.excludedIngredient
+              ? this.state.friendProfile.excludedIngredient.map(
+                  (ingredient, i) => {
+                    return (
+                      <div key={i}>
+                        <li>{ingredient}</li>
+                        <button
+                          onClick={() => this.deleteIngredient(`${ingredient}`)}
+                        >
+                          REMOVE INGREDIENT
+                        </button>
+                      </div>
+                    );
+                  }
+                )
+              : null}
           </ul>
           <form onSubmit={this.handleSubmitEditFriend} action="">
             <input onChange={this.handleChangeEditFriend} type="text" />

@@ -3,7 +3,6 @@
 import React, { Component } from "react";
 import DisplayMatchingRecipes from "../DisplayMatchingRecipes/DisplayMatchingRecipes";
 import { Route, Link } from "react-router-dom";
-import EditFriend from "../EditFriend";
 import firebase from "../../firebase";
 import _ from "lodash";
 import Header from "../Header";
@@ -12,7 +11,9 @@ class EventPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: props.userProfile
+      userProfile: props.userProfile,
+      inputValue: "",
+      confirmedNewName: ""
     };
     this.dbRef = firebase.database().ref(`${props.userProfile.id}`);
   }
@@ -41,18 +42,53 @@ class EventPage extends Component {
     });
   };
 
-  addNewFriendToEvent = e => {};
+  addExistingFriendToEvent = () => {
+    this.props.updateAppUserProfile(this.state.userProfile);
+  };
 
-  addExistingGuestToEvent = e => {};
+  handleChangeAddFriend = e => {
+    this.setState({
+      inputValue: e.target.value
+    });
+  };
+
+  handleSubmitAddFriend = e => {
+    e.preventDefault();
+
+    let newFriendObj = {
+      name: this.state.confirmedNewName,
+      allowedAllergy: [],
+      allowedDiet: [],
+      excludedIngredient: [],
+      parties: [this.props.selectedEvent.title]
+    };
+
+    // create temp array (clone of current firebase friend array) and add new object to it
+    let tempArr = this.state.userProfile.friends;
+    tempArr.push(newFriendObj);
+    console.log(tempArr);
+
+    // replace the firebase array with the newly updated array
+    this.dbRef.child("/friends").set(tempArr);
+
+    console.log(tempArr);
+  };
+
+  handleClickAddFriend = e => {
+    this.setState({
+      confirmedNewName: this.state.inputValue
+    });
+  };
 
   render() {
     return (
       <div className="event-page">
+        <Header
+          user={_.capitalize(this.state.userProfile.user)}
+          handleLogout={this.props.handleLogout}
+        />
 
-        <Header user={_.capitalize(this.state.userProfile.user)} handleLogout={this.props.handleLogout} />
-       
         <div className="wrapper">
-        
           <Link onClick={this.props.handleBackToOverview} to="/Overview">
             Back to Overview
           </Link>
@@ -61,7 +97,7 @@ class EventPage extends Component {
 
           <div className="guestList">
             <ul className="guests">
-              {this.props.userProfile.friends.map((friend, i) => {
+              {this.state.userProfile.friends.map((friend, i) => {
                 if (
                   friend.parties.indexOf(this.props.selectedEvent.title) !== -1
                 ) {
@@ -92,7 +128,16 @@ class EventPage extends Component {
               })}
             </ul>
             <Link to="existing-friend-list">Add Existing Guest</Link>
-            <a href="#AddExistingGuest">Add New Guest</a>
+
+            <form onSubmit={this.handleSubmitAddFriend} action="">
+              <label htmlFor="add-new-friend">Add New Guest</label>
+              <input
+                id={"add-new-friend"}
+                onChange={this.handleChangeAddFriend}
+                type="text"
+              />
+              <button onClick={this.handleClickAddFriend}>ADD</button>
+            </form>
           </div>
 
           <DisplayMatchingRecipes
@@ -101,9 +146,14 @@ class EventPage extends Component {
           />
         </div>
         {/* End of Wrapper */}
-
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.dbRef.on("value", snapshot => {
+      this.setState({ userProfile: snapshot.val() });
+    });
   }
 }
 
