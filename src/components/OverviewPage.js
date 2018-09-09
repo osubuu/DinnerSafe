@@ -13,9 +13,10 @@ class OverviewPage extends Component {
     this.state = {
       userProfile: props.userProfile,
       inputValue: "",
-      confirmedEventName: ""
+      confirmedEventName: "",
+      userID: props.userID
     };
-    this.dbRef = firebase.database().ref(`${props.userProfile.id}`);
+    this.dbRef = firebase.database().ref(`${this.state.userID}`);
   }
 
   handleChangeAddEvent = e => {
@@ -52,7 +53,7 @@ class OverviewPage extends Component {
 
     this.setState({
       inputValue: ""
-    })
+    });
   };
 
   // delete parties
@@ -68,10 +69,7 @@ class OverviewPage extends Component {
   render() {
     return (
       <main className="overview-page">
-        <Header
-          user={_.capitalize(this.state.userProfile.user)}
-          handleLogout={this.props.handleLogout}
-        />
+        <Header user={_.capitalize(this.state.userProfile.user)} handleLogout={this.props.handleLogout} />
 
         <div className="wrapper">
           <div className="events">
@@ -83,9 +81,8 @@ class OverviewPage extends Component {
 
             <ul>
               {/* Go through parties object and list all the parties and their recipes */}
-              {this.state.userProfile.parties === undefined
-                ? null
-                : this.state.userProfile.parties.map((party, i) => {
+              {this.state.userProfile.parties
+                ? this.state.userProfile.parties.map((party, i) => {
                     return (
                       <li key={i}>
                         <Link
@@ -97,12 +94,11 @@ class OverviewPage extends Component {
                         >
                           {party.title}
                         </Link>
-                        <button onClick={() => this.deleteEvent(i)}>
-                          DELETE EVENT
-                        </button>
+                        <button onClick={() => this.deleteEvent(i)}>DELETE EVENT</button>
                       </li>
                     );
-                  })}
+                  })
+                : null}
             </ul>
           </div>
           {/* End of Events Div */}
@@ -112,8 +108,8 @@ class OverviewPage extends Component {
             <input
               onChange={this.handleChangeAddEvent}
               id="new-event"
-              type="text" 
-              placeholder="New Event Name" 
+              type="text"
+              placeholder="New Event Name"
               value={this.state.inputValue}
             />
             <button onClick={this.handleClickAddEvent}>SUBMIT</button>
@@ -124,8 +120,17 @@ class OverviewPage extends Component {
   }
 
   componentDidMount() {
+    console.log("Inside ComponentDidMount of Overview");
+    console.log("UserProfile state:");
+    console.log(this.state.userProfile);
+    console.log("UserID");
+    console.log(this.state.userID);
+
     this.dbRef.on("value", snapshot => {
-      this.setState({ userProfile: snapshot.val() });
+      console.log(snapshot.val());
+      this.setState({ userProfile: snapshot.val() }, () => {
+        console.log(this.state.userProfile);
+      });
     });
   }
 }

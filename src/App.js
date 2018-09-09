@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import firebase from "./firebase";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import _ from "lodash";
 
 //COMPONENTS//
@@ -69,9 +64,10 @@ class App extends Component {
     super();
     this.state = {
       userProfile: {
-        user: "default",
-        id: -1
+        user: "loggedOut",
+        id: "default"
       },
+      // userProfile: null,
       selectedEventIndex: null,
       selectedFriend: null,
       loggedIn: false,
@@ -135,27 +131,18 @@ class App extends Component {
     // console.log(currentInfoFromFirebase);
 
     currentInfoFromFirebase.map(userObject => {
-      console.log(userObject);
       // If the user input is found within the current firebase and the user clicked "CREATE", reset user state to "" so nothing displays
-      if (
-        this.state.loginPurpose === "create" &&
-        userObject.user === this.state.user
-      ) {
+      if (this.state.loginPurpose === "create" && userObject.user === this.state.user) {
         this.setState({
           user: "",
           userProfile: null
         });
-        alert(
-          "Name already exists. Please create an account with another name."
-        );
+        alert("Name already exists. Please create an account with another name.");
         return;
       }
 
       // when person is found
-      if (
-        this.state.loginPurpose === "sign-in" &&
-        userObject.user === this.state.user
-      ) {
+      if (this.state.loginPurpose === "sign-in" && userObject.user === this.state.user) {
         this.setState({
           userProfile: userObject,
           loggedIn: true,
@@ -227,7 +214,10 @@ class App extends Component {
 
   handleLogout = e => {
     this.setState({
-      userProfile: null,
+      userProfile: {
+        user: "loggedOut",
+        id: "default"
+      },
       selectedEventIndex: null,
       selectedFriend: null,
       loggedIn: false,
@@ -248,9 +238,7 @@ class App extends Component {
     return (
       <EventPage
         userProfile={this.state.userProfile}
-        selectedEvent={
-          this.state.userProfile.parties[this.state.selectedEventIndex]
-        }
+        selectedEvent={this.state.userProfile.parties[this.state.selectedEventIndex]}
         handleBackToOverview={this.handleBackToOverview}
         selectFriend={this.selectFriend}
         updateAppUserProfile={this.updateAppUserProfile}
@@ -278,10 +266,7 @@ class App extends Component {
       },
       () => {
         let friendProfile = this.state.userProfile.friends[
-          _.findIndex(this.state.userProfile.friends, [
-            "name",
-            this.state.selectedFriend
-          ])
+          _.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])
         ];
         console.log(friendProfile);
       }
@@ -310,17 +295,9 @@ class App extends Component {
                   <div className="wrapper">
                     {/* FIRST PAGE: USER LOGIN */}
                     <h1 className="app-name">DinnerSafe</h1>
-                    <h2 className="app-name-sub-header">
-                      Party guests with allergies and diet restictions?
-                    </h2>
-                    <h2 className="app-name-sub-header">
-                      Find recipes that everyone can eat!
-                    </h2>
-                    <form
-                      className="log-in-form clearfix"
-                      action=""
-                      onSubmit={this.handleSubmitLogin}
-                    >
+                    <h2 className="app-name-sub-header">Party guests with allergies and diet restictions?</h2>
+                    <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
+                    <form className="log-in-form clearfix" action="" onSubmit={this.handleSubmitLogin}>
                       <label className="username" htmlFor="create-user">
                         Username
                       </label>
@@ -333,18 +310,10 @@ class App extends Component {
                       />
 
                       <div className="buttons clearfix">
-                        <button
-                          className="left"
-                          value="sign-in"
-                          onClick={this.handleClickLogin}
-                        >
+                        <button className="left" value="sign-in" onClick={this.handleClickLogin}>
                           SIGN IN
                         </button>
-                        <button
-                          className="right"
-                          value="create"
-                          onClick={this.handleClickLogin}
-                        >
+                        <button className="right" value="create" onClick={this.handleClickLogin}>
                           CREATE
                         </button>
                       </div>
@@ -359,7 +328,7 @@ class App extends Component {
           <Route
             path="/"
             render={() => {
-              return this.state.userProfile && this.state.loggedIn === true ? (
+              return this.state.userProfile.id !== "default" && this.state.loggedIn === true && this.state.key ? (
                 <Redirect to="/overview" />
               ) : null;
             }}
@@ -375,6 +344,7 @@ class App extends Component {
                 handleLogout={this.handleLogout}
                 selectEvent={this.selectEvent}
                 updateAppUserProfile={this.updateAppUserProfile}
+                userID={this.state.key}
               />
             )}
           />
@@ -383,9 +353,7 @@ class App extends Component {
           <Route
             path="/"
             render={() => {
-              return this.state.selectedEventIndex ? (
-                <Redirect to="/event" />
-              ) : null;
+              return this.state.selectedEventIndex ? <Redirect to="/event" /> : null;
             }}
           />
 
@@ -396,9 +364,7 @@ class App extends Component {
           <Route
             path="/event"
             render={() => {
-              return this.state.selectedFriend ? (
-                <Redirect to="/edit-friend" />
-              ) : null;
+              return this.state.selectedFriend ? <Redirect to="/edit-friend" /> : null;
             }}
           />
 
@@ -410,16 +376,10 @@ class App extends Component {
                 {...props}
                 friendProfile={
                   this.state.userProfile.friends[
-                    _.findIndex(this.state.userProfile.friends, [
-                      "name",
-                      this.state.selectedFriend
-                    ])
+                    _.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])
                   ]
                 }
-                friendKey={_.findIndex(this.state.userProfile.friends, [
-                  "name",
-                  this.state.selectedFriend
-                ])}
+                friendKey={_.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])}
                 userID={this.state.userProfile.id}
                 handleBackToEvent={this.handleBackToEvent}
               />
@@ -443,13 +403,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("outside");
+    console.log("Inside ComponentDidMount of App.js");
 
-    console.log("inside");
-
+    console.log(this.state.userProfile);
     let dbRef = firebase.database().ref(`${this.state.userProfile.id}`);
 
     dbRef.on("value", snapshot => {
+      console.log(snapshot.val());
       this.setState({ userProfile: snapshot.val() });
     });
   }
