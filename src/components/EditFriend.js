@@ -14,9 +14,7 @@ class EditFriend extends Component {
       friendKey: props.friendKey
     };
 
-    this.dbRef = firebase
-      .database()
-      .ref(`${this.state.userID}/friends/${this.state.friendKey}`);
+    this.dbRef = firebase.database().ref(`${this.state.userID}/friends/${this.state.friendKey}`);
   }
 
   handleChangeEditFriend = e => {
@@ -102,15 +100,11 @@ class EditFriend extends Component {
             // if the current allergy is already in the friend's allergy array, check the input on display
             if (
               this.state.friendProfile.allowedAllergy &&
-              this.state.friendProfile.allowedAllergy.indexOf(
-                allergy.searchValue
-              ) !== -1
+              this.state.friendProfile.allowedAllergy.indexOf(allergy.searchValue) !== -1
             ) {
               return (
                 <div>
-                  <label htmlFor={allergy.searchValue}>
-                    {allergy.shortDescription}
-                  </label>
+                  <label htmlFor={allergy.searchValue}>{allergy.shortDescription}</label>
                   <input
                     className="allergy"
                     onChange={this.toggleAllergies}
@@ -126,9 +120,7 @@ class EditFriend extends Component {
             else {
               return (
                 <div>
-                  <label htmlFor={allergy.searchValue}>
-                    {allergy.shortDescription}
-                  </label>
+                  <label htmlFor={allergy.searchValue}>{allergy.shortDescription}</label>
                   <input
                     className="allergy"
                     onChange={this.toggleAllergies}
@@ -147,14 +139,11 @@ class EditFriend extends Component {
             // if the current diet is already in the friend's diet array, check the input on display
             if (
               this.state.friendProfile.allowedDiet &&
-              this.state.friendProfile.allowedDiet.indexOf(diet.searchValue) !==
-                -1
+              this.state.friendProfile.allowedDiet.indexOf(diet.searchValue) !== -1
             ) {
               return (
                 <div>
-                  <label htmlFor={diet.searchValue}>
-                    {diet.shortDescription}
-                  </label>
+                  <label htmlFor={diet.searchValue}>{diet.shortDescription}</label>
                   <input
                     className="diet"
                     type="checkbox"
@@ -170,9 +159,7 @@ class EditFriend extends Component {
             else {
               return (
                 <div>
-                  <label htmlFor={diet.searchValue}>
-                    {diet.shortDescription}
-                  </label>
+                  <label htmlFor={diet.searchValue}>{diet.shortDescription}</label>
                   <input
                     className="diet"
                     type="checkbox"
@@ -189,20 +176,14 @@ class EditFriend extends Component {
           <ul className="friend-restricted-ingredients">
             <h3>Restricted Ingredients</h3>
             {this.state.friendProfile.excludedIngredient
-              ? this.state.friendProfile.excludedIngredient.map(
-                  (ingredient, i) => {
-                    return (
-                      <div key={i}>
-                        <li>{ingredient}</li>
-                        <button
-                          onClick={() => this.deleteIngredient(`${ingredient}`)}
-                        >
-                          REMOVE INGREDIENT
-                        </button>
-                      </div>
-                    );
-                  }
-                )
+              ? this.state.friendProfile.excludedIngredient.map((ingredient, i) => {
+                  return (
+                    <div key={i}>
+                      <li>{ingredient}</li>
+                      <button onClick={() => this.deleteIngredient(`${ingredient}`)}>REMOVE INGREDIENT</button>
+                    </div>
+                  );
+                })
               : null}
           </ul>
           <form onSubmit={this.handleSubmitEditFriend} action="">

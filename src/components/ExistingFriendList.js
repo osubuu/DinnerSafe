@@ -12,9 +12,7 @@ class ExistingFriendList extends Component {
       userProfileFriends: props.userProfile.friends,
       key: null
     };
-    this.dbRef = firebase
-      .database()
-      .ref(`${this.props.userProfile.id}/friends`);
+    this.dbRef = firebase.database().ref(`${this.props.userProfile.id}/friends`);
   }
 
   handleSubmit = e => {
@@ -30,10 +28,7 @@ class ExistingFriendList extends Component {
 
   toggleFriend = e => {
     let tempArr = this.state.userProfileFriends;
-    let friendIndex = _.findIndex(this.state.userProfileFriends, [
-      "name",
-      e.target.value
-    ]);
+    let friendIndex = _.findIndex(this.state.userProfileFriends, ["name", e.target.value]);
 
     tempArr = tempArr[friendIndex].parties;
 
@@ -56,31 +51,17 @@ class ExistingFriendList extends Component {
         <h1>FRIENDS</h1>
         <form action="" onSubmit={this.handleSubmit}>
           {this.state.userProfileFriends.map((friend, i) => {
-            if (
-              friend.parties.indexOf(this.state.selectedEvent) !== -1 &&
-              friend.parties !== undefined
-            ) {
+            if (friend.parties.indexOf(this.state.selectedEvent) !== -1 && friend.parties !== undefined) {
               return (
                 <div key={i} className="single-friend">
-                  <input
-                    onClick={this.toggleFriend}
-                    id={i}
-                    value={friend.name}
-                    type="checkbox"
-                    defaultChecked
-                  />
+                  <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" defaultChecked />
                   <label htmlFor={i}>{friend.name}</label>
                 </div>
               );
             } else {
               return (
                 <div key={i} className="single-friend">
-                  <input
-                    onClick={this.toggleFriend}
-                    id={i}
-                    value={friend.name}
-                    type="checkbox"
-                  />
+                  <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" />
                   <label htmlFor={i}>{friend.name}</label>
                 </div>
               );

@@ -99,10 +99,7 @@ class ManageEvents extends Component {
   componentDidMount() {
     if (this.state.userProfile.parties) {
       // if there are any changes in the firebase array of parties for the user, update the userProfile state
-      let dbRef = firebase
-        .database()
-        // .ref(`${this.props.userProfile.id}/parties`);
-        .ref(`${this.props.userProfile.id}`);
+      let dbRef = firebase.database().ref(`${this.props.userProfile.id}`);
 
       dbRef.on("value", snapshot => {
         this.setState({

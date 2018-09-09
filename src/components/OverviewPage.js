@@ -13,9 +13,10 @@ class OverviewPage extends Component {
     this.state = {
       userProfile: props.userProfile,
       inputValue: "",
-      confirmedEventName: ""
+      confirmedEventName: "",
+      userID: props.userID
     };
-    this.dbRef = firebase.database().ref(`${props.userProfile.id}`);
+    this.dbRef = firebase.database().ref(`${this.state.userID}`);
   }
 
   handleChangeAddEvent = e => {
@@ -62,64 +63,68 @@ class OverviewPage extends Component {
   };
 
   render() {
-    return (
-      <main className="overview-page">
-        <Header
-          user={_.capitalize(this.state.userProfile.user)}
-          handleLogout={this.props.handleLogout}
-        />
+    if (this.state.userProfile) {
+      return (
+        <main className="overview-page">
+          <Header user={_.capitalize(this.state.userProfile.user)} handleLogout={this.props.handleLogout} />
 
-        <div className="wrapper">
-          <div className="events">
-            <h2 className="page-title">Events</h2>
+          <div className="wrapper">
+            <div className="events">
+              <h2 className="page-title">Events</h2>
 
-            <Link className="create-new-event" to="/PLACEHOLDER">
-              Create New Event
-            </Link>
+              <Link className="create-new-event" to="/PLACEHOLDER">
+                Create New Event
+              </Link>
 
-            <ul>
-              {/* Go through parties object and list all the parties and their recipes */}
-              {this.state.userProfile.parties === undefined
-                ? null
-                : this.state.userProfile.parties.map((party, i) => {
-                    return (
-                      <li key={i}>
-                        <Link
-                          id={i}
-                          className="go-to-event event"
-                          to="/event"
-                          onClick={this.props.selectEvent}
-                          href="#"
-                        >
-                          {party.title}
-                        </Link>
-                        <button onClick={() => this.deleteEvent(i)}>
-                          DELETE EVENT
-                        </button>
-                      </li>
-                    );
-                  })}
-            </ul>
+              <ul>
+                {/* Go through parties object and list all the parties and their recipes */}
+                {this.state.userProfile.parties
+                  ? this.state.userProfile.parties.map((party, i) => {
+                      return (
+                        <li key={i}>
+                          <Link
+                            id={i}
+                            className="go-to-event event"
+                            to="/event"
+                            onClick={this.props.selectEvent}
+                            href="#"
+                          >
+                            {party.title}
+                          </Link>
+                          <button onClick={() => this.deleteEvent(i)}>DELETE EVENT</button>
+                        </li>
+                      );
+                    })
+                  : null}
+              </ul>
+            </div>
+            {/* End of Events Div */}
+
+            <form onSubmit={this.handleSubmitAddEvent} action="">
+              <label htmlFor="new-event">Add New Event</label>
+              <input onChange={this.handleChangeAddEvent} id="new-event" type="text" />
+              <button onClick={this.handleClickAddEvent}>SUBMIT</button>
+            </form>
           </div>
-          {/* End of Events Div */}
-
-          <form onSubmit={this.handleSubmitAddEvent} action="">
-            <label htmlFor="new-event">Add New Event</label>
-            <input
-              onChange={this.handleChangeAddEvent}
-              id="new-event"
-              type="text"
-            />
-            <button onClick={this.handleClickAddEvent}>SUBMIT</button>
-          </form>
-        </div>
-      </main>
-    );
+        </main>
+      );
+    } else {
+      return <h1>HELLO</h1>;
+    }
   }
 
   componentDidMount() {
+    console.log("Inside ComponentDidMount of Overview");
+    console.log("UserProfile state:");
+    console.log(this.state.userProfile);
+    console.log("UserID");
+    console.log(this.state.userID);
+
     this.dbRef.on("value", snapshot => {
-      this.setState({ userProfile: snapshot.val() });
+      console.log(snapshot.val());
+      this.setState({ userProfile: snapshot.val() }, () => {
+        console.log(this.state.userProfile);
+      });
     });
   }
 }
