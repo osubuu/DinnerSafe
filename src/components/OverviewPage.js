@@ -82,7 +82,7 @@ class OverviewPage extends Component {
                 onChange={this.handleChangeAddEvent}
                 id="new-event"
                 type="text"
-                placeholder="New Event Name"
+                placeholder="Event Name"
                 value={this.state.inputValue}
               />
               <button className="new-event-button" onClick={this.handleClickAddEvent}>Submit</button>
