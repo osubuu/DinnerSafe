@@ -228,6 +228,13 @@ img {
 ul {
   list-style: none; }
 
+body {
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(./assets/heroBGweb.jpg) 50% 50% fixed;
+  background-size: 100% auto; }
+
+a {
+  text-decoration: none; }
+
 .log-in-page {
   background: #3e3e3e;
   height: 100vh;
@@ -285,7 +292,71 @@ ul {
   font-weight: normal;
   color: #ffcb00;
   text-align: center;
-  padding-top: 9vh; }
+  padding-top: 5vh;
+  padding-bottom: 20px; }
+
+.app-name-sub-header {
+  color: #ffcb00;
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-align: center;
+  padding-bottom: 5px; }
+
+header {
+  background: #505050; }
+  header .app-name {
+    font-size: 3rem;
+    padding: 15px 0;
+    text-align: left;
+    width: auto;
+    float: left; }
+
+.user {
+  color: #ffcb00;
+  float: right;
+  padding: 15px 0;
+  position: relative;
+  display: block; }
+  .user h2 {
+    float: left;
+    padding-right: 70px; }
+  .user a {
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 60px;
+    text-align: center; }
+
+.log-out {
+  background: #f34843;
+  color: #f2f2f2; }
+
+.page-title {
+  text-align: center;
+  margin: 50px 0 25px 0; }
+
+.create-new-event,
+.event {
+  width: 90%;
+  max-width: 500px;
+  display: block;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+  font-size: 2rem;
+  padding: 10px;
+  margin: 0 auto 10px auto; }
+
+.create-new-event {
+  background: #f34843; }
+
+.event {
+  background: #505050; }
 
 @media all and (max-width: 500px) {
   h1 {

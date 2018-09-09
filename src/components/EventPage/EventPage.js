@@ -6,6 +6,7 @@ import { Route, Link } from "react-router-dom";
 import EditFriend from "../EditFriend";
 import firebase from "../../firebase";
 import _ from "lodash";
+import Header from "../Header";
 
 class EventPage extends Component {
   constructor(props) {
@@ -47,52 +48,60 @@ class EventPage extends Component {
   render() {
     return (
       <div className="event-page">
-        <Link onClick={this.props.handleBackToOverview} to="/Overview">
-          Back to Overview
-        </Link>
 
-        <h2>{this.props.selectedEvent.title}</h2>
+        <Header user={_.capitalize(this.state.userProfile.user)} handleLogout={this.props.handleLogout} />
+       
+        <div className="wrapper">
+        
+          <Link onClick={this.props.handleBackToOverview} to="/Overview">
+            Back to Overview
+          </Link>
 
-        <div className="guestList">
-          <ul className="guests">
-            {this.props.userProfile.friends.map((friend, i) => {
-              if (
-                friend.parties.indexOf(this.props.selectedEvent.title) !== -1
-              ) {
-                return (
-                  <li className="guest">
-                    {/* Edit the guests restrictions */}
-                    {/* <a href="#placeholderToEditGuestRestrictions"> */}
-                    <p>{friend.name}</p>
+          <h2>{this.props.selectedEvent.title}</h2>
 
-                    {/* Fake button to make it clear you can click on the guest to edit them */}
-                    <div className="fakeButton">
-                      <h2 id={friend.name} onClick={this.props.selectFriend}>
-                        EDIT FRIEND
-                      </h2>
-                    </div>
-                    {/* </a> */}
+          <div className="guestList">
+            <ul className="guests">
+              {this.props.userProfile.friends.map((friend, i) => {
+                if (
+                  friend.parties.indexOf(this.props.selectedEvent.title) !== -1
+                ) {
+                  return (
+                    <li className="guest">
+                      {/* Edit the guests restrictions */}
+                      {/* <a href="#placeholderToEditGuestRestrictions"> */}
+                      <p>{friend.name}</p>
 
-                    {/* Removes guest from the event */}
-                    <button
-                      id={friend.name}
-                      onClick={this.removeFriendFromEvent}
-                    >
-                      Remove From Event
-                    </button>
-                  </li>
-                );
-              }
-            })}
-          </ul>
-          <Link to="existing-friend-list">Add Existing Guest</Link>
-          <a href="#AddExistingGuest">Add New Guest</a>
+                      {/* Fake button to make it clear you can click on the guest to edit them */}
+                      <div className="fakeButton">
+                        <h2 id={friend.name} onClick={this.props.selectFriend}>
+                          EDIT FRIEND
+                        </h2>
+                      </div>
+                      {/* </a> */}
+
+                      {/* Removes guest from the event */}
+                      <button
+                        id={friend.name}
+                        onClick={this.removeFriendFromEvent}
+                      >
+                        Remove From Event
+                      </button>
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+            <Link to="existing-friend-list">Add Existing Guest</Link>
+            <a href="#AddExistingGuest">Add New Guest</a>
+          </div>
+
+          <DisplayMatchingRecipes
+            userProfile={this.props.userProfile}
+            eventName={this.props.selectedEvent.title}
+          />
         </div>
+        {/* End of Wrapper */}
 
-        <DisplayMatchingRecipes
-          userProfile={this.props.userProfile}
-          eventName={this.props.selectedEvent.title}
-        />
       </div>
     );
   }
