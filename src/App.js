@@ -247,6 +247,7 @@ class App extends Component {
         }
         handleBackToOverview={this.handleBackToOverview}
         selectFriend={this.selectFriend}
+        handleLogout={this.handleLogout}
       />
     );
   };
