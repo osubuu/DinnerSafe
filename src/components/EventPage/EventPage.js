@@ -5,6 +5,7 @@ import DisplayMatchingRecipes from "../DisplayMatchingRecipes/DisplayMatchingRec
 import { Route, Link } from "react-router-dom";
 import firebase from "../../firebase";
 import _ from "lodash";
+import Header from "../Header";
 
 class EventPage extends Component {
   constructor(props) {
@@ -91,66 +92,68 @@ class EventPage extends Component {
   render() {
     return (
       <div className="event-page">
-        <Link onClick={this.props.handleBackToOverview} to="/Overview">
-          Back to Overview
-        </Link>
+        <Header
+          user={_.capitalize(this.state.userProfile.user)}
+          handleLogout={this.props.handleLogout}
+        />
 
-        <h2>{this.props.selectedEvent.title}</h2>
-
-        <div className="guestList">
-          <ul className="guests">
-            {this.state.userProfile.friends.map((friend, i) => {
-              if (
-                friend.parties &&
-                friend.parties.indexOf(this.props.selectedEvent.title) !== -1
-              ) {
-                return (
-                  <li className="guest">
-                    {/* Edit the guests restrictions */}
-                    <p>{friend.name}</p>
-
-                    {/* Fake button to make it clear you can click on the guest to edit them */}
-                    <div className="fakeButton">
-                      <h2 id={friend.name} onClick={this.props.selectFriend}>
-                        EDIT FRIEND
-                      </h2>
-                    </div>
-                    {/* </a> */}
-
-                    {/* Removes guest from the event */}
-                    <button
-                      id={friend.name}
-                      onClick={this.removeFriendFromEvent}
-                    >
-                      Remove From Event
-                    </button>
-                  </li>
-                );
-              }
-            })}
-          </ul>
-          <Link
-            onClick={this.addExistingFriendToEvent}
-            to="/existing-friend-list"
-          >
-            Add Existing Guest
+        <div className="wrapper">
+          <Link onClick={this.props.handleBackToOverview} to="/Overview">
+            Back to Overview
           </Link>
 
-          <form onSubmit={this.handleSubmitAddFriend} action="">
-            <label htmlFor="add-new-friend">Add New Guest</label>
-            <input
-              id={"add-new-friend"}
-              onChange={this.handleChangeAddFriend}
-              type="text"
-            />
-            <button onClick={this.handleClickAddFriend}>ADD</button>
-          </form>
-        </div>
+          <h2>{this.props.selectedEvent.title}</h2>
 
-        <DisplayMatchingRecipes
-          userProfile={this.props.userProfile}
-          eventName={this.props.selectedEvent.title}
-        />
+          <div className="guestList">
+            <ul className="guests">
+              {this.props.userProfile.friends.map((friend, i) => {
+                if (
+                  friend.parties.indexOf(this.props.selectedEvent.title) !== -1
+                ) {
+                  return (
+                    <li className="guest">
+                      {/* Edit the guests restrictions */}
+                      {/* <a href="#placeholderToEditGuestRestrictions"> */}
+                      <p>{friend.name}</p>
+
+                      {/* Fake button to make it clear you can click on the guest to edit them */}
+                      <div className="fakeButton">
+                        <h2 id={friend.name} onClick={this.props.selectFriend}>
+                          EDIT FRIEND
+                        </h2>
+                      </div>
+                      {/* </a> */}
+
+                      {/* Removes guest from the event */}
+                      <button
+                        id={friend.name}
+                        onClick={this.removeFriendFromEvent}
+                      >
+                        Remove From Event
+                      </button>
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+            <Link to="existing-friend-list">Add Existing Guest</Link>
+            <form onSubmit={this.handleSubmitAddFriend} action="">
+              <label htmlFor="add-new-friend">Add New Guest</label>
+              <input
+                id={"add-new-friend"}
+                onChange={this.handleChangeAddFriend}
+                type="text"
+              />
+              <button onClick={this.handleClickAddFriend}>ADD</button>
+            </form>
+          </div>
+
+          <DisplayMatchingRecipes
+            userProfile={this.props.userProfile}
+            eventName={this.props.selectedEvent.title}
+          />
+        </div>
+        {/* End of Wrapper */}
       </div>
     );
   }
