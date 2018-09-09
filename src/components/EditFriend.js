@@ -2,19 +2,17 @@ import React, { Component } from "react";
 import { allergy as Allergy, diet as Diet } from "./matchingRecipes";
 import { Link } from "react-router-dom";
 import firebase from "../firebase";
+import _ from "lodash";
 
 class EditFriend extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      friendProfile: props.friendProfile,
       inputValue: "",
-      confirmedIngredient: "",
-      userID: props.userID,
-      friendKey: props.friendKey
+      confirmedIngredient: ""
     };
 
-    this.dbRef = firebase.database().ref(`${this.state.userID}/friends/${this.state.friendKey}`);
+    this.dbRef = firebase.database().ref(`${this.props.userID}/friends/${this.props.friendKey}`);
   }
 
   // Handle input value for new restriction
@@ -36,15 +34,15 @@ class EditFriend extends Component {
     e.preventDefault();
 
     // make copy of current friend profile
-    let tempObj = this.state.friendProfile;
+    let tempObj = this.props.friendProfile;
 
     // initialize an empty array of excluded ingredient, if it doesn't exist yet
-    if (!this.state.friendProfile.excludedIngredient) {
+    if (!this.props.friendProfile.excludedIngredient) {
       tempObj.excludedIngredient = [];
     }
 
     // push new ingredient into array
-    tempObj.excludedIngredient.push(this.state.confirmedIngredient);
+    tempObj.excludedIngredient.push(this.state.confirmedIngredient.trim().toLowerCase());
 
     // set new ingredient list to friend
     this.dbRef.set(tempObj);
@@ -57,7 +55,7 @@ class EditFriend extends Component {
 
   // Delete current ingredient
   deleteIngredient = key => {
-    let newIngredientList = this.state.friendProfile.excludedIngredient;
+    let newIngredientList = this.props.friendProfile.excludedIngredient;
     newIngredientList.splice(newIngredientList.indexOf(key), 1);
 
     this.dbRef.child("/excludedIngredient").set(newIngredientList);
@@ -66,15 +64,15 @@ class EditFriend extends Component {
   // Function to toggle allergies/diets directly on page and into firebase
   toggleAllergies = e => {
     // make copy of current friend profile
-    let tempObj = this.state.friendProfile;
+    let tempObj = this.props.friendProfile;
 
     // if friend has no allergy array yet, initialize one
-    if (!this.state.friendProfile.allowedAllergy) {
+    if (!this.props.friendProfile.allowedAllergy) {
       tempObj.allowedAllergy = [];
     }
 
     // if friend has no diet array yet, initialize one
-    if (!this.state.friendProfile.allowedDiet) {
+    if (!this.props.friendProfile.allowedDiet) {
       tempObj.allowedDiet = [];
     }
 
@@ -109,18 +107,18 @@ class EditFriend extends Component {
   render() {
     return (
       <div>
-        <h2>{this.state.friendProfile.name}</h2>
+        <h2>{this.props.friendProfile.name}</h2>
         <form action="">
           <h3>Allergies</h3>
           {Allergy.map((allergy, i) => {
             // if the current allergy is already in the friend's allergy array, check the input on display
             if (
-              this.state.friendProfile.allowedAllergy &&
-              this.state.friendProfile.allowedAllergy.indexOf(allergy.searchValue) !== -1
+              this.props.friendProfile.allowedAllergy &&
+              this.props.friendProfile.allowedAllergy.indexOf(allergy.searchValue) !== -1
             ) {
               return (
                 <div key={i}>
-                  <label htmlFor={allergy.searchValue}>{allergy.shortDescription}</label>
+                  <label htmlFor={allergy.searchValue}>{allergy.shortDescription.replace("-Free", "")}</label>
                   <input
                     className="allergy"
                     onChange={this.toggleAllergies}
@@ -136,7 +134,7 @@ class EditFriend extends Component {
             else {
               return (
                 <div key={i}>
-                  <label htmlFor={allergy.searchValue}>{allergy.shortDescription}</label>
+                  <label htmlFor={allergy.searchValue}>{allergy.shortDescription.replace("-Free", "")}</label>
                   <input
                     className="allergy"
                     onChange={this.toggleAllergies}
@@ -154,12 +152,12 @@ class EditFriend extends Component {
           {Diet.map((diet, i) => {
             // if the current diet is already in the friend's diet array, check the input on display
             if (
-              this.state.friendProfile.allowedDiet &&
-              this.state.friendProfile.allowedDiet.indexOf(diet.searchValue) !== -1
+              this.props.friendProfile.allowedDiet &&
+              this.props.friendProfile.allowedDiet.indexOf(diet.searchValue) !== -1
             ) {
               return (
                 <div key={i}>
-                  <label htmlFor={diet.searchValue}>{diet.shortDescription}</label>
+                  <label htmlFor={diet.searchValue}>{diet.shortDescription.replace("-Free", "")}</label>
                   <input
                     className="diet"
                     type="checkbox"
@@ -175,7 +173,7 @@ class EditFriend extends Component {
             else {
               return (
                 <div key={i}>
-                  <label htmlFor={diet.searchValue}>{diet.shortDescription}</label>
+                  <label htmlFor={diet.searchValue}>{diet.shortDescription.replace("-Free", "")}</label>
                   <input
                     className="diet"
                     type="checkbox"
@@ -191,11 +189,11 @@ class EditFriend extends Component {
         <section>
           <ul className="friend-restricted-ingredients">
             <h3>Restricted Ingredients</h3>
-            {this.state.friendProfile.excludedIngredient
-              ? this.state.friendProfile.excludedIngredient.map((ingredient, i) => {
+            {this.props.friendProfile.excludedIngredient
+              ? this.props.friendProfile.excludedIngredient.map((ingredient, i) => {
                   return (
                     <div key={i}>
-                      <li>{ingredient}</li>
+                      <li>{_.capitalize(ingredient)}</li>
                       <button onClick={() => this.deleteIngredient(`${ingredient}`)}>REMOVE INGREDIENT</button>
                     </div>
                   );
@@ -213,14 +211,6 @@ class EditFriend extends Component {
         </Link>
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.dbRef.on("value", snapshot => {
-      this.setState({
-        friendProfile: snapshot.val()
-      });
-    });
   }
 }
 

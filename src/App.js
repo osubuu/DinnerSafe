@@ -3,6 +3,7 @@ import "./App.css";
 import firebase from "./firebase";
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import _ from "lodash";
+import swal from "sweetalert2";
 
 //COMPONENTS//
 
@@ -14,6 +15,208 @@ import EditFriend from "./components/EditFriend";
 import ExistingFriendList from "./components/ExistingFriendList";
 
 const dbRef = firebase.database().ref();
+
+// let tempObj = {
+//   "-LLkJvR9qcy1G-CNtFoN": {
+//     friends: [
+//       {
+//         allergies: ["Apple", "Bananas"],
+//         name: "Pratik",
+//         parties: ["sept3", "oct5"]
+//       },
+//       {
+//         allergies: ["Grapes", "Cookies"],
+//         name: "Junior",
+//         parties: ["sept3", "oct5", "nov1"]
+//       }
+//     ],
+//     id: "-LLkJvR9qcy1G-CNtFoN",
+//     parties: [
+//       {
+//         recipes: ["Pie", "McDonald's"],
+//         title: "sept3"
+//       },
+//       {
+//         recipes: ["Peanut", "Pizza"],
+//         title: "oct5"
+//       },
+//       {
+//         recipes: ["Candy", "Dog Food"],
+//         title: "nov1"
+//       }
+//     ],
+//     user: "david"
+//   },
+//   "-LLkJyagyBPDPH2v_ELC": {
+//     friends: [
+//       {
+//         allergies: ["Apple", "Bananas"],
+//         name: "Pratik",
+//         parties: ["sept3", "oct5"]
+//       },
+//       {
+//         allergies: ["Grapes", "Cookies"],
+//         name: "Junior",
+//         parties: ["sept3", "oct5", "nov1"]
+//       }
+//     ],
+//     id: "-LLkJyagyBPDPH2v_ELC",
+//     parties: [
+//       {
+//         recipes: ["Pie", "McDonald's"],
+//         title: "sept3"
+//       },
+//       {
+//         title: "dec20"
+//       },
+//       {
+//         title: "jan18"
+//       },
+//       {
+//         title: "nov3"
+//       }
+//     ],
+//     user: "jeff"
+//   },
+//   "-LLkK6EFr-U7nnArv6Bu": {
+//     friends: [
+//       {
+//         allergies: ["Apple", "Bananas"],
+//         name: "Pratik",
+//         parties: ["sept3"]
+//       },
+//       {
+//         allergies: ["Grapes", "Cookies"],
+//         name: "Junior",
+//         parties: ["sept3", "nov1"]
+//       }
+//     ],
+//     id: "-LLkK6EFr-U7nnArv6Bu",
+//     parties: [
+//       {
+//         recipes: ["Pie", "McDonald's"],
+//         title: "sept3"
+//       },
+//       {
+//         recipes: ["Candy", "Dog Food"],
+//         title: "nov1"
+//       }
+//     ],
+//     user: "nicole"
+//   },
+//   "-LLkMs39ouY20thDZdDK": {
+//     id: "-LLkMs39ouY20thDZdDK",
+//     user: "pratik"
+//   },
+//   "-LLkxQeHIEKxdNL6XjfB": {
+//     friends: [
+//       {
+//         allowedAllergy: [null, "394^Peanut-Free"],
+//         allowedDiet: [null, "389^Ovo vegetarian"],
+//         excludedIngredient: [null, "Banana"],
+//         name: "Stefan",
+//         parties: ["sept3"]
+//       },
+//       {
+//         allowedDiet: [null, "403^Paleo"],
+//         excludedIngredient: ["Arugula", "garlic"],
+//         name: "Ben",
+//         parties: ["sept3", "nov1"]
+//       },
+//       {
+//         name: "Duck",
+//         parties: ["sept3"]
+//       },
+//       {
+//         name: "Rubber Duck",
+//         parties: ["sept3"]
+//       },
+//       {
+//         excludedIngredient: ["Cauliflower"],
+//         name: "Real Duck",
+//         parties: ["sept3"]
+//       },
+//       {
+//         allowedAllergy: ["398^Seafood-Free"],
+//         allowedDiet: ["403^Paleo"],
+//         excludedIngredient: ["Arugala", "Cauliflower"],
+//         name: "Donald Duck"
+//       }
+//     ],
+//     id: "-LLkxQeHIEKxdNL6XjfB",
+//     parties: [
+//       {
+//         title: "sept3"
+//       },
+//       {
+//         title: "nov1"
+//       },
+//       {
+//         title: "this is a new test event"
+//       },
+//       {
+//         title: "hello"
+//       }
+//     ],
+//     user: "chris"
+//   },
+//   "-LLkzJf0mDz0nYtxLJK7": {
+//     friends: [
+//       {
+//         allowedAllergy: ["393^Gluten-Free", "394^Peanut-Free"],
+//         allowedDiet: ["388^Lacto vegetarian", "389^Ovo vegetarian"],
+//         excludedIngredient: ["banana", "apple"],
+//         name: "Jeff",
+//         parties: ["nov1", "sept15"]
+//       },
+//       {
+//         allowedAllergy: ["397^Egg-Free"],
+//         allowedDiet: ["388^Lacto vegetarian"],
+//         excludedIngredient: ["watermelon"],
+//         name: "Shang",
+//         parties: ["nov1"]
+//       },
+//       {
+//         allowedAllergy: ["400^Soy-Free"],
+//         excludedIngredient: ["strawberry"],
+//         name: "Claire",
+//         parties: ["nov1"]
+//       },
+//       {
+//         allowedAllergy: ["394^Peanut-Free"],
+//         excludedIngredient: ["cauliflower"],
+//         name: "Rita",
+//         parties: ["nov1", "sept15"]
+//       },
+//       {
+//         allowedDiet: ["390^Pescetarian"],
+//         name: "Dianna",
+//         parties: ["sept15"]
+//       },
+//       {
+//         excludedIngredient: ["fish"],
+//         name: "Daniel",
+//         parties: ["sept15"]
+//       }
+//     ],
+//     id: "-LLkzJf0mDz0nYtxLJK7",
+//     parties: [
+//       {
+//         title: "nov1"
+//       },
+//       {
+//         title: "sept15"
+//       }
+//     ],
+//     user: "christine"
+//   },
+//   default: {
+//     id: "default",
+//     user: "loggedOut"
+//   }
+// };
+
+// dbRef.set(tempObj);
 
 class App extends Component {
   constructor() {
@@ -29,7 +232,8 @@ class App extends Component {
       user: "",
       currentTextValue: "",
       loginPurpose: "",
-      key: ""
+      key: "",
+      signInAndLogIn: false
     };
   }
 
@@ -47,15 +251,20 @@ class App extends Component {
       // If the user input is found within the current firebase and the user clicked "CREATE", reset user state to "" so nothing displays
       if (this.state.loginPurpose === "create" && userObject.user === this.state.user) {
         this.setState({
-          user: "",
-          userProfile: null
+          user: ""
         });
-        alert("Name already exists. Please create an account with another name.");
+        swal({
+          type: "warning",
+          title: "User name already exists!",
+          text: `Please create another user name."`
+        });
         return;
       }
 
       // when person is found
       if (this.state.loginPurpose === "sign-in" && userObject.user === this.state.user) {
+        console.log("match");
+
         this.setState({
           userProfile: userObject,
           loggedIn: true,
@@ -72,20 +281,25 @@ class App extends Component {
       // If this conditional is true, then the userInput does not exist yet and will be added to firebase
       if (counter === currentInfoFromFirebase.length) {
         let user = this.state.user;
-        let friends = [];
+        let friends = [{ name: _.capitalize(this.state.user) }];
         let parties = [];
 
         // if user clicked create button, create new user on firebase
         if (this.state.loginPurpose === "create") {
-          let id = dbRef.push(this.state.user).key;
-          dbRef.child(id).set({ user, friends, parties, id });
-
-          this.setState({
-            userProfile: { user: this.state.user }
+          console.log("creating new users");
+          this.setState({ loginPurpose: "sign-in", signInAndLogIn: true }, () => {
+            let id = dbRef.push(this.state.user).key;
+            dbRef.child(id).set({ user, friends, parties, id });
+            return;
           });
-        } else {
-          alert("You should create an account!");
-          this.setState({ user: "", userProfile: null });
+        } else if (this.state.signInAndLogIn === false) {
+          swal({
+            type: "warning",
+            title: "User name not recognized!",
+            text: `Please sign in with a correct user name."`
+          });
+          this.setState({ user: "" });
+          console.log("warning");
         }
       }
     });
@@ -159,7 +373,7 @@ class App extends Component {
     );
   };
 
-  // Handler for going back to the overview page from the single event page
+  // Handler for going back to the main page from the single event page
   handleBackToOverview = e => {
     this.setState({
       selectedEventIndex: null
@@ -230,14 +444,14 @@ class App extends Component {
             path="/"
             render={() => {
               return this.state.userProfile.id !== "default" && this.state.loggedIn === true && this.state.key ? (
-                <Redirect to="/overview" />
+                <Redirect to="/home" />
               ) : null;
             }}
           />
 
           {/* OVERVIEW PAGE */}
           <Route
-            path="/overview"
+            path="/home"
             render={props => (
               <OverviewPage
                 {...props}
