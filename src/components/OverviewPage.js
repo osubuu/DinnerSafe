@@ -25,7 +25,7 @@ class OverviewPage extends Component {
     });
   };
 
-  // Handling for click of either sign in or create buttons
+  // Handling for click create buttons
   handleClickAddEvent = e => {
     this.setState({
       confirmedEventName: this.state.inputValue
@@ -50,6 +50,10 @@ class OverviewPage extends Component {
     this.dbRef.child("/parties").set(tempArr);
 
     console.log(tempArr);
+
+    this.setState({
+      inputValue: ""
+    });
   };
 
   // delete parties
@@ -63,54 +67,56 @@ class OverviewPage extends Component {
   };
 
   render() {
-    if (this.state.userProfile) {
-      return (
-        <main className="overview-page">
-          <Header user={_.capitalize(this.state.userProfile.user)} handleLogout={this.props.handleLogout} />
+    return (
+      <main className="overview-page">
+        <Header user={_.capitalize(this.state.userProfile.user)} handleLogout={this.props.handleLogout} />
 
-          <div className="wrapper">
-            <div className="events">
-              <h2 className="page-title">Events</h2>
+        <div className="wrapper">
+          <div className="events">
+            <h2 className="page-title">Events</h2>
 
-              <Link className="create-new-event" to="/PLACEHOLDER">
-                Create New Event
-              </Link>
+            <Link className="create-new-event" to="/PLACEHOLDER">
+              Create New Event
+            </Link>
 
-              <ul>
-                {/* Go through parties object and list all the parties and their recipes */}
-                {this.state.userProfile.parties
-                  ? this.state.userProfile.parties.map((party, i) => {
-                      return (
-                        <li key={i}>
-                          <Link
-                            id={i}
-                            className="go-to-event event"
-                            to="/event"
-                            onClick={this.props.selectEvent}
-                            href="#"
-                          >
-                            {party.title}
-                          </Link>
-                          <button onClick={() => this.deleteEvent(i)}>DELETE EVENT</button>
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
-            </div>
-            {/* End of Events Div */}
-
-            <form onSubmit={this.handleSubmitAddEvent} action="">
-              <label htmlFor="new-event">Add New Event</label>
-              <input onChange={this.handleChangeAddEvent} id="new-event" type="text" />
-              <button onClick={this.handleClickAddEvent}>SUBMIT</button>
-            </form>
+            <ul>
+              {/* Go through parties object and list all the parties and their recipes */}
+              {this.state.userProfile.parties
+                ? this.state.userProfile.parties.map((party, i) => {
+                    return (
+                      <li key={i}>
+                        <Link
+                          id={i}
+                          className="go-to-event event"
+                          to="/event"
+                          onClick={this.props.selectEvent}
+                          href="#"
+                        >
+                          {party.title}
+                        </Link>
+                        <button onClick={() => this.deleteEvent(i)}>DELETE EVENT</button>
+                      </li>
+                    );
+                  })
+                : null}
+            </ul>
           </div>
-        </main>
-      );
-    } else {
-      return <h1>HELLO</h1>;
-    }
+          {/* End of Events Div */}
+
+          <form onSubmit={this.handleSubmitAddEvent} action="">
+            <label htmlFor="new-event">Add New Event</label>
+            <input
+              onChange={this.handleChangeAddEvent}
+              id="new-event"
+              type="text"
+              placeholder="New Event Name"
+              value={this.state.inputValue}
+            />
+            <button onClick={this.handleClickAddEvent}>SUBMIT</button>
+          </form>
+        </div>
+      </main>
+    );
   }
 
   componentDidMount() {
