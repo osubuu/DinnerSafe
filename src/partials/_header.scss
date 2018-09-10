@@ -1,0 +1,44 @@
+// Header
+
+header {
+  background: rgb(80, 80, 80);
+
+  & .app-name {
+    font-size: 3rem;
+    padding: 15px 0;
+    text-align: left;
+    width: auto;
+    float: left;
+  }
+}
+
+.user {
+  color: $yellow;
+  float: right;
+  padding: 15px 0;
+  position: relative;
+  display: block;
+
+  & h2 {
+    float: left;
+    padding-right: 70px;
+  }
+
+  & a {
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 60px;
+    text-align: center;
+  }
+}
+
+.log-out {
+  background: $red;
+  color: $color-2;
+}

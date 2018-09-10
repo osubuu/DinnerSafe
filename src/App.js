@@ -244,7 +244,7 @@ class App extends Component {
                 <section className="log-in-page">
                   <div className="wrapper">
                     <h1 className="app-name">DinnerSafe</h1>
-                    <h2 className="app-name-sub-header">Party guests with allergies and diet restictions?</h2>
+                    <h2 className="app-name-sub-header">Party guests with allergies and diet restrictions?</h2>
                     <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
                     <form className="log-in-form clearfix" action="" onSubmit={this.handleSubmitLogin}>
                       {/* <label className="username" htmlFor="create-user">
