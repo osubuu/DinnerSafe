@@ -15,26 +15,13 @@ import EditFriend from "./components/EditFriend";
 import ExistingFriendList from "./components/ExistingFriendList";
 
 const dbRef = firebase.database().ref();
-
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
-
-// let tempObj = {
-//   user: "Demo",
-//   id: "demo",
-//   friends: [{ name: "Demo" }]
-// };
-
-// dbRef.set(tempObj);
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      // userProfile: {
-      //   user: "loggedOut",
-      //   id: "default"
-      // },
       userProfile: null,
       selectedEventIndex: null,
       selectedFriend: null,
@@ -50,7 +37,7 @@ class App extends Component {
   // Function for create button
   checkIfUserExists = snapshot => {
     // if userInput is blank, leave the function
-    if (this.state.user.length === 0) {
+    if (!this.state.user) {
       return;
     }
 
@@ -153,13 +140,6 @@ class App extends Component {
     }
   };
 
-  // Handling for text input of login
-  // handleChangeLogin = e => {
-  //   this.setState({
-  //     currentTextValue: e.target.value
-  //   });
-  // };
-
   // Handling for click of either sign in or create buttons
   handleClickLogin = e => {
     this.setState({
@@ -171,10 +151,6 @@ class App extends Component {
   handleLogout = e => {
     auth.signOut().then(res => {
       this.setState({
-        // userProfile: {
-        //   user: "loggedOut",
-        //   id: "default"
-        // },
         userProfile: null,
         selectedEventIndex: null,
         selectedFriend: null,
@@ -247,17 +223,6 @@ class App extends Component {
                     <h2 className="app-name-sub-header">Party guests with allergies and diet restrictions?</h2>
                     <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
                     <form className="log-in-form clearfix" action="" onSubmit={this.handleSubmitLogin}>
-                      {/* <label className="username" htmlFor="create-user">
-                        Username
-                      </label>
-
-                      <input
-                        className="log-in-text-input"
-                        onChange={this.handleChangeLogin}
-                        id="create-user"
-                        type="text"
-                      /> */}
-
                       <div className="buttons clearfix">
                         <button className="left" value="sign-in" onClick={this.handleClickLogin}>
                           SIGN IN
@@ -358,10 +323,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // let dbRef = firebase.database().ref(`${this.state.userProfile.id}`);
-    // dbRef.on("value", snapshot => {
-    //   this.setState({ userProfile: snapshot.val() });
-    // });
+    auth.onAuthStateChanged(user => {
+      // if previous user had an email (i.e not a guest/demo), automatically log-in
+      if (user.emailVerified === true) {
+        this.setState({ user: user.displayName, loginPurpose: "sign-in" }, () => {
+          dbRef.on("value", snapshot => {
+            this.checkIfUserExists(snapshot.val());
+          });
+        });
+      }
+    });
   }
 }
 
