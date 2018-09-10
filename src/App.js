@@ -20,203 +20,9 @@ const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
 // let tempObj = {
-//   "-LLkJvR9qcy1G-CNtFoN": {
-//     friends: [
-//       {
-//         allergies: ["Apple", "Bananas"],
-//         name: "Pratik",
-//         parties: ["sept3", "oct5"]
-//       },
-//       {
-//         allergies: ["Grapes", "Cookies"],
-//         name: "Junior",
-//         parties: ["sept3", "oct5", "nov1"]
-//       }
-//     ],
-//     id: "-LLkJvR9qcy1G-CNtFoN",
-//     parties: [
-//       {
-//         recipes: ["Pie", "McDonald's"],
-//         title: "sept3"
-//       },
-//       {
-//         recipes: ["Peanut", "Pizza"],
-//         title: "oct5"
-//       },
-//       {
-//         recipes: ["Candy", "Dog Food"],
-//         title: "nov1"
-//       }
-//     ],
-//     user: "david"
-//   },
-//   "-LLkJyagyBPDPH2v_ELC": {
-//     friends: [
-//       {
-//         allergies: ["Apple", "Bananas"],
-//         name: "Pratik",
-//         parties: ["sept3", "oct5"]
-//       },
-//       {
-//         allergies: ["Grapes", "Cookies"],
-//         name: "Junior",
-//         parties: ["sept3", "oct5", "nov1"]
-//       }
-//     ],
-//     id: "-LLkJyagyBPDPH2v_ELC",
-//     parties: [
-//       {
-//         recipes: ["Pie", "McDonald's"],
-//         title: "sept3"
-//       },
-//       {
-//         title: "dec20"
-//       },
-//       {
-//         title: "jan18"
-//       },
-//       {
-//         title: "nov3"
-//       }
-//     ],
-//     user: "jeff"
-//   },
-//   "-LLkK6EFr-U7nnArv6Bu": {
-//     friends: [
-//       {
-//         allergies: ["Apple", "Bananas"],
-//         name: "Pratik",
-//         parties: ["sept3"]
-//       },
-//       {
-//         allergies: ["Grapes", "Cookies"],
-//         name: "Junior",
-//         parties: ["sept3", "nov1"]
-//       }
-//     ],
-//     id: "-LLkK6EFr-U7nnArv6Bu",
-//     parties: [
-//       {
-//         recipes: ["Pie", "McDonald's"],
-//         title: "sept3"
-//       },
-//       {
-//         recipes: ["Candy", "Dog Food"],
-//         title: "nov1"
-//       }
-//     ],
-//     user: "nicole"
-//   },
-//   "-LLkMs39ouY20thDZdDK": {
-//     id: "-LLkMs39ouY20thDZdDK",
-//     user: "pratik"
-//   },
-//   "-LLkxQeHIEKxdNL6XjfB": {
-//     friends: [
-//       {
-//         allowedAllergy: [null, "394^Peanut-Free"],
-//         allowedDiet: [null, "389^Ovo vegetarian"],
-//         excludedIngredient: [null, "Banana"],
-//         name: "Stefan",
-//         parties: ["sept3"]
-//       },
-//       {
-//         allowedDiet: [null, "403^Paleo"],
-//         excludedIngredient: ["Arugula", "garlic"],
-//         name: "Ben",
-//         parties: ["sept3", "nov1"]
-//       },
-//       {
-//         name: "Duck",
-//         parties: ["sept3"]
-//       },
-//       {
-//         name: "Rubber Duck",
-//         parties: ["sept3"]
-//       },
-//       {
-//         excludedIngredient: ["Cauliflower"],
-//         name: "Real Duck",
-//         parties: ["sept3"]
-//       },
-//       {
-//         allowedAllergy: ["398^Seafood-Free"],
-//         allowedDiet: ["403^Paleo"],
-//         excludedIngredient: ["Arugala", "Cauliflower"],
-//         name: "Donald Duck"
-//       }
-//     ],
-//     id: "-LLkxQeHIEKxdNL6XjfB",
-//     parties: [
-//       {
-//         title: "sept3"
-//       },
-//       {
-//         title: "nov1"
-//       },
-//       {
-//         title: "this is a new test event"
-//       },
-//       {
-//         title: "hello"
-//       }
-//     ],
-//     user: "chris"
-//   },
-//   "-LLkzJf0mDz0nYtxLJK7": {
-//     friends: [
-//       {
-//         allowedAllergy: ["393^Gluten-Free", "394^Peanut-Free"],
-//         allowedDiet: ["388^Lacto vegetarian", "389^Ovo vegetarian"],
-//         excludedIngredient: ["banana", "apple"],
-//         name: "Jeff",
-//         parties: ["nov1", "sept15"]
-//       },
-//       {
-//         allowedAllergy: ["397^Egg-Free"],
-//         allowedDiet: ["388^Lacto vegetarian"],
-//         excludedIngredient: ["watermelon"],
-//         name: "Shang",
-//         parties: ["nov1"]
-//       },
-//       {
-//         allowedAllergy: ["400^Soy-Free"],
-//         excludedIngredient: ["strawberry"],
-//         name: "Claire",
-//         parties: ["nov1"]
-//       },
-//       {
-//         allowedAllergy: ["394^Peanut-Free"],
-//         excludedIngredient: ["cauliflower"],
-//         name: "Rita",
-//         parties: ["nov1", "sept15"]
-//       },
-//       {
-//         allowedDiet: ["390^Pescetarian"],
-//         name: "Dianna",
-//         parties: ["sept15"]
-//       },
-//       {
-//         excludedIngredient: ["fish"],
-//         name: "Daniel",
-//         parties: ["sept15"]
-//       }
-//     ],
-//     id: "-LLkzJf0mDz0nYtxLJK7",
-//     parties: [
-//       {
-//         title: "nov1"
-//       },
-//       {
-//         title: "sept15"
-//       }
-//     ],
-//     user: "christine"
-//   },
-//   default: {
-//     id: "default",
-//     user: "loggedOut"
-//   }
+//   user: "Demo",
+//   id: "demo",
+//   friends: [{ name: "Demo" }]
 // };
 
 // dbRef.set(tempObj);
@@ -266,9 +72,12 @@ class App extends Component {
       }
 
       // when person is found
-      if (this.state.loginPurpose === "sign-in" && userObject.user === this.state.user) {
-        console.log("match");
-
+      if (
+        (this.state.loginPurpose === "sign-in" ||
+          this.state.loginPurpose === "guest" ||
+          this.state.loginPurpose === "demo") &&
+        userObject.user === this.state.user
+      ) {
         this.setState({
           userProfile: userObject,
           loggedIn: true,
@@ -303,7 +112,6 @@ class App extends Component {
             text: `Please sign in with a correct user name."`
           });
           this.setState({ user: "" });
-          console.log("warning");
         }
       }
     });
@@ -313,28 +121,44 @@ class App extends Component {
   handleSubmitLogin = e => {
     e.preventDefault();
 
-    auth.signInWithPopup(provider).then(res => {
-      //create user on firebase
-      this.setState(
-        {
-          // user: this.state.currentTextValue.trim().toLowerCase()
-          user: res.user.displayName
-        },
-        () => {
+    if (this.state.loginPurpose === "sign-in" || this.state.loginPurpose === "create") {
+      auth.signInWithPopup(provider).then(res => {
+        //create user on firebase
+        this.setState({ user: res.user.displayName }, () => {
           dbRef.on("value", snapshot => {
             this.checkIfUserExists(snapshot.val());
           });
+        });
+      });
+    } else {
+      auth.signInAnonymously().then(res => {
+        let userName = "Demo";
+
+        // if guest account, reset guest account
+        if (this.state.loginPurpose === "guest") {
+          userName = "Guest";
+          dbRef.child("default").set({
+            id: "default",
+            user: "Guest",
+            friends: [{ name: "Guest" }]
+          });
         }
-      );
-    });
+
+        this.setState({ user: userName }, () => {
+          dbRef.on("value", snapshot => {
+            this.checkIfUserExists(snapshot.val());
+          });
+        });
+      });
+    }
   };
 
   // Handling for text input of login
-  handleChangeLogin = e => {
-    this.setState({
-      currentTextValue: e.target.value
-    });
-  };
+  // handleChangeLogin = e => {
+  //   this.setState({
+  //     currentTextValue: e.target.value
+  //   });
+  // };
 
   // Handling for click of either sign in or create buttons
   handleClickLogin = e => {
@@ -440,6 +264,12 @@ class App extends Component {
                         </button>
                         <button className="right" value="create" onClick={this.handleClickLogin}>
                           CREATE
+                        </button>
+                        <button onClick={this.handleClickLogin} value="guest">
+                          CONTINUE AS GUEST
+                        </button>
+                        <button onClick={this.handleClickLogin} value="demo">
+                          DEMO
                         </button>
                       </div>
                     </form>

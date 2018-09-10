@@ -80,7 +80,6 @@ class OverviewPage extends Component {
   };
 
   render() {
-    // if (this.props.userProfile) {
     return (
       <main className="overview-page">
         <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
@@ -127,9 +126,6 @@ class OverviewPage extends Component {
         </div>
       </main>
     );
-    // } else {
-    //   return null;
-    // }
   }
 }
 
