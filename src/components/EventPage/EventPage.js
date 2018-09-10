@@ -10,7 +10,6 @@ class EventPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: props.userProfile,
       inputValue: "",
       confirmedNewName: ""
     };
@@ -48,21 +47,31 @@ class EventPage extends Component {
   // Handle form submit of new friend
   handleSubmitAddFriend = e => {
     e.preventDefault();
+    let doesFriendToAddExistYet = false;
 
-    let newFriendObj = {
-      name: this.state.confirmedNewName,
-      allowedAllergy: [],
-      allowedDiet: [],
-      excludedIngredient: [],
-      parties: [this.props.selectedEvent.title]
-    };
+    this.props.userProfile.friends.forEach(friend => {
+      if (friend.name === this.state.confirmedNewName) {
+        doesFriendToAddExistYet = true;
+        alert("Friend name already exists. Please add a new friend.");
+      }
+    });
 
-    // create temp array (clone of current firebase friend array) and add new object to it
-    let tempArr = this.props.userProfile.friends;
-    tempArr.push(newFriendObj);
+    if (doesFriendToAddExistYet === false) {
+      let newFriendObj = {
+        name: this.state.confirmedNewName,
+        allowedAllergy: [],
+        allowedDiet: [],
+        excludedIngredient: [],
+        parties: [this.props.selectedEvent.title]
+      };
 
-    // replace the firebase array with the newly updated array
-    this.dbRef.child("/friends").set(tempArr);
+      // create temp array (clone of current firebase friend array) and add new object to it
+      let tempArr = this.props.userProfile.friends;
+      tempArr.push(newFriendObj);
+
+      // replace the firebase array with the newly updated array
+      this.dbRef.child("/friends").set(tempArr);
+    }
   };
 
   // Handle click of new friend
@@ -78,36 +87,38 @@ class EventPage extends Component {
         <Header user={_.capitalize(this.props.userProfile.user)} handleLogout={this.props.handleLogout} />
 
         <div className="wrapper">
-          <Link onClick={this.props.handleBackToOverview} to="/Overview">
-            Back to Overview
+          <Link onClick={this.props.handleBackToOverview} to="/home">
+            Back to Main Page
           </Link>
 
           <h2>{this.props.selectedEvent.title}</h2>
 
           <div className="guestList">
             <ul className="guests">
-              {this.props.userProfile.friends.map((friend, i) => {
-                if (friend.parties && friend.parties.indexOf(this.props.selectedEvent.title) !== -1) {
-                  return (
-                    <li key={i} className="guest">
-                      {/* Edit the guests restrictions */}
-                      <p>{friend.name}</p>
+              {this.props.userProfile.friends
+                ? this.props.userProfile.friends.map((friend, i) => {
+                    if (friend.parties && friend.parties.indexOf(this.props.selectedEvent.title) !== -1) {
+                      return (
+                        <li key={i} className="guest">
+                          {/* Edit the guests restrictions */}
+                          <p>{friend.name}</p>
 
-                      {/* Fake button to make it clear you can click on the guest to edit them */}
-                      <div className="fakeButton">
-                        <h2 id={friend.name} onClick={this.props.selectFriend}>
-                          EDIT FRIEND
-                        </h2>
-                      </div>
+                          {/* Fake button to make it clear you can click on the guest to edit them */}
+                          <div className="fakeButton">
+                            <h2 id={friend.name} onClick={this.props.selectFriend}>
+                              EDIT FRIEND
+                            </h2>
+                          </div>
 
-                      {/* Removes guest from the event */}
-                      <button id={friend.name} onClick={this.removeFriendFromEvent}>
-                        Remove From Event
-                      </button>
-                    </li>
-                  );
-                }
-              })}
+                          {/* Removes guest from the event */}
+                          <button id={friend.name} onClick={this.removeFriendFromEvent}>
+                            Remove From Event
+                          </button>
+                        </li>
+                      );
+                    }
+                  })
+                : null}
             </ul>
             <Link to="existing-friend-list">Add Existing Guest</Link>
 
@@ -123,12 +134,6 @@ class EventPage extends Component {
         {/* End of Wrapper */}
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.dbRef.on("value", snapshot => {
-      this.setState({ userProfile: snapshot.val() });
-    });
   }
 }
 

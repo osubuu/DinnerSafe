@@ -8,12 +8,10 @@ class OverviewPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: props.userProfile,
       inputValue: "",
-      confirmedEventName: "",
-      userID: props.userID
+      confirmedEventName: ""
     };
-    this.dbRef = firebase.database().ref(`${this.state.userID}`);
+    this.dbRef = firebase.database().ref(`${this.props.userID}`);
   }
 
   // Handle input for new event name
@@ -41,11 +39,18 @@ class OverviewPage extends Component {
     };
 
     // create temp array (clone of current firebase parties array) and add new object to it
-    let tempArr = this.props.userProfile.parties;
-    tempArr.push(newEventObj);
+    let tempArr = this.props.userProfile;
+
+    // if no parties array, initialize one
+    if (!tempArr.parties) {
+      tempArr.parties = [];
+    }
+
+    // push new event object to array
+    tempArr.parties.push(newEventObj);
 
     // replace the firebase array with the newly updated array
-    this.dbRef.child("/parties").set(tempArr);
+    this.dbRef.set(tempArr);
 
     this.setState({
       inputValue: ""
@@ -79,7 +84,7 @@ class OverviewPage extends Component {
 
         <div className="wrapper">
           <div className="events">
-            <h2 className="page-title">Events</h2>
+            <h2 className="page-title">Home</h2>
 
             <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
               <label className="new-event-label" htmlFor="new-event">
@@ -120,12 +125,6 @@ class OverviewPage extends Component {
         </div>
       </main>
     );
-  }
-
-  componentDidMount() {
-    this.dbRef.on("value", snapshot => {
-      this.setState({ userProfile: snapshot.val() });
-    });
   }
 }
 
