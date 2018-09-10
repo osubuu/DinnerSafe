@@ -13,7 +13,7 @@ class DisplayMatchingRecipes extends Component {
     super();
     this.state = {
       listOfRecipes: [],
-      courses: {
+      courseCheckboxes: {
         mainDishes: 
           {
             include: true,
@@ -99,19 +99,20 @@ class DisplayMatchingRecipes extends Component {
         allowedCourse: [],
         q: "",
         set: false
-      }
+      },
+      courses: ["course^course-Cocktails"],
+      search: "melon"
     };
   }
 
-  setRestrictions = (userProfile, event, callback) => {
+  setRestrictions = (userProfile, event, courses, searchTerm, callback) => {
     // filters userProfile.friends array for friends with the event and pushes them to the friends array
     const friends = userProfile.friends.filter(friend => friend.parties && friend.parties.includes(event));
 
     const allergies = [];
     const diets = [];
     const ingredients = [];
-    const courses = [];
-    const searchTerms = "";
+    
 
     friends.forEach(friend => {
       if (friend.allowedAllergy) {
@@ -132,7 +133,7 @@ class DisplayMatchingRecipes extends Component {
           allowedDiet: diets,
           excludedIngredient: ingredients,
           allowedCourse: courses,
-          q: searchTerms,
+          q: searchTerm,
           set: true
         }
       },
@@ -142,24 +143,48 @@ class DisplayMatchingRecipes extends Component {
     );
   };
 
-  handleCheckChange = () => {
+
+  handleCheckChange = (e) => {
+  
+    const value = e.target.value;
+    const name = e.target.name;
+    let tempCourses = this.state.courseCheckboxes
+
+    tempCourses[name].include = value;
     
+    console.log('tempCourses', tempCourses);
+    
+    
+
+
+    // console.log(this.state.courses[name].include);
+    
+
+    // this.setState({
+    //   courses[{name}]:
+    //     {
+    //       include: value,
+    //     }
+    // });
+  }
+
+  handleChange = (e) => {
+
+    this.setState({
+      [e.target.id]: e.target.value
+    });
   }
 
   componentDidMount() {
-    if (this.props.userProfile) {
-      this.setRestrictions(this.props.userProfile, this.props.eventName, () => {
+    this.setRestrictions(this.props.userProfile, this.props.eventName, this.state.courses, this.state.search, () => {
+      
+      matchingRecipes(this.state.restrictions).then(res => {
 
-        matchingRecipes(this.state.restrictions).then(res => {
-
-          this.setState({
-            listOfRecipes: res.data.matches
-          });
+        this.setState({
+          listOfRecipes: res.data.matches
         });
       });
-    } else {
-      return null;
-    }
+    });
   }
 
   render() {
@@ -167,7 +192,13 @@ class DisplayMatchingRecipes extends Component {
       <div className="matching-recipes">
         <form className="filter-recipes-form" action="">
           <label htmlFor="search">Search</label>
-          <input type="text" id="search" placeholder="food, meal, or ingredient"/>
+          <input 
+            type="text" 
+            id="search" 
+            placeholder="ingredient" 
+            value={this.state.search}
+            onChange={this.handleChange}
+          />
 
           <h3 className="filter-by-course">Filter by Category</h3>
           <fieldset className="courses">
@@ -178,7 +209,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="mainDishes"  
                 type="checkbox"
-                checked={this.state.courses.mainDishes.include}
+                checked={this.state.courseCheckboxes.mainDishes.include}
                 onChange={this.handleCheckChange}
               />
               Main Dishes
@@ -188,7 +219,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="sideDishes"  
                 type="checkbox"
-                checked={this.state.courses.sideDishes.include}
+                checked={this.state.courseCheckboxes.sideDishes.include}
                 onChange={this.handleCheckChange}
               />
               Side Dishes
@@ -198,7 +229,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="appetizers"  
                 type="checkbox"
-                checked={this.state.courses.appetizers.include}
+                checked={this.state.courseCheckboxes.appetizers.include}
                 onChange={this.handleCheckChange}
               />
               Appetizers
@@ -208,7 +239,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="salads"  
                 type="checkbox"
-                checked={this.state.courses.salads.include}
+                checked={this.state.courseCheckboxes.salads.include}
                 onChange={this.handleCheckChange}
               />
               Salads
@@ -218,7 +249,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="desserts"  
                 type="checkbox"
-                checked={this.state.courses.desserts.include}
+                checked={this.state.courseCheckboxes.desserts.include}
                 onChange={this.handleCheckChange}
               />
               Desserts
@@ -228,7 +259,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="breakfastAndBrunch"  
                 type="checkbox"
-                checked={this.state.courses.breakfastAndBrunch.include}
+                checked={this.state.courseCheckboxes.breakfastAndBrunch.include}
                 onChange={this.handleCheckChange}
               />
               Breakfast & Brunch
@@ -238,7 +269,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="breads"  
                 type="checkbox"
-                checked={this.state.courses.breads.include}
+                checked={this.state.courseCheckboxes.breads.include}
                 onChange={this.handleCheckChange}
               />
               Breads
@@ -248,7 +279,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="soups"  
                 type="checkbox"
-                checked={this.state.courses.soups.include}
+                checked={this.state.courseCheckboxes.soups.include}
                 onChange={this.handleCheckChange}
               />
               Soups
@@ -258,7 +289,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="beverages"  
                 type="checkbox"
-                checked={this.state.courses.beverages.include}
+                checked={this.state.courseCheckboxes.beverages.include}
                 onChange={this.handleCheckChange}
               />
               Beverages
@@ -268,7 +299,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="condimentsAndSauces"  
                 type="checkbox"
-                checked={this.state.courses.condimentsAndSauces.include}
+                checked={this.state.courseCheckboxes.condimentsAndSauces.include}
                 onChange={this.handleCheckChange}
               />
               Condiments & Sauces
@@ -278,7 +309,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="cocktails"  
                 type="checkbox"
-                checked={this.state.courses.cocktails.include}
+                checked={this.state.courseCheckboxes.cocktails.include}
                 onChange={this.handleCheckChange}
               />
               Cocktails
@@ -288,7 +319,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="snacks"  
                 type="checkbox"
-                checked={this.state.courses.snacks.include}
+                checked={this.state.courseCheckboxes.snacks.include}
                 onChange={this.handleCheckChange}
               />
               Snacks
@@ -298,7 +329,7 @@ class DisplayMatchingRecipes extends Component {
               <input 
                 name="lunch"  
                 type="checkbox"
-                checked={this.state.courses.lunch.include}
+                checked={this.state.courseCheckboxes.lunch.include}
                 onChange={this.handleCheckChange}
               />
               Lunch
@@ -309,7 +340,7 @@ class DisplayMatchingRecipes extends Component {
 
           </fieldset>
 
-          <button onClick="this.setFilters">Filter Recipes</button>
+          <button onClick={this.handleSubmit}>Filter Recipes</button>
         </form>
         <ul>
           {this.state.listOfRecipes.map(recipe => {
