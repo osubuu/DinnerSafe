@@ -265,10 +265,10 @@ class App extends Component {
                         <button className="right" value="create" onClick={this.handleClickLogin}>
                           CREATE
                         </button>
-                        <button onClick={this.handleClickLogin} value="guest">
+                        <button className="guest" onClick={this.handleClickLogin} value="guest">
                           CONTINUE AS GUEST
                         </button>
-                        <button onClick={this.handleClickLogin} value="demo">
+                        <button className="demo" onClick={this.handleClickLogin} value="demo">
                           DEMO
                         </button>
                       </div>

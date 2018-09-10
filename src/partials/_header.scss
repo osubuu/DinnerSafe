@@ -41,4 +41,8 @@ header {
 .log-out {
   background: $red;
   color: $color-2;
+  & :hover {
+    background: $color-2;
+    color: $red;
+  }
 }
