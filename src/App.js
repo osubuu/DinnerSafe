@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import firebase from "./firebase";
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import _ from "lodash";
 import swal from "sweetalert2";
 
@@ -30,9 +30,50 @@ class App extends Component {
       currentTextValue: "",
       loginPurpose: "",
       key: "",
-      signInAndLogIn: false
+      signInAndLogIn: false,
+      savedRecipes: []
     };
   }
+
+  toggleRecipe = (recipeObj, action) => {
+    console.log(action);
+    let tempArr = this.state.savedRecipes;
+
+    // if user is saving the recipe
+    if (action === "save") {
+      // if recipe to be saved is already in saved recipes
+      if (_.findIndex(tempArr, ["id", recipeObj.id]) !== -1) {
+        swal({ type: "warning", title: "Recipe already saved!" });
+        return;
+      } else {
+        // add recipe to temporary recipes array
+        tempArr.push(recipeObj);
+
+        console.log(this.state.savedRecipes);
+
+        // create copy of current party object
+        let currentUserParty = this.state.userProfile.parties[this.state.selectedEventIndex];
+
+        // if there are no saved recipes yet, initialize one
+        if (!currentUserParty.savedRecipes) {
+          currentUserParty.savedRecipes = [];
+        }
+
+        currentUserParty.savedRecipes = tempArr;
+
+        // put new array of saved recipes to firebase
+        dbRef.child(`${this.state.key}/parties/${this.state.selectedEventIndex}`).set(currentUserParty);
+      }
+    }
+    // if user is removing the saved recipe
+    else {
+      tempArr.splice(_.findIndex(tempArr, ["id", recipeObj.id]), 1);
+      console.log(tempArr);
+      let currentUserParty = this.state.userProfile.parties[this.state.selectedEventIndex];
+      currentUserParty.savedRecipes = tempArr;
+      dbRef.child(`${this.state.key}/parties/${this.state.selectedEventIndex}`).set(currentUserParty);
+    }
+  };
 
   // Function for create button
   checkIfUserExists = snapshot => {
@@ -166,9 +207,18 @@ class App extends Component {
 
   // Set state for selecting an event (used in overview page)
   selectEvent = e => {
-    this.setState({
-      selectedEventIndex: Number(e.target.id)
-    });
+    this.setState(
+      {
+        selectedEventIndex: Number(e.target.id)
+      },
+      () => {
+        if (this.state.userProfile.parties[this.state.selectedEventIndex].savedRecipes) {
+          this.setState({
+            savedRecipes: this.state.userProfile.parties[this.state.selectedEventIndex].savedRecipes
+          });
+        }
+      }
+    );
   };
 
   // Function with props for the single event page
@@ -180,6 +230,8 @@ class App extends Component {
         handleBackToOverview={this.handleBackToOverview}
         selectFriend={this.selectFriend}
         handleLogout={this.handleLogout}
+        toggleRecipe={this.toggleRecipe}
+        savedRecipes={this.state.savedRecipes}
       />
     );
   };
@@ -271,7 +323,7 @@ class App extends Component {
           {/* REDIRECT FOR SINGLE EVENT PAGE ROUTE: wait for selected event index to be ready */}
           <Route
             exact
-            path="/"
+            path="/home"
             render={() => {
               return this.state.selectedEventIndex ? <Redirect to="/event" /> : null;
             }}

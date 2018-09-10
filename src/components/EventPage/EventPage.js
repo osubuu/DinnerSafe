@@ -6,6 +6,7 @@ import firebase from "../../firebase";
 import _ from "lodash";
 import Header from "../Header";
 import swal from "sweetalert2";
+import DisplaySavedRecipes from "../DisplayMatchingRecipes/DisplaySavedRecipes";
 
 class EventPage extends Component {
   constructor(props) {
@@ -155,7 +156,14 @@ class EventPage extends Component {
           </div>
 
           {this.checkCurrentEventForGuests() === true ? (
-            <DisplayMatchingRecipes userProfile={this.props.userProfile} eventName={this.props.selectedEvent.title} />
+            <div>
+              <DisplayMatchingRecipes
+                toggleRecipe={this.props.toggleRecipe}
+                userProfile={this.props.userProfile}
+                eventName={this.props.selectedEvent.title}
+              />
+              <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe} savedRecipes={this.props.savedRecipes} />
+            </div>
           ) : null}
         </div>
         {/* End of Wrapper */}

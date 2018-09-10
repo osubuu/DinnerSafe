@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import { Link } from "react-router-dom";
 import firebase from "firebase";
 import Header from "./Header";
