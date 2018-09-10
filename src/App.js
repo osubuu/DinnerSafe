@@ -225,10 +225,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      userProfile: {
-        user: "loggedOut",
-        id: "default"
-      },
+      // userProfile: {
+      //   user: "loggedOut",
+      //   id: "default"
+      // },
+      userProfile: null,
       selectedEventIndex: null,
       selectedFriend: null,
       loggedIn: false,
@@ -316,8 +317,8 @@ class App extends Component {
       //create user on firebase
       this.setState(
         {
-          user: this.state.currentTextValue.trim().toLowerCase()
-          // user: res.user.displayName
+          // user: this.state.currentTextValue.trim().toLowerCase()
+          user: res.user.displayName
         },
         () => {
           dbRef.on("value", snapshot => {
@@ -346,10 +347,11 @@ class App extends Component {
   handleLogout = e => {
     auth.signOut().then(res => {
       this.setState({
-        userProfile: {
-          user: "loggedOut",
-          id: "default"
-        },
+        // userProfile: {
+        //   user: "loggedOut",
+        //   id: "default"
+        // },
+        userProfile: null,
         selectedEventIndex: null,
         selectedFriend: null,
         loggedIn: false,
@@ -421,7 +423,7 @@ class App extends Component {
                     <h2 className="app-name-sub-header">Party guests with allergies and diet restictions?</h2>
                     <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
                     <form className="log-in-form clearfix" action="" onSubmit={this.handleSubmitLogin}>
-                      <label className="username" htmlFor="create-user">
+                      {/* <label className="username" htmlFor="create-user">
                         Username
                       </label>
 
@@ -430,7 +432,7 @@ class App extends Component {
                         onChange={this.handleChangeLogin}
                         id="create-user"
                         type="text"
-                      />
+                      /> */}
 
                       <div className="buttons clearfix">
                         <button className="left" value="sign-in" onClick={this.handleClickLogin}>
@@ -449,10 +451,9 @@ class App extends Component {
 
           {/* REDIRECT FOR OVERVIEW PAGE: wait for userProfile to be ready */}
           <Route
-            exact
             path="/"
             render={() => {
-              return this.state.userProfile.id !== "default" && this.state.loggedIn === true && this.state.key ? (
+              return this.state.userProfile && this.state.loggedIn === true && this.state.key ? (
                 <Redirect to="/home" />
               ) : null;
             }}

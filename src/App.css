@@ -235,6 +235,10 @@ body {
 a {
   text-decoration: none; }
 
+.section-header {
+  text-align: center;
+  padding: 20px 0; }
+
 .log-in-page {
   background: #3e3e3e;
   height: 100vh;
