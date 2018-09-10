@@ -15,6 +15,7 @@
   transform: translate(-50%, -50%);
   padding: 50px;
   border-radius: 10px;
+  margin-top: 10px;
 
   & .username {
     text-align: center;
@@ -45,7 +46,7 @@
     font-size: 2rem;
     border: none;
     border-radius: 5px;
-
+    margin: 8px 0;
   }
 
   & .buttons {
@@ -61,6 +62,13 @@
     }
 
     & .right {
+      float: right;
+    }
+    & .guest {
+      float: left;
+      font-size: 1.5rem;
+    }
+    & .demo {
       float: right;
     }
   }

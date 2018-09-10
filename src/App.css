@@ -228,7 +228,8 @@ p {
   position: absolute;
   transform: translate(-50%, -50%);
   padding: 50px;
-  border-radius: 10px; }
+  border-radius: 10px;
+  margin-top: 10px; }
   .log-in-form .username {
     text-align: center;
     float: left;
@@ -253,7 +254,8 @@ p {
     color: #f2f2f2;
     font-size: 2rem;
     border: none;
-    border-radius: 5px; }
+    border-radius: 5px;
+    margin: 8px 0; }
   .log-in-form .buttons {
     width: 75%;
     margin: 0 auto; }
@@ -263,6 +265,11 @@ p {
     .log-in-form .buttons .left {
       float: left; }
     .log-in-form .buttons .right {
+      float: right; }
+    .log-in-form .buttons .guest {
+      float: left;
+      font-size: 1.5rem; }
+    .log-in-form .buttons .demo {
       float: right; }
 
 .app-name {
@@ -314,32 +321,9 @@ header {
 .log-out {
   background: #f34843;
   color: #f2f2f2; }
-
-* {
-  margin: 0;
-  padding: 0; }
-
-img {
-  max-width: 100%; }
-
-.wrapper {
-  max-width: 1440px;
-  width: 90%;
-  margin: 0 auto; }
-
-ul {
-  list-style: none; }
-
-body {
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(./assets/heroBGweb.jpg) 50% 50% fixed;
-  background-size: 100% auto; }
-
-a {
-  text-decoration: none; }
-
-.section-header {
-  text-align: center;
-  padding: 20px 0; }
+  .log-out :hover {
+    background: #f2f2f2;
+    color: #f34843; }
 
 .page-title {
   text-align: center;
@@ -423,17 +407,125 @@ a {
   margin: 0;
   font-size: 2.5rem; }
 
+.event-page .event-title {
+  margin: 25px 0; }
+  .event-page .event-title h2 {
+    font-size: 5rem;
+    float: left;
+    width: 50%; }
+  .event-page .event-title a {
+    font-size: 2rem;
+    float: left;
+    width: 50%;
+    margin: 20px 0;
+    text-align: right; }
+
+.event-page .guestList {
+  float: left;
+  width: calc(20% - 20px);
+  margin: 25px 10px; }
+
+.event-page .guest p {
+  font-size: 2rem;
+  float: left;
+  width: 80%; }
+
+.event-page .fakeButton {
+  float: left;
+  width: 10%; }
+  .event-page .fakeButton h2 {
+    font-size: 1.1rem;
+    border: grey 1px solid;
+    border-radius: 5px;
+    padding: 1px;
+    margin: 4px 2px;
+    width: 100%; }
+
+.event-page .guest button {
+  float: left;
+  width: calc(10% - 4px);
+  margin: 4px 2px;
+  color: red;
+  border: none;
+  font-size: 1.5rem; }
+
+.event-page .matching-recipes {
+  float: left;
+  width: calc(80% - 20px);
+  margin: 25px 10px; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+img {
+  max-width: 100%; }
+
+.wrapper {
+  max-width: 1440px;
+  width: 90%;
+  margin: 0 auto; }
+
+ul {
+  list-style: none; }
+
+body {
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(./assets/heroBGweb.jpg) 50% 50% fixed;
+  background-size: 100% auto; }
+
+a {
+  text-decoration: none; }
+
+.section-header {
+  text-align: center;
+  padding: 20px 0; }
+
 @media (max-width: 727px) {
   .app-name {
     font-size: 11rem; }
   .app-name-sub-header {
-    font-size: 2.3rem; } }
+    font-size: 2.3rem; }
+  .inner-header .app-name {
+    float: none;
+    text-align: center;
+    font-size: 4rem; }
+  .inner-header .user {
+    float: none; }
+    .inner-header .user a {
+      text-align: center;
+      top: 60px;
+      right: 45%;
+      position: absolute; }
+  .inner-header .user h2 {
+    font-size: 2.5rem;
+    float: none;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 20px; } }
 
 @media (max-width: 615px) {
   .app-name {
     font-size: 10rem; }
   .app-name-sub-header {
-    font-size: 2rem; } }
+    font-size: 2rem; }
+  .section-header {
+    font-size: 2.8rem; }
+  .new-event-button {
+    padding: 10px;
+    font-size: 1.6rem;
+    float: none; }
+  .new-event-name-input {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px; }
+  .new-event-label {
+    font-size: 2rem;
+    text-align: center; }
+  .create-new-event {
+    margin: 0 auto;
+    width: 100%; }
+  li.event {
+    width: 100%; } }
 
 @media (max-width: 555px) {
   .app-name {
@@ -450,5 +542,22 @@ a {
     font-size: 6rem; }
   .log-in-form {
     width: 100%; }
-  .user a {
-    top: 45%; } }
+  .user {
+    float: none;
+    width: 100%;
+    height: 85px; }
+    .user h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      float: none;
+      padding: 0; }
+    .user a {
+      top: 20%;
+      left: 43%;
+      float: none;
+      position: relative; }
+  header .app-name {
+    float: none;
+    text-align: center;
+    font-size: 5rem;
+    padding: 15px 0 0 0; } }

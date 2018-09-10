@@ -107,14 +107,16 @@ class EventPage extends Component {
       <div className="event-page">
         <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
 
-        <div className="wrapper">
-          <Link onClick={this.props.handleBackToOverview} to="/home">
-            Back to Main Page
-          </Link>
+        <div className="wrapper clearfix">
+          <div className="event-title">
+            <h2>{this.props.selectedEvent.title}</h2>
+            <Link onClick={this.props.handleBackToOverview} to="/home">
+              Back to Main Page
+            </Link>
+          </div>
 
-          <h2>{this.props.selectedEvent.title}</h2>
 
-          <div className="guestList">
+          <div className="guestList clearfix">
             <ul className="guests">
               {this.props.userProfile.friends
                 ? this.props.userProfile.friends.map((friend, i) => {
@@ -126,14 +128,14 @@ class EventPage extends Component {
 
                           {/* Fake button to make it clear you can click on the guest to edit them */}
                           <div className="fakeButton">
-                            <h2 id={friend.name} onClick={this.props.selectFriend}>
-                              EDIT FRIEND
-                            </h2>
+                            {/* <h2 > */}
+                            <i id={friend.name} onClick={this.props.selectFriend}   class="fas fa-user-edit"></i>
+                            {/* </h2> */}
                           </div>
 
                           {/* Removes guest from the event */}
                           <button id={friend.name} onClick={this.removeFriendFromEvent}>
-                            Remove From Event
+                            <i class="fas fa-times-circle"></i>
                           </button>
                         </li>
                       );
