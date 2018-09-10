@@ -142,6 +142,10 @@ class DisplayMatchingRecipes extends Component {
     );
   };
 
+  handleCheckChange = () => {
+    
+  }
+
   componentDidMount() {
     if (this.props.userProfile) {
       this.setRestrictions(this.props.userProfile, this.props.eventName, () => {
