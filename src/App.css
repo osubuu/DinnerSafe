@@ -213,32 +213,6 @@ p {
   font-size: 1.6rem;
   font-family: "Muli", sans-serif; }
 
-* {
-  margin: 0;
-  padding: 0; }
-
-img {
-  max-width: 100%; }
-
-.wrapper {
-  max-width: 1440px;
-  width: 90%;
-  margin: 0 auto; }
-
-ul {
-  list-style: none; }
-
-body {
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(./assets/heroBGweb.jpg) 50% 50% fixed;
-  background-size: 100% auto; }
-
-a {
-  text-decoration: none; }
-
-.section-header {
-  text-align: center;
-  padding: 20px 0; }
-
 .log-in-page {
   background: #3e3e3e;
   height: 100vh;
@@ -248,10 +222,9 @@ a {
 
 .log-in-form {
   width: 80%;
-  background: #ffe4c9;
   max-width: 500px;
   left: 50%;
-  top: 55%;
+  top: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
   padding: 50px;
@@ -278,13 +251,15 @@ a {
     padding: 10px 0;
     background: #f34843;
     color: #f2f2f2;
-    font-size: 1.5rem;
+    font-size: 2rem;
     border: none;
     border-radius: 5px; }
   .log-in-form .buttons {
-    width: 50%;
-    margin: 0 auto;
-    padding-top: 23px; }
+    width: 75%;
+    margin: 0 auto; }
+    .log-in-form .buttons :hover {
+      background: #f2f2f2;
+      color: #f34843; }
     .log-in-form .buttons .left {
       float: left; }
     .log-in-form .buttons .right {
@@ -339,6 +314,32 @@ header {
 .log-out {
   background: #f34843;
   color: #f2f2f2; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+img {
+  max-width: 100%; }
+
+.wrapper {
+  max-width: 1440px;
+  width: 90%;
+  margin: 0 auto; }
+
+ul {
+  list-style: none; }
+
+body {
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(./assets/heroBGweb.jpg) 50% 50% fixed;
+  background-size: 100% auto; }
+
+a {
+  text-decoration: none; }
+
+.section-header {
+  text-align: center;
+  padding: 20px 0; }
 
 .page-title {
   text-align: center;
@@ -422,6 +423,32 @@ header {
   margin: 0;
   font-size: 2.5rem; }
 
-@media all and (max-width: 500px) {
-  h1 {
-    color: blue; } }
+@media (max-width: 727px) {
+  .app-name {
+    font-size: 11rem; }
+  .app-name-sub-header {
+    font-size: 2.3rem; } }
+
+@media (max-width: 615px) {
+  .app-name {
+    font-size: 10rem; }
+  .app-name-sub-header {
+    font-size: 2rem; } }
+
+@media (max-width: 555px) {
+  .app-name {
+    font-size: 8rem; } }
+
+@media (max-width: 450px) {
+  .app-name {
+    font-size: 7rem; }
+  .log-in-form .buttons {
+    width: 100%; } }
+
+@media (max-width: 385px) {
+  .app-name {
+    font-size: 6rem; }
+  .log-in-form {
+    width: 100%; }
+  .user a {
+    top: 45%; } }

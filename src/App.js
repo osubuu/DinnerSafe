@@ -285,7 +285,7 @@ class App extends Component {
       // If this conditional is true, then the userInput does not exist yet and will be added to firebase
       if (counter === currentInfoFromFirebase.length) {
         let user = this.state.user;
-        let friends = [{ name: _.capitalize(this.state.user) }];
+        let friends = [{ name: this.state.user }];
         let parties = [];
 
         // if user clicked create button, create new user on firebase
@@ -420,7 +420,7 @@ class App extends Component {
                 <section className="log-in-page">
                   <div className="wrapper">
                     <h1 className="app-name">DinnerSafe</h1>
-                    <h2 className="app-name-sub-header">Party guests with allergies and diet restictions?</h2>
+                    <h2 className="app-name-sub-header">Party guests with allergies and diet restrictions?</h2>
                     <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
                     <form className="log-in-form clearfix" action="" onSubmit={this.handleSubmitLogin}>
                       {/* <label className="username" htmlFor="create-user">
