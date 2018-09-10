@@ -27,8 +27,8 @@ const matchingRecipes = object => {
       allowedDiet: object.allowedDiet,
       excludedIngredient: object.excludedIngredient,
 
-      allowedCourse: courses,
-      q: searchTerms
+      allowedCourse: object.allowedCourse,
+      q: object.q
     }
   });
 };
@@ -171,6 +171,7 @@ export const allergy = [
 
 const course = [
   {
+    // DONE,
     id: "course-Main Dishes",
     name: "Main Dishes",
     type: "course",
@@ -179,6 +180,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE
     id: "course-Desserts",
     name: "Desserts",
     type: "course",
@@ -187,6 +189,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE,
     id: "course-Side Dishes",
     name: "Side Dishes",
     type: "course",
@@ -195,6 +198,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE,
     id: "course-Appetizers",
     name: "Appetizers",
     type: "course",
@@ -203,6 +207,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE
     id: "course-Salads",
     name: "Salads",
     type: "course",
@@ -211,6 +216,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE
     id: "course-Breakfast and Brunch",
     name: "Breakfast and Brunch",
     type: "course",
@@ -219,6 +225,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE
     id: "course-Breads",
     name: "Breads",
     type: "course",
@@ -227,6 +234,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE
     id: "course-Soups",
     name: "Soups",
     type: "course",
@@ -235,6 +243,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE
     id: "course-Beverages",
     name: "Beverages",
     type: "course",
@@ -243,6 +252,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE
     id: "course-Condiments and Sauces",
     name: "Condiments and Sauces",
     type: "course",
@@ -251,6 +261,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE
     id: "course-Cocktails",
     name: "Cocktails",
     type: "course",
@@ -259,6 +270,7 @@ const course = [
     localesAvailableIn: ["en-US"]
   },
   {
+    // DONE
     id: "course-Snacks",
     name: "Snacks",
     type: "course",
