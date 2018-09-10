@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import firebase from "../../firebase";
 import _ from "lodash";
 import Header from "../Header";
+import swal from "sweetalert2";
 
 class EventPage extends Component {
   constructor(props) {
@@ -37,6 +38,18 @@ class EventPage extends Component {
     });
   };
 
+  // Function to check if current event has any guests already
+  checkCurrentEventForGuests = () => {
+    let condition = false;
+
+    this.props.userProfile.friends.forEach(friend => {
+      if (friend.parties && friend.parties.indexOf(this.props.selectedEvent.title) !== -1) {
+        condition = true;
+      }
+    });
+    return condition;
+  };
+
   // Handle input value for new friend to add
   handleChangeAddFriend = e => {
     this.setState({
@@ -47,18 +60,25 @@ class EventPage extends Component {
   // Handle form submit of new friend
   handleSubmitAddFriend = e => {
     e.preventDefault();
+    this.setState({
+      inputValue: ""
+    });
     let doesFriendToAddExistYet = false;
 
     this.props.userProfile.friends.forEach(friend => {
       if (friend.name === this.state.confirmedNewName) {
         doesFriendToAddExistYet = true;
-        alert("Friend name already exists. Please add a new friend.");
+        swal({
+          type: "warning",
+          title: "That friend already exists!",
+          text: `Please add a new friend."`
+        });
       }
     });
 
     if (doesFriendToAddExistYet === false) {
       let newFriendObj = {
-        name: _.capitalize(this.state.confirmedNewName),
+        name: this.state.confirmedNewName,
         allowedAllergy: [],
         allowedDiet: [],
         excludedIngredient: [],
@@ -124,12 +144,19 @@ class EventPage extends Component {
 
             <form onSubmit={this.handleSubmitAddFriend} action="">
               <label htmlFor="add-new-friend">Add New Guest</label>
-              <input id={"add-new-friend"} onChange={this.handleChangeAddFriend} type="text" />
+              <input
+                id={"add-new-friend"}
+                value={this.state.inputValue}
+                onChange={this.handleChangeAddFriend}
+                type="text"
+              />
               <button onClick={this.handleClickAddFriend}>ADD</button>
             </form>
           </div>
 
-          <DisplayMatchingRecipes userProfile={this.props.userProfile} eventName={this.props.selectedEvent.title} />
+          {this.checkCurrentEventForGuests() === true ? (
+            <DisplayMatchingRecipes userProfile={this.props.userProfile} eventName={this.props.selectedEvent.title} />
+          ) : null}
         </div>
         {/* End of Wrapper */}
       </div>
