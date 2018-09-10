@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import firebase from "firebase";
 import _ from "lodash";
+import swal from "sweetalert2";
 
 class ExistingFriendList extends Component {
   constructor(props) {
@@ -23,6 +24,32 @@ class ExistingFriendList extends Component {
   saveCurrentFriendIndex = e => {
     this.setState({
       key: e.target.id
+    });
+  };
+
+  // Function to delete friend permanently
+  deleteFriend = friendName => {
+    swal({
+      type: "warning",
+      title: "Are you sure?",
+      text: "This will remove your friend permanently from all your events and from your existing friend list. ",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
+        swal("Removed!", "Your friend has been removed.", "success");
+        let tempArr = this.props.userProfile.friends;
+        console.log(tempArr);
+
+        let indexPosition = _.findIndex(this.props.userProfile.friends, ["name", friendName]);
+
+        tempArr.splice(indexPosition, 1);
+        console.log(tempArr);
+
+        this.dbRef.set(tempArr);
+      }
     });
   };
 
@@ -62,6 +89,9 @@ class ExistingFriendList extends Component {
                 <div key={i} className="single-friend">
                   <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" defaultChecked />
                   <label htmlFor={i}>{friend.name}</label>
+                  <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
+                    DELETE FRIEND FROM EXISTING FRIENDS
+                  </button>
                 </div>
               );
             } else {
@@ -69,6 +99,9 @@ class ExistingFriendList extends Component {
                 <div key={i} className="single-friend">
                   <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" />
                   <label htmlFor={i}>{friend.name}</label>
+                  <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
+                    DELETE FRIEND FROM EXISTING FRIENDS
+                  </button>
                 </div>
               );
             }

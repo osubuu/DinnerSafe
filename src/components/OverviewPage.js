@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import { Link } from "react-router-dom";
 import firebase from "firebase";
 import Header from "./Header";
+import swal from "sweetalert2";
 
 class OverviewPage extends Component {
   constructor(props) {
@@ -61,22 +61,35 @@ class OverviewPage extends Component {
 
   // Function to delete a party from parties list AND individual friends' parties array
   deleteEvent = (key, eventName) => {
-    // remove event from parties array
-    let tempPartiesArr = this.props.userProfile.parties;
-    tempPartiesArr.splice(key, 1);
-    this.dbRef.child("/parties").set(tempPartiesArr);
+    swal({
+      type: "warning",
+      title: "Are you sure?",
+      text: "This will remove your event permanently.",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!"
+    }).then(result => {
+      if (result.value) {
+        swal("Removed!", "Your event has been removed.", "success");
+        // remove event from parties array
+        let tempPartiesArr = this.props.userProfile.parties;
+        tempPartiesArr.splice(key, 1);
+        this.dbRef.child("/parties").set(tempPartiesArr);
 
-    // remove event from friends
-    let tempFriendsArr = this.props.userProfile.friends;
+        // remove event from friends
+        let tempFriendsArr = this.props.userProfile.friends;
 
-    // go through all the friends and check if party is in their parties array
-    tempFriendsArr.forEach(friend => {
-      if (friend.parties && friend.parties.indexOf(eventName) !== -1) {
-        friend.parties.splice(friend.parties.indexOf(eventName), 1);
+        // go through all the friends and check if party is in their parties array
+        tempFriendsArr.forEach(friend => {
+          if (friend.parties && friend.parties.indexOf(eventName) !== -1) {
+            friend.parties.splice(friend.parties.indexOf(eventName), 1);
+          }
+        });
+
+        this.dbRef.child("/friends").set(tempFriendsArr);
       }
     });
-
-    this.dbRef.child("/friends").set(tempFriendsArr);
   };
 
   render() {

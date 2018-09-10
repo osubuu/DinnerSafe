@@ -202,102 +202,92 @@ class DisplayMatchingRecipes extends Component {
 
           <h3 className="filter-by-course">Filter by Category</h3>
           <fieldset className="courses">
-            
             {/* MAINS */}
             {/* MAINS is the only category checked by default */}
             <label>
-              <input 
-                name="mainDishes"  
+              <input
+                name="mainDishes"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.mainDishes.include}
                 onChange={this.handleCheckChange}
               />
               Main Dishes
             </label>
-
             <label>
-              <input 
-                name="sideDishes"  
+              <input
+                name="sideDishes"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.sideDishes.include}
                 onChange={this.handleCheckChange}
               />
               Side Dishes
             </label>
-
             <label>
-              <input 
-                name="appetizers"  
+              <input
+                name="appetizers"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.appetizers.include}
                 onChange={this.handleCheckChange}
               />
               Appetizers
             </label>
-
             <label>
-              <input 
-                name="salads"  
+              <input
+                name="salads"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.salads.include}
                 onChange={this.handleCheckChange}
               />
               Salads
             </label>
-
             <label>
-              <input 
-                name="desserts"  
+              <input
+                name="desserts"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.desserts.include}
                 onChange={this.handleCheckChange}
               />
               Desserts
             </label>
-
             <label>
-              <input 
-                name="breakfastAndBrunch"  
+              <input
+                name="breakfastAndBrunch"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.breakfastAndBrunch.include}
                 onChange={this.handleCheckChange}
               />
               Breakfast & Brunch
             </label>
-
             <label>
-              <input 
-                name="breads"  
+              <input
+                name="breads"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.breads.include}
                 onChange={this.handleCheckChange}
               />
               Breads
             </label>
-
             <label>
-              <input 
-                name="soups"  
+              <input
+                name="soups"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.soups.include}
                 onChange={this.handleCheckChange}
               />
               Soups
             </label>
-
             <label>
-              <input 
-                name="beverages"  
+              <input
+                name="beverages"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.beverages.include}
                 onChange={this.handleCheckChange}
               />
               Beverages
             </label>
-
             <label>
-              <input 
-                name="condimentsAndSauces"  
+              <input
+                name="condimentsAndSauces"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.condimentsAndSauces.include}
                 onChange={this.handleCheckChange}
@@ -306,45 +296,47 @@ class DisplayMatchingRecipes extends Component {
             </label>
             s
             <label>
-              <input 
-                name="cocktails"  
+              <input
+                name="cocktails"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.cocktails.include}
                 onChange={this.handleCheckChange}
               />
               Cocktails
             </label>
-
             <label>
-              <input 
-                name="snacks"  
+              <input
+                name="snacks"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.snacks.include}
                 onChange={this.handleCheckChange}
               />
               Snacks
             </label>
-
             <label>
-              <input 
-                name="lunch"  
+              <input
+                name="lunch"
                 type="checkbox"
                 checked={this.state.courseCheckboxes.lunch.include}
                 onChange={this.handleCheckChange}
               />
               Lunch
             </label>
-
-
-
-
           </fieldset>
 
           <button onClick={this.handleSubmit}>Filter Recipes</button>
         </form>
         <ul>
           {this.state.listOfRecipes.map(recipe => {
-            return <DisplaySingleRecipe key={recipe.id} recipe={recipe} />;
+            return (
+              <DisplaySingleRecipe
+                toggleRecipe={this.props.toggleRecipe}
+                action={"save"}
+                buttonTag={"+"}
+                key={recipe.id}
+                recipe={recipe}
+              />
+            );
           })}
         </ul>
       </div>

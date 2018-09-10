@@ -1,0 +1,94 @@
+// Overview Page
+
+.page-title {
+  text-align: center;
+  margin: 50px 0 25px 0;
+}
+
+.create-new-event {
+  background: $yellow;
+  padding: 10px;
+  border-radius: 5px;
+  color: $color-1;
+}
+
+.new-event-label {
+  width: 100%;
+  float: left;
+  font-size: 1.5rem;
+  text-align: left;
+  padding-bottom: 5px;
+  font-family: $primary-font;
+  font-weight: bold;
+}
+
+.new-event-name-input,
+.new-event-button {
+  border: none;
+  float: left;
+}
+
+.new-event-name-input {
+  padding: 10px;
+  width: calc(100% - 114px);
+}
+
+.new-event-button {
+  float: left;
+  margin-left: 10px;
+  border-radius: 5px;
+  background: rgb(17, 120, 66);
+  color: $color-2;
+  padding: 10px 20px;
+}
+
+.go-to-event,
+.create-new-event {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.go-to-event {
+  width: calc(100% - 55px);
+  float: left;
+  background: rgb(80, 80, 80);
+  color: white;
+  font-family: $secondary-font;
+}
+
+.create-new-event,
+.event {
+  max-width: 500px;
+  width: 80%;
+  display: block;
+  text-align: center;
+  font-size: 2rem;
+  margin: 0 auto 15px auto;
+  position: relative;
+}
+
+.delete-button {
+  background: $red;
+  height: 45px;
+  width: 45px;
+  float: left;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-weight: bold;
+  position: absolute;
+  margin-left: 10px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fa-times {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  margin: 0;
+  font-size: 2.5rem;
+}
