@@ -9,7 +9,6 @@ class ExistingFriendList extends Component {
     this.state = {
       inputValue: "",
       selectedEvent: props.userProfile.parties[props.selectedEventIndex].title,
-      userProfileFriends: props.userProfile.friends,
       key: null
     };
     this.dbRef = firebase.database().ref(`${this.props.userProfile.id}/friends`);
@@ -29,8 +28,8 @@ class ExistingFriendList extends Component {
 
   // Function for toggling friend directly into firebase
   toggleFriend = e => {
-    let tempArr = this.state.userProfileFriends;
-    let friendIndex = _.findIndex(this.state.userProfileFriends, ["name", e.target.value]);
+    let tempArr = this.props.userProfile.friends;
+    let friendIndex = _.findIndex(this.props.userProfile.friends, ["name", e.target.value]);
 
     // create copy of current friend profile
     let friendProfile = tempArr[friendIndex];
@@ -57,7 +56,7 @@ class ExistingFriendList extends Component {
       <section className="manage-friends">
         <h1>FRIENDS</h1>
         <form action="" onSubmit={this.handleSubmit}>
-          {this.state.userProfileFriends.map((friend, i) => {
+          {this.props.userProfile.friends.map((friend, i) => {
             if (friend.parties && friend.parties.indexOf(this.state.selectedEvent) !== -1) {
               return (
                 <div key={i} className="single-friend">
@@ -79,14 +78,6 @@ class ExistingFriendList extends Component {
         <Link to="/event">Back to Event</Link>
       </section>
     );
-  }
-
-  componentDidMount() {
-    if (this.state.userProfileFriends) {
-      this.dbRef.on("value", snapshot => {
-        this.setState({ userProfileFriends: snapshot.val() });
-      });
-    }
   }
 }
 
