@@ -81,21 +81,22 @@ class OverviewPage extends Component {
     return (
       <main className="overview-page">
         <Header user={_.capitalize(this.props.userProfile.user)} handleLogout={this.props.handleLogout} />
+        
+        <h2 className="page-title nav-home">Home</h2>
 
         <div className="wrapper">
           <div className="events">
-            <h2 className="page-title">Home</h2>
 
+            <h3 className="section-header">Create Event</h3>
             <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
               <label className="new-event-label" htmlFor="new-event">
-                Add New Event
+                Event Name
               </label>
               <input
                 className="new-event-name-input"
                 onChange={this.handleChangeAddEvent}
                 id="new-event"
                 type="text"
-                placeholder="Event Name"
                 value={this.state.inputValue}
               />
               <button className="new-event-button" onClick={this.handleClickAddEvent}>
@@ -103,6 +104,7 @@ class OverviewPage extends Component {
               </button>
             </form>
 
+            <h3 className="section-header">Event List</h3>
             <ul>
               {/* Go through parties object and list all the parties and their recipes */}
               {this.props.userProfile.parties
