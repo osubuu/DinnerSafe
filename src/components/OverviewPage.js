@@ -80,7 +80,7 @@ class OverviewPage extends Component {
   render() {
     return (
       <main className="overview-page">
-        <Header user={_.capitalize(this.props.userProfile.user)} handleLogout={this.props.handleLogout} />
+        <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
 
         <div className="wrapper">
           <div className="events">
