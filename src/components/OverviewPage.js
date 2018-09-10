@@ -32,29 +32,31 @@ class OverviewPage extends Component {
   handleSubmitAddEvent = e => {
     e.preventDefault();
 
-    // create new event object, because the firebase parties array holds objects of each event
-    let newEventObj = {
-      title: this.state.confirmedEventName,
-      recipes: []
-    };
+    if (this.state.confirmedEventName) {
+      let newEventObj = {
+        title: this.state.confirmedEventName,
+        recipes: []
+      };
 
-    // create temp array (clone of current firebase parties array) and add new object to it
-    let tempArr = this.props.userProfile;
+      // create temp array (clone of current firebase parties array) and add new object to it
+      let tempArr = this.props.userProfile;
 
-    // if no parties array, initialize one
-    if (!tempArr.parties) {
-      tempArr.parties = [];
+      // if no parties array, initialize one
+      if (!tempArr.parties) {
+        tempArr.parties = [];
+      }
+
+      // push new event object to array
+      tempArr.parties.push(newEventObj);
+
+      // replace the firebase array with the newly updated array
+      this.dbRef.set(tempArr);
+
+      this.setState({
+        inputValue: ""
+      });
     }
-
-    // push new event object to array
-    tempArr.parties.push(newEventObj);
-
-    // replace the firebase array with the newly updated array
-    this.dbRef.set(tempArr);
-
-    this.setState({
-      inputValue: ""
-    });
+    // create new event object, because the firebase parties array holds objects of each event
   };
 
   // Function to delete a party from parties list AND individual friends' parties array
@@ -78,15 +80,13 @@ class OverviewPage extends Component {
   };
 
   render() {
+    // if (this.props.userProfile) {
     return (
       <main className="overview-page">
-        <Header user={_.capitalize(this.props.userProfile.user)} handleLogout={this.props.handleLogout} />
-        
-        <h2 className="page-title nav-home">Home</h2>
+        <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
 
         <div className="wrapper">
           <div className="events">
-
             <h3 className="section-header">Create Event</h3>
             <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
               <label className="new-event-label" htmlFor="new-event">
@@ -127,6 +127,9 @@ class OverviewPage extends Component {
         </div>
       </main>
     );
+    // } else {
+    //   return null;
+    // }
   }
 }
 

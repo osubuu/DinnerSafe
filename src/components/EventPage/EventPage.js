@@ -58,7 +58,7 @@ class EventPage extends Component {
 
     if (doesFriendToAddExistYet === false) {
       let newFriendObj = {
-        name: this.state.confirmedNewName,
+        name: _.capitalize(this.state.confirmedNewName),
         allowedAllergy: [],
         allowedDiet: [],
         excludedIngredient: [],
@@ -84,7 +84,7 @@ class EventPage extends Component {
   render() {
     return (
       <div className="event-page">
-        <Header user={_.capitalize(this.props.userProfile.user)} handleLogout={this.props.handleLogout} />
+        <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
 
         <div className="wrapper">
           <Link onClick={this.props.handleBackToOverview} to="/home">
