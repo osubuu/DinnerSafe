@@ -508,11 +508,30 @@ header {
 .event-page .courses {
   width: 100%;
   border: none; }
+  .event-page .courses label {
+    display: inline-block;
+    font-size: 1.5rem;
+    width: calc(100% / 4); }
 
-.event-page .courses label {
+.event-page input.course-checkbox {
   display: inline-block;
-  width: calc(100% / 4);
-  font-size: 1.5rem; }
+  font-size: 1.5rem;
+  visibility: hidden;
+  width: 0; }
+
+.recipe-return {
+  overflow: scroll;
+  float: left;
+  width: calc(75% - 10px);
+  margin: 0 5px; }
+
+.recipe-each {
+  float: left;
+  width: 50%; }
+
+.saved-recipes {
+  float: left;
+  width: 25%; }
 
 * {
   margin: 0;

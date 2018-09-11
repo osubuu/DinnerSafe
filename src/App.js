@@ -30,13 +30,11 @@ class App extends Component {
       currentTextValue: "",
       loginPurpose: "",
       key: "",
-      signInAndLogIn: false,
       savedRecipes: []
     };
   }
 
   toggleRecipe = (recipeObj, action) => {
-    console.log(action);
     let tempArr = this.state.savedRecipes;
 
     // if user is saving the recipe
@@ -48,8 +46,6 @@ class App extends Component {
       } else {
         // add recipe to temporary recipes array
         tempArr.push(recipeObj);
-
-        console.log(this.state.savedRecipes);
 
         // create copy of current party object
         let currentUserParty = this.state.userProfile.parties[this.state.selectedEventIndex];
@@ -65,19 +61,23 @@ class App extends Component {
         dbRef.child(`${this.state.key}/parties/${this.state.selectedEventIndex}`).set(currentUserParty);
       }
     }
-    // if user is removing the saved recipe
+    // if user wishes to remove the saved recipe
     else {
+      // remove recipe from array
       tempArr.splice(_.findIndex(tempArr, ["id", recipeObj.id]), 1);
-      console.log(tempArr);
+
+      // create copy of current party object and update it
       let currentUserParty = this.state.userProfile.parties[this.state.selectedEventIndex];
       currentUserParty.savedRecipes = tempArr;
+
+      // send updated copy to firebase
       dbRef.child(`${this.state.key}/parties/${this.state.selectedEventIndex}`).set(currentUserParty);
     }
   };
 
   // Function for create button
   checkIfUserExists = snapshot => {
-    // if userInput is blank, leave the function
+    // error handling (if there is no user state)
     if (!this.state.user) {
       return;
     }
@@ -86,60 +86,34 @@ class App extends Component {
     let currentInfoFromFirebase = Object.values(snapshot);
 
     currentInfoFromFirebase.map(userObject => {
-      // If the user input is found within the current firebase and the user clicked "CREATE", reset user state to "" so nothing displays
-      if (this.state.loginPurpose === "create" && userObject.user === this.state.user) {
-        this.setState({
-          user: ""
-        });
-        swal({
-          type: "warning",
-          title: "User name already exists!",
-          text: `Please create another user name."`
-        });
-        return;
-      }
-
-      // when person is found
-      if (
-        (this.state.loginPurpose === "sign-in" ||
-          this.state.loginPurpose === "guest" ||
-          this.state.loginPurpose === "demo") &&
-        userObject.user === this.state.user
-      ) {
+      // when the current person is found
+      if (userObject.user === this.state.user) {
         this.setState({
           userProfile: userObject,
           loggedIn: true,
           key: userObject.id
         });
         return;
-      }
-
-      // If the user input is not found within the current firebase object, increment the counter by 1
-      if (userObject.user !== this.state.user) {
+      } else {
+        // If the user input is not found within the current firebase object, increment the counter by 1
         counter++;
-      }
 
-      // If this conditional is true, then the userInput does not exist yet and will be added to firebase
-      if (counter === currentInfoFromFirebase.length) {
-        let user = this.state.user;
-        let friends = [{ name: this.state.user }];
-        let parties = [];
+        // If this conditional is true, then the user does not exist yet and will be created and added to firebase
+        if (this.state.loginPurpose !== "create" && counter === currentInfoFromFirebase.length) {
+          let user = this.state.user;
+          let friends = [{ name: this.state.user }];
+          let parties = [];
 
-        // if user clicked create button, create new user on firebase
-        if (this.state.loginPurpose === "create") {
-          console.log("creating new users");
-          this.setState({ loginPurpose: "sign-in", signInAndLogIn: true }, () => {
-            let id = dbRef.push(this.state.user).key;
-            dbRef.child(id).set({ user, friends, parties, id });
-            return;
-          });
-        } else if (this.state.signInAndLogIn === false) {
-          swal({
-            type: "warning",
-            title: "User name not recognized!",
-            text: `Please sign in with a correct user name."`
-          });
-          this.setState({ user: "" });
+          this.setState(
+            {
+              loginPurpose: "create"
+            },
+            () => {
+              // push new account to firebase
+              let id = dbRef.push(this.state.user).key;
+              dbRef.child(id).set({ user, friends, parties, id });
+            }
+          );
         }
       }
     });
@@ -149,20 +123,23 @@ class App extends Component {
   handleSubmitLogin = e => {
     e.preventDefault();
 
-    if (this.state.loginPurpose === "sign-in" || this.state.loginPurpose === "create") {
+    // if user is logging in with GMAIL
+    if (this.state.loginPurpose === "sign-in") {
       auth.signInWithPopup(provider).then(res => {
-        //create user on firebase
+        //set user state to gmail display name
         this.setState({ user: res.user.displayName }, () => {
           dbRef.on("value", snapshot => {
             this.checkIfUserExists(snapshot.val());
           });
         });
       });
-    } else {
+    }
+    // if user is signing in as guest or demo
+    else {
       auth.signInAnonymously().then(res => {
         let userName = "Demo";
 
-        // if guest account, reset guest account
+        // if guest account, reset guest account everytime
         if (this.state.loginPurpose === "guest") {
           userName = "Guest";
           dbRef.child("default").set({
@@ -222,19 +199,19 @@ class App extends Component {
   };
 
   // Function with props for the single event page
-  singleEvent = () => {
-    return (
-      <EventPage
-        userProfile={this.state.userProfile}
-        selectedEvent={this.state.userProfile.parties[this.state.selectedEventIndex]}
-        handleBackToOverview={this.handleBackToOverview}
-        selectFriend={this.selectFriend}
-        handleLogout={this.handleLogout}
-        toggleRecipe={this.toggleRecipe}
-        savedRecipes={this.state.savedRecipes}
-      />
-    );
-  };
+  // singleEvent = () => {
+  //   return (
+  //     <EventPage
+  //       userProfile={this.state.userProfile}
+  //       selectedEvent={this.state.userProfile.parties[this.state.selectedEventIndex]}
+  //       handleBackToOverview={this.handleBackToOverview}
+  //       selectFriend={this.selectFriend}
+  //       handleLogout={this.handleLogout}
+  //       toggleRecipe={this.toggleRecipe}
+  //       savedRecipes={this.state.savedRecipes}
+  //     />
+  //   );
+  // };
 
   // Handler for going back to the main page from the single event page
   handleBackToOverview = e => {
@@ -257,10 +234,29 @@ class App extends Component {
     });
   };
 
+  getFriendProfile = () => {
+    if (this.state.userProfile) {
+      return this.state.userProfile.friends[
+        _.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])
+      ];
+    } else {
+      return null;
+    }
+  };
+
+  getFriendKey = () => {
+    if (this.state.userProfile) {
+      return _.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend]);
+    } else {
+      return null;
+    }
+  };
+
   render() {
     return (
       <Router>
         <div className="App">
+          <Redirect from="*" to="/" />
           {/* Current router setup is possibly just a placeholder.
           /// Making sure it's not visible when hitting other pages of the site.
           /// decide if we should make the login page into a component?   */}
@@ -277,10 +273,7 @@ class App extends Component {
                     <form className="log-in-form clearfix" action="" onSubmit={this.handleSubmitLogin}>
                       <div className="buttons clearfix">
                         <button className="left" value="sign-in" onClick={this.handleClickLogin}>
-                          SIGN IN
-                        </button>
-                        <button className="right" value="create" onClick={this.handleClickLogin}>
-                          CREATE
+                          SIGN IN / CREATE ACCOUNT WITH GMAIL
                         </button>
                         <button className="guest" onClick={this.handleClickLogin} value="guest">
                           CONTINUE AS GUEST
@@ -322,7 +315,7 @@ class App extends Component {
 
           {/* REDIRECT FOR SINGLE EVENT PAGE ROUTE: wait for selected event index to be ready */}
           <Route
-            exact
+            // exact
             path="/home"
             render={() => {
               return this.state.selectedEventIndex ? <Redirect to="/event" /> : null;
@@ -330,7 +323,23 @@ class App extends Component {
           />
 
           {/* SINGLE EVENT PAGE ROUTE */}
-          <Route path="/event" render={this.singleEvent} />
+          {/* <Route path="/event" render={this.singleEvent} /> */}
+          <Route
+            path="/event"
+            render={props => (
+              <EventPage
+                {...props}
+                userProfile={this.state.userProfile}
+                // selectedEvent={this.state.userProfile.parties[this.state.selectedEventIndex]}
+                selectedEventIndex={this.state.selectedEventIndex}
+                handleBackToOverview={this.handleBackToOverview}
+                selectFriend={this.selectFriend}
+                handleLogout={this.handleLogout}
+                toggleRecipe={this.toggleRecipe}
+                savedRecipes={this.state.savedRecipes}
+              />
+            )}
+          />
 
           {/* REDIRECT FOR EDIT FRIEND ROUTE: wait for selected friend state to be ready*/}
           <Route
@@ -346,13 +355,15 @@ class App extends Component {
             render={props => (
               <EditFriend
                 {...props}
-                friendProfile={
-                  this.state.userProfile.friends[
-                    _.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])
-                  ]
-                }
-                friendKey={_.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])}
-                userID={this.state.userProfile.id}
+                // friendProfile={
+                //   this.state.userProfile.friends[
+                //     _.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])
+                //   ]
+                // }
+                friendProfile={this.getFriendProfile()}
+                // friendKey={_.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])}
+                friendKey={this.getFriendKey()}
+                userID={this.state.key}
                 handleBackToEvent={this.handleBackToEvent}
               />
             )}

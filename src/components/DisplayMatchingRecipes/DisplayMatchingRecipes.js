@@ -7,91 +7,29 @@ import matchingRecipes from "../matchingRecipes";
 
 // COMPONENTS
 import DisplaySingleRecipe from "./DisplaySingleRecipe";
+import DisplaySavedRecipes from "./DisplaySavedRecipes";
 
 class DisplayMatchingRecipes extends Component {
   constructor() {
     super();
     this.state = {
+      courses: ["course^course-Main Dishes"],
+      mains: true,
+      desserts: false,
+      sideDishes: false,
+      appetizers: false,
+      salads: false,
+      breakfastAndBrunch: false,
+      breads: false,
+      soups: false,
+      beverages: false,
+      condimentsAndSauces: false,
+      cocktails: false,
+      snacks: false,
+      lunch: false,
+      search: "",
+      // placeholder: "ingredient",
       listOfRecipes: [],
-      courseCheckboxes: {
-        mainDishes: 
-          {
-            include: true,
-            value: "course^course-Main Dishes"
-          }
-        ,
-        sideDishes: 
-          {
-            include: false,
-            value: "course^course-Side Dishes"
-          }
-        ,
-        appetizers: 
-          {
-            include: false,
-            value: "course^course-Appetizers"
-          }
-        ,
-        salads: 
-          {
-            include: false,
-            value: "course^course-Salads"
-          }
-        ,
-        desserts: 
-          {
-            include: false,
-            value: "course^course-Desserts"
-          }
-        ,
-        breakfastAndBrunch: 
-          {
-            include: false,
-            value: "course^course-Breakfast and Brunch"
-          }
-        ,
-        breads: 
-          {
-            include: false,
-            value: "course^course-Breads"
-          }
-        ,
-        soups: 
-          {
-            include: false,
-            value: "course^course-Soups"
-          }
-        ,
-        beverages: 
-          {
-            include: false,
-            value: "course^course-Beverages"
-          }
-        ,
-        condimentsAndSauces: 
-          {
-            include: false,
-            value: "course^course-Condiments and Sauces"
-          }
-        ,
-        cocktails: 
-          {
-            include: false,
-            value: "course^course-Cocktails"
-          }
-        ,
-        snacks: 
-          {
-            include: false,
-            value: "course^course-Snacks"
-          }
-        ,
-        lunch: 
-          {
-            include: false,
-            value: "course^course-Lunch"
-          }
-      },
       restrictions: {
         allowedAllergy: [],
         allowedDiet: [],
@@ -100,19 +38,19 @@ class DisplayMatchingRecipes extends Component {
         q: "",
         set: false
       },
-      courses: ["course^course-Cocktails"],
-      search: "melon"
+      APICallDone: false
     };
   }
 
-  setRestrictions = (userProfile, event, courses, searchTerm, callback) => {
+  setRestrictions = () => {
     // filters userProfile.friends array for friends with the event and pushes them to the friends array
-    const friends = userProfile.friends.filter(friend => friend.parties && friend.parties.includes(event));
+    const friends = this.props.userProfile.friends.filter(
+      friend => friend.parties && friend.parties.includes(this.props.eventName)
+    );
 
     const allergies = [];
     const diets = [];
     const ingredients = [];
-    
 
     friends.forEach(friend => {
       if (friend.allowedAllergy) {
@@ -132,200 +70,194 @@ class DisplayMatchingRecipes extends Component {
           allowedAllergy: allergies,
           allowedDiet: diets,
           excludedIngredient: ingredients,
-          allowedCourse: courses,
-          q: searchTerm,
+          allowedCourse: this.state.courses,
+          q: this.state.search,
           set: true
         }
       },
       () => {
-        callback();
+        matchingRecipes(this.state.restrictions).then(res => {
+          // this.props.checkIfAPICallDone();
+          this.setState({
+            listOfRecipes: res.data.matches,
+            APICallDone: true
+          });
+        });
       }
     );
   };
 
-
-  handleCheckChange = (e) => {
-  
-    const value = e.target.value;
-    const name = e.target.name;
-    let tempCourses = this.state.courseCheckboxes
-
-    tempCourses[name].include = value;
-    
-    console.log('tempCourses', tempCourses);
-    
-    
-
-
-    // console.log(this.state.courses[name].include);
-    
-
-    // this.setState({
-    //   courses[{name}]:
-    //     {
-    //       include: value,
-    //     }
-    // });
-  }
-
-  handleChange = (e) => {
-
+  handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
-  }
+  };
 
   componentDidMount() {
-    this.setRestrictions(this.props.userProfile, this.props.eventName, this.state.courses, this.state.search, () => {
-      
-      matchingRecipes(this.state.restrictions).then(res => {
-
-        this.setState({
-          listOfRecipes: res.data.matches
-        });
-      });
-    });
+    this.setRestrictions();
   }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setRestrictions();
+  };
+
+  handleCheckboxChange = e => {
+    const tempCourses = this.state.courses;
+
+    const courseList = {
+      mains: "course^course-Main Dishes",
+      desserts: "course^course-Desserts",
+      sideDishes: "course^course-Side Dishes",
+      appetizers: "course^course-Appetizers",
+      salads: "course^course-Salads",
+      breakfastAndBrunch: "course^course-Breakfast and Brunch",
+      breads: "course^course-Breads",
+      soups: "course^course-Soups",
+      beverages: "course^course-Beverages",
+      condimentsAndSauces: "course^course-Condiments and Sauces",
+      cocktails: "course^course-Cocktails",
+      snacks: "course^course-Snacks",
+      lunch: "course^course-Lunch"
+    };
+
+    // Remove from array
+    if (this.state[e.target.name]) {
+      tempCourses.splice(tempCourses.indexOf(courseList[e.target.name]), 1);
+    }
+    // Add to array
+    else {
+      tempCourses.push(courseList[e.target.name]);
+    }
+
+    const value = !this.state[e.target.name];
+    // const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    const name = e.target.name;
+
+    this.setState({
+      [name]: value,
+      courses: tempCourses
+    });
+  };
 
   render() {
     return (
       <div className="matching-recipes">
         <form className="filter-recipes-form" action="">
           <label htmlFor="search">Search</label>
-          <input 
-            type="text" 
-            id="search" 
-            placeholder="ingredient" 
+          <input
+            type="text"
+            id="search"
+            placeholder="ingredient"
             value={this.state.search}
             onChange={this.handleChange}
           />
 
-          <h3 className="filter-by-course">Filter by Category</h3>
-          <fieldset className="courses">
-            {/* MAINS */}
-            {/* MAINS is the only category checked by default */}
+          <div className="courses">
             <label>
-              <input
-                name="mainDishes"
-                type="checkbox"
-                checked={this.state.courseCheckboxes.mainDishes.include}
-                onChange={this.handleCheckChange}
-              />
-              Main Dishes
+              <input className="course-checkbox" name="mains" type="checkbox" checked={this.state.mains} onChange={this.handleCheckboxChange} />
+              Mains
             </label>
+
             <label>
-              <input
-                name="sideDishes"
-                type="checkbox"
-                checked={this.state.courseCheckboxes.sideDishes.include}
-                onChange={this.handleCheckChange}
-              />
-              Side Dishes
-            </label>
-            <label>
-              <input
-                name="appetizers"
-                type="checkbox"
-                checked={this.state.courseCheckboxes.appetizers.include}
-                onChange={this.handleCheckChange}
-              />
-              Appetizers
-            </label>
-            <label>
-              <input
-                name="salads"
-                type="checkbox"
-                checked={this.state.courseCheckboxes.salads.include}
-                onChange={this.handleCheckChange}
-              />
-              Salads
-            </label>
-            <label>
-              <input
+              <input className="course-checkbox"
                 name="desserts"
                 type="checkbox"
-                checked={this.state.courseCheckboxes.desserts.include}
-                onChange={this.handleCheckChange}
+                checked={this.state.desserts}
+                onChange={this.handleCheckboxChange}
               />
               Desserts
             </label>
+
             <label>
-              <input
+              <input className="course-checkbox"
+                name="sideDishes"
+                type="checkbox"
+                checked={this.state.sideDishes}
+                onChange={this.handleCheckboxChange}
+              />
+              Side Dishes
+            </label>
+
+            <label>
+              <input className="course-checkbox"
+                name="appetizers"
+                type="checkbox"
+                checked={this.state.appetizers}
+                onChange={this.handleCheckboxChange}
+              />
+              Appetizers
+            </label>
+
+            <label>
+              <input className="course-checkbox" name="salads" type="checkbox" checked={this.state.salads} onChange={this.handleCheckboxChange} />
+              Salads
+            </label>
+
+            <label>
+              <input className="course-checkbox"
                 name="breakfastAndBrunch"
                 type="checkbox"
-                checked={this.state.courseCheckboxes.breakfastAndBrunch.include}
-                onChange={this.handleCheckChange}
+                checked={this.state.breakfastAndBrunch}
+                onChange={this.handleCheckboxChange}
               />
               Breakfast & Brunch
             </label>
+
             <label>
-              <input
-                name="breads"
-                type="checkbox"
-                checked={this.state.courseCheckboxes.breads.include}
-                onChange={this.handleCheckChange}
-              />
+              <input className="course-checkbox" name="breads" type="checkbox" checked={this.state.breads} onChange={this.handleCheckboxChange} />
               Breads
             </label>
+
             <label>
-              <input
-                name="soups"
-                type="checkbox"
-                checked={this.state.courseCheckboxes.soups.include}
-                onChange={this.handleCheckChange}
-              />
+              <input className="course-checkbox" name="soups" type="checkbox" checked={this.state.soups} onChange={this.handleCheckboxChange} />
               Soups
             </label>
+
             <label>
-              <input
+              <input className="course-checkbox"
                 name="beverages"
                 type="checkbox"
-                checked={this.state.courseCheckboxes.beverages.include}
-                onChange={this.handleCheckChange}
+                checked={this.state.beverages}
+                onChange={this.handleCheckboxChange}
               />
               Beverages
             </label>
+
             <label>
-              <input
+              <input className="course-checkbox"
                 name="condimentsAndSauces"
                 type="checkbox"
-                checked={this.state.courseCheckboxes.condimentsAndSauces.include}
-                onChange={this.handleCheckChange}
+                checked={this.state.condimentsAndSauces}
+                onChange={this.handleCheckboxChange}
               />
               Condiments & Sauces
             </label>
             <label>
-              <input
+              <input className="course-checkbox"
                 name="cocktails"
                 type="checkbox"
-                checked={this.state.courseCheckboxes.cocktails.include}
-                onChange={this.handleCheckChange}
+                checked={this.state.cocktails}
+                onChange={this.handleCheckboxChange}
               />
               Cocktails
             </label>
+
             <label>
-              <input
-                name="snacks"
-                type="checkbox"
-                checked={this.state.courseCheckboxes.snacks.include}
-                onChange={this.handleCheckChange}
-              />
+              <input className="course-checkbox" name="snacks" type="checkbox" checked={this.state.snacks} onChange={this.handleCheckboxChange} />
               Snacks
             </label>
+
             <label>
-              <input
-                name="lunch"
-                type="checkbox"
-                checked={this.state.courseCheckboxes.lunch.include}
-                onChange={this.handleCheckChange}
-              />
+              <input className="course-checkbox" name="lunch" type="checkbox" checked={this.state.lunch} onChange={this.handleCheckboxChange} />
               Lunch
             </label>
-          </fieldset>
+          </div>
 
           <button className="filter-button" onClick={this.handleSubmit}>Filter Recipes</button>
         </form>
-        <ul>
+
+        <ul className="recipe-return">
           {this.state.listOfRecipes.map(recipe => {
             return (
               <DisplaySingleRecipe
@@ -338,6 +270,9 @@ class DisplayMatchingRecipes extends Component {
             );
           })}
         </ul>
+        {this.state.APICallDone === true?
+        <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe}
+          savedRecipes={this.props.savedRecipes} />: null}
       </div>
     );
   }

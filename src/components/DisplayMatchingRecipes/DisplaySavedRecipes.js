@@ -4,9 +4,9 @@ import DisplaySingleRecipe from "./DisplaySingleRecipe";
 const DisplaySavedRecipes = props => {
   if (props.savedRecipes) {
     return (
-      <div>
+      <div className="saved-recipes">
         <h1>SAVED RECIPES</h1>
-        <ul className="saved-recipes">
+        <ul className="saved-recipes-list">
           {props.savedRecipes.map(recipe => {
             return (
               <DisplaySingleRecipe
