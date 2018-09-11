@@ -711,7 +711,6 @@ h2.saved-recipe-name {
   color: #f2f2f2;
   border-radius: 5px;
   font-size: 1.5rem;
-  display: inline-block;
   text-align: center;
   float: right; }
 
@@ -733,7 +732,6 @@ h2.saved-recipe-name {
   margin: 10px 0; }
 
 .delete-ingredient {
-  display: inline-block;
   float: left;
   border: none;
   height: 25px;
@@ -753,6 +751,100 @@ h2.saved-recipe-name {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%); }
+
+.restricted-ingredient-label-input-container {
+  position: relative;
+  float: left;
+  width: 30%;
+  min-width: 280px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 15px; }
+
+.add-restricted-ingredient-label {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  margin: 0;
+  cursor: text;
+  font-size: 1.8rem; }
+
+.add-restricted-ingredient-input {
+  font-size: 2rem;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none; }
+
+.add-restricted-ingredient-button {
+  font-size: 2rem;
+  border-radius: 10px;
+  border: none;
+  margin: 20px 0 20px 10px;
+  padding: 10px 20px;
+  background: #117842;
+  color: #f2f2f2; }
+
+.add-restricted-ingredient-input:focus + .add-restricted-ingredient-label,
+.add-restricted-ingredient-input:not([value=""]) + .add-restricted-ingredient-label {
+  transition: 0.3s;
+  top: -15px;
+  left: 10px;
+  font-size: 1.5rem; }
+
+.edit-all-guests-subheader {
+  background: #dedede;
+  margin-bottom: 40px; }
+
+.edit-all-guests-sub-subheader {
+  padding: 15px 0;
+  position: relative; }
+
+.edit-all-guests-title {
+  display: block;
+  width: 60%;
+  padding-right: 10px;
+  font-size: 2rem;
+  float: left;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.edit-all-guests-save-div {
+  width: 40%;
+  float: right;
+  display: block; }
+
+.edit-all-guests-save {
+  padding: 15px 25px;
+  background: #117842;
+  color: #f2f2f2;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  text-align: center;
+  float: right; }
+
+.edit-all-guests-section-header {
+  margin-bottom: 15px; }
+
+.edit-all-guests-form {
+  background: #ffcb96;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  padding: 15px; }
+
+.edit-all-guests-section-header {
+  margin-bottom: 15px; }
+
+.single-friend {
+  width: 50%;
+  float: left;
+  position: relative;
+  font-size: 2rem;
+  font-family: "Muli", sans-serif;
+  margin: 10px 0; }
 
 * {
   margin: 0;
@@ -858,6 +950,24 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
   .app-name {
     font-size: 5rem; } }
 
+@media (max-width: 600px) {
+  .allergy-diet {
+    width: 100%; } }
+
+@media (max-width: 450px) {
+  .restricted-ingredient-label-input-container {
+    min-width: 170px; }
+  .add-restricted-ingredient-label {
+    font-size: 1.2rem;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  .add-restricted-ingredient-input:focus + .add-restricted-ingredient-label,
+  .add-restricted-ingredient-input:not([value=""]) + .add-restricted-ingredient-label {
+    min-width: 200px;
+    transform: translate(-5%, -50%); }
+  .add-restricted-ingredient-button {
+    margin: 20px 0 20px 5px; } }
+
 @media (max-width: 727px) {
   .inner-header .app-name {
     float: none;
@@ -924,3 +1034,7 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     text-align: center;
     font-size: 5rem;
     padding: 15px 0 0 0; } }
+
+@media (max-width: 650px) {
+  .single-friend {
+    width: 100%; } }

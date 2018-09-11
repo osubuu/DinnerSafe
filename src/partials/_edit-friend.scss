@@ -32,7 +32,6 @@
   color: $color-2;
   border-radius: 5px;
   font-size: 1.5rem;
-  display: inline-block;
   text-align: center;
   float: right;
 }
@@ -58,7 +57,6 @@
 }
 
 .delete-ingredient {
-  display: inline-block;
   float: left;
   border: none;
   height: 25px;
@@ -80,4 +78,50 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.restricted-ingredient-label-input-container {
+  position: relative;
+  float: left;
+  width: 30%;
+  min-width: 280px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.add-restricted-ingredient-label {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  margin: 0;
+  cursor: text;
+  font-size: 1.8rem;
+}
+
+.add-restricted-ingredient-input {
+  font-size: 2rem;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+.add-restricted-ingredient-button {
+  font-size: 2rem;
+  border-radius: 10px;
+  border: none;
+  margin: 20px 0 20px 10px;
+  padding: 10px 20px;
+  background: $green;
+  color: $color-2;
+}
+
+.add-restricted-ingredient-input:focus + .add-restricted-ingredient-label,
+.add-restricted-ingredient-input:not([value=""]) + .add-restricted-ingredient-label {
+    transition: 0.3s;
+    top: -15px;
+    left: 10px;
+    font-size: 1.5rem;
 }
