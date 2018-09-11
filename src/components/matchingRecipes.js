@@ -4,16 +4,10 @@ const apiUrl = "http://api.yummly.com/v1/api/recipes";
 const apiKey = "db330b81d710c9b574e3c76551fbcdb5";
 const apiId = "a61c2317";
 
-// const allergies = ["394^Peanut-Free", "396^Dairy-Free"];
-// const diets = ["390^Pescetarian"]
-// const excludeIngredients = [];
-const courses = ["course^course-Main Dishes", "course^course-Side Dishes"];
-const searchTerms = "";
-const resultsPerPage = 10;
-const page = 2;
+const resultsPerPage = 20;
+const page = 1;
 
 const matchingRecipes = object => {
-  // const recipes = []
 
   return axios.get(apiUrl, {
     params: {

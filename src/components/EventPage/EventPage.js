@@ -14,8 +14,6 @@ class EventPage extends Component {
     this.state = {
       inputValue: "",
       confirmedNewName: "",
-      courses: ["course^course-Cocktails"],
-      search: "strawberry"
     };
     this.dbRef = firebase.database().ref(`${props.userProfile.id}`);
   }
@@ -104,13 +102,6 @@ class EventPage extends Component {
     });
   };
 
-  handleChange = (e) => {
-
-    this.setState({
-      [e.target.id]: e.target.value
-    });
-  }
-
   render() {
     return (
       <div className="event-page">
@@ -168,19 +159,6 @@ class EventPage extends Component {
 
           {this.checkCurrentEventForGuests() === true ? (
             <div>
-              
-              <form className="filter-recipes-form" action="">
-                <label htmlFor="search">Search</label>
-                <input
-                  type="text"
-                  id="search"
-                  placeholder="ingredient"
-                  value={this.state.search}
-                  onChange={this.handleChange}
-                />
-
-                <button onClick={this.handleSubmit}>Filter Recipes</button>
-              </form>
               
               <DisplayMatchingRecipes
                 toggleRecipe={this.props.toggleRecipe}
