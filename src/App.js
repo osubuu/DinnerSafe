@@ -345,13 +345,13 @@ class App extends Component {
           <Route
             path="/event"
             render={() => {
-              return this.state.selectedFriend ? <Redirect to="/edit-friend" /> : null;
+              return this.state.selectedFriend ? <Redirect to="/edit-guest" /> : null;
             }}
           />
 
           {/* EDIT FRIEND PAGE ROUTE */}
           <Route
-            path="/edit-friend"
+            path="/edit-guest"
             render={props => (
               <EditFriend
                 {...props}
@@ -369,9 +369,9 @@ class App extends Component {
             )}
           />
 
-          {/* ADD EXISTING FRIEND ROUTE */}
+          {/* ADD EXISTING GUEST ROUTE */}
           <Route
-            path="/existing-friend-list"
+            path="/existing-guest-list"
             render={props => (
               <ExistingFriendList
                 {...props}
