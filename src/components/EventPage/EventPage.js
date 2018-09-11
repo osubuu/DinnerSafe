@@ -13,7 +13,7 @@ class EventPage extends Component {
     super(props);
     this.state = {
       inputValue: "",
-      confirmedNewName: ""
+      confirmedNewName: "",
     };
     this.dbRef = firebase.database().ref(`${props.userProfile.id}`);
   }
@@ -159,10 +159,13 @@ class EventPage extends Component {
 
           {this.checkCurrentEventForGuests() === true ? (
             <div>
+              
               <DisplayMatchingRecipes
                 toggleRecipe={this.props.toggleRecipe}
                 userProfile={this.props.userProfile}
                 eventName={this.props.selectedEvent.title}
+                courses={this.state.courses}
+                search={this.state.search}
               />
               <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe} savedRecipes={this.props.savedRecipes} />
             </div>
