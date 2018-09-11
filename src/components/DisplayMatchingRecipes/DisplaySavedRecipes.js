@@ -16,6 +16,8 @@ const DisplaySavedRecipes = props => {
                 buttonTag={<i class="fas fa-minus-circle"></i>}
                 key={recipe.id}
                 recipe={recipe}
+                buttonClass={"recipe-remove-button"}
+                
               />
             );
           })}
