@@ -137,9 +137,11 @@ class EventPage extends Component {
             <div className="wrapper clearfix">
               <div className="event-title">
                 <h2>{this.props.userProfile.parties[this.props.selectedEventIndex].title}</h2>
-                <div className="title-back-button"><Link onClick={this.props.handleBackToOverview} to="/home">
-                  Back to Main Page
-                </Link></div>
+                <div className="title-back-button">
+                  <Link onClick={this.props.handleBackToOverview} to="/home">
+                    Back to Main Page
+                  </Link>
+                </div>
               </div>
 
               <div className="guestList clearfix">
@@ -153,7 +155,7 @@ class EventPage extends Component {
                           ) !== -1
                         ) {
                           return (
-                            <li key={i} className="guest">
+                            <li key={i} className="guest clearfix">
                               {/* Edit the guests restrictions */}
                               <p>{friend.name}</p>
 
@@ -165,7 +167,11 @@ class EventPage extends Component {
                               </div>
 
                               {/* Removes guest from the event */}
-                              <button className="remove-friend-button" id={friend.name} onClick={this.removeFriendFromEvent}>
+                              <button
+                                className="remove-friend-button"
+                                id={friend.name}
+                                onClick={this.removeFriendFromEvent}
+                              >
                                 <i className="fas fa-times" />
                               </button>
                             </li>
@@ -177,7 +183,9 @@ class EventPage extends Component {
                 <Link to="existing-guest-list">Add Existing Guest</Link>
 
                 <form onSubmit={this.handleSubmitAddFriend} action="">
-                  <label className="add-new-friend-label"htmlFor="add-new-friend">Add New Guest</label>
+                  <label className="add-new-friend-label" htmlFor="add-new-friend">
+                    Add New Guest
+                  </label>
                   <input
                     id={"add-new-friend"}
                     value={this.state.inputValue}
@@ -186,7 +194,9 @@ class EventPage extends Component {
                     autoComplete="off"
                     className="add-new-friend-input"
                   />
-                  <button className="add-friend-button" onClick={this.handleClickAddFriend}>ADD</button>
+                  <button className="add-friend-button" onClick={this.handleClickAddFriend}>
+                    Add
+                  </button>
                 </form>
               </div>
 

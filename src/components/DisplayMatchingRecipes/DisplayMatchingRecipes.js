@@ -145,9 +145,11 @@ class DisplayMatchingRecipes extends Component {
     return (
       <div className="matching-recipes clearfix">
         <form className="filter-recipes-form" action="">
-          <label className="filter-recipes-label" htmlFor="search">Search</label>
+          <label className="filter-recipes-label" htmlFor="search">
+            Search
+          </label>
           <input
-          className="filter-recipes-input"
+            className="filter-recipes-input"
             type="text"
             id="search"
             placeholder="ingredient"
@@ -155,8 +157,8 @@ class DisplayMatchingRecipes extends Component {
             onChange={this.handleChange}
           />
 
-          <div className="courses">
-            <label><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
+          <div className="courses clearfix">
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="mains"
@@ -164,138 +166,177 @@ class DisplayMatchingRecipes extends Component {
                 checked={this.state.mains}
                 onChange={this.handleCheckboxChange}
               />
-              Mains
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Mains</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="desserts"
                 type="checkbox"
                 checked={this.state.desserts}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Desserts
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Desserts</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="sideDishes"
                 type="checkbox"
                 checked={this.state.sideDishes}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Side Dishes
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Side</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="appetizers"
                 type="checkbox"
                 checked={this.state.appetizers}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Appetizers
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Appetizers</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="salads"
                 type="checkbox"
                 checked={this.state.salads}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Salads
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Salads</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="breakfastAndBrunch"
                 type="checkbox"
                 checked={this.state.breakfastAndBrunch}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Breakfast & Brunch
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Breakfast</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="breads"
                 type="checkbox"
                 checked={this.state.breads}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Breads
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Breads</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="soups"
                 type="checkbox"
                 checked={this.state.soups}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Soups
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Soups</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="beverages"
                 type="checkbox"
                 checked={this.state.beverages}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Beverages
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Beverages</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="condimentsAndSauces"
                 type="checkbox"
                 checked={this.state.condimentsAndSauces}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Condiments & Sauces
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Sauces</span>
             </label>
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="cocktails"
                 type="checkbox"
                 checked={this.state.cocktails}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Cocktails
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Cocktails</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="snacks"
                 type="checkbox"
                 checked={this.state.snacks}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Snacks
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Snacks</span>
             </label>
 
-            <label>
+            <label className="clearfix">
               <input
                 className="course-checkbox"
                 name="lunch"
                 type="checkbox"
                 checked={this.state.lunch}
                 onChange={this.handleCheckboxChange}
-              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
-              Lunch
+              />
+              <div className="stylish-checkbox">
+                <i class="fas fa-check" />
+              </div>
+              <span>Lunch</span>
             </label>
           </div>
 
@@ -328,8 +369,8 @@ class DisplayMatchingRecipes extends Component {
               <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe} savedRecipes={this.props.savedRecipes} />
             ) : null}
           </div>
-        ) : // <Loader />
-        null}
+        ) : null // <Loader />
+        }
       </div>
     );
   }
