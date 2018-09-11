@@ -66,6 +66,7 @@ input[type="checkbox"]:checked + .stylish-checkbox {
   top: 50%;
   transform: translateY(-50%);
   border: 2px solid $color-1;
+  cursor: pointer;
 }
 
 input[type="checkbox"] + .stylish-checkbox,

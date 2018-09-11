@@ -800,7 +800,8 @@ input[type="checkbox"]:checked + .stylish-checkbox {
   left: calc(-18px - 10px);
   top: 50%;
   transform: translateY(-50%);
-  border: 2px solid #141414; }
+  border: 2px solid #141414;
+  cursor: pointer; }
 
 input[type="checkbox"] + .stylish-checkbox,
 input[type="checkbox"]:checked + .stylish-checkbox {

@@ -93,6 +93,11 @@
       text-decoration: underline;
     }
   }
+
+  .filter-button {
+    &:hover {
+    }
+  }
   li.guest {
     margin: 5px 0px;
   }
