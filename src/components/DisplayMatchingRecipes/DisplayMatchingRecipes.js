@@ -252,7 +252,7 @@ class DisplayMatchingRecipes extends Component {
             </label>
           </div>
 
-          <button onClick={this.handleSubmit}>Filter Recipes</button>
+          <button className="filter-button" onClick={this.handleSubmit}>Filter Recipes</button>
         </form>
 
         <ul>

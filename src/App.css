@@ -213,6 +213,9 @@ p {
   font-size: 1.6rem;
   font-family: "Muli", sans-serif; }
 
+label, input, .event-title h2, a, button, .new-event-label, .section-header, .user h2, .filter-by-course {
+  font-family: "Muli", sans-serif; }
+
 .log-in-page {
   background: #3e3e3e;
   height: 100vh;
@@ -338,11 +341,11 @@ header {
 .new-event-label {
   width: 100%;
   float: left;
-  font-size: 1.5rem;
-  text-align: left;
   padding-bottom: 5px;
   font-family: "Roboto", sans-serif;
-  font-weight: bold; }
+  font-weight: bold;
+  text-align: center;
+  font-size: 2.6rem; }
 
 .new-event-name-input,
 .new-event-button {
@@ -350,16 +353,18 @@ header {
   float: left; }
 
 .new-event-name-input {
-  padding: 10px;
-  width: calc(100% - 114px); }
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px; }
 
 .new-event-button {
-  float: left;
-  margin-left: 10px;
+  position: relative;
+  left: 37%;
   border-radius: 5px;
   background: #117842;
   color: #f2f2f2;
-  padding: 10px 20px; }
+  padding: 10px 20px;
+  margin: 10px; }
 
 .go-to-event,
 .create-new-event {
@@ -426,33 +431,88 @@ header {
   margin: 25px 10px; }
 
 .event-page .guest p {
-  font-size: 2rem;
+  font-size: 2.5rem;
   float: left;
   width: 80%; }
 
 .event-page .fakeButton {
   float: left;
   width: 10%; }
-  .event-page .fakeButton h2 {
-    font-size: 1.1rem;
-    border: grey 1px solid;
-    border-radius: 5px;
-    padding: 1px;
-    margin: 4px 2px;
-    width: 100%; }
+  .event-page .fakeButton i {
+    font-size: 1.8rem; }
 
-.event-page .guest button {
+.event-page button.remove-friend {
   float: left;
   width: calc(10% - 4px);
-  margin: 4px 2px;
-  color: red;
+  margin: 0px 2px;
+  color: #f34843;
   border: none;
-  font-size: 1.5rem; }
+  font-size: 1.9rem; }
 
 .event-page .matching-recipes {
   float: left;
   width: calc(80% - 20px);
   margin: 25px 10px; }
+
+.event-page .guests {
+  overflow: scroll; }
+
+.event-page li.guest {
+  margin: 5px 0px; }
+
+.event-page .guestList a {
+  font-size: 1.6rem;
+  display: inline-block;
+  margin: 10px 0;
+  color: #f34843; }
+
+.event-page .guestList form {
+  position: relative;
+  padding: 0; }
+
+.event-page .guestList label {
+  position: absolute;
+  transform: translate(0, 16px) scale(1);
+  top: -10px; }
+  .event-page .guestList label .active {
+    transform: translate(0, 4px) scale(0.75);
+    top: -16px; }
+
+.event-page .guestList input {
+  border: none;
+  outline: 0;
+  font-size: 1.6rem;
+  padding: 16px 0 10px; }
+
+.event-page .add-friend button {
+  border: #f34843 1px solid;
+  border-radius: 5px;
+  background: #f34843;
+  padding: 7px;
+  margin-top: 5px;
+  position: relative;
+  left: 75%;
+  color: white; }
+
+.event-page .filter-recipes-form label {
+  font-size: 2.5rem; }
+
+.event-page .filter-recipes-form input {
+  width: calc(90% - 30px);
+  font-size: 1.8rem;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  margin: 15px; }
+
+.event-page .courses {
+  width: 100%;
+  border: none; }
+
+.event-page .courses label {
+  display: inline-block;
+  width: calc(100% / 4);
+  font-size: 1.5rem; }
 
 * {
   margin: 0;
@@ -512,14 +572,13 @@ a {
     font-size: 2.8rem; }
   .new-event-button {
     padding: 10px;
-    font-size: 1.6rem;
-    float: none; }
+    float: none;
+    left: 0; }
   .new-event-name-input {
     width: 100%;
     margin-bottom: 10px;
     border-radius: 5px; }
   .new-event-label {
-    font-size: 2rem;
     text-align: center; }
   .create-new-event {
     margin: 0 auto;
