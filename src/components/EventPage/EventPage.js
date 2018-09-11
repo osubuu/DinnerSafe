@@ -7,6 +7,7 @@ import _ from "lodash";
 import Header from "../Header";
 import swal from "sweetalert2";
 import DisplaySavedRecipes from "../DisplayMatchingRecipes/DisplaySavedRecipes";
+import Loader from "../Loader";
 
 class EventPage extends Component {
   constructor(props) {
@@ -18,6 +19,8 @@ class EventPage extends Component {
     };
     if (props.userProfile) {
       this.dbRef = firebase.database().ref(`${props.userProfile.id}`);
+    } else {
+      props.getRedirected(true);
     }
   }
 
@@ -194,7 +197,6 @@ class EventPage extends Component {
                     eventName={this.props.userProfile.parties[this.props.selectedEventIndex].title}
                     checkIfAPICallDone={this.checkIfAPICallDone}
                     savedRecipes={this.props.savedRecipes}
-                    
                   />
 
                   {/* Wait for API call above to be done first before displaying */}
@@ -210,7 +212,10 @@ class EventPage extends Component {
             {/* End of Wrapper */}
           </div>
         ) : (
-          <Redirect from="/event" to="/" />
+          <div>
+            <Loader />
+            <Redirect from="/event" to="/" />
+          </div>
         )}
       </div>
     );

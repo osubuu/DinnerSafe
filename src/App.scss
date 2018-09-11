@@ -2,6 +2,7 @@
 @import "./partials/_utils.scss";
 @import "./partials/_typography.scss";
 @import "./partials/_loginPage.scss";
+@import "./partials/_loader.scss";
 @import "./partials/_header.scss";
 @import "./partials/_overviewPage.scss";
 @import "./partials/_eventPage.scss";
@@ -27,7 +28,8 @@ ul {
 }
 
 body {
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(./assets/heroBGweb.jpg) 50% 50% fixed;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+    url(./assets/heroBGweb.jpg) 50% 50% fixed;
   background-size: 100% auto;
 }
 
@@ -39,9 +41,6 @@ a {
   text-align: center;
   padding: 20px 0;
 }
-
-
-
 
 @import "./partials/_loginPageMQs";
 @import "./partials/_media-queries.scss";

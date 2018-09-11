@@ -7,11 +7,15 @@ import _ from "lodash";
 class EditFriend extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      inputValue: "",
-      confirmedIngredient: ""
-    };
-    this.dbRef = firebase.database().ref(`${this.props.userID}/friends/${this.props.friendKey}`);
+    if (props.friendProfile) {
+      this.state = {
+        inputValue: "",
+        confirmedIngredient: ""
+      };
+      this.dbRef = firebase.database().ref(`${this.props.userID}/friends/${this.props.friendKey}`);
+    } else {
+      props.getRedirected(true);
+    }
   }
 
   // Handle input value for new restriction

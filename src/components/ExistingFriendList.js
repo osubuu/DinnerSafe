@@ -14,6 +14,8 @@ class ExistingFriendList extends Component {
         key: null
       };
       this.dbRef = firebase.database().ref(`${this.props.userProfile.id}/friends`);
+    } else {
+      props.getRedirected(true);
     }
   }
 
