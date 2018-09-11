@@ -1,0 +1,50 @@
+@media (max-width: 800px) {
+  .app-name {
+    font-size: 11rem;
+  }
+
+  .app-name-sub-header {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .app-name {
+    font-size: 9rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .app-name {
+    font-size: 7rem;
+  }
+  
+  .app-name-sub-header {
+    font-size: 1.8rem;
+  }
+
+  .log-in-form{
+      margin: 25px auto 0 auto;
+  }
+}
+
+@media (max-width: 450px) {
+  .app-name {
+    font-size: 6rem;
+  }
+
+  .app-name-sub-header {
+    font-size: 1.5rem;
+  }
+
+  .log-in-form {
+      width: 100%;
+  }
+
+}
+
+@media (max-width: 375px) {
+  .app-name {
+    font-size: 5rem;
+  }
+}

@@ -1,10 +1,4 @@
 @media (max-width: 727px) {
-  .app-name {
-    font-size: 11rem;
-  }
-  .app-name-sub-header {
-    font-size: 2.3rem;
-  }
   .inner-header {
     & .app-name {
       float: none;
@@ -31,12 +25,7 @@
 }
 
 @media (max-width: 615px) {
-  .app-name {
-    font-size: 10rem;
-  }
-  .app-name-sub-header {
-    font-size: 2rem;
-  }
+
   ///OVERVIEW PAGE///
   .section-header {
     font-size: 2.8rem;
@@ -63,29 +52,17 @@
   }
 }
 
-@media (max-width: 555px) {
-  .app-name {
-    font-size: 8rem;
-  }
-  
-}
+
 
 @media (max-width: 450px){
-  .app-name {
-    font-size: 7rem;
-  }
+
   .log-in-form .buttons {
     width: 100%;
   }
 }
 
 @media (max-width: 385px){
-  .app-name {
-    font-size: 6rem;
-  }
-  .log-in-form {
-    width: 100%;
-  }
+
   // HEADER STYLES ///
   .user {
     float: none;
