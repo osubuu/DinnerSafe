@@ -184,6 +184,7 @@ class EventPage extends Component {
                     value={this.state.inputValue}
                     onChange={this.handleChangeAddFriend}
                     type="text"
+                    autoComplete="off"
                   />
                   <button onClick={this.handleClickAddFriend}>ADD</button>
                 </form>
@@ -198,14 +199,6 @@ class EventPage extends Component {
                     checkIfAPICallDone={this.checkIfAPICallDone}
                     savedRecipes={this.props.savedRecipes}
                   />
-
-                  {/* Wait for API call above to be done first before displaying */}
-                  {/* {this.state.APICallDone === true ? (
-                    <DisplaySavedRecipes
-                      toggleRecipe={this.props.toggleRecipe}
-                      savedRecipes={this.props.savedRecipes}
-                    />
-                  ) : null} */}
                 </div>
               ) : null}
             </div>

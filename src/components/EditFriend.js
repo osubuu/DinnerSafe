@@ -115,29 +115,24 @@ class EditFriend extends Component {
   render() {
     return (
       <div>
-        
         <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
-        
+
         {this.props.friendProfile ? (
           <div>
             <div className="edit-guest-subheader">
-               <div className="wrapper clearfix edit-guest-sub-subheader">
-                
-                  <h2 className="edit-guest-title">Dietary Options for {this.props.friendProfile.name}</h2>
-                
-                  <div className="edit-guest-save-div clearfix">
-                    <Link className="edit-guest-save" onClick={this.props.handleBackToEvent} to="/event">
+              <div className="wrapper clearfix edit-guest-sub-subheader">
+                <h2 className="edit-guest-title">Dietary Options for {this.props.friendProfile.name}</h2>
+
+                <div className="edit-guest-save-div clearfix">
+                  <Link className="edit-guest-save" onClick={this.props.handleBackToEvent} to="/event">
                     Save and Return to Event
-                    </Link>
-                  </div>
-                 
-               </div>
+                  </Link>
+                </div>
+              </div>
             </div>
 
             <div className="wrapper">
-              
               <div>
-                
                 <h3 className="edit-guest-section-header">Allergies</h3>
                 <form className="edit-guest-form clearfix" action="">
                   {Allergy.map((allergy, i) => {
@@ -156,7 +151,12 @@ class EditFriend extends Component {
                             id={allergy.searchValue}
                             defaultChecked
                           />
-                          <label htmlFor={allergy.searchValue}><div className="stylish-checkbox"><i class="fas fa-check"></i></div>{allergy.shortDescription.replace("-Free", "")}</label>
+                          <label htmlFor={allergy.searchValue}>
+                            <div className="stylish-checkbox">
+                              <i class="fas fa-check" />
+                            </div>
+                            {allergy.shortDescription.replace("-Free", "")}
+                          </label>
                         </div>
                       );
                     }
@@ -171,14 +171,18 @@ class EditFriend extends Component {
                             value={allergy.shortDescription}
                             id={allergy.searchValue}
                           />
-                          <label htmlFor={allergy.searchValue}><div className="stylish-checkbox"><i class="fas fa-check"></i></div>{allergy.shortDescription.replace("-Free", "")}</label>
+                          <label htmlFor={allergy.searchValue}>
+                            <div className="stylish-checkbox">
+                              <i class="fas fa-check" />
+                            </div>
+                            {allergy.shortDescription.replace("-Free", "")}
+                          </label>
                         </div>
                       );
                     }
                   })}
                 </form>
                 {/* End of Allergies */}
-
 
                 <h3 className="edit-guest-section-header">Diet</h3>
                 <form className="edit-guest-form clearfix" action="">
@@ -198,8 +202,13 @@ class EditFriend extends Component {
                             id={diet.searchValue}
                             defaultChecked
                           />
-                          
-                          <label htmlFor={diet.searchValue}><div className="stylish-checkbox"><i class="fas fa-check"></i></div>{diet.shortDescription.replace("-Free", "")}</label>
+
+                          <label htmlFor={diet.searchValue}>
+                            <div className="stylish-checkbox">
+                              <i class="fas fa-check" />
+                            </div>
+                            {diet.shortDescription.replace("-Free", "")}
+                          </label>
                         </div>
                       );
                     }
@@ -214,8 +223,13 @@ class EditFriend extends Component {
                             value={diet.shortDescription}
                             id={diet.searchValue}
                           />
-                          
-                          <label htmlFor={diet.searchValue}><div className="stylish-checkbox"><i class="fas fa-check"></i></div>{diet.shortDescription.replace("-Free", "")}</label>
+
+                          <label htmlFor={diet.searchValue}>
+                            <div className="stylish-checkbox">
+                              <i class="fas fa-check" />
+                            </div>
+                            {diet.shortDescription.replace("-Free", "")}
+                          </label>
                         </div>
                       );
                     }
@@ -225,7 +239,6 @@ class EditFriend extends Component {
 
                 <h3 className="edit-guest-section-header">Restricted Ingredients</h3>
                 <section className="edit-guest-form">
-                  
                   <form onSubmit={this.handleSubmitEditFriend} action="">
                     <input value={this.state.inputValue} onChange={this.handleChangeEditFriend} type="text" />
                     <button onClick={this.handleClickEditFriend}>ADD</button>
@@ -245,11 +258,9 @@ class EditFriend extends Component {
                   </ul>
                 </section>
                 {/* End of Restricted Ingredients */}
-
               </div>
             </div>
             {/* end of wrapper */}
-
           </div>
         ) : (
           <Redirect from="/event" to="/" />

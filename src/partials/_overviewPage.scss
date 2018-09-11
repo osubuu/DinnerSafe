@@ -1,13 +1,25 @@
 // Overview Page
 
+.events {
+  .section-header {
+    font-size: 30px;
+  }
+}
+
 .page-title {
   text-align: center;
   margin: 50px 0 25px 0;
 }
 
+.go-to-event,
+.create-new-event {
+  padding: 10px;
+  border-radius: 5px;
+}
+
 .create-new-event {
   background: $yellow;
-  padding: 10px;
+  padding: 20px;
   border-radius: 5px;
   color: $color-1;
 }
@@ -15,11 +27,11 @@
 .new-event-label {
   width: 100%;
   float: left;
-  padding-bottom: 5px;
   font-family: $primary-font;
   font-weight: bold;
   text-align: center;
   font-size: 2.6rem;
+  margin: 0;
 }
 
 .new-event-name-input,
@@ -29,9 +41,11 @@
 }
 
 .new-event-name-input {
-  width: 100%;
+  width: 80%;
   border-radius: 5px;
   padding: 10px;
+  margin: 15px 10%;
+  text-align: center;
 }
 
 .new-event-button {
@@ -41,21 +55,29 @@
   background: $green;
   color: $color-2;
   padding: 10px 20px;
-  margin: 10px;
-}
+  margin: 0 10px;
+  transition: 0.2s;
 
-.go-to-event,
-.create-new-event {
-  padding: 10px;
-  border-radius: 5px;
+  &:hover {
+    transition: 0.2s;
+    background: $color-2;
+    color: rgb(17, 120, 66);
+  }
 }
 
 .go-to-event {
-  width: calc(100% - 55px);
+  width: 100%;
   float: left;
   background: rgb(80, 80, 80);
-  color: white;
+  color: $color-2;
   font-family: $secondary-font;
+  transition: 0.2s;
+
+  &:hover {
+    transition: 0.2s;
+    background: $peach;
+    color: $color-1;
+  }
 }
 
 .create-new-event,
@@ -71,18 +93,16 @@
 
 .delete-button {
   background: $red;
-  height: 45px;
-  width: 45px;
+  height: 20px;
+  width: 20px;
   float: left;
   color: white;
   border: none;
   border-radius: 50%;
   font-weight: bold;
   position: absolute;
-  margin-left: 10px;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  right: -7px;
+  top: -8px;
 }
 
 .fa-times {
@@ -92,5 +112,5 @@
   transform: translate(-50%, -50%);
   padding: 0;
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
