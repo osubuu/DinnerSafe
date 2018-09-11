@@ -4,29 +4,38 @@
     & h2 {
       font-size: 5rem;
       float: left;
-      width: 50%;
+      width: 85%;
     }
     & a {
-      font-size: 2rem;
+      font-size: 1.6rem;
       float: left;
-      width: 50%;
+      width: 15%;
       margin: 20px 0;
-      text-align: right;
+      text-align: center;
+      background: $yellow;
+      padding: 10px;
+      color: white;
+      border-radius: 5px;
     }
   }
   .guestList {
     float: left;
     width: calc(20% - 20px);
     margin: 25px 10px;
+    background: #505050;
+    padding: 5px;
+    border: 1px solid #505050;
+    border-radius: 5px;
   }
   .guest p {
-    font-size: 2.5rem;
+    font-size: 2.2em;
     float: left;
-    width: 80%;
+    width: 70%;
+    color: white;
   }
   .fakeButton {
     float: left;
-    width: 10%;
+    width: 15%;
     & i {
       font-size: 1.8rem;
     }
@@ -46,6 +55,7 @@
     position: absolute;
     right: -7px;
     top: 10px;
+    font-size: 1.5rem;
   }
   .matching-recipes {
     float: left;
@@ -54,13 +64,16 @@
   }
   .guests {
     overflow: scroll; 
+    margin-bottom: 9%;
+
   }
   .guestList a {
-    border: $green 1px solid;
-    background: $green;
+    border: $yellow 1px solid;
+    background: $yellow;
     color: white;
     padding: 10px;
     border-radius: 5px;
+    margin: 5px 0;
   }
   li.guest {
     margin: 5px 0px;
@@ -69,30 +82,36 @@
     position: relative;
     padding: 0;
   }
-  .guestList label {
-    position: absolute;
-    transform: translate(0,16px) scale(1);
-    top: -10px;
-    & .active {
-      transform: translate(0, 4px) scale(.75);
-      top: -16px
-    }
-  }
-  .guestList input {
-    border: none;
-    outline: 0;
-    font-size: 1.6rem;
-    padding: 16px 0 10px;
-  }
+  // .guestList label {
+  //   position: absolute;
+  //   transform: translate(0,16px) scale(1);
+  //   top: -10px;
+  //   & .active {
+  //     transform: translate(0, 4px) scale(.75);
+  //     top: -16px
+  //   }
+  // }
   .add-friend-button {
-    border: $red 1px solid;
+    border: $yellow 1px solid;
     border-radius: 5px;
-    background: $red;
+    background: $yellow;
     padding: 7px;
     margin-top: 5px;
     position: relative;
     left: 75%;
     color: white;
+  }
+  .add-new-friend-label {
+    font-size: 1.2rem;
+    top: 25px;
+    left: -35px;
+  }
+  .add-new-friend-input {
+    margin: 10px 0 0;
+    border: none;
+    outline: 0;
+    font-size: 1.6rem;
+    padding: 20px 0 10px;
   }
   .filter-recipes-label {
     font-size: 2.5rem;
@@ -105,6 +124,7 @@
     padding: 5px;
     margin: 15px;
   }
+
 
   // .courses {
   //   width: 100%;

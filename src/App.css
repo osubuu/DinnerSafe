@@ -438,27 +438,36 @@ header {
   .event-page .event-title h2 {
     font-size: 5rem;
     float: left;
-    width: 50%; }
+    width: 85%; }
   .event-page .event-title a {
-    font-size: 2rem;
+    font-size: 1.6rem;
     float: left;
-    width: 50%;
+    width: 15%;
     margin: 20px 0;
-    text-align: right; }
+    text-align: center;
+    background: #ffcb00;
+    padding: 10px;
+    color: white;
+    border-radius: 5px; }
 
 .event-page .guestList {
   float: left;
   width: calc(20% - 20px);
-  margin: 25px 10px; }
+  margin: 25px 10px;
+  background: #505050;
+  padding: 5px;
+  border: 1px solid #505050;
+  border-radius: 5px; }
 
 .event-page .guest p {
-  font-size: 2.5rem;
+  font-size: 2.2em;
   float: left;
-  width: 80%; }
+  width: 70%;
+  color: white; }
 
 .event-page .fakeButton {
   float: left;
-  width: 10%; }
+  width: 15%; }
   .event-page .fakeButton i {
     font-size: 1.8rem; }
 
@@ -476,7 +485,8 @@ header {
 .event-page .remove-friend-button .fa-times {
   position: absolute;
   right: -7px;
-  top: 10px; }
+  top: 10px;
+  font-size: 1.5rem; }
 
 .event-page .matching-recipes {
   float: left;
@@ -484,14 +494,16 @@ header {
   margin: 25px 10px; }
 
 .event-page .guests {
-  overflow: scroll; }
+  overflow: scroll;
+  margin-bottom: 9%; }
 
 .event-page .guestList a {
-  border: #117842 1px solid;
-  background: #117842;
+  border: #ffcb00 1px solid;
+  background: #ffcb00;
   color: white;
   padding: 10px;
-  border-radius: 5px; }
+  border-radius: 5px;
+  margin: 5px 0; }
 
 .event-page li.guest {
   margin: 5px 0px; }
@@ -500,29 +512,27 @@ header {
   position: relative;
   padding: 0; }
 
-.event-page .guestList label {
-  position: absolute;
-  transform: translate(0, 16px) scale(1);
-  top: -10px; }
-  .event-page .guestList label .active {
-    transform: translate(0, 4px) scale(0.75);
-    top: -16px; }
-
-.event-page .guestList input {
-  border: none;
-  outline: 0;
-  font-size: 1.6rem;
-  padding: 16px 0 10px; }
-
 .event-page .add-friend-button {
-  border: #f34843 1px solid;
+  border: #ffcb00 1px solid;
   border-radius: 5px;
-  background: #f34843;
+  background: #ffcb00;
   padding: 7px;
   margin-top: 5px;
   position: relative;
   left: 75%;
   color: white; }
+
+.event-page .add-new-friend-label {
+  font-size: 1.2rem;
+  top: 25px;
+  left: -35px; }
+
+.event-page .add-new-friend-input {
+  margin: 10px 0 0;
+  border: none;
+  outline: 0;
+  font-size: 1.6rem;
+  padding: 20px 0 10px; }
 
 .event-page .filter-recipes-label {
   font-size: 2.5rem; }
@@ -554,22 +564,26 @@ header {
 .display-single-recipe {
   float: left;
   width: calc(50% - 10px);
-  height: 300px; }
+  height: 300px;
+  position: relative; }
 
-.saved-single-recipe {
-  height: 100%; }
+.save-single-recipe {
+  height: 200px; }
 
 .saved-recipes {
   float: left;
-  width: 25%; }
+  width: 25%;
+  background: #505050;
+  padding: 5px;
+  border: 1px solid #505050;
+  border-radius: 5px;
+  height: 100vh;
+  overflow: scroll; }
   .saved-recipes h1 {
     font-size: 2.5rem;
     font-family: "Muli", sans-serif;
-    text-align: center; }
-
-.saved-recipe-list {
-  height: 100vh;
-  overflow: scroll; }
+    text-align: center;
+    color: #ffe4c9; }
 
 .recipe-name {
   font-size: 1.8rem;
@@ -581,12 +595,19 @@ header {
 .recipe-img-container {
   width: auto;
   margin: 0 auto;
-  height: 100%; }
+  height: 100%;
+  width: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }
 
 .recipe-img {
   border-radius: 5px;
-  width: auto;
-  height: 200px; }
+  width: 100%;
+  height: 100%;
+  object-fit: cover; }
 
 .recipe-add-button, .recipe-remove-button {
   margin-left: 5px;
@@ -599,13 +620,21 @@ header {
   right: 1%;
   z-index: 100; }
 
-h2.recipe-name {
-  font-size: 1.8rem;
-  text-align: left;
+h2.recipe-name, h2.saved-recipe-name {
   font-family: "Muli", sans-serif;
-  color: #ffe4c9;
-  float: left;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  z-index: 100;
+  position: absolute;
+  top: 25%;
+  text-align: center;
+  text-shadow: 5px 5px 5px black;
+  color: #ffe4c9; }
+
+h2.recipe-name {
+  font-size: 2rem; }
+
+h2.saved-recipe-name {
+  font-size: 1.5rem; }
 
 .edit-guest-subheader {
   background: #dedede;
