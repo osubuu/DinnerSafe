@@ -11,10 +11,15 @@
   background: rgba(0, 0, 0, 0.6);
   padding: 10px;
   margin: 5px 5px;
+  position: relative;
 }
 .display-single-recipe {
   float: left;
   width: calc(50% - 10px);
+  height: 300px;
+}
+.saved-single-recipe {
+  height: 100%;
 }
 .saved-recipes {
   float: left;
@@ -31,8 +36,34 @@
   text-align: center;
   font-family: $secondary-font;
   color: $peach;
+  margin-bottom: 10px;
 }
 .recipe-img-container {
-  width: 95%;
+  width: auto;
   margin: 0 auto;
+  height: 100%;
+}
+.recipe-img {
+  border-radius: 5px;
+  width: auto;
+  height: 200px;
+}
+.recipe-add-button, .recipe-remove-button {
+  margin-left: 5px;
+  background: none;
+  border: none;
+  color: $red;
+  font-size: 2rem;
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  z-index: 100;
+}
+h2.recipe-name {
+  font-size: 1.8rem;
+  text-align: left;
+  font-family: "Muli", sans-serif;
+  color: #ffe4c9;
+  float: left;
+  margin-bottom: 10px;
 }

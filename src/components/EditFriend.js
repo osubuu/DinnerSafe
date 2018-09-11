@@ -142,7 +142,7 @@ class EditFriend extends Component {
                       this.props.friendProfile.allowedAllergy.indexOf(allergy.searchValue) !== -1
                     ) {
                       return (
-                        <div className="alergy-diet" key={i}>
+                        <div className="allergy-diet" key={i}>
                           <input
                             className="allergy"
                             onChange={this.toggleAllergies}
@@ -163,7 +163,7 @@ class EditFriend extends Component {
                     // else, do not check it
                     else {
                       return (
-                        <div className="alergy-diet" key={i}>
+                        <div className="allergy-diet" key={i}>
                           <input
                             className="allergy"
                             onChange={this.toggleAllergies}
@@ -193,7 +193,7 @@ class EditFriend extends Component {
                       this.props.friendProfile.allowedDiet.indexOf(diet.searchValue) !== -1
                     ) {
                       return (
-                        <div className="alergy-diet" key={i}>
+                        <div className="allergy-diet" key={i}>
                           <input
                             className="diet"
                             type="checkbox"
@@ -215,7 +215,7 @@ class EditFriend extends Component {
                     // else, do not check it
                     else {
                       return (
-                        <div className="alergy-diet" key={i}>
+                        <div className="allergy-diet" key={i}>
                           <input
                             className="diet"
                             type="checkbox"
@@ -248,7 +248,7 @@ class EditFriend extends Component {
                     {this.props.friendProfile.excludedIngredient
                       ? this.props.friendProfile.excludedIngredient.map((ingredient, i) => {
                           return (
-                            <div className="alergy-diet" key={i}>
+                            <div className="allergy-diet" key={i}>
                               <li>{_.startCase(_.toLower(ingredient))}</li>
                               <button onClick={() => this.deleteIngredient(`${ingredient}`)}>REMOVE INGREDIENT</button>
                             </div>
