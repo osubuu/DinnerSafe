@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Redirect } from "react-router-dom";
 import firebase from "firebase";
 import Header from "./Header";
 import swal from "sweetalert2";
@@ -11,7 +11,10 @@ class OverviewPage extends Component {
       inputValue: "",
       confirmedEventName: ""
     };
-    this.dbRef = firebase.database().ref(`${this.props.userID}`);
+
+    if (props.userProfile) {
+      this.dbRef = firebase.database().ref(`${this.props.userID}`);
+    }
   }
 
   // Handle input for new event name
@@ -94,50 +97,56 @@ class OverviewPage extends Component {
 
   render() {
     return (
-      <main className="overview-page">
-        <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
+      <div>
+        {this.props.userProfile ? (
+          <main className="overview-page">
+            <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
 
-        <div className="wrapper">
-          <div className="events">
-            <h3 className="section-header">Create Event</h3>
-            <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
-              <label className="new-event-label" htmlFor="new-event">
-                Event Name
-              </label>
-              <input
-                className="new-event-name-input"
-                onChange={this.handleChangeAddEvent}
-                id="new-event"
-                type="text"
-                value={this.state.inputValue}
-              />
-              <button className="new-event-button" onClick={this.handleClickAddEvent}>
-                Submit
-              </button>
-            </form>
+            <div className="wrapper">
+              <div className="events">
+                <h3 className="section-header">Create Event</h3>
+                <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
+                  <label className="new-event-label" htmlFor="new-event">
+                    Event Name
+                  </label>
+                  <input
+                    className="new-event-name-input"
+                    onChange={this.handleChangeAddEvent}
+                    id="new-event"
+                    type="text"
+                    value={this.state.inputValue}
+                  />
+                  <button className="new-event-button" onClick={this.handleClickAddEvent}>
+                    Submit
+                  </button>
+                </form>
 
-            <h3 className="section-header">Event List</h3>
-            <ul>
-              {/* Go through parties object and list all the parties and their recipes */}
-              {this.props.userProfile.parties
-                ? this.props.userProfile.parties.map((party, i) => {
-                    return (
-                      <li className="clearfix event" key={i}>
-                        <Link id={i} className="go-to-event" to="/event" onClick={this.props.selectEvent} href="#">
-                          {party.title}
-                        </Link>
-                        <button className="delete-button" onClick={() => this.deleteEvent(i, party.title)}>
-                          <i className="fas fa-times" />
-                        </button>
-                      </li>
-                    );
-                  })
-                : null}
-            </ul>
-          </div>
-          {/* End of Events Div */}
-        </div>
-      </main>
+                <h3 className="section-header">Event List</h3>
+                <ul>
+                  {/* Go through parties object and list all the parties and their recipes */}
+                  {this.props.userProfile.parties
+                    ? this.props.userProfile.parties.map((party, i) => {
+                        return (
+                          <li className="clearfix event" key={i}>
+                            <Link id={i} className="go-to-event" to="/event" onClick={this.props.selectEvent} href="#">
+                              {party.title}
+                            </Link>
+                            <button className="delete-button" onClick={() => this.deleteEvent(i, party.title)}>
+                              <i className="fas fa-times" />
+                            </button>
+                          </li>
+                        );
+                      })
+                    : null}
+                </ul>
+              </div>
+              {/* End of Events Div */}
+            </div>
+          </main>
+        ) : (
+          <Redirect from="/home" to="/" />
+        )}
+      </div>
     );
   }
 }
