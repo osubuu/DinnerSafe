@@ -166,7 +166,7 @@ class EventPage extends Component {
 
                               {/* Removes guest from the event */}
                               <button className="remove-friend" id={friend.name} onClick={this.removeFriendFromEvent}>
-                                <i className="fas fa-times-circle" />
+                                <i className="fas fa-times" />
                               </button>
                             </li>
                           );
