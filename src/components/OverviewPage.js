@@ -3,6 +3,7 @@ import { Link, Route, Redirect } from "react-router-dom";
 import firebase from "firebase";
 import Header from "./Header";
 import swal from "sweetalert2";
+import Loader from "./Loader";
 
 class OverviewPage extends Component {
   constructor(props) {
@@ -104,6 +105,7 @@ class OverviewPage extends Component {
 
             <div className="wrapper">
               <div className="events">
+                <Loader />
                 <h3 className="section-header">Create Event</h3>
                 <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
                   <label className="new-event-label" htmlFor="new-event">
