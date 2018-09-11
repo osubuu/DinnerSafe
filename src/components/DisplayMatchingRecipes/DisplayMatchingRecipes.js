@@ -42,12 +42,13 @@ class DisplayMatchingRecipes extends Component {
 
   setRestrictions = () => {
     // filters userProfile.friends array for friends with the event and pushes them to the friends array
-    const friends = this.props.userProfile.friends.filter(friend => friend.parties && friend.parties.includes(this.props.eventName));
+    const friends = this.props.userProfile.friends.filter(
+      friend => friend.parties && friend.parties.includes(this.props.eventName)
+    );
 
     const allergies = [];
     const diets = [];
     const ingredients = [];
-    
 
     friends.forEach(friend => {
       if (friend.allowedAllergy) {
@@ -73,9 +74,8 @@ class DisplayMatchingRecipes extends Component {
         }
       },
       () => {
-      
         matchingRecipes(this.state.restrictions).then(res => {
-
+          this.props.checkIfAPICallDone();
           this.setState({
             listOfRecipes: res.data.matches
           });
@@ -84,12 +84,11 @@ class DisplayMatchingRecipes extends Component {
     );
   };
 
-  handleChange = (e) => {
-
+  handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
-  }
+  };
 
   componentDidMount() {
     this.setRestrictions();
@@ -98,20 +97,12 @@ class DisplayMatchingRecipes extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.setRestrictions();
+  };
 
-    // if(this.state.search){
-    //   this.setState({
-    //     placeholder: this.state.search,
-    //     search: ""
-    //   })
-    // }
-  }
-
-  handleCheckboxChange = (e) => {
-    
+  handleCheckboxChange = e => {
     const tempCourses = this.state.courses;
 
-    const courseList = { 
+    const courseList = {
       mains: "course^course-Main Dishes",
       desserts: "course^course-Desserts",
       sideDishes: "course^course-Side Dishes",
@@ -124,20 +115,17 @@ class DisplayMatchingRecipes extends Component {
       condimentsAndSauces: "course^course-Condiments and Sauces",
       cocktails: "course^course-Cocktails",
       snacks: "course^course-Snacks",
-      lunch: "course^course-Lunch",
-    }
+      lunch: "course^course-Lunch"
+    };
 
     // Remove from array
-    if (this.state[e.target.name]){
-      tempCourses.splice(tempCourses.indexOf(courseList[e.target.name]),1)
-
+    if (this.state[e.target.name]) {
+      tempCourses.splice(tempCourses.indexOf(courseList[e.target.name]), 1);
     }
     // Add to array
     else {
-      tempCourses.push(courseList[e.target.name])
+      tempCourses.push(courseList[e.target.name]);
     }
-
-
 
     const value = !this.state[e.target.name];
     // const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -147,12 +135,11 @@ class DisplayMatchingRecipes extends Component {
       [name]: value,
       courses: tempCourses
     });
-  }
+  };
 
   render() {
     return (
       <div className="matching-recipes">
-
         <form className="filter-recipes-form" action="">
           <label htmlFor="search">Search</label>
           <input
@@ -165,11 +152,7 @@ class DisplayMatchingRecipes extends Component {
 
           <div className="courses">
             <label>
-              <input
-                name="mains"
-                type="checkbox"
-                checked={this.state.mains}
-                onChange={this.handleCheckboxChange} />
+              <input name="mains" type="checkbox" checked={this.state.mains} onChange={this.handleCheckboxChange} />
               Mains
             </label>
 
@@ -178,8 +161,9 @@ class DisplayMatchingRecipes extends Component {
                 name="desserts"
                 type="checkbox"
                 checked={this.state.desserts}
-                onChange={this.handleCheckboxChange} />
-                Desserts
+                onChange={this.handleCheckboxChange}
+              />
+              Desserts
             </label>
 
             <label>
@@ -187,8 +171,9 @@ class DisplayMatchingRecipes extends Component {
                 name="sideDishes"
                 type="checkbox"
                 checked={this.state.sideDishes}
-                onChange={this.handleCheckboxChange} />
-                Side Dishes
+                onChange={this.handleCheckboxChange}
+              />
+              Side Dishes
             </label>
 
             <label>
@@ -196,17 +181,14 @@ class DisplayMatchingRecipes extends Component {
                 name="appetizers"
                 type="checkbox"
                 checked={this.state.appetizers}
-                onChange={this.handleCheckboxChange} />
-                Appetizers
+                onChange={this.handleCheckboxChange}
+              />
+              Appetizers
             </label>
 
             <label>
-              <input
-                name="salads"
-                type="checkbox"
-                checked={this.state.salads}
-                onChange={this.handleCheckboxChange} />
-                Salads
+              <input name="salads" type="checkbox" checked={this.state.salads} onChange={this.handleCheckboxChange} />
+              Salads
             </label>
 
             <label>
@@ -214,26 +196,19 @@ class DisplayMatchingRecipes extends Component {
                 name="breakfastAndBrunch"
                 type="checkbox"
                 checked={this.state.breakfastAndBrunch}
-                onChange={this.handleCheckboxChange} />
-                Breakfast & Brunch
+                onChange={this.handleCheckboxChange}
+              />
+              Breakfast & Brunch
             </label>
 
             <label>
-              <input
-                name="breads"
-                type="checkbox"
-                checked={this.state.breads}
-                onChange={this.handleCheckboxChange} />
-                Breads
+              <input name="breads" type="checkbox" checked={this.state.breads} onChange={this.handleCheckboxChange} />
+              Breads
             </label>
 
             <label>
-              <input
-                name="soups"
-                type="checkbox"
-                checked={this.state.soups}
-                onChange={this.handleCheckboxChange} />
-                Soups
+              <input name="soups" type="checkbox" checked={this.state.soups} onChange={this.handleCheckboxChange} />
+              Soups
             </label>
 
             <label>
@@ -241,8 +216,9 @@ class DisplayMatchingRecipes extends Component {
                 name="beverages"
                 type="checkbox"
                 checked={this.state.beverages}
-                onChange={this.handleCheckboxChange} />
-                Beverages
+                onChange={this.handleCheckboxChange}
+              />
+              Beverages
             </label>
 
             <label>
@@ -250,8 +226,9 @@ class DisplayMatchingRecipes extends Component {
                 name="condimentsAndSauces"
                 type="checkbox"
                 checked={this.state.condimentsAndSauces}
-                onChange={this.handleCheckboxChange} />
-                Condiments & Sauces
+                onChange={this.handleCheckboxChange}
+              />
+              Condiments & Sauces
             </label>
 
             <label>
@@ -259,28 +236,20 @@ class DisplayMatchingRecipes extends Component {
                 name="cocktails"
                 type="checkbox"
                 checked={this.state.cocktails}
-                onChange={this.handleCheckboxChange} />
-                Cocktails
+                onChange={this.handleCheckboxChange}
+              />
+              Cocktails
             </label>
 
             <label>
-              <input
-                name="snacks"
-                type="checkbox"
-                checked={this.state.snacks}
-                onChange={this.handleCheckboxChange} />
-                Snacks
+              <input name="snacks" type="checkbox" checked={this.state.snacks} onChange={this.handleCheckboxChange} />
+              Snacks
             </label>
 
             <label>
-              <input
-                name="lunch"
-                type="checkbox"
-                checked={this.state.lunch}
-                onChange={this.handleCheckboxChange} />
-                Lunch
+              <input name="lunch" type="checkbox" checked={this.state.lunch} onChange={this.handleCheckboxChange} />
+              Lunch
             </label>
-
           </div>
 
           <button onClick={this.handleSubmit}>Filter Recipes</button>
