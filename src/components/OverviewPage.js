@@ -111,7 +111,7 @@ class OverviewPage extends Component {
                 <h3 className="section-header">Create Event</h3>
                 <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
                   <label className="new-event-label" htmlFor="new-event">
-                    Event Name
+                    New Event Name
                   </label>
                   <input
                     className="new-event-name-input"
@@ -119,6 +119,7 @@ class OverviewPage extends Component {
                     id="new-event"
                     type="text"
                     value={this.state.inputValue}
+                    autoComplete="off"
                   />
                   <button className="new-event-button" onClick={this.handleClickAddEvent}>
                     Submit
