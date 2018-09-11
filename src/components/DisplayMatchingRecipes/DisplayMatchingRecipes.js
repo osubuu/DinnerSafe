@@ -319,6 +319,7 @@ class DisplayMatchingRecipes extends Component {
                     key={recipe.id}
                     recipe={recipe}
                     buttonClass={"recipe-add-button"}
+                    recipeHeading={"recipe-name"}
                   />
                 );
               })}

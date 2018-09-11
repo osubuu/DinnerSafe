@@ -5,7 +5,7 @@ import React from "react";
 const DisplaySingleRecipe = props => {
   return (
     <li className={props.className}>
-    <h2 className="recipe-name">{props.recipe.recipeName}</h2>
+    <h2 className={props.recipeHeading}>{props.recipe.recipeName}</h2>
     <button className={props.buttonClass} onClick={() => props.toggleRecipe(props.recipe, props.action)}>{props.buttonTag}</button>
       <a className="recipe-each-link clearfix" href={`http://www.yummly.com/recipe/${props.recipe.id}`} target="_blank">
         <div className="recipe-img-container">
