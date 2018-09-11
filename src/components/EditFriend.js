@@ -239,9 +239,15 @@ class EditFriend extends Component {
 
                 <h3 className="edit-guest-section-header">Restricted Ingredients</h3>
                 <section className="edit-guest-form">
-                  <form onSubmit={this.handleSubmitEditFriend} action="">
-                    <input value={this.state.inputValue} onChange={this.handleChangeEditFriend} type="text" />
-                    <button onClick={this.handleClickEditFriend}>ADD</button>
+                  <form className="clearfix" onSubmit={this.handleSubmitEditFriend} action="">
+                    
+                    <div className="restricted-ingredient-label-input-container">
+                      <input className="add-restricted-ingredient-input" value={this.state.inputValue} onChange={this.handleChangeEditFriend} type="text" id="add-restricted-ingredient"/>
+                      
+                      <label className="add-restricted-ingredient-label" htmlFor="add-restricted-ingredient">New Restricted Ingredient</label>
+                    </div>
+                    
+                    <button className="add-restricted-ingredient-button" onClick={this.handleClickEditFriend}>Add</button>
                   </form>
 
                   <ul className="friend-restricted-ingredients clearfix">

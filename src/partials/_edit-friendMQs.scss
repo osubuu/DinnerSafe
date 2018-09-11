@@ -1,0 +1,27 @@
+@media (max-width: 600px) {
+  .allergy-diet {
+      width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .restricted-ingredient-label-input-container {
+    min-width: 170px;
+  }
+
+  .add-restricted-ingredient-label {
+    font-size: 1.2rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .add-restricted-ingredient-input:focus + .add-restricted-ingredient-label,
+  .add-restricted-ingredient-input:not([value=""]) + .add-restricted-ingredient-label {
+    min-width: 200px;
+    transform: translate(-5%, -50%);
+}
+
+  .add-restricted-ingredient-button {
+    margin: 20px 0 20px 5px;
+  }
+}
