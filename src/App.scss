@@ -54,7 +54,9 @@ label {
 }
 
 input[type="checkbox"] + label .stylish-checkbox,
-input[type="checkbox"]:checked + label .stylish-checkbox {
+input[type="checkbox"]:checked + label .stylish-checkbox,
+input[type="checkbox"] + .stylish-checkbox,
+input[type="checkbox"]:checked + .stylish-checkbox {
   display: inline-block;
   width: 18px;
   height: 18px;
@@ -66,19 +68,28 @@ input[type="checkbox"]:checked + label .stylish-checkbox {
   border: 2px solid $color-1;
 }
 
-input[type="checkbox"] + label .stylish-checkbox {
+input[type="checkbox"] + .stylish-checkbox,
+input[type="checkbox"]:checked + .stylish-checkbox {
+  left: 5px;
+}
+
+input[type="checkbox"] + label .stylish-checkbox,
+input[type="checkbox"]:checked + .stylish-checkbox {
   background: white;
 }
 
-input[type="checkbox"] + label .stylish-checkbox .fa-check {
+input[type="checkbox"] + label .stylish-checkbox .fa-check,
+input[type="checkbox"] + .stylish-checkbox .fa-check {
   display: none;
 }
 
-input[type="checkbox"]:checked + label .stylish-checkbox {
+input[type="checkbox"]:checked + label .stylish-checkbox,
+input[type="checkbox"]:checked + .stylish-checkbox {
   background: rgb(43, 218, 37);
 }
 
-input[type="checkbox"]:checked + label .stylish-checkbox .fa-check {
+input[type="checkbox"]:checked + label .stylish-checkbox .fa-check,
+input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
   display: block;
   position: absolute;
   top: 50%;
