@@ -502,11 +502,11 @@ header {
   left: 75%;
   color: white; }
 
-.event-page .filter-recipes-form label {
+.event-page .filter-recipes-label {
   font-size: 2.5rem; }
 
-.event-page .filter-recipes-form input {
-  width: calc(90% - 30px);
+.event-page .filter-recipes-input {
+  width: calc(85% - 30px);
   font-size: 1.8rem;
   border-radius: 5px;
   border: none;
@@ -525,11 +525,16 @@ header {
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.6);
   padding: 10px;
-  margin: 5px 5px; }
+  margin: 5px 5px;
+  position: relative; }
 
 .display-single-recipe {
   float: left;
-  width: calc(50% - 10px); }
+  width: calc(50% - 10px);
+  height: 300px; }
+
+.saved-single-recipe {
+  height: 100%; }
 
 .saved-recipes {
   float: left;
@@ -543,11 +548,37 @@ header {
   font-size: 1.8rem;
   text-align: center;
   font-family: "Muli", sans-serif;
-  color: #ffe4c9; }
+  color: #ffe4c9;
+  margin-bottom: 10px; }
 
 .recipe-img-container {
-  width: 95%;
-  margin: 0 auto; }
+  width: auto;
+  margin: 0 auto;
+  height: 100%; }
+
+.recipe-img {
+  border-radius: 5px;
+  width: auto;
+  height: 200px; }
+
+.recipe-add-button, .recipe-remove-button {
+  margin-left: 5px;
+  background: none;
+  border: none;
+  color: #f34843;
+  font-size: 2rem;
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  z-index: 100; }
+
+h2.recipe-name {
+  font-size: 1.8rem;
+  text-align: left;
+  font-family: "Muli", sans-serif;
+  color: #ffe4c9;
+  float: left;
+  margin-bottom: 10px; }
 
 .edit-guest-subheader {
   background: #dedede;

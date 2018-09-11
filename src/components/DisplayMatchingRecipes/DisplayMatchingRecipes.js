@@ -145,8 +145,9 @@ class DisplayMatchingRecipes extends Component {
     return (
       <div className="matching-recipes clearfix">
         <form className="filter-recipes-form" action="">
-          <label htmlFor="search">Search</label>
+          <label className="filter-recipes-label" htmlFor="search">Search</label>
           <input
+          className="filter-recipes-input"
             type="text"
             id="search"
             placeholder="ingredient"
@@ -155,7 +156,7 @@ class DisplayMatchingRecipes extends Component {
           />
 
           <div className="courses">
-            <label>
+            <label><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               <input
                 className="course-checkbox"
                 name="mains"
@@ -173,7 +174,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.desserts}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Desserts
             </label>
 
@@ -184,7 +185,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.sideDishes}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Side Dishes
             </label>
 
@@ -195,7 +196,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.appetizers}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Appetizers
             </label>
 
@@ -206,7 +207,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.salads}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Salads
             </label>
 
@@ -217,7 +218,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.breakfastAndBrunch}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Breakfast & Brunch
             </label>
 
@@ -228,7 +229,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.breads}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Breads
             </label>
 
@@ -239,7 +240,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.soups}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Soups
             </label>
 
@@ -250,7 +251,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.beverages}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Beverages
             </label>
 
@@ -261,7 +262,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.condimentsAndSauces}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Condiments & Sauces
             </label>
             <label>
@@ -271,7 +272,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.cocktails}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Cocktails
             </label>
 
@@ -282,7 +283,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.snacks}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Snacks
             </label>
 
@@ -293,7 +294,7 @@ class DisplayMatchingRecipes extends Component {
                 type="checkbox"
                 checked={this.state.lunch}
                 onChange={this.handleCheckboxChange}
-              />
+              /><div className="stylish-checkbox"><i class="fas fa-check"></i></div>
               Lunch
             </label>
           </div>
@@ -317,6 +318,7 @@ class DisplayMatchingRecipes extends Component {
                     buttonTag={<i class="fas fa-plus-circle" />}
                     key={recipe.id}
                     recipe={recipe}
+                    buttonClass={"recipe-add-button"}
                   />
                 );
               })}
