@@ -12,7 +12,7 @@
       width: 15%;
       margin: 20px 0;
       text-align: center;
-      background: $green;
+      background: $yellow;
       padding: 10px;
       color: white;
       border-radius: 5px;
@@ -22,15 +22,20 @@
     float: left;
     width: calc(20% - 20px);
     margin: 25px 10px;
+    background: #505050;
+    padding: 5px;
+    border: 1px solid #505050;
+    border-radius: 5px;
   }
   .guest p {
-    font-size: 2.5rem;
+    font-size: 2.2em;
     float: left;
-    width: 80%;
+    width: 70%;
+    color: white;
   }
   .fakeButton {
     float: left;
-    width: 10%;
+    width: 15%;
     & i {
       font-size: 1.8rem;
     }
@@ -63,8 +68,8 @@
 
   }
   .guestList a {
-    border: $green 1px solid;
-    background: $green;
+    border: $yellow 1px solid;
+    background: $yellow;
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -87,9 +92,9 @@
   //   }
   // }
   .add-friend-button {
-    border: $red 1px solid;
+    border: $yellow 1px solid;
     border-radius: 5px;
-    background: $red;
+    background: $yellow;
     padding: 7px;
     margin-top: 5px;
     position: relative;
