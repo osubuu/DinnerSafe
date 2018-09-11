@@ -20,35 +20,91 @@
     margin: 25px 10px;
   }
   .guest p {
-    font-size: 2rem;
+    font-size: 2.5rem;
     float: left;
     width: 80%;
   }
   .fakeButton {
     float: left;
     width: 10%;
-    & h2 {
-      font-size: 1.1rem;
-      border: grey 1px solid;
-      border-radius: 5px;
-      padding: 1px;
-      margin: 4px 2px;
-      width: 100%;
+    & i {
+      font-size: 1.8rem;
     }
   }
-  .guest button {
+  button.remove-friend {
     float: left;
     width: calc(10% - 4px);
-    margin: 4px 2px;
-    color: red;
+    margin: 0px 2px;
+    color: $red;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.9rem;
   }
-
   .matching-recipes {
     float: left;
     width: calc(80% - 20px);
     margin: 25px 10px;
   }
+  .guests {
+    overflow: scroll; 
+  }
+  li.guest {
+    margin: 5px 0px;
+  }
+  .guestList a {
+    font-size: 1.6rem;
+    display: inline-block;
+    margin: 10px 0;
+    color: $red;
+  }
+  .guestList form {
+    position: relative;
+    padding: 0;
+  }
+  .guestList label {
+    position: absolute;
+    transform: translate(0,16px) scale(1);
+    top: -10px;
+    & .active {
+      transform: translate(0, 4px) scale(.75);
+      top: -16px
+    }
+  }
+  .guestList input {
+    border: none;
+    outline: 0;
+    font-size: 1.6rem;
+    padding: 16px 0 10px;
+  }
+  .add-friend button {
+    border: $red 1px solid;
+    border-radius: 5px;
+    background: $red;
+    padding: 7px;
+    margin-top: 5px;
+    position: relative;
+    left: 75%;
+    color: white;
+  }
+  .filter-recipes-form label{
+    font-size: 2.5rem;
+  }
+  .filter-recipes-form input {
+    width: calc(90% - 30px);
+    font-size: 1.8rem;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    margin: 15px;
+  }
+  .courses {
+    width: 100%;
+    border: none;
+  }
+  .courses label {
+    display: inline-block;
+    width: calc(100% / 4);
+    font-size: 1.5rem;
+  }
+
 
 }

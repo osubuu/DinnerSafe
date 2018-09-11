@@ -15,11 +15,11 @@
 .new-event-label {
   width: 100%;
   float: left;
-  font-size: 1.5rem;
-  text-align: left;
   padding-bottom: 5px;
   font-family: $primary-font;
   font-weight: bold;
+  text-align: center;
+  font-size: 2.6rem;
 }
 
 .new-event-name-input,
@@ -29,17 +29,19 @@
 }
 
 .new-event-name-input {
+  width: 100%;
+  border-radius: 5px;
   padding: 10px;
-  width: calc(100% - 114px);
 }
 
 .new-event-button {
-  float: left;
-  margin-left: 10px;
+  position: relative;
+  left: 37%;
   border-radius: 5px;
   background: rgb(17, 120, 66);
   color: $color-2;
   padding: 10px 20px;
+  margin: 10px;
 }
 
 .go-to-event,

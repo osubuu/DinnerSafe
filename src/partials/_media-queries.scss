@@ -43,8 +43,8 @@
   }
   .new-event-button {
     padding: 10px;
-    font-size: 1.6rem;
     float: none;
+    left: 0;
   }
   .new-event-name-input {
     width: 100%;
@@ -52,7 +52,6 @@
     border-radius: 5px;
   }
   .new-event-label {
-    font-size: 2rem;
     text-align: center;
   }
   .create-new-event {
