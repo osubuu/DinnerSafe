@@ -14,16 +14,16 @@
       text-align: center;
       background: $yellow;
       padding: 10px;
-      color: white;
+      color: $color-1;
       border-radius: 5px;
     }
   }
   .guestList {
     float: left;
     width: calc(20% - 20px);
-    margin: 25px 10px;
+    margin: 25px 10px 25px 0;
     background: #505050;
-    padding: 5px;
+    padding: 15px;
     border: 1px solid #505050;
     border-radius: 5px;
   }
@@ -36,26 +36,36 @@
   .fakeButton {
     float: left;
     width: 15%;
+    margin-top: 5px;
+    color: white;
+    cursor: pointer;
+    transition: 0.1s;
     & i {
-      font-size: 1.8rem;
+      font-size: 2.2rem;
+    }
+
+    &:hover {
+      transition: 0.1s;
+      color: $yellow;
     }
   }
   .remove-friend-button {
     background: $red;
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     float: left;
     color: white;
     border: none;
     border-radius: 50%;
     font-weight: bold;
     position: relative;
+    cursor: pointer;
   }
   .remove-friend-button .fa-times {
     position: absolute;
     right: -7px;
-    top: 10px;
-    font-size: 1.5rem;
+    top: 15px;
+    font-size: 2.2rem;
   }
   .matching-recipes {
     float: left;
@@ -70,10 +80,18 @@
   .filter-button {
     border: $yellow 1px solid;
     background: $yellow;
-    color: white;
+    color: $color-1;
     padding: 10px;
     border-radius: 5px;
     margin: 5px 0;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  .guestList a {
+    &:hover {
+      text-decoration: underline;
+    }
   }
   li.guest {
     margin: 5px 0px;
@@ -96,29 +114,36 @@
     border-radius: 5px;
     background: $yellow;
     padding: 7px;
-    margin-top: 5px;
+    margin-top: 10px;
     position: relative;
-    left: 75%;
-    color: white;
+    color: $color-1;
+    font-size: 1.4rem;
   }
   .add-new-friend-label {
+    margin: 0;
+    margin-left: 5px;
     font-size: 1.2rem;
-    top: 25px;
-    left: -35px;
+    top: 27px;
+    left: 0;
+    border-bottom: 1px solid $color-1;
   }
   .add-new-friend-input {
     margin: 10px 0 0;
     border: none;
     outline: 0;
     font-size: 1.6rem;
-    padding: 20px 0 10px;
+    padding: 20px 0 10px 5px;
+    border-radius: 5px;
   }
 
   .filter-recipes-form {
     margin-left: 10px;
     margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid $color-1;
+    padding: 10px;
+    // border-bottom: 1px solid $color-1;
+    border-radius: 5px;
+    border: 1px solid $color-1;
+    background: rgba($peach, 0.5);
   }
 
   .filter-recipes-label {
@@ -129,12 +154,12 @@
     width: calc(60% - 30px);
     font-size: 1.8rem;
     border-radius: 5px;
-    border: none;
+    border: 1px solid $color-1;
     padding: 5px;
     padding-left: 10px;
-    margin: 15px;
+    margin: 0 0 15px 15px;
     color: $color-1;
-    background: $peach;
+    background: white;
   }
 
   .courses {
