@@ -4,10 +4,10 @@ import React from "react";
 
 const DisplaySingleRecipe = props => {
   return (
-     <li className={props.className}>
-      <a className="recipe-each-link" href={`http://www.yummly.com/recipe/${props.recipe.id}`} target="_blank">
-        <h2 className="recipe-name">{props.recipe.recipeName}</h2>
-
+    <li className={props.className}>
+    <h2 className="recipe-name">{props.recipe.recipeName}</h2>
+    <button className={props.buttonClass} onClick={() => props.toggleRecipe(props.recipe, props.action)}>{props.buttonTag}</button>
+      <a className="recipe-each-link clearfix" href={`http://www.yummly.com/recipe/${props.recipe.id}`} target="_blank">
         <div className="recipe-img-container">
           {/* Removing the last 6 characters from the provided url '=s90-c' which appear to set the size of the image to a 90 pixel square */}
           <img
@@ -18,7 +18,6 @@ const DisplaySingleRecipe = props => {
         </div>
       </a>
 
-      <button onClick={() => props.toggleRecipe(props.recipe, props.action)}>{props.buttonTag}</button>
     </li>
   );
 };
