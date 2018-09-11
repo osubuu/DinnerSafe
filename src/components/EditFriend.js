@@ -248,9 +248,11 @@ class EditFriend extends Component {
                     {this.props.friendProfile.excludedIngredient
                       ? this.props.friendProfile.excludedIngredient.map((ingredient, i) => {
                           return (
-                            <div className="allergy-diet" key={i}>
-                              <li>{_.startCase(_.toLower(ingredient))}</li>
-                              <button onClick={() => this.deleteIngredient(`${ingredient}`)}>REMOVE INGREDIENT</button>
+                            <div className="allergy-diet clearfix" key={i}>
+                              <button className="delete-ingredient" onClick={() => this.deleteIngredient(`${ingredient}`)}>
+                                <i className="fas fa-times"></i>
+                              </button>
+                              <li className="ingredient">{_.startCase(_.toLower(ingredient))}</li>
                             </div>
                           );
                         })

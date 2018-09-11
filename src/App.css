@@ -462,13 +462,21 @@ header {
   .event-page .fakeButton i {
     font-size: 1.8rem; }
 
-.event-page button.remove-friend {
+.event-page .remove-friend-button {
+  background: #f34843;
+  height: 20px;
+  width: 20px;
   float: left;
-  width: calc(10% - 4px);
-  margin: 0px 2px;
-  color: #f34843;
+  color: white;
   border: none;
-  font-size: 1.9rem; }
+  border-radius: 50%;
+  font-weight: bold;
+  position: relative; }
+
+.event-page .remove-friend-button .fa-times {
+  position: absolute;
+  right: -7px;
+  top: 10px; }
 
 .event-page .matching-recipes {
   float: left;
@@ -478,14 +486,15 @@ header {
 .event-page .guests {
   overflow: scroll; }
 
+.event-page .guestList a {
+  border: #117842 1px solid;
+  background: #117842;
+  color: white;
+  padding: 10px;
+  border-radius: 5px; }
+
 .event-page li.guest {
   margin: 5px 0px; }
-
-.event-page .guestList a {
-  font-size: 1.6rem;
-  display: inline-block;
-  margin: 10px 0;
-  color: #f34843; }
 
 .event-page .guestList form {
   position: relative;
@@ -505,7 +514,7 @@ header {
   font-size: 1.6rem;
   padding: 16px 0 10px; }
 
-.event-page .add-friend button {
+.event-page .add-friend-button {
   border: #f34843 1px solid;
   border-radius: 5px;
   background: #f34843;
@@ -530,7 +539,8 @@ header {
   overflow: scroll;
   float: left;
   width: calc(75% - 10px);
-  margin: 0 5px; }
+  margin: 0 5px;
+  height: 100vh; }
 
 .display-single-recipe,
 .save-single-recipe {
@@ -556,6 +566,10 @@ header {
     font-size: 2.5rem;
     font-family: "Muli", sans-serif;
     text-align: center; }
+
+.saved-recipe-list {
+  height: 100vh;
+  overflow: scroll; }
 
 .recipe-name {
   font-size: 1.8rem;
@@ -594,7 +608,7 @@ h2.recipe-name {
   margin-bottom: 10px; }
 
 .edit-guest-subheader {
-  background: #dedede;
+  background: #c8c8c8;
   margin-bottom: 40px; }
 
 .edit-guest-sub-subheader {
@@ -638,7 +652,33 @@ h2.recipe-name {
 
 .allergy-diet {
   width: 50%;
+  float: left;
+  position: relative;
+  font-size: 2rem;
+  font-family: "Muli", sans-serif;
+  margin: 10px 0; }
+
+.delete-ingredient {
+  display: inline-block;
+  float: left;
+  border: none;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: #f34843;
+  color: #f2f2f2;
+  position: relative;
+  margin-right: 8px;
+  margin-left: 5px; }
+
+.ingredient {
   float: left; }
+
+.delete-ingredient .fa-times {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); }
 
 * {
   margin: 0;
@@ -671,7 +711,7 @@ input[type="checkbox"] {
 
 label {
   position: relative;
-  margin-left: 35px;
+  margin-left: 38px;
   font-size: 2rem; }
 
 input[type="checkbox"] + label .stylish-checkbox,
@@ -681,7 +721,7 @@ input[type="checkbox"]:checked + label .stylish-checkbox {
   height: 18px;
   position: absolute;
   border-radius: 3px;
-  left: calc(-15px - 10px);
+  left: calc(-18px - 10px);
   top: 50%;
   transform: translateY(-50%);
   border: 2px solid #141414; }
