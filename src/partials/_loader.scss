@@ -17,15 +17,13 @@
 
 .matching-recipes {
   .loader {
-    height: 100%;
-    width: 100%;
     position: relative;
   }
 
   .lds-spin {
     position: absolute;
-    top: 100%;
+    bottom: -200px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
   }
 }

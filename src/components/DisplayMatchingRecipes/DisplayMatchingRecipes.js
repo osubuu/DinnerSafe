@@ -302,10 +302,12 @@ class DisplayMatchingRecipes extends Component {
           <button className="filter-button" onClick={this.handleSubmit}>
             Filter Recipes
           </button>
+
+          {this.state.APICallDone === false ? <Loader /> : null}
         </form>
 
         {this.state.APICallDone === true ? (
-          <div>
+          <div className="recipes-container">
             <ul className="recipe-return clearfix">
               {this.state.listOfRecipes.map(recipe => {
                 return (
@@ -325,9 +327,8 @@ class DisplayMatchingRecipes extends Component {
               <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe} savedRecipes={this.props.savedRecipes} />
             ) : null}
           </div>
-        ) : (
-          <Loader />
-        )}
+        ) : // <Loader />
+        null}
       </div>
     );
   }

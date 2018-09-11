@@ -278,15 +278,13 @@ label, input, .event-title h2, a, button, .new-event-label, .section-header, .us
   transform: translate(-50%, -50%); }
 
 .matching-recipes .loader {
-  height: 100%;
-  width: 100%;
   position: relative; }
 
 .matching-recipes .lds-spin {
   position: absolute;
-  top: 100%;
+  bottom: -200px;
   left: 50%;
-  transform: translate(-50%, -50%); }
+  transform: translateX(-50%); }
 
 header {
   background: #505050; }
@@ -325,24 +323,32 @@ header {
     background: #f2f2f2;
     color: #f34843; }
 
+.events .section-header {
+  font-size: 30px; }
+
 .page-title {
   text-align: center;
   margin: 50px 0 25px 0; }
 
+.go-to-event,
+.create-new-event {
+  padding: 10px;
+  border-radius: 5px; }
+
 .create-new-event {
   background: #ffcb00;
-  padding: 10px;
+  padding: 20px;
   border-radius: 5px;
   color: #141414; }
 
 .new-event-label {
   width: 100%;
   float: left;
-  padding-bottom: 5px;
   font-family: "Roboto", sans-serif;
   font-weight: bold;
   text-align: center;
-  font-size: 2.6rem; }
+  font-size: 2.6rem;
+  margin: 0; }
 
 .new-event-name-input,
 .new-event-button {
@@ -350,9 +356,11 @@ header {
   float: left; }
 
 .new-event-name-input {
-  width: 100%;
+  width: 80%;
   border-radius: 5px;
-  padding: 10px; }
+  padding: 10px;
+  margin: 15px 10%;
+  text-align: center; }
 
 .new-event-button {
   position: relative;
@@ -361,19 +369,24 @@ header {
   background: #117842;
   color: #f2f2f2;
   padding: 10px 20px;
-  margin: 10px; }
-
-.go-to-event,
-.create-new-event {
-  padding: 10px;
-  border-radius: 5px; }
+  margin: 0 10px;
+  transition: 0.2s; }
+  .new-event-button:hover {
+    transition: 0.2s;
+    background: #f2f2f2;
+    color: #117842; }
 
 .go-to-event {
-  width: calc(100% - 55px);
+  width: 100%;
   float: left;
   background: #505050;
-  color: white;
-  font-family: "Muli", sans-serif; }
+  color: #f2f2f2;
+  font-family: "Muli", sans-serif;
+  transition: 0.2s; }
+  .go-to-event:hover {
+    transition: 0.2s;
+    background: #ffe4c9;
+    color: #141414; }
 
 .create-new-event,
 .event {
@@ -387,18 +400,16 @@ header {
 
 .delete-button {
   background: #f34843;
-  height: 45px;
-  width: 45px;
+  height: 20px;
+  width: 20px;
   float: left;
   color: white;
   border: none;
   border-radius: 50%;
   font-weight: bold;
   position: absolute;
-  margin-left: 10px;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%); }
+  right: -7px;
+  top: -8px; }
 
 .fa-times {
   position: absolute;
@@ -407,7 +418,7 @@ header {
   transform: translate(-50%, -50%);
   padding: 0;
   margin: 0;
-  font-size: 2.5rem; }
+  font-size: 1.5rem; }
 
 .event-page .event-title {
   margin: 25px 0; }
@@ -568,6 +579,53 @@ h2.recipe-name {
   color: #ffe4c9;
   float: left;
   margin-bottom: 10px; }
+
+.edit-guest-subheader {
+  background: #dedede;
+  margin-bottom: 40px; }
+
+.edit-guest-sub-subheader {
+  padding: 15px 0;
+  position: relative; }
+
+.edit-guest-title {
+  display: block;
+  width: 60%;
+  padding-right: 10px;
+  font-size: 2rem;
+  float: left;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.edit-guest-save-div {
+  width: 40%;
+  float: right;
+  display: block; }
+
+.edit-guest-save {
+  padding: 15px 25px;
+  background: #117842;
+  color: #f2f2f2;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  display: inline-block;
+  text-align: center;
+  float: right; }
+
+.edit-guest-section-header {
+  margin-bottom: 15px; }
+
+.edit-guest-form {
+  background: #ffcb96;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  padding: 15px; }
+
+.alergy-diet {
+  width: 50%;
+  float: left; }
 
 * {
   margin: 0;
