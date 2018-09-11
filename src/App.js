@@ -13,6 +13,7 @@ import EditFriend from "./components/EditFriend";
 
 //COMPONENTS
 import ExistingFriendList from "./components/ExistingFriendList";
+import Loader from "./components/Loader";
 
 const dbRef = firebase.database().ref();
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -30,9 +31,17 @@ class App extends Component {
       currentTextValue: "",
       loginPurpose: "",
       key: "",
-      savedRecipes: []
+      savedRecipes: [],
+      loading: false,
+      redirected: false
     };
   }
+
+  getRedirected = condition => {
+    this.setState({
+      redirected: true
+    });
+  };
 
   toggleRecipe = (recipeObj, action) => {
     let tempArr = this.state.savedRecipes;
@@ -91,7 +100,8 @@ class App extends Component {
         this.setState({
           userProfile: userObject,
           loggedIn: true,
-          key: userObject.id
+          key: userObject.id,
+          loading: false
         });
         return;
       } else {
@@ -127,7 +137,7 @@ class App extends Component {
     if (this.state.loginPurpose === "sign-in") {
       auth.signInWithPopup(provider).then(res => {
         //set user state to gmail display name
-        this.setState({ user: res.user.displayName }, () => {
+        this.setState({ user: res.user.displayName, loading: true }, () => {
           dbRef.on("value", snapshot => {
             this.checkIfUserExists(snapshot.val());
           });
@@ -149,7 +159,7 @@ class App extends Component {
           });
         }
 
-        this.setState({ user: userName }, () => {
+        this.setState({ user: userName, loading: true }, () => {
           dbRef.on("value", snapshot => {
             this.checkIfUserExists(snapshot.val());
           });
@@ -160,9 +170,14 @@ class App extends Component {
 
   // Handling for click of either sign in or create buttons
   handleClickLogin = e => {
-    this.setState({
-      loginPurpose: e.target.value
-    });
+    if (e.target.value !== "sign-in") {
+      this.setState({
+        loginPurpose: e.target.value,
+        loading: true
+      });
+    } else {
+      this.setState({ loginPurpose: e.target.value });
+    }
   };
 
   // Reset stats back to default when logged out
@@ -176,7 +191,9 @@ class App extends Component {
         user: "",
         currentTextValue: "",
         loginPurpose: "",
-        key: ""
+        key: "",
+        loading: false,
+        redirected: false
       });
       dbRef.off();
     });
@@ -256,7 +273,6 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Redirect from="*" to="/" />
           {/* Current router setup is possibly just a placeholder.
           /// Making sure it's not visible when hitting other pages of the site.
           /// decide if we should make the login page into a component?   */}
@@ -272,8 +288,12 @@ class App extends Component {
                     <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
                     <form className="log-in-form clearfix" action="" onSubmit={this.handleSubmitLogin}>
                       <div className="buttons clearfix">
-                        <button className="log-in-page-button sign-in-create" value="sign-in" onClick={this.handleClickLogin}>
-                          Sign In / Create Account <i class="fab fa-google"></i>
+                        <button
+                          className="log-in-page-button sign-in-create"
+                          value="sign-in"
+                          onClick={this.handleClickLogin}
+                        >
+                          Sign In / Create Account <i class="fab fa-google" />
                         </button>
                         <button className="log-in-page-button guest" onClick={this.handleClickLogin} value="guest">
                           Continue as Guest
@@ -284,6 +304,8 @@ class App extends Component {
                       </div>
                     </form>
                   </div>
+                  {this.state.loading === true || this.state.redirected === true ? <Loader /> : null}
+                  {/* <Loader /> */}
                 </section>
               );
             }}
@@ -291,9 +313,13 @@ class App extends Component {
 
           {/* REDIRECT FOR OVERVIEW PAGE: wait for userProfile to be ready */}
           <Route
+            exact
             path="/"
             render={() => {
-              return this.state.userProfile && this.state.loggedIn === true && this.state.key ? (
+              return this.state.userProfile &&
+                this.state.loggedIn === true &&
+                this.state.key &&
+                this.state.loading === false ? (
                 <Redirect to="/home" />
               ) : null;
             }}
@@ -309,15 +335,16 @@ class App extends Component {
                 handleLogout={this.handleLogout}
                 selectEvent={this.selectEvent}
                 userID={this.state.key}
+                getRedirected={this.getRedirected}
               />
             )}
           />
 
           {/* REDIRECT FOR SINGLE EVENT PAGE ROUTE: wait for selected event index to be ready */}
           <Route
-            // exact
             path="/home"
             render={() => {
+              // exact
               return this.state.selectedEventIndex ? <Redirect to="/event" /> : null;
             }}
           />
@@ -330,13 +357,15 @@ class App extends Component {
               <EventPage
                 {...props}
                 userProfile={this.state.userProfile}
-                // selectedEvent={this.state.userProfile.parties[this.state.selectedEventIndex]}
-                selectedEventIndex={this.state.selectedEventIndex}
+                selectedEventIndex={
+                  this.state.selectedEventIndex // selectedEvent={this.state.userProfile.parties[this.state.selectedEventIndex]}
+                }
                 handleBackToOverview={this.handleBackToOverview}
                 selectFriend={this.selectFriend}
                 handleLogout={this.handleLogout}
                 toggleRecipe={this.toggleRecipe}
                 savedRecipes={this.state.savedRecipes}
+                getRedirected={this.getRedirected}
               />
             )}
           />
@@ -354,19 +383,18 @@ class App extends Component {
             path="/edit-guest"
             render={props => (
               <EditFriend
-                {...props}
-                // friendProfile={
-                //   this.state.userProfile.friends[
-                //     _.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])
+                {...props} //     _.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend]) //   this.state.userProfile.friends[ // friendProfile={
                 //   ]
                 // }
                 friendProfile={this.getFriendProfile()}
-                // friendKey={_.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])}
-                friendKey={this.getFriendKey()}
+                friendKey={
+                  this.getFriendKey() // friendKey={_.findIndex(this.state.userProfile.friends, ["name", this.state.selectedFriend])}
+                }
                 userID={this.state.key}
                 handleBackToEvent={this.handleBackToEvent}
                 userProfile={this.state.userProfile}
                 handleLogout={this.handleLogout}
+                getRedirected={this.getRedirected}
               />
             )}
           />
@@ -379,6 +407,7 @@ class App extends Component {
                 {...props}
                 userProfile={this.state.userProfile}
                 selectedEventIndex={this.state.selectedEventIndex}
+                getRedirected={this.getRedirected}
               />
             )}
           />

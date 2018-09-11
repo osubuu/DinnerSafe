@@ -3,6 +3,7 @@ import { Link, Route, Redirect } from "react-router-dom";
 import firebase from "firebase";
 import Header from "./Header";
 import swal from "sweetalert2";
+import Loader from "./Loader";
 
 class OverviewPage extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class OverviewPage extends Component {
 
     if (props.userProfile) {
       this.dbRef = firebase.database().ref(`${this.props.userID}`);
+    } else {
+      props.getRedirected(true);
     }
   }
 
@@ -104,6 +107,7 @@ class OverviewPage extends Component {
 
             <div className="wrapper">
               <div className="events">
+                {/* <Loader /> */}
                 <h3 className="section-header">Create Event</h3>
                 <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
                   <label className="new-event-label" htmlFor="new-event">
@@ -144,7 +148,7 @@ class OverviewPage extends Component {
             </div>
           </main>
         ) : (
-          <Redirect from="/home" to="/" />
+          <Redirect from="/home" to="/" redirected={true} />
         )}
       </div>
     );

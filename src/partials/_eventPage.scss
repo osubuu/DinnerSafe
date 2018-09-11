@@ -96,21 +96,21 @@
     padding: 5px;
     margin: 15px;
   }
-  .courses {
-    width: 100%;
-    border: none;
-    & label {
-      display: inline-block;
-      font-size:  1.5rem;
-      width: calc(100% / 4);
-    }
-  }
-  input.course-checkbox {
-    display: inline-block;
-    font-size: 1.5rem;
-    visibility: hidden;
-    width: 0;
-  }
+  // .courses {
+  //   width: 100%;
+  //   border: none;
+  //   & label {
+  //     display: inline-block;
+  //     font-size:  1.5rem;
+  //     width: calc(100% / 4);
+  //   }
+  // }
+  // input.course-checkbox {
+  //   display: inline-block;
+  //   font-size: 1.5rem;
+  //   visibility: hidden;
+  //   width: 0;
+  // }
 
 
 }
