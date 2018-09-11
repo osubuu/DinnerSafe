@@ -14,6 +14,8 @@ class ExistingFriendList extends Component {
         key: null
       };
       this.dbRef = firebase.database().ref(`${this.props.userProfile.id}/friends`);
+    } else {
+      props.getRedirected(true);
     }
   }
 
@@ -93,9 +95,11 @@ class ExistingFriendList extends Component {
                     <div key={i} className="single-friend">
                       <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" defaultChecked />
                       <label htmlFor={i}>{friend.name}</label>
-                      <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
-                        DELETE FRIEND FROM EXISTING FRIENDS
-                      </button>
+                      {friend.name !== this.props.userProfile.user ? (
+                        <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
+                          DELETE FRIEND FROM EXISTING FRIENDS
+                        </button>
+                      ) : null}
                     </div>
                   );
                 } else {
@@ -103,9 +107,11 @@ class ExistingFriendList extends Component {
                     <div key={i} className="single-friend">
                       <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" />
                       <label htmlFor={i}>{friend.name}</label>
-                      <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
-                        DELETE FRIEND FROM EXISTING FRIENDS
-                      </button>
+                      {friend.name !== this.props.userProfile.user ? (
+                        <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
+                          DELETE FRIEND FROM EXISTING FRIENDS
+                        </button>
+                      ) : null}
                     </div>
                   );
                 }

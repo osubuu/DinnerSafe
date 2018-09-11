@@ -8,6 +8,7 @@ import matchingRecipes from "../matchingRecipes";
 // COMPONENTS
 import DisplaySingleRecipe from "./DisplaySingleRecipe";
 import DisplaySavedRecipes from "./DisplaySavedRecipes";
+import Loader from "../Loader";
 
 class DisplayMatchingRecipes extends Component {
   constructor() {
@@ -155,12 +156,19 @@ class DisplayMatchingRecipes extends Component {
 
           <div className="courses">
             <label>
-              <input className="course-checkbox" name="mains" type="checkbox" checked={this.state.mains} onChange={this.handleCheckboxChange} />
+              <input
+                className="course-checkbox"
+                name="mains"
+                type="checkbox"
+                checked={this.state.mains}
+                onChange={this.handleCheckboxChange}
+              />
               Mains
             </label>
 
             <label>
-              <input className="course-checkbox"
+              <input
+                className="course-checkbox"
                 name="desserts"
                 type="checkbox"
                 checked={this.state.desserts}
@@ -170,7 +178,8 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input className="course-checkbox"
+              <input
+                className="course-checkbox"
                 name="sideDishes"
                 type="checkbox"
                 checked={this.state.sideDishes}
@@ -180,7 +189,8 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input className="course-checkbox"
+              <input
+                className="course-checkbox"
                 name="appetizers"
                 type="checkbox"
                 checked={this.state.appetizers}
@@ -190,12 +200,19 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input className="course-checkbox" name="salads" type="checkbox" checked={this.state.salads} onChange={this.handleCheckboxChange} />
+              <input
+                className="course-checkbox"
+                name="salads"
+                type="checkbox"
+                checked={this.state.salads}
+                onChange={this.handleCheckboxChange}
+              />
               Salads
             </label>
 
             <label>
-              <input className="course-checkbox"
+              <input
+                className="course-checkbox"
                 name="breakfastAndBrunch"
                 type="checkbox"
                 checked={this.state.breakfastAndBrunch}
@@ -205,17 +222,30 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input className="course-checkbox" name="breads" type="checkbox" checked={this.state.breads} onChange={this.handleCheckboxChange} />
+              <input
+                className="course-checkbox"
+                name="breads"
+                type="checkbox"
+                checked={this.state.breads}
+                onChange={this.handleCheckboxChange}
+              />
               Breads
             </label>
 
             <label>
-              <input className="course-checkbox" name="soups" type="checkbox" checked={this.state.soups} onChange={this.handleCheckboxChange} />
+              <input
+                className="course-checkbox"
+                name="soups"
+                type="checkbox"
+                checked={this.state.soups}
+                onChange={this.handleCheckboxChange}
+              />
               Soups
             </label>
 
             <label>
-              <input className="course-checkbox"
+              <input
+                className="course-checkbox"
                 name="beverages"
                 type="checkbox"
                 checked={this.state.beverages}
@@ -225,7 +255,8 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input className="course-checkbox"
+              <input
+                className="course-checkbox"
                 name="condimentsAndSauces"
                 type="checkbox"
                 checked={this.state.condimentsAndSauces}
@@ -234,7 +265,8 @@ class DisplayMatchingRecipes extends Component {
               Condiments & Sauces
             </label>
             <label>
-              <input className="course-checkbox"
+              <input
+                className="course-checkbox"
                 name="cocktails"
                 type="checkbox"
                 checked={this.state.cocktails}
@@ -244,36 +276,56 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input className="course-checkbox" name="snacks" type="checkbox" checked={this.state.snacks} onChange={this.handleCheckboxChange} />
+              <input
+                className="course-checkbox"
+                name="snacks"
+                type="checkbox"
+                checked={this.state.snacks}
+                onChange={this.handleCheckboxChange}
+              />
               Snacks
             </label>
 
             <label>
-              <input className="course-checkbox" name="lunch" type="checkbox" checked={this.state.lunch} onChange={this.handleCheckboxChange} />
+              <input
+                className="course-checkbox"
+                name="lunch"
+                type="checkbox"
+                checked={this.state.lunch}
+                onChange={this.handleCheckboxChange}
+              />
               Lunch
             </label>
           </div>
 
-          <button className="filter-button" onClick={this.handleSubmit}>Filter Recipes</button>
+          <button className="filter-button" onClick={this.handleSubmit}>
+            Filter Recipes
+          </button>
         </form>
 
-        <ul className="recipe-return clearfix">
-          {this.state.listOfRecipes.map(recipe => {
-            return (
-              <DisplaySingleRecipe
-                className={"display-single-recipe"}
-                toggleRecipe={this.props.toggleRecipe}
-                action={"save"}
-                buttonTag={<i class="fas fa-plus-circle"></i>}
-                key={recipe.id}
-                recipe={recipe}
-              />
-            );
-          })}
-        </ul>
-        {this.state.APICallDone === true?
-        <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe}
-          savedRecipes={this.props.savedRecipes} />: null}
+        {this.state.APICallDone === true ? (
+          <div>
+            <ul className="recipe-return clearfix">
+              {this.state.listOfRecipes.map(recipe => {
+                return (
+                  <DisplaySingleRecipe
+                    className={"display-single-recipe"}
+                    toggleRecipe={this.props.toggleRecipe}
+                    action={"save"}
+                    buttonTag={<i class="fas fa-plus-circle" />}
+                    key={recipe.id}
+                    recipe={recipe}
+                  />
+                );
+              })}
+            </ul>
+            {this.state.APICallDone === true ? (
+              <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe} savedRecipes={this.props.savedRecipes} />
+            ) : null}
+          </div>
+        ) : (
+          <Loader />
+        )}
       </div>
     );
   }
