@@ -408,6 +408,7 @@ class App extends Component {
                 userProfile={this.state.userProfile}
                 selectedEventIndex={this.state.selectedEventIndex}
                 getRedirected={this.getRedirected}
+                handleLogout={this.handleLogout}
               />
             )}
           />

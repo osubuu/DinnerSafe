@@ -8,6 +8,7 @@
 @import "./partials/_eventPage.scss";
 @import "./partials/_matchingRecipes.scss";
 @import "./partials/_edit-friend";
+@import "./partials/_existingFriendList.scss";
 
 * {
   margin: 0;
@@ -90,3 +91,4 @@ input[type="checkbox"]:checked + label .stylish-checkbox .fa-check {
 @import "./partials/_loginPageMQs";
 @import "./partials/_edit-friendMQs";
 @import "./partials/_media-queries.scss";
+@import "./partials/_existingFriendListMQs.scss"
