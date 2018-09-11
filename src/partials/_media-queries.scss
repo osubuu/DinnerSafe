@@ -25,7 +25,6 @@
 }
 
 @media (max-width: 615px) {
-
   ///OVERVIEW PAGE///
   .section-header {
     font-size: 2.8rem;
@@ -36,7 +35,6 @@
     left: 0;
   }
   .new-event-name-input {
-    width: 100%;
     margin-bottom: 10px;
     border-radius: 5px;
   }
@@ -45,24 +43,20 @@
   }
   .create-new-event {
     margin: 0 auto;
-    width: 100%
+    width: 100%;
   }
   li.event {
     width: 100%;
   }
 }
 
-
-
-@media (max-width: 450px){
-
+@media (max-width: 450px) {
   .log-in-form .buttons {
     width: 100%;
   }
 }
 
-@media (max-width: 385px){
-
+@media (max-width: 385px) {
   // HEADER STYLES ///
   .user {
     float: none;
