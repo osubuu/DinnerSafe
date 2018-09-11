@@ -272,14 +272,14 @@ class App extends Component {
                     <h2 className="app-name-sub-header">Find recipes that everyone can eat!</h2>
                     <form className="log-in-form clearfix" action="" onSubmit={this.handleSubmitLogin}>
                       <div className="buttons clearfix">
-                        <button className="left" value="sign-in" onClick={this.handleClickLogin}>
-                          SIGN IN / CREATE ACCOUNT WITH GMAIL
+                        <button className="log-in-page-button sign-in-create" value="sign-in" onClick={this.handleClickLogin}>
+                          Sign In / Create Account <i class="fab fa-google"></i>
                         </button>
-                        <button className="guest" onClick={this.handleClickLogin} value="guest">
-                          CONTINUE AS GUEST
+                        <button className="log-in-page-button guest" onClick={this.handleClickLogin} value="guest">
+                          Continue as Guest
                         </button>
-                        <button className="demo" onClick={this.handleClickLogin} value="demo">
-                          DEMO
+                        <button className="log-in-page-button" onClick={this.handleClickLogin} value="demo">
+                          Demo
                         </button>
                       </div>
                     </form>
