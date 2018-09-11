@@ -607,7 +607,7 @@ h2.recipe-name {
   margin-bottom: 10px; }
 
 .edit-guest-subheader {
-  background: #dedede;
+  background: #c8c8c8;
   margin-bottom: 40px; }
 
 .edit-guest-sub-subheader {
@@ -651,7 +651,33 @@ h2.recipe-name {
 
 .allergy-diet {
   width: 50%;
+  float: left;
+  position: relative;
+  font-size: 2rem;
+  font-family: "Muli", sans-serif;
+  margin: 10px 0; }
+
+.delete-ingredient {
+  display: inline-block;
+  float: left;
+  border: none;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: #f34843;
+  color: #f2f2f2;
+  position: relative;
+  margin-right: 8px;
+  margin-left: 5px; }
+
+.ingredient {
   float: left; }
+
+.delete-ingredient .fa-times {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); }
 
 * {
   margin: 0;
@@ -684,7 +710,7 @@ input[type="checkbox"] {
 
 label {
   position: relative;
-  margin-left: 35px;
+  margin-left: 38px;
   font-size: 2rem; }
 
 input[type="checkbox"] + label .stylish-checkbox,
@@ -694,7 +720,7 @@ input[type="checkbox"]:checked + label .stylish-checkbox {
   height: 18px;
   position: absolute;
   border-radius: 3px;
-  left: calc(-15px - 10px);
+  left: calc(-18px - 10px);
   top: 50%;
   transform: translateY(-50%);
   border: 2px solid #141414; }
