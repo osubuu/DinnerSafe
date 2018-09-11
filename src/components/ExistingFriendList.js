@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import firebase from "firebase";
 import _ from "lodash";
 import swal from "sweetalert2";
@@ -7,12 +7,14 @@ import swal from "sweetalert2";
 class ExistingFriendList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      inputValue: "",
-      selectedEvent: props.userProfile.parties[props.selectedEventIndex].title,
-      key: null
-    };
-    this.dbRef = firebase.database().ref(`${this.props.userProfile.id}/friends`);
+    if (props.userProfile) {
+      this.state = {
+        inputValue: "",
+        selectedEvent: props.userProfile.parties[props.selectedEventIndex].title,
+        key: null
+      };
+      this.dbRef = firebase.database().ref(`${this.props.userProfile.id}/friends`);
+    }
   }
 
   // Handle Submit of toggling friends from event
@@ -80,36 +82,42 @@ class ExistingFriendList extends Component {
 
   render() {
     return (
-      <section className="manage-friends">
-        <h1>FRIENDS</h1>
-        <form action="" onSubmit={this.handleSubmit}>
-          {this.props.userProfile.friends.map((friend, i) => {
-            if (friend.parties && friend.parties.indexOf(this.state.selectedEvent) !== -1) {
-              return (
-                <div key={i} className="single-friend">
-                  <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" defaultChecked />
-                  <label htmlFor={i}>{friend.name}</label>
-                  <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
-                    DELETE FRIEND FROM EXISTING FRIENDS
-                  </button>
-                </div>
-              );
-            } else {
-              return (
-                <div key={i} className="single-friend">
-                  <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" />
-                  <label htmlFor={i}>{friend.name}</label>
-                  <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
-                    DELETE FRIEND FROM EXISTING FRIENDS
-                  </button>
-                </div>
-              );
-            }
-          })}
-        </form>
+      <div>
+        {this.props.userProfile ? (
+          <section className="manage-friends">
+            <h1>FRIENDS</h1>
+            <form action="" onSubmit={this.handleSubmit}>
+              {this.props.userProfile.friends.map((friend, i) => {
+                if (friend.parties && friend.parties.indexOf(this.state.selectedEvent) !== -1) {
+                  return (
+                    <div key={i} className="single-friend">
+                      <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" defaultChecked />
+                      <label htmlFor={i}>{friend.name}</label>
+                      <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
+                        DELETE FRIEND FROM EXISTING FRIENDS
+                      </button>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div key={i} className="single-friend">
+                      <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" />
+                      <label htmlFor={i}>{friend.name}</label>
+                      <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
+                        DELETE FRIEND FROM EXISTING FRIENDS
+                      </button>
+                    </div>
+                  );
+                }
+              })}
+            </form>
 
-        <Link to="/event">Back to Event</Link>
-      </section>
+            <Link to="/event">Back to Event</Link>
+          </section>
+        ) : (
+          <Redirect from="/event" to="/" />
+        )}
+      </div>
     );
   }
 }

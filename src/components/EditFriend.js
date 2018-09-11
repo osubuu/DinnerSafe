@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { allergy as Allergy, diet as Diet } from "./matchingRecipes";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import firebase from "../firebase";
 import _ from "lodash";
 
@@ -11,7 +11,6 @@ class EditFriend extends Component {
       inputValue: "",
       confirmedIngredient: ""
     };
-
     this.dbRef = firebase.database().ref(`${this.props.userID}/friends/${this.props.friendKey}`);
   }
 
@@ -33,24 +32,28 @@ class EditFriend extends Component {
   handleSubmitEditFriend = e => {
     e.preventDefault();
 
-    // make copy of current friend profile
-    let tempObj = this.props.friendProfile;
+    if (this.state.confirmedIngredient) {
+      // make copy of current friend profile
+      let tempObj = this.props.friendProfile;
 
-    // initialize an empty array of excluded ingredient, if it doesn't exist yet
-    if (!this.props.friendProfile.excludedIngredient) {
-      tempObj.excludedIngredient = [];
+      // initialize an empty array of excluded ingredient, if it doesn't exist yet
+      if (!this.props.friendProfile.excludedIngredient) {
+        tempObj.excludedIngredient = [];
+      }
+
+      // push new ingredient into array
+      tempObj.excludedIngredient.push(this.state.confirmedIngredient.trim().toLowerCase());
+
+      // set new ingredient list to friend
+      this.dbRef.set(tempObj);
+
+      this.setState({
+        confirmedIngredient: "",
+        inputValue: ""
+      });
+    } else {
+      return null;
     }
-
-    // push new ingredient into array
-    tempObj.excludedIngredient.push(this.state.confirmedIngredient.trim().toLowerCase());
-
-    // set new ingredient list to friend
-    this.dbRef.set(tempObj);
-
-    this.setState({
-      confirmedIngredient: "",
-      inputValue: ""
-    });
   };
 
   // Delete current ingredient
@@ -107,108 +110,114 @@ class EditFriend extends Component {
   render() {
     return (
       <div>
-        <h2>{this.props.friendProfile.name}</h2>
-        <form action="">
-          <h3>Allergies</h3>
-          {Allergy.map((allergy, i) => {
-            // if the current allergy is already in the friend's allergy array, check the input on display
-            if (
-              this.props.friendProfile.allowedAllergy &&
-              this.props.friendProfile.allowedAllergy.indexOf(allergy.searchValue) !== -1
-            ) {
-              return (
-                <div key={i}>
-                  <label htmlFor={allergy.searchValue}>{allergy.shortDescription.replace("-Free", "")}</label>
-                  <input
-                    className="allergy"
-                    onChange={this.toggleAllergies}
-                    type="checkbox"
-                    value={allergy.shortDescription}
-                    id={allergy.searchValue}
-                    defaultChecked
-                  />
-                </div>
-              );
-            }
-            // else, do not check it
-            else {
-              return (
-                <div key={i}>
-                  <label htmlFor={allergy.searchValue}>{allergy.shortDescription.replace("-Free", "")}</label>
-                  <input
-                    className="allergy"
-                    onChange={this.toggleAllergies}
-                    type="checkbox"
-                    value={allergy.shortDescription}
-                    id={allergy.searchValue}
-                  />
-                </div>
-              );
-            }
-          })}
-        </form>
-        <form action="">
-          <h3>Diet</h3>
-          {Diet.map((diet, i) => {
-            // if the current diet is already in the friend's diet array, check the input on display
-            if (
-              this.props.friendProfile.allowedDiet &&
-              this.props.friendProfile.allowedDiet.indexOf(diet.searchValue) !== -1
-            ) {
-              return (
-                <div key={i}>
-                  <label htmlFor={diet.searchValue}>{diet.shortDescription.replace("-Free", "")}</label>
-                  <input
-                    className="diet"
-                    type="checkbox"
-                    onChange={this.toggleAllergies}
-                    value={diet.shortDescription}
-                    id={diet.searchValue}
-                    defaultChecked
-                  />
-                </div>
-              );
-            }
-            // else, do not check it
-            else {
-              return (
-                <div key={i}>
-                  <label htmlFor={diet.searchValue}>{diet.shortDescription.replace("-Free", "")}</label>
-                  <input
-                    className="diet"
-                    type="checkbox"
-                    onChange={this.toggleAllergies}
-                    value={diet.shortDescription}
-                    id={diet.searchValue}
-                  />
-                </div>
-              );
-            }
-          })}
-        </form>
-        <section>
-          <ul className="friend-restricted-ingredients">
-            <h3>Restricted Ingredients</h3>
-            {this.props.friendProfile.excludedIngredient
-              ? this.props.friendProfile.excludedIngredient.map((ingredient, i) => {
+        {this.props.friendProfile ? (
+          <div>
+            <h2>{this.props.friendProfile.name}</h2>
+            <form action="">
+              <h3>Allergies</h3>
+              {Allergy.map((allergy, i) => {
+                // if the current allergy is already in the friend's allergy array, check the input on display
+                if (
+                  this.props.friendProfile.allowedAllergy &&
+                  this.props.friendProfile.allowedAllergy.indexOf(allergy.searchValue) !== -1
+                ) {
                   return (
                     <div key={i}>
-                      <li>{_.capitalize(ingredient)}</li>
-                      <button onClick={() => this.deleteIngredient(`${ingredient}`)}>REMOVE INGREDIENT</button>
+                      <label htmlFor={allergy.searchValue}>{allergy.shortDescription.replace("-Free", "")}</label>
+                      <input
+                        className="allergy"
+                        onChange={this.toggleAllergies}
+                        type="checkbox"
+                        value={allergy.shortDescription}
+                        id={allergy.searchValue}
+                        defaultChecked
+                      />
                     </div>
                   );
-                })
-              : null}
-          </ul>
-          <form onSubmit={this.handleSubmitEditFriend} action="">
-            <input value={this.state.inputValue} onChange={this.handleChangeEditFriend} type="text" />
-            <button onClick={this.handleClickEditFriend}>ADD</button>
-          </form>
-        </section>
+                }
+                // else, do not check it
+                else {
+                  return (
+                    <div key={i}>
+                      <label htmlFor={allergy.searchValue}>{allergy.shortDescription.replace("-Free", "")}</label>
+                      <input
+                        className="allergy"
+                        onChange={this.toggleAllergies}
+                        type="checkbox"
+                        value={allergy.shortDescription}
+                        id={allergy.searchValue}
+                      />
+                    </div>
+                  );
+                }
+              })}
+            </form>
+            <form action="">
+              <h3>Diet</h3>
+              {Diet.map((diet, i) => {
+                // if the current diet is already in the friend's diet array, check the input on display
+                if (
+                  this.props.friendProfile.allowedDiet &&
+                  this.props.friendProfile.allowedDiet.indexOf(diet.searchValue) !== -1
+                ) {
+                  return (
+                    <div key={i}>
+                      <label htmlFor={diet.searchValue}>{diet.shortDescription.replace("-Free", "")}</label>
+                      <input
+                        className="diet"
+                        type="checkbox"
+                        onChange={this.toggleAllergies}
+                        value={diet.shortDescription}
+                        id={diet.searchValue}
+                        defaultChecked
+                      />
+                    </div>
+                  );
+                }
+                // else, do not check it
+                else {
+                  return (
+                    <div key={i}>
+                      <label htmlFor={diet.searchValue}>{diet.shortDescription.replace("-Free", "")}</label>
+                      <input
+                        className="diet"
+                        type="checkbox"
+                        onChange={this.toggleAllergies}
+                        value={diet.shortDescription}
+                        id={diet.searchValue}
+                      />
+                    </div>
+                  );
+                }
+              })}
+            </form>
+            <section>
+              <ul className="friend-restricted-ingredients">
+                <h3>Restricted Ingredients</h3>
+                {this.props.friendProfile.excludedIngredient
+                  ? this.props.friendProfile.excludedIngredient.map((ingredient, i) => {
+                      return (
+                        <div key={i}>
+                          <li>{_.startCase(_.toLower(ingredient))}</li>
+                          <button onClick={() => this.deleteIngredient(`${ingredient}`)}>REMOVE INGREDIENT</button>
+                        </div>
+                      );
+                    })
+                  : null}
+              </ul>
+              <form onSubmit={this.handleSubmitEditFriend} action="">
+                <input value={this.state.inputValue} onChange={this.handleChangeEditFriend} type="text" />
+                <button onClick={this.handleClickEditFriend}>ADD</button>
+              </form>
+            </section>
 
-        <Link onClick={this.props.handleBackToEvent} to="/event">
-          Back to Event Page
-        </Link>
+            <Link onClick={this.props.handleBackToEvent} to="/event">
+              Back to Event Page
+            </Link>
+          </div>
+        ) : (
+          <Redirect from="/event" to="/" />
+        )}
       </div>
     );
   }

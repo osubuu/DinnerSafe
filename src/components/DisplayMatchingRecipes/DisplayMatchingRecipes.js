@@ -14,83 +14,58 @@ class DisplayMatchingRecipes extends Component {
     this.state = {
       listOfRecipes: [],
       courseCheckboxes: {
-        mainDishes: 
-          {
-            include: true,
-            value: "course^course-Main Dishes"
-          }
-        ,
-        sideDishes: 
-          {
-            include: false,
-            value: "course^course-Side Dishes"
-          }
-        ,
-        appetizers: 
-          {
-            include: false,
-            value: "course^course-Appetizers"
-          }
-        ,
-        salads: 
-          {
-            include: false,
-            value: "course^course-Salads"
-          }
-        ,
-        desserts: 
-          {
-            include: false,
-            value: "course^course-Desserts"
-          }
-        ,
-        breakfastAndBrunch: 
-          {
-            include: false,
-            value: "course^course-Breakfast and Brunch"
-          }
-        ,
-        breads: 
-          {
-            include: false,
-            value: "course^course-Breads"
-          }
-        ,
-        soups: 
-          {
-            include: false,
-            value: "course^course-Soups"
-          }
-        ,
-        beverages: 
-          {
-            include: false,
-            value: "course^course-Beverages"
-          }
-        ,
-        condimentsAndSauces: 
-          {
-            include: false,
-            value: "course^course-Condiments and Sauces"
-          }
-        ,
-        cocktails: 
-          {
-            include: false,
-            value: "course^course-Cocktails"
-          }
-        ,
-        snacks: 
-          {
-            include: false,
-            value: "course^course-Snacks"
-          }
-        ,
-        lunch: 
-          {
-            include: false,
-            value: "course^course-Lunch"
-          }
+        mainDishes: {
+          include: true,
+          value: "course^course-Main Dishes"
+        },
+        sideDishes: {
+          include: false,
+          value: "course^course-Side Dishes"
+        },
+        appetizers: {
+          include: false,
+          value: "course^course-Appetizers"
+        },
+        salads: {
+          include: false,
+          value: "course^course-Salads"
+        },
+        desserts: {
+          include: false,
+          value: "course^course-Desserts"
+        },
+        breakfastAndBrunch: {
+          include: false,
+          value: "course^course-Breakfast and Brunch"
+        },
+        breads: {
+          include: false,
+          value: "course^course-Breads"
+        },
+        soups: {
+          include: false,
+          value: "course^course-Soups"
+        },
+        beverages: {
+          include: false,
+          value: "course^course-Beverages"
+        },
+        condimentsAndSauces: {
+          include: false,
+          value: "course^course-Condiments and Sauces"
+        },
+        cocktails: {
+          include: false,
+          value: "course^course-Cocktails"
+        },
+        snacks: {
+          include: false,
+          value: "course^course-Snacks"
+        },
+        lunch: {
+          include: false,
+          value: "course^course-Lunch"
+        }
       },
       restrictions: {
         allowedAllergy: [],
@@ -112,7 +87,6 @@ class DisplayMatchingRecipes extends Component {
     const allergies = [];
     const diets = [];
     const ingredients = [];
-    
 
     friends.forEach(friend => {
       if (friend.allowedAllergy) {
@@ -143,22 +117,16 @@ class DisplayMatchingRecipes extends Component {
     );
   };
 
-
-  handleCheckChange = (e) => {
-  
+  handleCheckChange = e => {
     const value = e.target.value;
     const name = e.target.name;
-    let tempCourses = this.state.courseCheckboxes
+    let tempCourses = this.state.courseCheckboxes;
 
     tempCourses[name].include = value;
-    
-    console.log('tempCourses', tempCourses);
-    
-    
 
+    console.log("tempCourses", tempCourses);
 
     // console.log(this.state.courses[name].include);
-    
 
     // this.setState({
     //   courses[{name}]:
@@ -166,20 +134,18 @@ class DisplayMatchingRecipes extends Component {
     //       include: value,
     //     }
     // });
-  }
+  };
 
-  handleChange = (e) => {
-
+  handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
-  }
+  };
 
   componentDidMount() {
     this.setRestrictions(this.props.userProfile, this.props.eventName, this.state.courses, this.state.search, () => {
-      
       matchingRecipes(this.state.restrictions).then(res => {
-
+        this.props.checkIfAPICallDone();
         this.setState({
           listOfRecipes: res.data.matches
         });
@@ -192,10 +158,10 @@ class DisplayMatchingRecipes extends Component {
       <div className="matching-recipes">
         <form className="filter-recipes-form" action="">
           <label htmlFor="search">Search</label>
-          <input 
-            type="text" 
-            id="search" 
-            placeholder="ingredient" 
+          <input
+            type="text"
+            id="search"
+            placeholder="ingredient"
             value={this.state.search}
             onChange={this.handleChange}
           />
