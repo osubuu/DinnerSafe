@@ -4,14 +4,22 @@
       float: none;
       text-align: center;
       font-size: 4rem;
+      padding-bottom: 0;
     }
     & .user {
       float: none;
+      padding-top: 0;
+      padding-bottom: 40px;
       & a {
         text-align: center;
-        top: 60px;
-        right: 45%;
+        // top: 60px;
+        // right: 45%;
+        right: 50%;
+        transform: translateX(50%);
+        // top: 50px;
+        // right: 45%;
         position: absolute;
+        width: 100px;
       }
     }
     .user h2 {
@@ -19,7 +27,7 @@
       float: none;
       padding: 0;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 0;
     }
   }
 }
@@ -69,12 +77,18 @@
       padding: 0;
     }
     & a {
-      top: 20%;
-      left: 43%;
+      // top: 22%;
+      // left: 35%;
       float: none;
       position: relative;
     }
   }
+
+  .new-event-label {
+    font-size: 2rem;
+    top: 25px;
+  }
+
   header .app-name {
     float: none;
     text-align: center;

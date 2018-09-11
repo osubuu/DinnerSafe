@@ -608,7 +608,7 @@ h2.recipe-name {
   margin-bottom: 10px; }
 
 .edit-guest-subheader {
-  background: #c8c8c8;
+  background: #dedede;
   margin-bottom: 40px; }
 
 .edit-guest-sub-subheader {
@@ -777,20 +777,24 @@ input[type="checkbox"]:checked + label .stylish-checkbox .fa-check {
   .inner-header .app-name {
     float: none;
     text-align: center;
-    font-size: 4rem; }
+    font-size: 4rem;
+    padding-bottom: 0; }
   .inner-header .user {
-    float: none; }
+    float: none;
+    padding-top: 0;
+    padding-bottom: 40px; }
     .inner-header .user a {
       text-align: center;
-      top: 60px;
-      right: 45%;
-      position: absolute; }
+      right: 50%;
+      transform: translateX(50%);
+      position: absolute;
+      width: 100px; }
   .inner-header .user h2 {
     font-size: 2.5rem;
     float: none;
     padding: 0;
     text-align: center;
-    margin-bottom: 20px; } }
+    margin-bottom: 0; } }
 
 @media (max-width: 615px) {
   .section-header {
@@ -825,10 +829,11 @@ input[type="checkbox"]:checked + label .stylish-checkbox .fa-check {
       float: none;
       padding: 0; }
     .user a {
-      top: 20%;
-      left: 43%;
       float: none;
       position: relative; }
+  .new-event-label {
+    font-size: 2rem;
+    top: 25px; }
   header .app-name {
     float: none;
     text-align: center;
