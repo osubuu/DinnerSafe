@@ -193,15 +193,17 @@ class EventPage extends Component {
                     userProfile={this.props.userProfile}
                     eventName={this.props.userProfile.parties[this.props.selectedEventIndex].title}
                     checkIfAPICallDone={this.checkIfAPICallDone}
+                    savedRecipes={this.props.savedRecipes}
+                    
                   />
 
                   {/* Wait for API call above to be done first before displaying */}
-                  {this.state.APICallDone === true ? (
+                  {/* {this.state.APICallDone === true ? (
                     <DisplaySavedRecipes
                       toggleRecipe={this.props.toggleRecipe}
                       savedRecipes={this.props.savedRecipes}
                     />
-                  ) : null}
+                  ) : null} */}
                 </div>
               ) : null}
             </div>
