@@ -365,6 +365,8 @@ class App extends Component {
                 friendKey={this.getFriendKey()}
                 userID={this.state.key}
                 handleBackToEvent={this.handleBackToEvent}
+                userProfile={this.state.userProfile}
+                handleLogout={this.handleLogout}
               />
             )}
           />
