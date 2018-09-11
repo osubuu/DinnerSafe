@@ -137,9 +137,9 @@ class EventPage extends Component {
             <div className="wrapper clearfix">
               <div className="event-title">
                 <h2>{this.props.userProfile.parties[this.props.selectedEventIndex].title}</h2>
-                <Link onClick={this.props.handleBackToOverview} to="/home">
+                <div className="title-back-button"><Link onClick={this.props.handleBackToOverview} to="/home">
                   Back to Main Page
-                </Link>
+                </Link></div>
               </div>
 
               <div className="guestList clearfix">
@@ -184,6 +184,7 @@ class EventPage extends Component {
                     onChange={this.handleChangeAddFriend}
                     type="text"
                     autoComplete="off"
+                    className="add-new-friend-input"
                   />
                   <button className="add-friend-button" onClick={this.handleClickAddFriend}>ADD</button>
                 </form>
