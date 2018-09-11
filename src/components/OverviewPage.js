@@ -110,17 +110,19 @@ class OverviewPage extends Component {
                 {/* <Loader /> */}
                 <h3 className="section-header">Create Event</h3>
                 <form className="create-new-event clearfix" onSubmit={this.handleSubmitAddEvent} action="">
-                  <label className="new-event-label" htmlFor="new-event">
-                    New Event Name
-                  </label>
-                  <input
-                    className="new-event-name-input"
-                    onChange={this.handleChangeAddEvent}
-                    id="new-event"
-                    type="text"
-                    value={this.state.inputValue}
-                    autoComplete="off"
-                  />
+                  <div className="label-input-container">
+                    <input
+                      className="new-event-name-input"
+                      onChange={this.handleChangeAddEvent}
+                      id="new-event"
+                      type="text"
+                      value={this.state.inputValue}
+                      autoComplete="off"
+                    />
+                    <label className="new-event-label" htmlFor="new-event">
+                      New Event Name
+                    </label>
+                  </div>
                   <button className="new-event-button" onClick={this.handleClickAddEvent}>
                     Submit
                   </button>
