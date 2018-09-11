@@ -4,17 +4,17 @@
   width: calc(75% - 10px);
   margin: 0 5px;
 }
-.display-single-recipe, .save-single-recipe {
+.display-single-recipe,
+.save-single-recipe {
   border: black 1px solid;
   border-radius: 5px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   padding: 10px;
   margin: 5px 5px;
 }
 .display-single-recipe {
   float: left;
   width: calc(50% - 10px);
-  
 }
 .saved-recipes {
   float: left;
@@ -26,10 +26,6 @@
   }
 }
 
-.recipe-each-link {
-
-}
-
 .recipe-name {
   font-size: 1.8rem;
   text-align: center;
@@ -39,5 +35,4 @@
 .recipe-img-container {
   width: 95%;
   margin: 0 auto;
-
 }

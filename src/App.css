@@ -508,7 +508,8 @@ header {
   width: calc(75% - 10px);
   margin: 0 5px; }
 
-.display-single-recipe, .save-single-recipe {
+.display-single-recipe,
+.save-single-recipe {
   border: black 1px solid;
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.6);
