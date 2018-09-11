@@ -165,7 +165,7 @@ class EventPage extends Component {
                               </div>
 
                               {/* Removes guest from the event */}
-                              <button className="remove-friend" id={friend.name} onClick={this.removeFriendFromEvent}>
+                              <button className="remove-friend-button" id={friend.name} onClick={this.removeFriendFromEvent}>
                                 <i className="fas fa-times" />
                               </button>
                             </li>
@@ -177,16 +177,15 @@ class EventPage extends Component {
                 <Link to="existing-guest-list">Add Existing Guest</Link>
 
                 <form onSubmit={this.handleSubmitAddFriend} action="">
-                  <label htmlFor="add-new-friend">Add New Guest</label>
+                  <label className="add-new-friend-label"htmlFor="add-new-friend">Add New Guest</label>
                   <input
-                    className="add-friend"
                     id={"add-new-friend"}
                     value={this.state.inputValue}
                     onChange={this.handleChangeAddFriend}
                     type="text"
                     autoComplete="off"
                   />
-                  <button onClick={this.handleClickAddFriend}>ADD</button>
+                  <button className="add-friend-button" onClick={this.handleClickAddFriend}>ADD</button>
                 </form>
               </div>
 

@@ -3,6 +3,7 @@
   float: left;
   width: calc(75% - 10px);
   margin: 0 5px;
+  height: 100vh;
 }
 .display-single-recipe,
 .save-single-recipe {
@@ -29,6 +30,10 @@
     font-family: $secondary-font;
     text-align: center;
   }
+}
+.saved-recipe-list {
+  height: 100vh;
+  overflow: scroll;
 }
 
 .recipe-name {
