@@ -347,8 +347,7 @@ header {
 .new-event-label {
   width: 100%;
   float: left;
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
+  font-family: "Muli", sans-serif;
   text-align: center;
   font-size: 2.6rem;
   margin: 0;
