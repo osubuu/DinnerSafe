@@ -31,13 +31,21 @@
       font-size: 1.8rem;
     }
   }
-  button.remove-friend {
+  .remove-friend-button {
+    background: $red;
+    height: 20px;
+    width: 20px;
     float: left;
-    width: calc(10% - 4px);
-    margin: 0px 2px;
-    color: $red;
+    color: white;
     border: none;
-    font-size: 1.9rem;
+    border-radius: 50%;
+    font-weight: bold;
+    position: relative;
+  }
+  .remove-friend-button .fa-times {
+    position: absolute;
+    right: -7px;
+    top: 10px;
   }
   .matching-recipes {
     float: left;
@@ -47,14 +55,15 @@
   .guests {
     overflow: scroll; 
   }
+  .guestList a {
+    border: $green 1px solid;
+    background: $green;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
   li.guest {
     margin: 5px 0px;
-  }
-  .guestList a {
-    font-size: 1.6rem;
-    display: inline-block;
-    margin: 10px 0;
-    color: $red;
   }
   .guestList form {
     position: relative;
@@ -75,7 +84,7 @@
     font-size: 1.6rem;
     padding: 16px 0 10px;
   }
-  .add-friend button {
+  .add-friend-button {
     border: $red 1px solid;
     border-radius: 5px;
     background: $red;
