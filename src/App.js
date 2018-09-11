@@ -392,6 +392,8 @@ class App extends Component {
                 }
                 userID={this.state.key}
                 handleBackToEvent={this.handleBackToEvent}
+                userProfile={this.state.userProfile}
+                handleLogout={this.handleLogout}
                 getRedirected={this.getRedirected}
               />
             )}

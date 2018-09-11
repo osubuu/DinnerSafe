@@ -549,6 +549,53 @@ header {
   width: 95%;
   margin: 0 auto; }
 
+.edit-guest-subheader {
+  background: #dedede;
+  margin-bottom: 40px; }
+
+.edit-guest-sub-subheader {
+  padding: 15px 0;
+  position: relative; }
+
+.edit-guest-title {
+  display: block;
+  width: 60%;
+  padding-right: 10px;
+  font-size: 2rem;
+  float: left;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.edit-guest-save-div {
+  width: 40%;
+  float: right;
+  display: block; }
+
+.edit-guest-save {
+  padding: 15px 25px;
+  background: #117842;
+  color: #f2f2f2;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  display: inline-block;
+  text-align: center;
+  float: right; }
+
+.edit-guest-section-header {
+  margin-bottom: 15px; }
+
+.edit-guest-form {
+  background: #ffcb96;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  padding: 15px; }
+
+.alergy-diet {
+  width: 50%;
+  float: left; }
+
 * {
   margin: 0;
   padding: 0; }
