@@ -541,7 +541,7 @@ header {
   margin: 0; }
 
 .event-page .filter-recipes-input {
-  width: calc(85% - 30px);
+  width: calc(60% - 30px);
   font-size: 1.8rem;
   border-radius: 5px;
   border: none;
