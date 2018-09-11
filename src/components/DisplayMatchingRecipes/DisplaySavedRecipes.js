@@ -17,6 +17,7 @@ const DisplaySavedRecipes = props => {
                 key={recipe.id}
                 recipe={recipe}
                 buttonClass={"recipe-remove-button"}
+                
               />
             );
           })}
