@@ -51,4 +51,33 @@
 .allergy-diet {
     width: 50%;
     float: left;
+    position: relative;
+    font-size: 2rem;
+    font-family: $secondary-font;
+    margin: 10px 0;
+}
+
+.delete-ingredient {
+    display: inline-block;
+    float: left;
+    border: none;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background: $red;
+    color: $color-2;
+    position: relative;
+    margin-right: 8px;
+    margin-left: 5px;
+}
+
+.ingredient {
+    float: left;
+}
+
+.delete-ingredient .fa-times {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
