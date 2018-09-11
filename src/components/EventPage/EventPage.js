@@ -164,8 +164,8 @@ class EventPage extends Component {
                 toggleRecipe={this.props.toggleRecipe}
                 userProfile={this.props.userProfile}
                 eventName={this.props.selectedEvent.title}
-                courses={this.state.courses}
-                search={this.state.search}
+                // courses={this.state.courses}
+                // search={this.state.search}
               />
               <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe} savedRecipes={this.props.savedRecipes} />
             </div>

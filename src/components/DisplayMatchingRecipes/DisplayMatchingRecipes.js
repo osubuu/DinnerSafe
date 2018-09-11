@@ -98,13 +98,6 @@ class DisplayMatchingRecipes extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.setRestrictions();
-
-    // if(this.state.search){
-    //   this.setState({
-    //     placeholder: this.state.search,
-    //     search: ""
-    //   })
-    // }
   }
 
   handleCheckboxChange = (e) => {
