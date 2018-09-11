@@ -42,5 +42,49 @@ a {
   padding: 20px 0;
 }
 
+input[type="checkbox"] {
+  display: none;
+}
+
+label {
+  position: relative;
+  margin-left: 35px;
+  font-size: 2rem;
+}
+
+input[type="checkbox"] + label .stylish-checkbox,
+input[type="checkbox"]:checked + label .stylish-checkbox {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  border-radius: 3px;
+  left: calc(-15px - 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  border: 2px solid $color-1;
+}
+
+input[type="checkbox"] + label .stylish-checkbox {
+  background: white;
+}
+
+input[type="checkbox"] + label .stylish-checkbox .fa-check {
+  display: none;
+}
+
+input[type="checkbox"]:checked + label .stylish-checkbox {
+  background: rgb(43, 218, 37);
+}
+
+input[type="checkbox"]:checked + label .stylish-checkbox .fa-check {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+}
+
 @import "./partials/_loginPageMQs";
 @import "./partials/_media-queries.scss";

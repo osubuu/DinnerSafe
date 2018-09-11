@@ -143,7 +143,7 @@ class DisplayMatchingRecipes extends Component {
 
   render() {
     return (
-      <div className="matching-recipes">
+      <div className="matching-recipes clearfix">
         <form className="filter-recipes-form" action="">
           <label htmlFor="search">Search</label>
           <input
@@ -305,13 +305,14 @@ class DisplayMatchingRecipes extends Component {
 
         {this.state.APICallDone === true ? (
           <div>
-            <ul className="recipe-return">
+            <ul className="recipe-return clearfix">
               {this.state.listOfRecipes.map(recipe => {
                 return (
                   <DisplaySingleRecipe
+                    className={"display-single-recipe"}
                     toggleRecipe={this.props.toggleRecipe}
                     action={"save"}
-                    buttonTag={"+"}
+                    buttonTag={<i class="fas fa-plus-circle" />}
                     key={recipe.id}
                     recipe={recipe}
                   />

@@ -127,7 +127,6 @@ class EditFriend extends Component {
                 ) {
                   return (
                     <div key={i}>
-                      <label htmlFor={allergy.searchValue}>{allergy.shortDescription.replace("-Free", "")}</label>
                       <input
                         className="allergy"
                         onChange={this.toggleAllergies}
@@ -136,6 +135,7 @@ class EditFriend extends Component {
                         id={allergy.searchValue}
                         defaultChecked
                       />
+                      <label htmlFor={allergy.searchValue}><div className="stylish-checkbox"><i class="fas fa-check"></i></div>{allergy.shortDescription.replace("-Free", "")}</label>
                     </div>
                   );
                 }
@@ -143,7 +143,6 @@ class EditFriend extends Component {
                 else {
                   return (
                     <div key={i}>
-                      <label htmlFor={allergy.searchValue}>{allergy.shortDescription.replace("-Free", "")}</label>
                       <input
                         className="allergy"
                         onChange={this.toggleAllergies}
@@ -151,6 +150,7 @@ class EditFriend extends Component {
                         value={allergy.shortDescription}
                         id={allergy.searchValue}
                       />
+                      <label htmlFor={allergy.searchValue}><div className="stylish-checkbox"><i class="fas fa-check"></i></div>{allergy.shortDescription.replace("-Free", "")}</label>
                     </div>
                   );
                 }
@@ -166,7 +166,6 @@ class EditFriend extends Component {
                 ) {
                   return (
                     <div key={i}>
-                      <label htmlFor={diet.searchValue}>{diet.shortDescription.replace("-Free", "")}</label>
                       <input
                         className="diet"
                         type="checkbox"
@@ -175,6 +174,8 @@ class EditFriend extends Component {
                         id={diet.searchValue}
                         defaultChecked
                       />
+                      
+                      <label htmlFor={diet.searchValue}><div className="stylish-checkbox"><i class="fas fa-check"></i></div>{diet.shortDescription.replace("-Free", "")}</label>
                     </div>
                   );
                 }
@@ -182,7 +183,6 @@ class EditFriend extends Component {
                 else {
                   return (
                     <div key={i}>
-                      <label htmlFor={diet.searchValue}>{diet.shortDescription.replace("-Free", "")}</label>
                       <input
                         className="diet"
                         type="checkbox"
@@ -190,6 +190,8 @@ class EditFriend extends Component {
                         value={diet.shortDescription}
                         id={diet.searchValue}
                       />
+                      
+                      <label htmlFor={diet.searchValue}><div className="stylish-checkbox"><i class="fas fa-check"></i></div>{diet.shortDescription.replace("-Free", "")}</label>
                     </div>
                   );
                 }
