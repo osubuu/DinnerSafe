@@ -134,7 +134,7 @@ class EventPage extends Component {
                           </div>
 
                           {/* Removes guest from the event */}
-                          <button id={friend.name} onClick={this.removeFriendFromEvent}>
+                          <button className="remove-friend"id={friend.name} onClick={this.removeFriendFromEvent}>
                             <i class="fas fa-times-circle"></i>
                           </button>
                         </li>
@@ -153,7 +153,7 @@ class EventPage extends Component {
                 onChange={this.handleChangeAddFriend}
                 type="text"
               />
-              <button onClick={this.handleClickAddFriend}>ADD</button>
+              <button className="add-friend" onClick={this.handleClickAddFriend}>ADD</button>
             </form>
           </div>
 

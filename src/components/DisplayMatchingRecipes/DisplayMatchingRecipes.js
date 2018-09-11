@@ -294,7 +294,6 @@ class DisplayMatchingRecipes extends Component {
               />
               Condiments & Sauces
             </label>
-            s
             <label>
               <input
                 name="cocktails"
@@ -324,7 +323,7 @@ class DisplayMatchingRecipes extends Component {
             </label>
           </fieldset>
 
-          <button onClick={this.handleSubmit}>Filter Recipes</button>
+          <button className="filter-button" onClick={this.handleSubmit}>Filter Recipes</button>
         </form>
         <ul>
           {this.state.listOfRecipes.map(recipe => {

@@ -44,3 +44,7 @@ p {
   font-size: 1.6rem;
   font-family: $secondary-font;
 }
+
+label, input, .event-title h2, a, button, .new-event-label, .section-header, .user h2, .filter-by-course {
+  font-family: $secondary-font
+}
