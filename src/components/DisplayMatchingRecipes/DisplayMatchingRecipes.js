@@ -7,6 +7,7 @@ import matchingRecipes from "../matchingRecipes";
 
 // COMPONENTS
 import DisplaySingleRecipe from "./DisplaySingleRecipe";
+import DisplaySavedRecipes from "./DisplaySavedRecipes";
 
 class DisplayMatchingRecipes extends Component {
   constructor() {
@@ -36,7 +37,8 @@ class DisplayMatchingRecipes extends Component {
         allowedCourse: [],
         q: "",
         set: false
-      }
+      },
+      APICallDone: false
     };
   }
 
@@ -75,9 +77,10 @@ class DisplayMatchingRecipes extends Component {
       },
       () => {
         matchingRecipes(this.state.restrictions).then(res => {
-          this.props.checkIfAPICallDone();
+          // this.props.checkIfAPICallDone();
           this.setState({
-            listOfRecipes: res.data.matches
+            listOfRecipes: res.data.matches,
+            APICallDone: true
           });
         });
       }
@@ -152,12 +155,12 @@ class DisplayMatchingRecipes extends Component {
 
           <div className="courses">
             <label>
-              <input name="mains" type="checkbox" checked={this.state.mains} onChange={this.handleCheckboxChange} />
+              <input className="course-checkbox" name="mains" type="checkbox" checked={this.state.mains} onChange={this.handleCheckboxChange} />
               Mains
             </label>
 
             <label>
-              <input
+              <input className="course-checkbox"
                 name="desserts"
                 type="checkbox"
                 checked={this.state.desserts}
@@ -167,7 +170,7 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input
+              <input className="course-checkbox"
                 name="sideDishes"
                 type="checkbox"
                 checked={this.state.sideDishes}
@@ -177,7 +180,7 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input
+              <input className="course-checkbox"
                 name="appetizers"
                 type="checkbox"
                 checked={this.state.appetizers}
@@ -187,12 +190,12 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input name="salads" type="checkbox" checked={this.state.salads} onChange={this.handleCheckboxChange} />
+              <input className="course-checkbox" name="salads" type="checkbox" checked={this.state.salads} onChange={this.handleCheckboxChange} />
               Salads
             </label>
 
             <label>
-              <input
+              <input className="course-checkbox"
                 name="breakfastAndBrunch"
                 type="checkbox"
                 checked={this.state.breakfastAndBrunch}
@@ -202,17 +205,17 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input name="breads" type="checkbox" checked={this.state.breads} onChange={this.handleCheckboxChange} />
+              <input className="course-checkbox" name="breads" type="checkbox" checked={this.state.breads} onChange={this.handleCheckboxChange} />
               Breads
             </label>
 
             <label>
-              <input name="soups" type="checkbox" checked={this.state.soups} onChange={this.handleCheckboxChange} />
+              <input className="course-checkbox" name="soups" type="checkbox" checked={this.state.soups} onChange={this.handleCheckboxChange} />
               Soups
             </label>
 
             <label>
-              <input
+              <input className="course-checkbox"
                 name="beverages"
                 type="checkbox"
                 checked={this.state.beverages}
@@ -222,7 +225,7 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input
+              <input className="course-checkbox"
                 name="condimentsAndSauces"
                 type="checkbox"
                 checked={this.state.condimentsAndSauces}
@@ -230,9 +233,8 @@ class DisplayMatchingRecipes extends Component {
               />
               Condiments & Sauces
             </label>
-
             <label>
-              <input
+              <input className="course-checkbox"
                 name="cocktails"
                 type="checkbox"
                 checked={this.state.cocktails}
@@ -242,12 +244,12 @@ class DisplayMatchingRecipes extends Component {
             </label>
 
             <label>
-              <input name="snacks" type="checkbox" checked={this.state.snacks} onChange={this.handleCheckboxChange} />
+              <input className="course-checkbox" name="snacks" type="checkbox" checked={this.state.snacks} onChange={this.handleCheckboxChange} />
               Snacks
             </label>
 
             <label>
-              <input name="lunch" type="checkbox" checked={this.state.lunch} onChange={this.handleCheckboxChange} />
+              <input className="course-checkbox" name="lunch" type="checkbox" checked={this.state.lunch} onChange={this.handleCheckboxChange} />
               Lunch
             </label>
           </div>
@@ -255,7 +257,7 @@ class DisplayMatchingRecipes extends Component {
           <button className="filter-button" onClick={this.handleSubmit}>Filter Recipes</button>
         </form>
 
-        <ul>
+        <ul className="recipe-return">
           {this.state.listOfRecipes.map(recipe => {
             return (
               <DisplaySingleRecipe
@@ -268,6 +270,9 @@ class DisplayMatchingRecipes extends Component {
             );
           })}
         </ul>
+        {this.state.APICallDone === true?
+        <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe}
+          savedRecipes={this.props.savedRecipes} />: null}
       </div>
     );
   }

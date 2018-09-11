@@ -99,11 +99,17 @@
   .courses {
     width: 100%;
     border: none;
+    & label {
+      display: inline-block;
+      font-size:  1.5rem;
+      width: calc(100% / 4);
+    }
   }
-  .courses label {
+  input.course-checkbox {
     display: inline-block;
-    width: calc(100% / 4);
     font-size: 1.5rem;
+    visibility: hidden;
+    width: 0;
   }
 
 

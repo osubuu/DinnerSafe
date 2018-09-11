@@ -5,7 +5,7 @@ import React from "react";
 const DisplaySingleRecipe = props => {
   return (
     <li className="recipe-each">
-      <a href={`http://www.yummly.com/recipe/${props.recipe.id}`} target="_blank">
+      <a className="recipe-each-link" href={`http://www.yummly.com/recipe/${props.recipe.id}`} target="_blank">
         <h2 className="recipe-name">{props.recipe.recipeName}</h2>
 
         <div className="recipe-img-container">
