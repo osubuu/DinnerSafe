@@ -100,6 +100,9 @@ class DisplayMatchingRecipes extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({
+      APICallDone: false
+    });
     this.setRestrictions();
   };
 
@@ -369,7 +372,9 @@ class DisplayMatchingRecipes extends Component {
               <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe} savedRecipes={this.props.savedRecipes} />
             ) : null}
           </div>
-        ) : null // <Loader />
+        ) : null
+        // <Loader />
+        // <Loader />
         }
       </div>
     );

@@ -32,14 +32,12 @@ class EventPage extends Component {
   };
 
   // Function to remove specific friend from the current event
-  removeFriendFromEvent = e => {
-    let friendName = e.target.id;
-
+  removeFriendFromEvent = friendName => {
     this.dbRef.child("friends").once("value", snapshot => {
       // find index of current friend on firebase
       let tempFriendIndex = _.findIndex(snapshot.val(), ["name", friendName]);
 
-      if (_.find(snapshot.val(), ["name", friendName]).parties) {
+      if (_.find(snapshot.val(), ["name", friendName]) && _.find(snapshot.val(), ["name", friendName]).parties) {
         // make temporary array of the parties array of the current friend
         let tempFriendParties = _.find(snapshot.val(), ["name", friendName]).parties;
 
@@ -137,18 +135,21 @@ class EventPage extends Component {
             <header>
               <div className="event-subheader">
                 <div className="wrapper clearfix event-sub-subheader">
-                  
                   <div className="event-header-left clearfix">
                     <h1 className="app-name">DinnerSafe</h1>
 
                     <div className="event-title-div">
-                      <p className="event-title">{this.props.userProfile.parties[this.props.selectedEventIndex].title}</p>
+                      <p className="event-title">
+                        {this.props.userProfile.parties[this.props.selectedEventIndex].title}
+                      </p>
                     </div>
                   </div>
-                  
+
                   <div className="right user clearfix">
                     <h2>{this.props.userProfile.user}</h2>
-                    <Link className="log-out" onClick={this.props.handleLogout} to="/">Log Out</Link>
+                    <Link className="log-out" onClick={this.props.handleLogout} to="/">
+                      Log Out
+                    </Link>
                   </div>
 
                   <input type="checkbox" id="toggle" name="toggle" className="hidden-checkbox"></input>
@@ -162,7 +163,9 @@ class EventPage extends Component {
                   <div className="big-mac">
                     <ul>
                       <li className="ham-li">
-                        <Link className="log-out" onClick={this.props.handleLogout} to="/">Log Out</Link>
+                        <Link className="log-out" onClick={this.props.handleLogout} to="/">
+                          Log Out
+                        </Link>
                       </li>
 
                       <li className="ham-li">
@@ -178,7 +181,6 @@ class EventPage extends Component {
                       <li className="ham-li">
                         <a href="#display-matching-recipes">Search & Save Recipes</a>
                       </li>
-
 
                     </ul>
                   </div>
@@ -236,7 +238,7 @@ class EventPage extends Component {
                               <button
                                 className="remove-friend-button"
                                 id={friend.name}
-                                onClick={this.removeFriendFromEvent}
+                                onClick={() => this.removeFriendFromEvent(friend.name)}
                               >
                                 <i className="fas fa-times" />
                               </button>
