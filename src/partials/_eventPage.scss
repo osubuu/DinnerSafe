@@ -1,5 +1,4 @@
 .event-page {
-
   .app-name {
     float: left;
     width: 50%;
@@ -105,9 +104,10 @@
   }
   .matching-recipes {
     float: left;
-    width: calc(80% - 20px);
-    margin: 25px 10px;
+    width: 80%;
+    margin: 25px 0 25px 10px;
   }
+
   .guests {
     overflow: scroll;
     margin-bottom: 9%;

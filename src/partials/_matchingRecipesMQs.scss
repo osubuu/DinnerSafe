@@ -1,0 +1,148 @@
+@media all and (max-width: 1400px) {
+  .event-page {
+    .matching-recipes {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+
+      .recipes-container {
+        width: 100%;
+
+        .recipe-return {
+          width: 70%;
+          margin: 0;
+
+          .display-single-recipe:nth-child(-n + 2) {
+            margin-top: 0;
+          }
+
+          .display-single-recipe:nth-last-child(-n + 2) {
+            margin-bottom: 0;
+          }
+        }
+
+        .saved-recipes {
+          width: calc(30% - 5px);
+          margin-top: 0;
+          margin-left: 5px;
+          padding-bottom: 0;
+          padding-top: 0;
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 900px) {
+  h2.recipe-name {
+    font-size: 2.2rem;
+    width: 60%;
+  }
+
+  h2.saved-recipe-name {
+    font-size: 1.6rem;
+    width: 60%;
+  }
+
+  .event-page {
+    .matching-recipes {
+      .recipes-container {
+        .recipe-return {
+          width: 60%;
+          margin: 0;
+
+          .display-single-recipe {
+            width: calc(100% - 10px);
+            height: 200px;
+            float: none;
+            margin: 10px 5px;
+          }
+
+          .display-single-recipe:nth-child(2) {
+            margin-top: 10px;
+          }
+
+          .display-single-recipe:nth-last-child(2) {
+            margin-bottom: 10px;
+          }
+        }
+
+        .saved-recipes {
+          width: calc(40% - 5px);
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 600px) {
+  h2.recipe-name {
+    font-size: 1.9rem;
+  }
+
+  .recipe-add-button,
+  .recipe-remove-button {
+    font-size: 3rem;
+  }
+
+  .event-page {
+    .matching-recipes {
+      .recipes-container {
+        .recipe-return {
+          width: 100%;
+          margin: 0;
+          height: 60vh;
+          margin-bottom: 20px;
+
+          .display-single-recipe {
+            width: 100%;
+            height: 150px;
+            margin: 10px 0;
+          }
+        }
+
+        .saved-recipes {
+          width: 100%;
+          height: 40vh;
+          float: none;
+          margin-left: 0;
+
+          .save-single-recipe {
+            height: 100px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 350px) {
+  h2.recipe-name {
+    font-size: 1.6rem;
+  }
+
+  h2.saved-recipe-name {
+    font-size: 1.4rem;
+  }
+
+  .event-page {
+    .matching-recipes {
+      .recipes-container {
+        .recipe-return {
+          height: 50vh;
+          .display-single-recipe {
+            height: 100px;
+          }
+        }
+
+        .saved-recipes {
+          height: 50vh;
+
+          .save-single-recipe {
+            height: 80px;
+          }
+        }
+      }
+    }
+  }
+}
