@@ -1,5 +1,4 @@
 .event-page {
-
   @media (max-width: 1400px) {
     .remove-friend-button {
       background: #f34843;
@@ -15,7 +14,7 @@
       font-size: 2rem;
     }
 
-    .fakeButton{
+    .fakeButton {
       & i {
         font-size: 2em;
       }
@@ -34,7 +33,7 @@
       }
     }
     .fakeButton {
-      margin-right: 10px;  
+      margin-right: 10px;
       & i {
         font-size: 1.6rem;
       }
@@ -42,7 +41,7 @@
     ul.guests {
       margin-bottom: 2%;
       & p {
-      font-size: 2rem;
+        font-size: 2rem;
       }
     }
     .guestList {
@@ -53,15 +52,13 @@
     }
   }
 
-
-  @media (max-width:1024) {
-      .remove-friend-button .fa-times {
-        left: 9px;
-      }
+  @media (max-width: 1024) {
+    .remove-friend-button .fa-times {
+      left: 9px;
+    }
   }
 
   @media (max-width: 900px) {
-      
     // JESS
 
     .guestList {
@@ -110,7 +107,6 @@
     .event-title-div {
       width: 100%;
       text-align: left;
-
     }
 
     .big-mac-icon {
@@ -127,15 +123,15 @@
       transform: translateY(-50%);
       display: block;
     }
-    
+
     .fa-bars {
       color: $color-2;
       font-size: 3rem;
       cursor: pointer;
       padding: 20px 0 10px 10px;
+      display: block;
     }
 
-    
     .big-mac {
       display: block;
       position: absolute;
@@ -145,11 +141,10 @@
       background: $peach;
       transition: all 0.3s;
     }
-    
+
     .hidden-checkbox:checked ~ .big-mac {
       right: 0;
     }
-
 
     .ham-li {
       display: block;
@@ -159,7 +154,7 @@
       color: $color-1;
       z-index: 100;
       border-bottom: 1px solid lighten($color-1, 30);
-      
+
       & h2,
       & .event-main-page,
       & a {

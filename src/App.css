@@ -650,6 +650,9 @@ header {
   .event-page .courses label span {
     margin-left: 30px; }
 
+.event-page .fa-bars {
+  display: none; }
+
 .recipe-return {
   overflow: scroll;
   float: left;
@@ -1294,7 +1297,8 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     color: #f2f2f2;
     font-size: 3rem;
     cursor: pointer;
-    padding: 20px 0 10px 10px; }
+    padding: 20px 0 10px 10px;
+    display: block; }
   .event-page .big-mac {
     display: block;
     position: absolute;
