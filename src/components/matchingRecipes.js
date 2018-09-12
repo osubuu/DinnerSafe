@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "http://api.yummly.com/v1/api/recipes";
+const apiUrl = "https://api.yummly.com/v1/api/recipes";
 const apiKey = "db330b81d710c9b574e3c76551fbcdb5";
 const apiId = "a61c2317";
 
@@ -8,7 +8,6 @@ const resultsPerPage = 20;
 const page = 1;
 
 const matchingRecipes = object => {
-
   return axios.get(apiUrl, {
     params: {
       _app_key: apiKey,
