@@ -170,7 +170,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Mains</span>
             </label>
@@ -184,7 +184,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Desserts</span>
             </label>
@@ -198,7 +198,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Side</span>
             </label>
@@ -212,7 +212,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Appetizers</span>
             </label>
@@ -226,7 +226,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Salads</span>
             </label>
@@ -240,7 +240,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Breakfast</span>
             </label>
@@ -254,7 +254,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Breads</span>
             </label>
@@ -268,7 +268,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Soups</span>
             </label>
@@ -282,7 +282,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Beverages</span>
             </label>
@@ -296,7 +296,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Sauces</span>
             </label>
@@ -309,7 +309,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Cocktails</span>
             </label>
@@ -323,7 +323,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Snacks</span>
             </label>
@@ -337,7 +337,7 @@ class DisplayMatchingRecipes extends Component {
                 onChange={this.handleCheckboxChange}
               />
               <div className="stylish-checkbox">
-                <i class="fas fa-check" />
+                <i className="fas fa-check" />
               </div>
               <span>Lunch</span>
             </label>
@@ -359,7 +359,7 @@ class DisplayMatchingRecipes extends Component {
                     className={"display-single-recipe"}
                     toggleRecipe={this.props.toggleRecipe}
                     action={"save"}
-                    buttonTag={<i class="fas fa-plus-circle" />}
+                    buttonTag={<i className="fas fa-plus-circle" />}
                     key={recipe.id}
                     recipe={recipe}
                     buttonClass={"recipe-add-button"}
@@ -372,10 +372,7 @@ class DisplayMatchingRecipes extends Component {
               <DisplaySavedRecipes toggleRecipe={this.props.toggleRecipe} savedRecipes={this.props.savedRecipes} />
             ) : null}
           </div>
-        ) : null
-        // <Loader />
-        // <Loader />
-        }
+        ) : null}
       </div>
     );
   }

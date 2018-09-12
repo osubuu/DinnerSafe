@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Link, Route, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import firebase from "firebase";
 import Header from "./Header";
 import swal from "sweetalert2";
-import Loader from "./Loader";
 
 class OverviewPage extends Component {
   constructor(props) {
@@ -13,6 +12,7 @@ class OverviewPage extends Component {
       confirmedEventName: ""
     };
 
+    // initialize dbref only if props of userProfile is passed down
     if (props.userProfile) {
       this.dbRef = firebase.database().ref(`${this.props.userID}`);
     } else {
@@ -62,7 +62,6 @@ class OverviewPage extends Component {
         inputValue: ""
       });
     }
-    // create new event object, because the firebase parties array holds objects of each event
   };
 
   // Function to delete a party from parties list AND individual friends' parties array

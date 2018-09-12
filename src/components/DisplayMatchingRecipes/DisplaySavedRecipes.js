@@ -14,7 +14,7 @@ const DisplaySavedRecipes = props => {
                 className={"save-single-recipe"}
                 toggleRecipe={props.toggleRecipe}
                 action={"remove"}
-                buttonTag={<i class="fas fa-minus-circle" />}
+                buttonTag={<i className="fas fa-minus-circle" />}
                 key={recipe.id}
                 recipe={recipe}
                 buttonClass={"recipe-remove-button"}

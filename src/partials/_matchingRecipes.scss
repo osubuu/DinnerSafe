@@ -52,7 +52,6 @@
   text-align: center;
   font-family: $secondary-font;
   color: $peach;
-  // margin-bottom: 10px;
 }
 .recipe-img-container {
   width: auto;
@@ -74,7 +73,6 @@
 }
 .recipe-add-button,
 .recipe-remove-button {
-  // margin-left: 5px;
   background: none;
   border: none;
   color: $yellow;
@@ -84,11 +82,17 @@
   right: 1%;
   z-index: 100;
   text-shadow: -1.25px 0 black, 0 1.25px black, 1.25px 0 black, 0 -1.25px black;
+  transition: 0.1s;
+
+  &:hover {
+    transition: 0.1s;
+    transform: scale(0.9);
+  }
 }
+
 h2.recipe-name,
 h2.saved-recipe-name {
   font-family: "Muli", sans-serif;
-  // margin-bottom: 10px;
   z-index: 100;
   position: absolute;
   top: 25%;

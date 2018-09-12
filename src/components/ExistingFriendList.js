@@ -32,7 +32,7 @@ class ExistingFriendList extends Component {
     });
   };
 
-  // Function to delete friend permanently
+  // Function to delete friend permanently (TEMPORARILY DISABLED AS OF 9/12/2018)
   deleteFriend = friendName => {
     swal({
       type: "warning",
@@ -86,10 +86,9 @@ class ExistingFriendList extends Component {
   render() {
     return (
       <div>
-        <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
-
         {this.props.userProfile ? (
           <div>
+            <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
             <div className="edit-all-guests-subheader">
               <div className="wrapper clearfix edit-all-guests-sub-subheader">
                 <h2 className="edit-all-guests-title">Contact List</h2>
@@ -101,7 +100,7 @@ class ExistingFriendList extends Component {
                 </div>
               </div>
             </div>
-              
+
             <div className="wrapper">
               <section className="manage-friends">
                 <h3 className="edit-all-guests-section-header">Add and Remove Guests</h3>
@@ -110,10 +109,19 @@ class ExistingFriendList extends Component {
                     if (friend.parties && friend.parties.indexOf(this.state.selectedEvent) !== -1) {
                       return (
                         <div key={i} className="single-friend">
-                          <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" defaultChecked />
-                          <label htmlFor={i}><div className="stylish-checkbox">
-                                <i class="fas fa-check" />
-                              </div>{friend.name}</label>
+                          <input
+                            onClick={this.toggleFriend}
+                            id={i}
+                            value={friend.name}
+                            type="checkbox"
+                            defaultChecked
+                          />
+                          <label htmlFor={i}>
+                            <div className="stylish-checkbox">
+                              <i class="fas fa-check" />
+                            </div>
+                            {friend.name}
+                          </label>
                           {/* {friend.name !== this.props.userProfile.user ? (
                             <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
                               DELETE FRIEND FROM EXISTING FRIENDS
@@ -125,9 +133,12 @@ class ExistingFriendList extends Component {
                       return (
                         <div key={i} className="single-friend">
                           <input onClick={this.toggleFriend} id={i} value={friend.name} type="checkbox" />
-                          <label htmlFor={i}><div className="stylish-checkbox">
-                                <i class="fas fa-check" />
-                              </div>{friend.name}</label>
+                          <label htmlFor={i}>
+                            <div className="stylish-checkbox">
+                              <i class="fas fa-check" />
+                            </div>
+                            {friend.name}
+                          </label>
                           {/* {friend.name !== this.props.userProfile.user ? (
                             <button id={friend.name} onClick={() => this.deleteFriend(friend.name)}>
                               DELETE FRIEND FROM EXISTING FRIENDS
@@ -138,11 +149,9 @@ class ExistingFriendList extends Component {
                     }
                   })}
                 </form>
-
               </section>
             </div>
             {/* End of Wrapper */}
-
           </div>
         ) : (
           <Redirect from="/event" to="/" />

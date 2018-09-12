@@ -4,7 +4,7 @@ const Loader = () => {
   return (
     <div className="loader">
       <svg
-        class="lds-spin"
+        className="lds-spin"
         width="85px"
         height="85px"
         xmlns="http://www.w3.org/2000/svg"

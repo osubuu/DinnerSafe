@@ -293,7 +293,7 @@ class App extends Component {
                           value="sign-in"
                           onClick={this.handleClickLogin}
                         >
-                          Sign In / Create Account <i class="fab fa-google" />
+                          Sign In / Create Account <i className="fab fa-google" />
                         </button>
                         <button className="log-in-page-button guest" onClick={this.handleClickLogin} value="guest">
                           Continue as Guest

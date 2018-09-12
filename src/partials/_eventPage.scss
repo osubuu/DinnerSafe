@@ -155,15 +155,7 @@
     position: relative;
     padding: 0;
   }
-  // .guestList label {
-  //   position: absolute;
-  //   transform: translate(0,16px) scale(1);
-  //   top: -10px;
-  //   & .active {
-  //     transform: translate(0, 4px) scale(.75);
-  //     top: -16px
-  //   }
-  // }
+
   .add-friend-button {
     border: $yellow 1px solid;
     border-radius: 5px;
@@ -239,20 +231,4 @@
   .fa-bars {
     display: none;
   }
-
-  // .courses {
-  //   width: 100%;
-  //   border: none;
-  //   & label {
-  //     display: inline-block;
-  //     font-size:  1.5rem;
-  //     width: calc(100% / 4);
-  //   }
-  // }
-  // input.course-checkbox {
-  //   display: inline-block;
-  //   font-size: 1.5rem;
-  //   visibility: hidden;
-  //   width: 0;
-  // }
 }
