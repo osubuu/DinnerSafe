@@ -1,25 +1,25 @@
 .event-page {
 
   @media (max-width: 1400px) {
-  // .event-page {
     .remove-friend-button {
       background: #f34843;
       height: 25px;
       width: 25px;
-      left: 27px;
+      left: 29px;
     }
+
     .remove-friend-button .fa-times {
       position: absolute;
       right: -7px;
       top: 12px;
       font-size: 2rem;
     }
+
     .fakeButton{
       & i {
         font-size: 2em;
       }
     }
-  // }
   }
 
   @media (max-width: 1280px) {
@@ -33,20 +33,37 @@
         top: 10px;
       }
     }
-    .fakeButton i {
+    .fakeButton {
+      margin-right: 10px;  
+      & i {
         font-size: 1.6rem;
       }
-    .guest p {
+    }
+    ul.guests {
+      margin-bottom: 2%;
+      & p {
       font-size: 2rem;
+      }
     }
-    .guestList a {
-      padding: 5px;
+    .guestList {
+      width: calc(40% - 10px);
+      & a {
+        padding: 5px;
+      }
     }
-  // }
   }
 
-  @media (max-width: 1024px) {
-  // .event-page {
+
+  @media (max-width:1024) {
+      .remove-friend-button .fa-times {
+        left: 9px;
+      }
+  }
+
+  @media (max-width: 900px) {
+      
+    // JESS
+
     .guestList {
       margin: 0;
       padding: 10px;
@@ -69,10 +86,9 @@
     .filter-recipes-form {
       margin-left: 0;
     }
-  // }
-  }
 
-  @media (max-width: 900px) {
+    // DAN
+
     .event-main-page-div.body,
     .user.right {
       display: none;
@@ -118,6 +134,5 @@
         display: block;
       }
     }
-
   }
 }

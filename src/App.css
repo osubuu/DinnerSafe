@@ -529,7 +529,8 @@ header {
   border-radius: 50%;
   font-weight: bold;
   position: relative;
-  cursor: pointer; }
+  cursor: pointer;
+  left: 29px; }
 
 .event-page .remove-friend-button .fa-times {
   position: absolute;
@@ -722,7 +723,10 @@ h2.recipe-name {
   font-size: 2.5rem; }
 
 h2.saved-recipe-name {
-  font-size: 1.7rem; }
+  font-size: 1.7rem;
+  left: 43%;
+  width: 70%;
+  text-align: left; }
 
 .edit-guest-subheader {
   background: #dedede;
@@ -906,7 +910,8 @@ ul {
 
 body {
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(./assets/heroBGweb.jpg) 50% 50% fixed;
-  background-size: 100% auto; }
+  background-size: cover;
+  background-position: center; }
 
 a {
   text-decoration: none; }
@@ -1082,52 +1087,66 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
   .single-friend {
     width: 100%; } }
 
-@media all and (max-width: 1400px) {
+@media all and (max-width: 1280px) {
   .event-page .matching-recipes {
-    width: 100%;
-    margin-left: 0;
+    width: calc(60% - 10px);
     margin-right: 0; }
     .event-page .matching-recipes .recipes-container {
       width: 100%; }
       .event-page .matching-recipes .recipes-container .recipe-return {
-        width: 70%;
+        width: 55%;
         margin: 0; }
-        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:nth-child(-n + 2) {
+        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe {
+          width: calc(100% - 10px);
+          height: 200px;
+          float: none;
+          margin: 10px 5px; }
+        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:first-child {
           margin-top: 0; }
-        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:nth-last-child(-n + 2) {
+        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:last-child {
           margin-bottom: 0; }
       .event-page .matching-recipes .recipes-container .saved-recipes {
-        width: calc(30% - 5px);
+        width: calc(45% - 5px);
         margin-top: 0;
         margin-left: 5px;
         padding-bottom: 0;
-        padding-top: 0; } }
+        padding-top: 0; }
+        .event-page .matching-recipes .recipes-container .saved-recipes .save-single-recipe {
+          height: 125px; } }
 
-@media all and (max-width: 900px) {
+@media all and (max-width: 1200px) {
   h2.recipe-name {
-    font-size: 2.2rem;
     width: 60%; }
   h2.saved-recipe-name {
-    font-size: 1.6rem;
-    width: 60%; }
-  .event-page .matching-recipes .recipes-container .recipe-return {
-    width: 60%;
-    margin: 0; }
-    .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe {
-      width: calc(100% - 10px);
-      height: 200px;
-      float: none;
-      margin: 10px 5px; }
-    .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:nth-child(2) {
-      margin-top: 10px; }
-    .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:nth-last-child(2) {
-      margin-bottom: 10px; }
-  .event-page .matching-recipes .recipes-container .saved-recipes {
-    width: calc(40% - 5px); } }
+    font-size: 1.6rem; } }
+
+@media all and (max-width: 1000px) {
+  h2.recipe-name {
+    font-size: 2.2rem; }
+  .recipe-add-button,
+  .recipe-remove-button {
+    font-size: 3.5rem; }
+  .event-page .matching-recipes .filter-recipes-form .courses label {
+    width: 50%; } }
+
+@media all and (max-width: 900px) {
+  .event-page .matching-recipes {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0; }
+    .event-page .matching-recipes .filter-recipes-form {
+      margin-left: 0; }
+      .event-page .matching-recipes .filter-recipes-form .filter-recipes-input {
+        width: 80%; }
+      .event-page .matching-recipes .filter-recipes-form .courses label {
+        width: 33%; } }
 
 @media all and (max-width: 600px) {
   h2.recipe-name {
     font-size: 1.9rem; }
+  h2.saved-recipe-name {
+    left: 50%;
+    text-align: center; }
   .recipe-add-button,
   .recipe-remove-button {
     font-size: 3rem; }
@@ -1148,6 +1167,12 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     .event-page .matching-recipes .recipes-container .saved-recipes .save-single-recipe {
       height: 100px; } }
 
+@media all and (max-width: 550px) {
+  .event-page .matching-recipes .filter-recipes-form .courses label {
+    width: 50%; }
+  .event-page .matching-recipes .filter-recipes-form .filter-recipes-input {
+    width: 60%; } }
+
 @media all and (max-width: 350px) {
   h2.recipe-name {
     font-size: 1.6rem; }
@@ -1167,7 +1192,7 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     background: #f34843;
     height: 25px;
     width: 25px;
-    left: 27px; }
+    left: 29px; }
   .event-page .remove-friend-button .fa-times {
     position: absolute;
     right: -7px;
@@ -1185,14 +1210,24 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     .event-page .remove-friend-button .fa-times {
       font-size: 1.6rem;
       top: 10px; }
-  .event-page .fakeButton i {
-    font-size: 1.6rem; }
-  .event-page .guest p {
-    font-size: 2rem; }
-  .event-page .guestList a {
-    padding: 5px; } }
+  .event-page .fakeButton {
+    margin-right: 10px; }
+    .event-page .fakeButton i {
+      font-size: 1.6rem; }
+  .event-page ul.guests {
+    margin-bottom: 2%; }
+    .event-page ul.guests p {
+      font-size: 2rem; }
+  .event-page .guestList {
+    width: calc(40% - 10px); }
+    .event-page .guestList a {
+      padding: 5px; } }
 
-@media (max-width: 1024px) {
+@media (max-width: 1024) {
+  .event-page .remove-friend-button .fa-times {
+    left: 9px; } }
+
+@media (max-width: 900px) {
   .event-page .guestList {
     margin: 0;
     padding: 10px;
@@ -1208,9 +1243,7 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
   .event-page .remove-friend-button {
     margin: 1px 10px 0px 0; }
   .event-page .filter-recipes-form {
-    margin-left: 0; } }
-
-@media (max-width: 900px) {
+    margin-left: 0; }
   .event-page .event-main-page-div.body,
   .event-page .user.right {
     display: none; }
