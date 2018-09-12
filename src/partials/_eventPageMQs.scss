@@ -98,19 +98,57 @@
       width: 80%;
     }
 
+    .app-name {
+      padding: 0;
+    }
+
+    .event-title-div {
+      height: 40px;
+    }
+
     .app-name,
     .event-title-div {
       width: 100%;
+      text-align: left;
+
     }
 
+    .big-mac-icon {
+      float: left;
+      width: 20%;
+      position: relative;
+      height: 76px;
+    }
+
+    .hamburger {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: block;
+    }
+    
+    .fa-bars {
+      color: $color-2;
+      font-size: 3rem;
+      cursor: pointer;
+      padding: 20px 0 10px 10px;
+    }
+
+    
     .big-mac {
       display: block;
       position: absolute;
-      top: 134px;
       right: 0;
       left: 0;
+      top: -500px;
       background: $peach;
     }
+    
+    .hidden-checkbox:checked ~ .big-mac {
+      top: 76px;
+    }
+
 
     .ham-li {
       display: block;
