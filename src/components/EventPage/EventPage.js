@@ -138,13 +138,14 @@ class EventPage extends Component {
               <div className="event-subheader">
                 <div className="wrapper clearfix event-sub-subheader">
                   
-                  <h1 className="app-name">DinnerSafe</h1>
+                  <div className="event-header-left clearfix">
+                    <h1 className="app-name">DinnerSafe</h1>
 
-                  <div className="event-title-div">
-                    <p className="event-title">{this.props.userProfile.parties[this.props.selectedEventIndex].title}</p>
+                    <div className="event-title-div">
+                      <p className="event-title">{this.props.userProfile.parties[this.props.selectedEventIndex].title}</p>
+                    </div>
                   </div>
                   
-
                   <div className="user clearfix">
                     <h2>{this.props.userProfile.user}</h2>
                     <Link className="log-out" onClick={this.props.handleLogout} to="/">Log Out</Link>

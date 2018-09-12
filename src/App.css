@@ -434,10 +434,20 @@ header {
 
 .event-page .app-name {
   float: left;
-  width: calc(100% / 3); }
+  width: 50%; }
+
+.event-page .event-header-left {
+  width: calc(100% / 3 * 2);
+  float: left; }
+
+.event-page .user {
+  width: calc(100% / 3);
+  float: left; }
+  .event-page .user h2 {
+    float: right; }
 
 .event-page .event-title-div {
-  width: calc(100% / 3);
+  width: 50%;
   text-align: center;
   display: block;
   float: left;

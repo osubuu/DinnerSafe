@@ -2,11 +2,25 @@
 
   .app-name {
     float: left;
+    width: 50%;
+  }
+
+  .event-header-left {
+    width: calc(100% / 3 * 2);
+    float: left;
+  }
+
+  .user {
     width: calc(100% / 3);
+    float: left;
+
+    & h2 {
+      float: right;
+    }
   }
 
   .event-title-div {
-    width: calc(100% / 3);
+    width: 50%;
     text-align: center;
     display: block;
     float: left;
