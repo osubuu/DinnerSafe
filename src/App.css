@@ -479,7 +479,7 @@ header {
   transform: translate(-50%, -50%); }
 
 .event-page .event-main-page-div {
-  padding-top: 15px; }
+  padding-top: 80px; }
 
 .event-page .event-main-page {
   padding: 15px 25px;
@@ -1076,12 +1076,7 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
       position: relative; }
   .new-event-label {
     font-size: 2rem;
-    top: 25px; }
-  header .app-name {
-    float: none;
-    text-align: center;
-    font-size: 5rem;
-    padding: 15px 0 0 0; } }
+    top: 25px; } }
 
 @media (max-width: 650px) {
   .single-friend {
@@ -1252,23 +1247,48 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     display: none; }
   .event-page .event-header-left {
     width: 80%; }
+  .event-page .app-name {
+    padding: 0; }
+  .event-page .event-title-div {
+    height: 40px; }
   .event-page .app-name,
   .event-page .event-title-div {
-    width: 100%; }
+    width: 100%;
+    text-align: left; }
+  .event-page .big-mac-icon {
+    float: left;
+    width: 20%;
+    position: relative;
+    height: 76px; }
+  .event-page .hamburger {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block; }
+  .event-page .fa-bars {
+    color: #f2f2f2;
+    font-size: 3rem;
+    cursor: pointer;
+    padding: 20px 0 10px 10px; }
   .event-page .big-mac {
     display: block;
     position: absolute;
-    top: 134px;
-    right: 0;
-    left: 0;
-    background: #ffe4c9; }
+    width: 100%;
+    right: -100%;
+    top: 76px;
+    background: #ffe4c9;
+    transition: all 0.3s; }
+  .event-page .hidden-checkbox:checked ~ .big-mac {
+    right: 0; }
   .event-page .ham-li {
     display: block;
     width: 100%;
     text-align: center;
     font-size: 2rem;
     color: #141414;
-    z-index: 100; }
+    z-index: 100;
+    border-bottom: 1px solid #616161; }
     .event-page .ham-li h2,
     .event-page .ham-li .event-main-page,
     .event-page .ham-li a {
@@ -1279,5 +1299,11 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
       text-align: center;
       float: none;
       padding: 20px 10px;
-      margin: 10px 0;
-      display: block; } }
+      display: block; }
+    .event-page .ham-li .log-out {
+      background: #f34843;
+      color: #f2f2f2; }
+    .event-page .ham-li .event-main-page {
+      background: #117842;
+      color: #f2f2f2;
+      border-radius: 0; } }
