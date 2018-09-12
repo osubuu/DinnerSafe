@@ -166,6 +166,12 @@ class EventPage extends Component {
                       </li>
 
                       <li className="ham-li">
+                        <Link className="event-main-page" onClick={this.props.handleBackToEvent} to="/home">
+                          Main Page
+                        </Link>
+                      </li>
+                      
+                      <li className="ham-li">
                         <a href="#add-guest">Manage Event Guests</a>
                       </li>
 
@@ -173,11 +179,6 @@ class EventPage extends Component {
                         <a href="#display-matching-recipes">Search & Save Recipes</a>
                       </li>
 
-                      <li className="ham-li">
-                        <Link className="event-main-page" onClick={this.props.handleBackToEvent} to="/home">
-                          Main Page
-                        </Link>
-                      </li>
 
                     </ul>
                   </div>

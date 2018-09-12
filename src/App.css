@@ -1271,19 +1271,21 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
   .event-page .big-mac {
     display: block;
     position: absolute;
-    right: 0;
-    left: 0;
-    top: -500px;
-    background: #ffe4c9; }
+    width: 100%;
+    right: -100%;
+    top: 76px;
+    background: #ffe4c9;
+    transition: all 0.3s; }
   .event-page .hidden-checkbox:checked ~ .big-mac {
-    top: 76px; }
+    right: 0; }
   .event-page .ham-li {
     display: block;
     width: 100%;
     text-align: center;
     font-size: 2rem;
     color: #141414;
-    z-index: 100; }
+    z-index: 100;
+    border-bottom: 1px solid #616161; }
     .event-page .ham-li h2,
     .event-page .ham-li .event-main-page,
     .event-page .ham-li a {
@@ -1294,5 +1296,11 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
       text-align: center;
       float: none;
       padding: 20px 10px;
-      margin: 10px 0;
-      display: block; } }
+      display: block; }
+    .event-page .ham-li .log-out {
+      background: #f34843;
+      color: #f2f2f2; }
+    .event-page .ham-li .event-main-page {
+      background: #117842;
+      color: #f2f2f2;
+      border-radius: 0; } }
