@@ -152,6 +152,14 @@ class EventPage extends Component {
                     </Link>
                   </div>
 
+                  <input type="checkbox" id="toggle" name="toggle" className="hidden-checkbox"></input>
+
+                  <div className="big-mac-icon clearfix">
+                    <label className="hamburger" htmlFor="toggle">
+                      <i class="fas fa-bars"></i>
+                    </label>
+                  </div>
+
                   <div className="big-mac">
                     <ul>
                       <li className="ham-li">
@@ -161,6 +169,12 @@ class EventPage extends Component {
                       </li>
 
                       <li className="ham-li">
+                        <Link className="event-main-page" onClick={this.props.handleBackToEvent} to="/home">
+                          Main Page
+                        </Link>
+                      </li>
+                      
+                      <li className="ham-li">
                         <a href="#add-guest">Manage Event Guests</a>
                       </li>
 
@@ -168,18 +182,14 @@ class EventPage extends Component {
                         <a href="#display-matching-recipes">Search & Save Recipes</a>
                       </li>
 
-                      <li className="ham-li">
-                        <Link className="event-main-page" onClick={this.props.handleBackToEvent} to="/home">
-                          Main Page
-                        </Link>
-                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
             </header>
 
-            <div className="wrapper clearfix">
+            <div className="wrapper body clearfix">
+
               <div className="event-main-page-div body clearfix">
                 <Link className="event-main-page" onClick={this.props.handleBackToEvent} to="/home">
                   Main Page
