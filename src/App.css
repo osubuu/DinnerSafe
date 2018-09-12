@@ -432,22 +432,39 @@ header {
   margin: 0;
   font-size: 2rem; }
 
+.event-page .app-name {
+  float: left;
+  width: calc(100% / 3); }
+
+.event-page .event-title-div {
+  width: calc(100% / 3);
+  text-align: center;
+  display: block;
+  float: left;
+  position: relative;
+  height: 68px; }
+
 .event-page .event-title {
-  margin: 25px 0; }
-  .event-page .event-title h2 {
-    font-size: 5rem;
-    float: left;
-    width: 85%; }
-  .event-page .event-title a {
-    font-size: 1.6rem;
-    float: left;
-    width: 15%;
-    margin: 20px 0;
-    text-align: center;
-    background: #ffcb00;
-    padding: 10px;
-    color: #141414;
-    border-radius: 5px; }
+  color: #f2f2f2;
+  font-size: 2rem;
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); }
+
+.event-page .event-main-page-div {
+  padding-top: 15px; }
+
+.event-page .event-main-page {
+  padding: 15px 25px;
+  background: #117842;
+  color: #f2f2f2;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  text-align: center;
+  float: right; }
 
 .event-page .guestList {
   float: left;
