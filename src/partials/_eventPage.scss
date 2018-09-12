@@ -1,23 +1,43 @@
 .event-page {
-  & .event-title {
-    margin: 25px 0;
-    & h2 {
-      font-size: 5rem;
-      float: left;
-      width: 85%;
-    }
-    & a {
-      font-size: 1.6rem;
-      float: left;
-      width: 15%;
-      margin: 20px 0;
-      text-align: center;
-      background: $yellow;
-      padding: 10px;
-      color: $color-1;
-      border-radius: 5px;
-    }
+  .app-name {
+    float: left;
+    width: calc(100% / 3);
   }
+
+  .event-title-div {
+    width: calc(100% / 3);
+    text-align: center;
+    display: block;
+    float: left;
+    position: relative;
+    height: 68px;
+  }
+
+  .event-title {
+    color: $color-2;
+    font-size: 2rem;
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .event-main-page-div {
+    padding-top: 15px;
+  }
+
+  .event-main-page {
+    padding: 15px 25px;
+    background: $green;
+    color: $color-2;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    text-align: center;
+    float: right;
+  }
+
   .guestList {
     float: left;
     width: calc(20% - 20px);
@@ -70,9 +90,10 @@
   }
   .matching-recipes {
     float: left;
-    width: calc(80% - 20px);
-    margin: 25px 10px;
+    width: 80%;
+    margin: 25px 0 25px 10px;
   }
+
   .guests {
     overflow: scroll;
     margin-bottom: 9%;
@@ -95,10 +116,6 @@
     }
   }
 
-  .filter-button {
-    &:hover {
-    }
-  }
   li.guest {
     margin: 5px 0px;
   }

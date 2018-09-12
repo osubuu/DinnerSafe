@@ -132,16 +132,33 @@ class EventPage extends Component {
       <div>
         {this.props.userProfile ? (
           <div className="event-page">
-            <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} />
+            {/* <Header user={this.props.userProfile.user} handleLogout={this.props.handleLogout} /> */}
+
+            <header>
+              <div className="event-subheader">
+                <div className="wrapper clearfix event-sub-subheader">
+                  
+                  <h1 className="app-name">DinnerSafe</h1>
+
+                  <div className="event-title-div">
+                    <p className="event-title">{this.props.userProfile.parties[this.props.selectedEventIndex].title}</p>
+                  </div>
+                  
+
+                  <div className="user clearfix">
+                    <h2>{this.props.userProfile.user}</h2>
+                    <Link className="log-out" onClick={this.props.handleLogout} to="/">Log Out</Link>
+                  </div>
+                </div>
+              </div>
+            </header>
 
             <div className="wrapper clearfix">
-              <div className="event-title">
-                <h2>{this.props.userProfile.parties[this.props.selectedEventIndex].title}</h2>
-                <div className="title-back-button">
-                  <Link onClick={this.props.handleBackToOverview} to="/home">
-                    Back to Main Page
-                  </Link>
-                </div>
+
+              <div className="event-main-page-div clearfix">
+                <Link className="event-main-page" onClick={this.props.handleBackToEvent} to="/home">
+                  Main Page
+                </Link>
               </div>
 
               <div className="guestList clearfix">
