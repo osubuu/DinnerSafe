@@ -145,6 +145,22 @@ class EventPage extends Component {
               </div>
 
               <div className="guestList clearfix">
+                <form onSubmit={this.handleSubmitAddFriend} action="">
+                  <label className="add-new-friend-label" htmlFor="add-new-friend">
+                    Add New Guest
+                  </label>
+                  <input
+                    id={"add-new-friend"}
+                    value={this.state.inputValue}
+                    onChange={this.handleChangeAddFriend}
+                    type="text"
+                    autoComplete="off"
+                    className="add-new-friend-input"
+                  />
+                  <button className="add-friend-button" onClick={this.handleClickAddFriend}>
+                    Add
+                  </button>
+                </form>
                 <ul className="guests">
                   {this.props.userProfile.friends
                     ? this.props.userProfile.friends.map((friend, i) => {
@@ -182,7 +198,7 @@ class EventPage extends Component {
                 </ul>
                 <Link to="existing-guest-list">Add Existing Guest</Link>
 
-                <form onSubmit={this.handleSubmitAddFriend} action="">
+                {/* <form onSubmit={this.handleSubmitAddFriend} action="">
                   <label className="add-new-friend-label" htmlFor="add-new-friend">
                     Add New Guest
                   </label>
@@ -197,7 +213,7 @@ class EventPage extends Component {
                   <button className="add-friend-button" onClick={this.handleClickAddFriend}>
                     Add
                   </button>
-                </form>
+                </form> */}
               </div>
 
               {this.checkCurrentEventForGuests() === true ? (
