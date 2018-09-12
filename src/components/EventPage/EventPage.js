@@ -138,16 +138,40 @@ class EventPage extends Component {
               <div className="event-subheader">
                 <div className="wrapper clearfix event-sub-subheader">
                   
-                  <h1 className="app-name">DinnerSafe</h1>
+                  <div className="event-header-left clearfix">
+                    <h1 className="app-name">DinnerSafe</h1>
 
-                  <div className="event-title-div">
-                    <p className="event-title">{this.props.userProfile.parties[this.props.selectedEventIndex].title}</p>
+                    <div className="event-title-div">
+                      <p className="event-title">{this.props.userProfile.parties[this.props.selectedEventIndex].title}</p>
+                    </div>
                   </div>
                   
-
-                  <div className="user clearfix">
+                  <div className="right user clearfix">
                     <h2>{this.props.userProfile.user}</h2>
                     <Link className="log-out" onClick={this.props.handleLogout} to="/">Log Out</Link>
+                  </div>
+
+                  <div className="big-mac">
+                    <ul>
+                      <li className="ham-li">
+                        <Link className="log-out" onClick={this.props.handleLogout} to="/">Log Out</Link>
+                      </li>
+
+                      <li className="ham-li">
+                        <a href="#add-guest">Manage Event Guests</a>
+                      </li>
+
+                      <li className="ham-li">
+                        <a href="#display-matching-recipes">Search & Save Recipes</a>
+                      </li>
+
+                      <li className="ham-li">
+                        <Link className="event-main-page" onClick={this.props.handleBackToEvent} to="/home">
+                          Main Page
+                        </Link>
+                      </li>
+
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -155,13 +179,13 @@ class EventPage extends Component {
 
             <div className="wrapper clearfix">
 
-              <div className="event-main-page-div clearfix">
+              <div className="event-main-page-div body clearfix">
                 <Link className="event-main-page" onClick={this.props.handleBackToEvent} to="/home">
                   Main Page
                 </Link>
               </div>
 
-              <div className="guestList clearfix">
+              <div id="add-guest" className="guestList clearfix">
                 <form onSubmit={this.handleSubmitAddFriend} action="">
                   <label className="add-new-friend-label" htmlFor="add-new-friend">
                     Add New Guest
@@ -234,7 +258,7 @@ class EventPage extends Component {
               </div>
 
               {this.checkCurrentEventForGuests() === true ? (
-                <div>
+                <div id="display-matching-recipes">
                   <DisplayMatchingRecipes
                     toggleRecipe={this.props.toggleRecipe}
                     userProfile={this.props.userProfile}

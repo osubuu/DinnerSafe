@@ -1,11 +1,42 @@
 .event-page {
+  .wrapper.body {
+    padding-top: 68px;
+  }
+  
   .app-name {
     float: left;
+    width: 50%;
+  }
+
+  .big-mac {
+    display: none;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 200;
+  }
+
+  .event-header-left {
+    width: calc(100% / 3 * 2);
+    float: left;
+  }
+
+  .user {
     width: calc(100% / 3);
+    float: left;
+
+    & h2 {
+      float: right;
+    }
   }
 
   .event-title-div {
-    width: calc(100% / 3);
+    width: 50%;
     text-align: center;
     display: block;
     float: left;
@@ -81,6 +112,7 @@
     font-weight: bold;
     position: relative;
     cursor: pointer;
+    left: 29px;
   }
   .remove-friend-button .fa-times {
     position: absolute;
