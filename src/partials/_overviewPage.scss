@@ -118,6 +118,13 @@
   position: absolute;
   right: -15px;
   top: -13px;
+  transition: 0.2s;
+
+  &:hover {
+    transition: 0.2s;
+    background: $peach;
+    color: $red;
+  }
 }
 
 .fa-times {

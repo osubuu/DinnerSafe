@@ -237,19 +237,35 @@ label, input, .event-title h2, a, button, .new-event-label, .section-header, .us
   border: none;
   border-radius: 5px;
   margin: 15px 0;
-  padding: 15px 25px; }
+  padding: 15px 25px;
+  transition: 0.2s; }
+
+.log-in-page-button.guest:hover {
+  font-weight: 700;
+  transition: 0.2s;
+  background: #ffe4c9; }
+
+.demo:hover {
+  font-weight: 700;
+  transition: 0.2s;
+  background: lightblue; }
 
 .sign-in-create {
   background: #f34843;
   color: #f2f2f2;
   font-size: 2.5rem;
-  padding: 25px; }
+  padding: 25px;
+  transition: 0.2s; }
+  .sign-in-create:hover {
+    transition: 0.2s;
+    color: #f34843;
+    background: #f2f2f2; }
 
 .fa-google {
   margin-left: 5%; }
 
 .app-name {
-  font-family: 'Fredericka the Great', cursive;
+  font-family: "Fredericka the Great", cursive;
   font-size: 13rem;
   font-weight: normal;
   color: #ffcb00;
@@ -421,7 +437,12 @@ header {
   font-weight: bold;
   position: absolute;
   right: -15px;
-  top: -13px; }
+  top: -13px;
+  transition: 0.2s; }
+  .delete-button:hover {
+    transition: 0.2s;
+    background: #ffe4c9;
+    color: #f34843; }
 
 .fa-times {
   position: absolute;
@@ -665,11 +686,14 @@ header {
   height: 100vh;
   overflow: scroll;
   margin-top: 5px; }
-  .saved-recipes h1 {
+  .saved-recipes h1,
+  .saved-recipes h3 {
     font-size: 2.5rem;
     font-family: "Muli", sans-serif;
     text-align: center;
     color: white; }
+  .saved-recipes h3 {
+    font-size: 2rem; }
 
 .recipe-name {
   font-size: 1.8rem;

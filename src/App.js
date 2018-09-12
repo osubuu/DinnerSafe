@@ -298,7 +298,7 @@ class App extends Component {
                         <button className="log-in-page-button guest" onClick={this.handleClickLogin} value="guest">
                           Continue as Guest
                         </button>
-                        <button className="log-in-page-button" onClick={this.handleClickLogin} value="demo">
+                        <button className="log-in-page-button demo" onClick={this.handleClickLogin} value="demo">
                           Demo
                         </button>
                       </div>

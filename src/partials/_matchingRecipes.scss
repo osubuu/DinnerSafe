@@ -34,11 +34,16 @@
   height: 100vh;
   overflow: scroll;
   margin-top: 5px;
-  & h1 {
+  & h1,
+  h3 {
     font-size: 2.5rem;
     font-family: $secondary-font;
     text-align: center;
     color: white;
+  }
+
+  & h3 {
+    font-size: 2rem;
   }
 }
 

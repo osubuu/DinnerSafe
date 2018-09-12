@@ -6,6 +6,7 @@ const DisplaySavedRecipes = props => {
     return (
       <div className="saved-recipes">
         <h1>SAVED RECIPES</h1>
+        <h3>({props.savedRecipes.length})</h3>
         <ul className="saved-recipes-list clearfix">
           {props.savedRecipes.map(recipe => {
             return (
@@ -13,7 +14,7 @@ const DisplaySavedRecipes = props => {
                 className={"save-single-recipe"}
                 toggleRecipe={props.toggleRecipe}
                 action={"remove"}
-                buttonTag={<i class="fas fa-minus-circle"></i>}
+                buttonTag={<i class="fas fa-minus-circle" />}
                 key={recipe.id}
                 recipe={recipe}
                 buttonClass={"recipe-remove-button"}
