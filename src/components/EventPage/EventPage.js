@@ -34,7 +34,6 @@ class EventPage extends Component {
   // Function to remove specific friend from the current event
   removeFriendFromEvent = e => {
     let friendName = e.target.id;
-    console.log(friendName);
 
     this.dbRef.child("friends").once("value", snapshot => {
       // find index of current friend on firebase
