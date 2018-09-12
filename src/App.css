@@ -494,7 +494,7 @@ header {
 
 .event-page .fakeButton {
   float: left;
-  width: 15%;
+  width: 0;
   margin-top: 5px;
   color: white;
   cursor: pointer;
@@ -1147,3 +1147,57 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     height: 50vh; }
     .event-page .matching-recipes .recipes-container .saved-recipes .save-single-recipe {
       height: 80px; } }
+
+@media (max-width: 1400px) {
+  .event-page .remove-friend-button {
+    background: #f34843;
+    height: 25px;
+    width: 25px;
+    left: 27px; }
+  .event-page .remove-friend-button .fa-times {
+    position: absolute;
+    right: -7px;
+    top: 12px;
+    font-size: 2rem; }
+  .event-page .fakeButton i {
+    font-size: 2em; } }
+
+@media (max-width: 1280px) {
+  .event-page .event-title {
+    margin: 10px 0; }
+    .event-page .event-title h2 {
+      width: 80%; }
+    .event-page .event-title a {
+      width: 20%; }
+  .event-page .remove-friend-button {
+    height: 20px;
+    width: 20px;
+    top: 2px;
+    left: 22px; }
+    .event-page .remove-friend-button .fa-times {
+      font-size: 1.6rem;
+      top: 10px; }
+  .event-page .fakeButton i {
+    font-size: 1.6rem; }
+  .event-page .guest p {
+    font-size: 2rem; }
+  .event-page .guestList a {
+    padding: 5px; } }
+
+@media (max-width: 1024px) {
+  .event-page .guestList {
+    margin: 0;
+    padding: 10px;
+    padding-bottom: 25px;
+    float: none;
+    width: 100%; }
+  .event-page .guests {
+    margin-bottom: 1%; }
+  .event-page .add-friend-button {
+    margin: 5px 0; }
+  .event-page .fakeButton {
+    margin: 5px 15px 0 0; }
+  .event-page .remove-friend-button {
+    margin: 1px 10px 0px 0; }
+  .event-page .filter-recipes-form {
+    margin-left: 0; } }
