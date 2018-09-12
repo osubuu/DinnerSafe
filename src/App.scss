@@ -32,7 +32,9 @@ ul {
 body {
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
     url(./assets/heroBGweb.jpg) 50% 50% fixed;
-  background-size: 100% auto;
+  // background-size: 100% auto;
+  background-size: cover;
+  background-position: center;
 }
 
 a {
@@ -106,4 +108,3 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
 @import "./partials/_existingFriendListMQs.scss";
 @import "./partials/_matchingRecipesMQs.scss";
 @import "./partials/_eventPageMQs.scss";
-
