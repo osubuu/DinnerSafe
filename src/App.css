@@ -432,9 +432,23 @@ header {
   margin: 0;
   font-size: 2rem; }
 
+.event-page .wrapper.body {
+  padding-top: 68px; }
+
 .event-page .app-name {
   float: left;
   width: 50%; }
+
+.event-page .big-mac {
+  display: none; }
+
+.event-page header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 200; }
 
 .event-page .event-header-left {
   width: calc(100% / 3 * 2);
@@ -1163,12 +1177,6 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     font-size: 2em; } }
 
 @media (max-width: 1280px) {
-  .event-page .event-title {
-    margin: 10px 0; }
-    .event-page .event-title h2 {
-      width: 80%; }
-    .event-page .event-title a {
-      width: 20%; }
   .event-page .remove-friend-button {
     height: 20px;
     width: 20px;
@@ -1201,3 +1209,39 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     margin: 1px 10px 0px 0; }
   .event-page .filter-recipes-form {
     margin-left: 0; } }
+
+@media (max-width: 900px) {
+  .event-page .event-main-page-div.body,
+  .event-page .user.right {
+    display: none; }
+  .event-page .event-header-left {
+    width: 80%; }
+  .event-page .app-name,
+  .event-page .event-title-div {
+    width: 100%; }
+  .event-page .big-mac {
+    display: block;
+    position: absolute;
+    top: 134px;
+    right: 0;
+    left: 0;
+    background: #ffe4c9; }
+  .event-page .ham-li {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    color: #141414;
+    z-index: 100; }
+    .event-page .ham-li h2,
+    .event-page .ham-li .event-main-page,
+    .event-page .ham-li a {
+      font-size: 2rem;
+      color: #141414;
+      padding: 0;
+      background: none;
+      text-align: center;
+      float: none;
+      padding: 20px 10px;
+      margin: 10px 0;
+      display: block; } }

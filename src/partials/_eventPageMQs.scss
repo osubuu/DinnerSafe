@@ -1,5 +1,7 @@
-@media (max-width: 1400px) {
-  .event-page {
+.event-page {
+
+  @media (max-width: 1400px) {
+  // .event-page {
     .remove-friend-button {
       background: #f34843;
       height: 25px;
@@ -17,20 +19,10 @@
         font-size: 2em;
       }
     }
+  // }
   }
-}
 
-@media (max-width: 1280px) {
-  .event-page {
-    .event-title {
-      margin: 10px 0;
-      & h2 {
-        width: 80%;
-      }
-      & a {
-        width: 20%
-      }
-    }
+  @media (max-width: 1280px) {
     .remove-friend-button {
       height: 20px;
       width: 20px;
@@ -50,11 +42,11 @@
     .guestList a {
       padding: 5px;
     }
+  // }
   }
-}
 
-@media (max-width: 1024px) {
-  .event-page {
+  @media (max-width: 1024px) {
+  // .event-page {
     .guestList {
       margin: 0;
       padding: 10px;
@@ -77,7 +69,55 @@
     .filter-recipes-form {
       margin-left: 0;
     }
+  // }
+  }
 
+  @media (max-width: 900px) {
+    .event-main-page-div.body,
+    .user.right {
+      display: none;
+    }
+
+    .event-header-left {
+      width: 80%;
+    }
+
+    .app-name,
+    .event-title-div {
+      width: 100%;
+    }
+
+    .big-mac {
+      display: block;
+      position: absolute;
+      top: 134px;
+      right: 0;
+      left: 0;
+      background: $peach;
+    }
+
+    .ham-li {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      color: $color-1;
+      z-index: 100;
+      
+      & h2,
+      & .event-main-page,
+      & a {
+        font-size: 2rem;
+        color: $color-1;
+        padding: 0;
+        background: none;
+        text-align: center;
+        float: none;
+        padding: 20px 10px;
+        margin: 10px 0;
+        display: block;
+      }
+    }
 
   }
 }
