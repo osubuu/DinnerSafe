@@ -1119,6 +1119,9 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
 @media all and (max-width: 600px) {
   h2.recipe-name {
     font-size: 1.9rem; }
+  h2.saved-recipe-name {
+    text-align: center;
+    left: 50%; }
   .recipe-add-button,
   .recipe-remove-button {
     font-size: 3rem; }
