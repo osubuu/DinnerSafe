@@ -32,9 +32,7 @@ class EventPage extends Component {
   };
 
   // Function to remove specific friend from the current event
-  removeFriendFromEvent = e => {
-    let friendName = e.target.id;
-
+  removeFriendFromEvent = friendName => {
     this.dbRef.child("friends").once("value", snapshot => {
       // find index of current friend on firebase
       let tempFriendIndex = _.findIndex(snapshot.val(), ["name", friendName]);
@@ -230,7 +228,7 @@ class EventPage extends Component {
                               <button
                                 className="remove-friend-button"
                                 id={friend.name}
-                                onClick={this.removeFriendFromEvent}
+                                onClick={() => this.removeFriendFromEvent(friend.name)}
                               >
                                 <i className="fas fa-times" />
                               </button>
