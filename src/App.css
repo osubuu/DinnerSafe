@@ -882,7 +882,8 @@ ul {
 
 body {
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(./assets/heroBGweb.jpg) 50% 50% fixed;
-  background-size: 100% auto; }
+  background-size: cover;
+  background-position: center; }
 
 a {
   text-decoration: none; }
@@ -1058,48 +1059,56 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
   .single-friend {
     width: 100%; } }
 
-@media all and (max-width: 1400px) {
+@media all and (max-width: 1280px) {
+  .event-page .matching-recipes {
+    width: 60%;
+    margin-right: 0; } }
+
+@media all and (max-width: 1200px) {
+  h2.recipe-name {
+    width: 60%; }
+  h2.saved-recipe-name {
+    width: 50%; }
+  .event-page .matching-recipes .recipes-container {
+    width: 100%; }
+    .event-page .matching-recipes .recipes-container .recipe-return {
+      width: 55%;
+      margin: 0; }
+      .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe {
+        width: calc(100% - 10px);
+        height: 200px;
+        float: none;
+        margin: 10px 5px; }
+      .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:first-child {
+        margin-top: 0; }
+      .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:last-child {
+        margin-bottom: 0; }
+    .event-page .matching-recipes .recipes-container .saved-recipes {
+      width: calc(45% - 5px);
+      margin-top: 0;
+      margin-left: 5px;
+      padding-bottom: 0;
+      padding-top: 0; } }
+
+@media all and (max-width: 1000px) {
+  h2.recipe-name {
+    font-size: 2.2rem; }
+  h2.saved-recipe-name {
+    font-size: 1.6rem; }
+  .event-page .matching-recipes .filter-recipes-form .courses label {
+    width: 50%; } }
+
+@media all and (max-width: 900px) {
   .event-page .matching-recipes {
     width: 100%;
     margin-left: 0;
     margin-right: 0; }
-    .event-page .matching-recipes .recipes-container {
-      width: 100%; }
-      .event-page .matching-recipes .recipes-container .recipe-return {
-        width: 70%;
-        margin: 0; }
-        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:nth-child(-n + 2) {
-          margin-top: 0; }
-        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:nth-last-child(-n + 2) {
-          margin-bottom: 0; }
-      .event-page .matching-recipes .recipes-container .saved-recipes {
-        width: calc(30% - 5px);
-        margin-top: 0;
-        margin-left: 5px;
-        padding-bottom: 0;
-        padding-top: 0; } }
-
-@media all and (max-width: 900px) {
-  h2.recipe-name {
-    font-size: 2.2rem;
-    width: 60%; }
-  h2.saved-recipe-name {
-    font-size: 1.6rem;
-    width: 60%; }
-  .event-page .matching-recipes .recipes-container .recipe-return {
-    width: 60%;
-    margin: 0; }
-    .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe {
-      width: calc(100% - 10px);
-      height: 200px;
-      float: none;
-      margin: 10px 5px; }
-    .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:nth-child(2) {
-      margin-top: 10px; }
-    .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:nth-last-child(2) {
-      margin-bottom: 10px; }
-  .event-page .matching-recipes .recipes-container .saved-recipes {
-    width: calc(40% - 5px); } }
+    .event-page .matching-recipes .filter-recipes-form {
+      margin-left: 0; }
+      .event-page .matching-recipes .filter-recipes-form .filter-recipes-input {
+        width: 80%; }
+      .event-page .matching-recipes .filter-recipes-form .courses label {
+        width: 33%; } }
 
 @media all and (max-width: 600px) {
   h2.recipe-name {
@@ -1123,6 +1132,12 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     margin-left: 0; }
     .event-page .matching-recipes .recipes-container .saved-recipes .save-single-recipe {
       height: 100px; } }
+
+@media all and (max-width: 550px) {
+  .event-page .matching-recipes .filter-recipes-form .courses label {
+    width: 50%; }
+  .event-page .matching-recipes .filter-recipes-form .filter-recipes-input {
+    width: 60%; } }
 
 @media all and (max-width: 350px) {
   h2.recipe-name {

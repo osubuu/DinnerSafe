@@ -1,28 +1,47 @@
-@media all and (max-width: 1400px) {
+@media all and (max-width: 1280px) {
   .event-page {
     .matching-recipes {
-      width: 100%;
-      margin-left: 0;
+      width: 60%;
       margin-right: 0;
+    }
+  }
+}
 
+@media all and (max-width: 1200px) {
+  h2.recipe-name {
+    width: 60%;
+  }
+
+  h2.saved-recipe-name {
+    width: 50%;
+  }
+  .event-page {
+    .matching-recipes {
       .recipes-container {
         width: 100%;
 
         .recipe-return {
-          width: 70%;
+          width: 55%;
           margin: 0;
 
-          .display-single-recipe:nth-child(-n + 2) {
+          .display-single-recipe {
+            width: calc(100% - 10px);
+            height: 200px;
+            float: none;
+            margin: 10px 5px;
+          }
+
+          .display-single-recipe:first-child {
             margin-top: 0;
           }
 
-          .display-single-recipe:nth-last-child(-n + 2) {
+          .display-single-recipe:last-child {
             margin-bottom: 0;
           }
         }
 
         .saved-recipes {
-          width: calc(30% - 5px);
+          width: calc(45% - 5px);
           margin-top: 0;
           margin-left: 5px;
           padding-bottom: 0;
@@ -33,42 +52,44 @@
   }
 }
 
-@media all and (max-width: 900px) {
+@media all and (max-width: 1000px) {
   h2.recipe-name {
     font-size: 2.2rem;
-    width: 60%;
   }
 
   h2.saved-recipe-name {
     font-size: 1.6rem;
-    width: 60%;
   }
-
   .event-page {
     .matching-recipes {
-      .recipes-container {
-        .recipe-return {
-          width: 60%;
-          margin: 0;
-
-          .display-single-recipe {
-            width: calc(100% - 10px);
-            height: 200px;
-            float: none;
-            margin: 10px 5px;
-          }
-
-          .display-single-recipe:nth-child(2) {
-            margin-top: 10px;
-          }
-
-          .display-single-recipe:nth-last-child(2) {
-            margin-bottom: 10px;
+      .filter-recipes-form {
+        .courses {
+          label {
+            width: 50%;
           }
         }
+      }
+    }
+  }
+}
 
-        .saved-recipes {
-          width: calc(40% - 5px);
+@media all and (max-width: 900px) {
+  .event-page {
+    .matching-recipes {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+
+      .filter-recipes-form {
+        margin-left: 0;
+
+        .filter-recipes-input {
+          width: 80%;
+        }
+        .courses {
+          label {
+            width: 33%;
+          }
         }
       }
     }
@@ -110,6 +131,23 @@
           .save-single-recipe {
             height: 100px;
           }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 550px) {
+  .event-page {
+    .matching-recipes {
+      .filter-recipes-form {
+        .courses {
+          label {
+            width: 50%;
+          }
+        }
+        .filter-recipes-input {
+          width: 60%;
         }
       }
     }
