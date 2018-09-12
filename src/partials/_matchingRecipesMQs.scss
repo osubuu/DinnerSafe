@@ -3,20 +3,6 @@
     .matching-recipes {
       width: calc(60% - 10px);
       margin-right: 0;
-    }
-  }
-}
-
-@media all and (max-width: 1200px) {
-  h2.recipe-name {
-    width: 60%;
-  }
-
-  h2.saved-recipe-name {
-    width: 50%;
-  }
-  .event-page {
-    .matching-recipes {
       .recipes-container {
         width: 100%;
 
@@ -46,9 +32,23 @@
           margin-left: 5px;
           padding-bottom: 0;
           padding-top: 0;
+
+          .save-single-recipe {
+            height: 125px;
+          }
         }
       }
     }
+  }
+}
+
+@media all and (max-width: 1200px) {
+  h2.recipe-name {
+    width: 60%;
+  }
+
+  h2.saved-recipe-name {
+    font-size: 1.6rem;
   }
 }
 
@@ -57,9 +57,11 @@
     font-size: 2.2rem;
   }
 
-  h2.saved-recipe-name {
-    font-size: 1.6rem;
+  .recipe-add-button,
+  .recipe-remove-button {
+    font-size: 3.5rem;
   }
+
   .event-page {
     .matching-recipes {
       .filter-recipes-form {

@@ -698,7 +698,10 @@ h2.recipe-name {
   font-size: 2.5rem; }
 
 h2.saved-recipe-name {
-  font-size: 1.7rem; }
+  font-size: 1.7rem;
+  left: 43%;
+  width: 70%;
+  text-align: left; }
 
 .edit-guest-subheader {
   background: #dedede;
@@ -1062,39 +1065,42 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
 @media all and (max-width: 1280px) {
   .event-page .matching-recipes {
     width: calc(60% - 10px);
-    margin-right: 0; } }
+    margin-right: 0; }
+    .event-page .matching-recipes .recipes-container {
+      width: 100%; }
+      .event-page .matching-recipes .recipes-container .recipe-return {
+        width: 55%;
+        margin: 0; }
+        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe {
+          width: calc(100% - 10px);
+          height: 200px;
+          float: none;
+          margin: 10px 5px; }
+        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:first-child {
+          margin-top: 0; }
+        .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:last-child {
+          margin-bottom: 0; }
+      .event-page .matching-recipes .recipes-container .saved-recipes {
+        width: calc(45% - 5px);
+        margin-top: 0;
+        margin-left: 5px;
+        padding-bottom: 0;
+        padding-top: 0; }
+        .event-page .matching-recipes .recipes-container .saved-recipes .save-single-recipe {
+          height: 125px; } }
 
 @media all and (max-width: 1200px) {
   h2.recipe-name {
     width: 60%; }
   h2.saved-recipe-name {
-    width: 50%; }
-  .event-page .matching-recipes .recipes-container {
-    width: 100%; }
-    .event-page .matching-recipes .recipes-container .recipe-return {
-      width: 55%;
-      margin: 0; }
-      .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe {
-        width: calc(100% - 10px);
-        height: 200px;
-        float: none;
-        margin: 10px 5px; }
-      .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:first-child {
-        margin-top: 0; }
-      .event-page .matching-recipes .recipes-container .recipe-return .display-single-recipe:last-child {
-        margin-bottom: 0; }
-    .event-page .matching-recipes .recipes-container .saved-recipes {
-      width: calc(45% - 5px);
-      margin-top: 0;
-      margin-left: 5px;
-      padding-bottom: 0;
-      padding-top: 0; } }
+    font-size: 1.6rem; } }
 
 @media all and (max-width: 1000px) {
   h2.recipe-name {
     font-size: 2.2rem; }
-  h2.saved-recipe-name {
-    font-size: 1.6rem; }
+  .recipe-add-button,
+  .recipe-remove-button {
+    font-size: 3.5rem; }
   .event-page .matching-recipes .filter-recipes-form .courses label {
     width: 50%; } }
 
