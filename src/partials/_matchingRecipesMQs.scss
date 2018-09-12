@@ -1,7 +1,7 @@
 @media all and (max-width: 1280px) {
   .event-page {
     .matching-recipes {
-      width: 60%;
+      width: calc(60% - 10px);
       margin-right: 0;
     }
   }

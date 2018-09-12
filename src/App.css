@@ -1061,7 +1061,7 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
 
 @media all and (max-width: 1280px) {
   .event-page .matching-recipes {
-    width: 60%;
+    width: calc(60% - 10px);
     margin-right: 0; } }
 
 @media all and (max-width: 1200px) {
@@ -1153,12 +1153,12 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     .event-page .matching-recipes .recipes-container .saved-recipes .save-single-recipe {
       height: 80px; } }
 
-@media (max-width: 1400px) {
-  .event-page .remove-friend-button {
+@media all and (max-width: 1400px) {
+  .event-page .fakeButton.remove-friend-button {
     background: #f34843;
     height: 25px;
     width: 25px;
-    left: 27px; }
+    left: 30px; }
   .event-page .remove-friend-button .fa-times {
     position: absolute;
     right: -7px;

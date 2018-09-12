@@ -1,10 +1,10 @@
-@media (max-width: 1400px) {
+@media all and (max-width: 1400px) {
   .event-page {
-    .remove-friend-button {
+    .fakeButton.remove-friend-button {
       background: #f34843;
       height: 25px;
       width: 25px;
-      left: 27px;
+      left: 30px;
     }
     .remove-friend-button .fa-times {
       position: absolute;
