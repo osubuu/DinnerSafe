@@ -41,19 +41,36 @@
         top: 10px;
       }
     }
-    .fakeButton i {
+    .fakeButton {
+      margin-right: 10px;  
+      & i {
         font-size: 1.6rem;
       }
-    .guest p {
-      font-size: 2rem;
     }
-    .guestList a {
-      padding: 5px;
+    ul.guests {
+      margin-bottom: 2%;
+      & p {
+      font-size: 2rem;
+      }
+    }
+    .guestList {
+      width: calc(40% - 10px);
+      & a {
+        padding: 5px;
+      }
     }
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width:1024) {
+  .event-page {
+    .remove-friend-button .fa-times {
+      left: 9px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
   .event-page {
     .guestList {
       margin: 0;

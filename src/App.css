@@ -1167,14 +1167,24 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     .event-page .remove-friend-button .fa-times {
       font-size: 1.6rem;
       top: 10px; }
-  .event-page .fakeButton i {
-    font-size: 1.6rem; }
-  .event-page .guest p {
-    font-size: 2rem; }
-  .event-page .guestList a {
-    padding: 5px; } }
+  .event-page .fakeButton {
+    margin-right: 10px; }
+    .event-page .fakeButton i {
+      font-size: 1.6rem; }
+  .event-page ul.guests {
+    margin-bottom: 2%; }
+    .event-page ul.guests p {
+      font-size: 2rem; }
+  .event-page .guestList {
+    width: calc(40% - 10px); }
+    .event-page .guestList a {
+      padding: 5px; } }
 
-@media (max-width: 1024px) {
+@media (max-width: 1024) {
+  .event-page .remove-friend-button .fa-times {
+    left: 9px; } }
+
+@media (max-width: 900px) {
   .event-page .guestList {
     margin: 0;
     padding: 10px;
