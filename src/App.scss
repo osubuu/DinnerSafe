@@ -32,7 +32,6 @@ ul {
 body {
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
     url(./assets/heroBGweb.jpg) 50% 50% fixed;
-  // background-size: 100% auto;
   background-size: cover;
   background-position: center;
 }
@@ -54,6 +53,10 @@ label {
   position: relative;
   margin-left: 38px;
   font-size: 2rem;
+
+  &.hamburger {
+    margin-left: 0;
+  }
 }
 
 input[type="checkbox"] + label .stylish-checkbox,

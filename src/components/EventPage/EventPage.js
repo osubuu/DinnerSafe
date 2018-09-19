@@ -7,6 +7,7 @@ import _ from "lodash";
 import Header from "../Header";
 import swal from "sweetalert2";
 import Loader from "../Loader";
+import scrollToElement from "scroll-to-element";
 
 class EventPage extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class EventPage extends Component {
     this.state = {
       inputValue: "",
       confirmedNewName: "",
-      APICallDone: false
+      APICallDone: false,
+      menuOpen: false
     };
 
     // initialize firebase ref only if userProfile is passed down
@@ -126,6 +128,16 @@ class EventPage extends Component {
     });
   };
 
+  handleHamburgerMenu = event => {
+    console.log(event.target.hash);
+    scrollToElement(event.target.hash, { offset: -80, ease: "inSine", duration: 400 });
+    if (this.state.menuOpen === false) {
+      this.setState({ menuOpen: true });
+    } else {
+      this.setState({ menuOpen: false });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -153,9 +165,15 @@ class EventPage extends Component {
                     </Link>
                   </div>
 
-                  <input type="checkbox" id="toggle" name="toggle" className="hidden-checkbox" />
+                  <input
+                    type="checkbox"
+                    id="toggle"
+                    name="toggle"
+                    className="hidden-checkbox"
+                    checked={this.state.menuOpen}
+                  />
 
-                  <div className="big-mac-icon clearfix">
+                  <div onClick={this.handleHamburgerMenu} className="big-mac-icon clearfix">
                     <label className="hamburger" htmlFor="toggle">
                       <i className="fas fa-bars" />
                     </label>
@@ -170,17 +188,21 @@ class EventPage extends Component {
                       </li>
 
                       <li className="ham-li">
-                        <Link className="event-main-page" onClick={this.props.handleBackToEvent} to="/home">
+                        <Link className="event-main-page" onClick={this.props.handleBackToOverview} to="/home">
                           Main Page
                         </Link>
                       </li>
 
                       <li className="ham-li">
-                        <a href="#add-guest">Manage Event Guests</a>
+                        <a onClick={this.handleHamburgerMenu} href="#add-guest">
+                          Manage Event Guests
+                        </a>
                       </li>
 
                       <li className="ham-li">
-                        <a href="#display-matching-recipes">Search & Save Recipes</a>
+                        <a onClick={this.handleHamburgerMenu} href="#display-matching-recipes">
+                          Search & Save Recipes
+                        </a>
                       </li>
                     </ul>
                   </div>

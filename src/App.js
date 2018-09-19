@@ -215,25 +215,11 @@ class App extends Component {
     );
   };
 
-  // Function with props for the single event page
-  // singleEvent = () => {
-  //   return (
-  //     <EventPage
-  //       userProfile={this.state.userProfile}
-  //       selectedEvent={this.state.userProfile.parties[this.state.selectedEventIndex]}
-  //       handleBackToOverview={this.handleBackToOverview}
-  //       selectFriend={this.selectFriend}
-  //       handleLogout={this.handleLogout}
-  //       toggleRecipe={this.toggleRecipe}
-  //       savedRecipes={this.state.savedRecipes}
-  //     />
-  //   );
-  // };
-
   // Handler for going back to the main page from the single event page
   handleBackToOverview = e => {
     this.setState({
-      selectedEventIndex: null
+      selectedEventIndex: null,
+      savedRecipes: []
     });
   };
 
@@ -271,7 +257,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router basename="/dinnersafe">
         <div className="App">
           {/* Current router setup is possibly just a placeholder.
           /// Making sure it's not visible when hitting other pages of the site.

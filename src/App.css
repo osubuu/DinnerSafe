@@ -500,7 +500,7 @@ header {
   transform: translate(-50%, -50%); }
 
 .event-page .event-main-page-div {
-  padding-top: 80px; }
+  margin-top: 60px; }
 
 .event-page .event-main-page {
   padding: 15px 25px;
@@ -509,7 +509,8 @@ header {
   border-radius: 5px;
   font-size: 1.5rem;
   text-align: center;
-  float: right; }
+  float: right;
+  transition: 0.3s; }
 
 .event-page .guestList {
   float: left;
@@ -530,10 +531,13 @@ header {
 .event-page .fakeButton {
   float: left;
   width: 0;
-  margin-top: 5px;
   color: white;
   cursor: pointer;
-  transition: 0.1s; }
+  transition: 0.1s;
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%); }
   .event-page .fakeButton i {
     font-size: 2.2rem; }
   .event-page .fakeButton:hover {
@@ -542,22 +546,23 @@ header {
 
 .event-page .remove-friend-button {
   background: #f34843;
-  height: 30px;
-  width: 30px;
+  height: 28px;
+  width: 28px;
   float: left;
   color: white;
   border: none;
   border-radius: 50%;
   font-weight: bold;
-  position: relative;
-  cursor: pointer;
-  left: 29px; }
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer; }
 
 .event-page .remove-friend-button .fa-times {
   position: absolute;
   right: -7px;
-  top: 15px;
-  font-size: 2.2rem; }
+  font-size: 2rem; }
 
 .event-page .matching-recipes {
   float: left;
@@ -578,12 +583,17 @@ header {
   margin: 5px 0;
   font-size: 1.4rem;
   cursor: pointer; }
+  .event-page .guestList a:hover,
+  .event-page .filter-button:hover {
+    transition: 0.3s;
+    transform: scale(1.03); }
 
 .event-page .guestList a:hover {
   text-decoration: underline; }
 
 .event-page li.guest {
-  margin: 5px 0px; }
+  margin: 5px 0px;
+  position: relative; }
 
 .event-page .guestList form {
   position: relative;
@@ -598,7 +608,11 @@ header {
   margin-bottom: 7px;
   position: relative;
   color: #141414;
-  font-size: 1.4rem; }
+  font-size: 1.4rem;
+  transition: 0.3s; }
+  .event-page .add-friend-button:hover {
+    transition: 0.3s;
+    transform: scale(1.03); }
 
 .event-page .add-new-friend-label {
   margin: 0;
@@ -668,6 +682,10 @@ header {
   padding: 10px;
   margin: 5px 5px;
   position: relative; }
+  .display-single-recipe:hover .recipe-img-container,
+  .save-single-recipe:hover .recipe-img-container {
+    transition: 0.3s;
+    opacity: 1; }
 
 .display-single-recipe {
   float: left;
@@ -714,7 +732,8 @@ header {
   bottom: 0;
   left: 0;
   right: 0;
-  opacity: 0.75; }
+  opacity: 0.75;
+  transition: 0.3s; }
 
 .recipe-img {
   border-radius: 5px;
@@ -731,7 +750,7 @@ header {
   position: absolute;
   top: 1%;
   right: 1%;
-  z-index: 100;
+  z-index: 101;
   text-shadow: -1.25px 0 black, 0 1.25px black, 1.25px 0 black, 0 -1.25px black;
   transition: 0.1s; }
   .recipe-add-button:hover,
@@ -847,7 +866,8 @@ h2.saved-recipe-name {
   transform: translateY(-50%);
   margin: 0;
   cursor: text;
-  font-size: 1.8rem; }
+  font-size: 1.8rem;
+  transition: 0.3s; }
 
 .add-restricted-ingredient-input {
   font-size: 2rem;
@@ -959,6 +979,8 @@ label {
   position: relative;
   margin-left: 38px;
   font-size: 2rem; }
+  label.hamburger {
+    margin-left: 0; }
 
 input[type="checkbox"] + label .stylish-checkbox,
 input[type="checkbox"]:checked + label .stylish-checkbox,
@@ -1221,12 +1243,10 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
   .event-page .remove-friend-button {
     background: #f34843;
     height: 25px;
-    width: 25px;
-    left: 29px; }
+    width: 25px; }
   .event-page .remove-friend-button .fa-times {
     position: absolute;
     right: -7px;
-    top: 12px;
     font-size: 2rem; }
   .event-page .fakeButton i {
     font-size: 2em; } }
@@ -1234,18 +1254,15 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
 @media (max-width: 1280px) {
   .event-page .remove-friend-button {
     height: 20px;
-    width: 20px;
-    top: 2px;
-    left: 22px; }
+    width: 20px; }
     .event-page .remove-friend-button .fa-times {
-      font-size: 1.6rem;
-      top: 10px; }
+      font-size: 1.6rem; }
   .event-page .fakeButton {
-    margin-right: 10px; }
+    right: 50px; }
     .event-page .fakeButton i {
       font-size: 1.6rem; }
   .event-page ul.guests {
-    margin-bottom: 2%; }
+    margin-bottom: 3%; }
     .event-page ul.guests p {
       font-size: 2rem; }
   .event-page .guestList {
@@ -1263,15 +1280,13 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     padding: 10px;
     padding-bottom: 25px;
     float: none;
-    width: 100%; }
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 10px; }
   .event-page .guests {
     margin-bottom: 1%; }
   .event-page .add-friend-button {
-    margin: 5px 0; }
-  .event-page .fakeButton {
-    margin: 5px 15px 0 0; }
-  .event-page .remove-friend-button {
-    margin: 1px 10px 0px 0; }
+    margin: 6px 0 10px 0; }
   .event-page .filter-recipes-form {
     margin-left: 0; }
   .event-page .event-main-page-div.body,
@@ -1339,4 +1354,6 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
     .event-page .ham-li .event-main-page {
       background: #117842;
       color: #f2f2f2;
-      border-radius: 0; } }
+      border-radius: 0; }
+  .event-page .ham-li:nth-child(2) {
+    border-bottom: none; } }

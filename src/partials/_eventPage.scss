@@ -56,7 +56,7 @@
   }
 
   .event-main-page-div {
-    padding-top: 80px;
+    margin-top: 60px;
   }
 
   .event-main-page {
@@ -67,6 +67,7 @@
     font-size: 1.5rem;
     text-align: center;
     float: right;
+    transition: 0.3s;
   }
 
   .guestList {
@@ -88,10 +89,13 @@
   .fakeButton {
     float: left;
     width: 0;
-    margin-top: 5px;
     color: white;
     cursor: pointer;
     transition: 0.1s;
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
     & i {
       font-size: 2.2rem;
     }
@@ -103,22 +107,23 @@
   }
   .remove-friend-button {
     background: $red;
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 28px;
     float: left;
     color: white;
     border: none;
     border-radius: 50%;
     font-weight: bold;
-    position: relative;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
-    left: 29px;
   }
   .remove-friend-button .fa-times {
     position: absolute;
     right: -7px;
-    top: 15px;
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
   .matching-recipes {
     float: left;
@@ -140,6 +145,11 @@
     margin: 5px 0;
     font-size: 1.4rem;
     cursor: pointer;
+
+    &:hover {
+      transition: 0.3s;
+      transform: scale(1.03);
+    }
   }
 
   .guestList a {
@@ -150,6 +160,7 @@
 
   li.guest {
     margin: 5px 0px;
+    position: relative;
   }
   .guestList form {
     position: relative;
@@ -166,6 +177,12 @@
     position: relative;
     color: $color-1;
     font-size: 1.4rem;
+    transition: 0.3s;
+
+    &:hover {
+      transition: 0.3s;
+      transform: scale(1.03);
+    }
   }
   .add-new-friend-label {
     margin: 0;

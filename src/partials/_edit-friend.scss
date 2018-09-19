@@ -98,6 +98,7 @@
   margin: 0;
   cursor: text;
   font-size: 1.8rem;
+  transition: 0.3s;
 }
 
 .add-restricted-ingredient-input {
@@ -120,8 +121,8 @@
 
 .add-restricted-ingredient-input:focus + .add-restricted-ingredient-label,
 .add-restricted-ingredient-input:not([value=""]) + .add-restricted-ingredient-label {
-    transition: 0.3s;
-    top: -15px;
-    left: 10px;
-    font-size: 1.5rem;
+  transition: 0.3s;
+  top: -15px;
+  left: 10px;
+  font-size: 1.5rem;
 }
