@@ -78,3 +78,21 @@
   text-align: center;
   padding-bottom: 5px;
 }
+
+.credits {
+  margin-top: 4rem;
+  color: $color-2;
+  text-align: center;
+
+  a,
+  a:visited {
+    transition: 0.3s;
+    color: $red;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    transition: 0.3s;
+    color: $yellow;
+  }
+}

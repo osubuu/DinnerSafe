@@ -62,6 +62,10 @@
   .log-in-form .buttons {
     width: 100%;
   }
+
+  .credits {
+    font-size: 1.4rem;
+  }
 }
 
 @media (max-width: 385px) {
@@ -87,5 +91,9 @@
   .new-event-label {
     font-size: 2rem;
     top: 25px;
+  }
+
+  .credits {
+    margin-top: 2rem;
   }
 }

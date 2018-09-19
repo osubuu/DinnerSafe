@@ -289,6 +289,20 @@ class App extends Component {
                         </button>
                       </div>
                     </form>
+                    <h6 className="credits">
+                      Built by:{" "}
+                      <a target="_blank" rel="noopener noreferrer" href="http://jessicasea.com/">
+                        Jessica Sea
+                      </a>
+                      ,{" "}
+                      <a target="_blank" rel="noopener noreferrer" href="http://dtkahn.com/">
+                        Daniel Kahn
+                      </a>
+                      ,{" "}
+                      <a target="_blank" rel="noopener noreferrer" href="http://khoipham.net">
+                        Khoi Pham
+                      </a>
+                    </h6>
                   </div>
                   {this.state.loading === true || this.state.redirected === true ? <Loader /> : null}
                   {/* <Loader /> */}

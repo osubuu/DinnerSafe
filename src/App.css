@@ -280,6 +280,19 @@ label, input, .event-title h2, a, button, .new-event-label, .section-header, .us
   text-align: center;
   padding-bottom: 5px; }
 
+.credits {
+  margin-top: 4rem;
+  color: #f2f2f2;
+  text-align: center; }
+  .credits a,
+  .credits a:visited {
+    transition: 0.3s;
+    color: #f34843;
+    text-decoration: underline; }
+  .credits a:hover {
+    transition: 0.3s;
+    color: #ffcb00; }
+
 .log-in-page .loader {
   height: 100vh;
   width: 100vw;
@@ -1113,7 +1126,9 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
 
 @media (max-width: 450px) {
   .log-in-form .buttons {
-    width: 100%; } }
+    width: 100%; }
+  .credits {
+    font-size: 1.4rem; } }
 
 @media (max-width: 385px) {
   .user {
@@ -1130,7 +1145,9 @@ input[type="checkbox"]:checked + .stylish-checkbox .fa-check {
       position: relative; }
   .new-event-label {
     font-size: 2rem;
-    top: 25px; } }
+    top: 25px; }
+  .credits {
+    margin-top: 2rem; } }
 
 @media (max-width: 650px) {
   .single-friend {
