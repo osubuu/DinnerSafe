@@ -257,7 +257,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router basename="/dinnersafe">
+      <Router>
         <div className="App">
           {/* Current router setup is possibly just a placeholder.
           /// Making sure it's not visible when hitting other pages of the site.
